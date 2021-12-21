@@ -1,0 +1,9 @@
+echo "Starting documentation generation"
+
+# Check for Jazzy, install if we don't have it
+if test ! $(which jazzy); then
+    echo "Install Jazzy - gem install jazzy"
+    exit 1
+fi
+
+jazzy --output .documentation --build-tool-arguments -project,Asynchrone.xcodeproj,-scheme,Asynchrone --min-acl public

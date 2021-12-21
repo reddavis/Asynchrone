@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Continuation Extension Reference</title>
+    <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../../js/jquery.min.js" defer></script>
+    <script src="../../js/jazzy.js" defer></script>
+    
+    <script src="../../js/lunr.min.js" defer></script>
+    <script src="../../js/typeahead.jquery.js" defer></script>
+    <script src="../../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Extension/Continuation" class="dashAnchor"></a>
+    <a title="Continuation Extension Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../../index.html"> Docs</a> (98% documented)</p>
+        <div class="header-right">
+          <form role="search" action="../../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../../index.html"> Reference</a>
+        <img id="carat" src="../../img/carat.png" alt=""/>
+        Continuation Extension Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Extensions/AsyncSequence.html">AsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/AsyncStream.html">AsyncStream</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/AsyncStream/Continuation.html">– Continuation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/AsyncThrowingStream.html">AsyncThrowingStream</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/AsyncThrowingStream/Continuation.html">– Continuation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Structs/CombineLatest3AsyncSequence.html">CombineLatest3AsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/CombineLatestAsyncSequence.html">CombineLatestAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Merge3AsyncSequence.html">Merge3AsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MergeAsyncSequence.html">MergeAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RemoveDuplicatesAsyncSequence.html">RemoveDuplicatesAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Zip3AsyncSequence.html">Zip3AsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ZipAsyncSequence.html">ZipAsyncSequence</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Continuation</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">AsyncStream</span><span class="o">.</span><span class="kt">Continuation</span></code></pre>
+
+                </div>
+              </div>
+            
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ScS12ContinuationV10AsynchroneE6finish4withyx_tF"></a>
+                    <a name="//apple_ref/swift/Method/finish(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ScS12ContinuationV10AsynchroneE6finish4withyx_tF">finish(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Yield the provided value and then finish the stream.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">finish</span><span class="p">(</span><span class="n">with</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The value to yield to the stream.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2021-12-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
