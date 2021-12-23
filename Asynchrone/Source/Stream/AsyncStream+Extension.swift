@@ -31,17 +31,6 @@ extension AsyncStream {
             }
         }
     }
-    
-    // MARK: Helpers
-    
-    /// Initialize a single value yielding stream.
-    /// - Parameter value: The value to yield.
-    /// - Returns: An `AsyncStream`.
-    public static func just(_ value: Element) -> Self {
-        .init {
-            $0.finish(with: value)
-        }
-    }
 }
 
 

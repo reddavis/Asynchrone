@@ -31,17 +31,6 @@ extension AsyncThrowingStream {
             }
         }
     }
-    
-    // MARK: Helpers
-    
-    /// Initialize a single value yielding stream.
-    /// - Parameter value: The value to yield.
-    /// - Returns: An `AsyncThrowingStream`.
-    public static func just(_ value: Element) -> Self where Failure == Error {
-        .init {
-            $0.finish(with: value)
-        }
-    }
 }
 
 
