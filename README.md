@@ -30,6 +30,8 @@ Documentation can be found [here](https://distracted-austin-575f34.netlify.app).
 - [Extensions](https://distracted-austin-575f34.netlify.app/extensions/asyncsequence)
 - [CombineLatestAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/combinelatestasyncsequence)
 - [CombineLatest3AsyncSequence](https://distracted-austin-575f34.netlify.app/structs/combinelatest3asyncsequence)
+- [Fail](https://distracted-austin-575f34.netlify.app/structs/fail)
+- [Just](https://distracted-austin-575f34.netlify.app/structs/just) 
 - [MergeAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/mergeasyncsequence)
 - [Merge3AsyncSequence](https://distracted-austin-575f34.netlify.app/structs/merge3asyncsequence)
 - [RemoveDuplicatesAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/removeduplicatesasyncsequence)

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>AsyncThrowingStream Extension Reference</title>
+    <title>Fail Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Extension/AsyncThrowingStream" class="dashAnchor"></a>
-    <a title="AsyncThrowingStream Extension Reference"></a>
+    <a name="//apple_ref/swift/Struct/Fail" class="dashAnchor"></a>
+    <a title="Fail Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (98% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        AsyncThrowingStream Extension Reference
+        Fail Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -92,15 +92,30 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>AsyncThrowingStream</h1>
+            <h1>Fail</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">AsyncThrowingStream</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">Failure</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Fail</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
 
                 </div>
               </div>
-            
+            <p>An asynchronous sequence that immediately throws an error when iterated.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">stream</span> <span class="o">=</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">TestError</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">TestError</span><span class="p">())</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="k">try</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">stream</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Error!"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// Error!</span>
+</code></pre>
+
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -117,9 +132,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Scs10AsynchroneE_15bufferingPolicy_Scsyxs5Error_pGxm_Scs12ContinuationV09BufferingC0OyxsAC_p__GyAFyxsAC_p_GYactcsAC_pRs_rlufc"></a>
-                    <a name="//apple_ref/swift/Method/init(_:bufferingPolicy:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Scs10AsynchroneE_15bufferingPolicy_Scsyxs5Error_pGxm_Scs12ContinuationV09BufferingC0OyxsAC_p__GyAFyxsAC_p_GYactcsAC_pRs_rlufc">init(_:<wbr>bufferingPolicy:<wbr>_:<wbr>)</a>
+                    <a name="/s:10Asynchrone4FailV5errorACyxq_Gq__tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(error:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone4FailV5errorACyxq_Gq__tcfc">init(error:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -127,27 +142,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Construct a AsyncThrowingStream buffering given an Element type.</p>
-
-<p>The maximum number of pending elements limited by dropping the oldest
-value when a new value comes in if the buffer would excede the limit
-placed upon it. By default this limit is unlimited.</p>
-
-<p>The build closure passes in a Continuation which can be used in
-concurrent contexts. It is thread safe to send and finish; all calls are
-to the continuation are serialized, however calling this from multiple
-concurrent contexts could result in out of order delivery.</p>
+                        <p>Creates an async sequence that throws an error.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">elementType</span><span class="p">:</span> <span class="kt">Element</span><span class="o">.</span><span class="k">Type</span> <span class="o">=</span> <span class="kt">Element</span><span class="o">.</span><span class="k">self</span><span class="p">,</span>
-    <span class="n">bufferingPolicy</span> <span class="nv">limit</span><span class="p">:</span> <span class="kt">AsyncThrowingStream</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;.</span><span class="kt">Continuation</span><span class="o">.</span><span class="kt">BufferingPolicy</span> <span class="o">=</span> <span class="o">.</span><span class="n">unbounded</span><span class="p">,</span>
-    <span class="n">_</span> <span class="nv">build</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">AsyncThrowingStream</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;.</span><span class="kt">Continuation</span><span class="p">)</span> <span class="k">async</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
-<span class="p">)</span> <span class="k">where</span> <span class="kt">Failure</span> <span class="o">==</span> <span class="kt">Error</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Failure</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -158,38 +160,12 @@ concurrent contexts could result in out of order delivery.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>elementType</em>
+                                <em>error</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The type the AsyncThrowingStream will produce.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>maxBufferedElements</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The maximum number of elements to
-hold in the buffer past any checks for continuations being resumed.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>build</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The work associated with yielding values to the
-AsyncThrowingStream.</p>
+                                  <p>The error to throw.</p>
                                 </div>
                               </td>
                             </tr>
@@ -203,11 +179,11 @@ AsyncThrowingStream.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/AsyncThrowingStream.Continuation"></a>
-                <a name="//apple_ref/swift/Section/AsyncThrowingStream.Continuation" class="dashAnchor"></a>
+                <a name="/AsyncIteratorProtocol"></a>
+                <a name="//apple_ref/swift/Section/AsyncIteratorProtocol" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/AsyncThrowingStream.Continuation"></a>
-                  <h3 class="section-name"><span>AsyncThrowingStream.Continuation</span>
+                  <a class="section-name-link" href="#/AsyncIteratorProtocol"></a>
+                  <h3 class="section-name"><span>AsyncIteratorProtocol</span>
 </h3>
                 </div>
               </div>
@@ -215,9 +191,43 @@ AsyncThrowingStream.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Scs12ContinuationV"></a>
-                    <a name="//apple_ref/swift/Extension/Continuation" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Scs12ContinuationV">Continuation</a>
+                    <a name="/s:10Asynchrone4FailV4nextxSgyYaKF"></a>
+                    <a name="//apple_ref/swift/Method/next()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone4FailV4nextxSgyYaKF">next()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Produces the next element in the sequence.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">next</span><span class="p">()</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Element</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The next element or <code>nil</code> if the end of the sequence is reached.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone4FailV17makeAsyncIteratorACyxq_GyF"></a>
+                    <a name="//apple_ref/swift/Method/makeAsyncIterator()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone4FailV17makeAsyncIteratorACyxq_GyF">makeAsyncIterator()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -225,16 +235,20 @@ AsyncThrowingStream.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
-                        <a href="../Extensions/AsyncThrowingStream/Continuation.html" class="slightly-smaller">See more</a>
+                        <p>Creates an async iterator that emits elements of this async sequence.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">AsyncThrowingStream</span><span class="o">.</span><span class="kt">Continuation</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An instance that conforms to <code>AsyncIteratorProtocol</code>.</p>
                       </div>
                     </section>
                   </div>
