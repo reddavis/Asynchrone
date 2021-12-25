@@ -7,93 +7,6 @@
 
 import Foundation
 
-extension ThrottleAsyncSequence {
-    private actor Inner<T: AsyncSequence> {
-
-        public typealias Element = T.Element
-
-        private var continuation: AsyncStream<Element>.Continuation?
-
-        public let interval: TimeInterval
-
-        private var collectedElements: [Element] = []
-
-        private var lastTime: Date?
-        private var base: T
-        private let latest: Bool
-
-        private var waitingTask: Task<Void, Never>?
-
-        internal init(base: T, continuation: AsyncStream<Element>.Continuation, interval: TimeInterval, latest: Bool) {
-            self.base = base
-            self.continuation = continuation
-            self.interval = interval
-            self.latest = latest
-        }
-
-        internal func start() async {
-            do {
-                for try await event in base {
-                    handle(event: event)
-                }
-                if let element = latest ? collectedElements.last : collectedElements.first {
-                    continuation?.finish(with: element)
-                } else {
-                    continuation?.finish()
-                }
-            } catch {
-                continuation?.finish()
-            }
-        }
-
-        private func handle(event: T.Element) {
-
-            collectedElements.append(event)
-
-            guard let lastTime = lastTime else {
-                self.lastTime = Date()
-                if let value = latest ? collectedElements.last : collectedElements.first {
-                    continuation?.yield(value)
-                }
-                collectedElements = []
-                return
-            }
-
-            let currentTime = Date()
-            let gapDuration = currentTime.timeIntervalSince(lastTime)
-
-            if gapDuration < interval {
-                guard waitingTask == nil else {
-                    return
-                }
-
-                let delay = interval - gapDuration
-                waitingTask = Task { [weak self] in
-                    try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
-                    await self?.finishWaitingTask()
-                }
-
-            } else {
-                if let value = latest ? collectedElements.last : collectedElements.first {
-                    self.lastTime = Date()
-                    continuation?.yield(value)
-                    collectedElements = []
-                }
-            }
-        }
-
-        private func finishWaitingTask() {
-            waitingTask = nil
-
-            if let value = latest ? collectedElements.last : collectedElements.first {
-                lastTime = Date()
-                continuation?.yield(value)
-                collectedElements = []
-            }
-        }
-    }
-}
-
 public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
 
     /// The kind of elements streamed.
@@ -141,6 +54,93 @@ extension ThrottleAsyncSequence: AsyncIteratorProtocol {
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
     public func makeAsyncIterator() -> AsyncStream<Element>.Iterator {
         iterator
+    }
+}
+
+extension ThrottleAsyncSequence {
+    private actor Inner<T: AsyncSequence> {
+
+        public typealias Element = T.Element
+
+        private var continuation: AsyncStream<Element>.Continuation
+
+        public let interval: TimeInterval
+
+        private var collectedElements: [Element] = []
+
+        private var lastTime: Date?
+        private var base: T
+        private let latest: Bool
+
+        private var waitingTask: Task<Void, Never>?
+
+        internal init(base: T, continuation: AsyncStream<Element>.Continuation, interval: TimeInterval, latest: Bool) {
+            self.base = base
+            self.continuation = continuation
+            self.interval = interval
+            self.latest = latest
+        }
+
+        internal func start() async {
+            do {
+                for try await event in base {
+                    handle(event: event)
+                }
+                if let element = latest ? collectedElements.last : collectedElements.first {
+                    continuation.finish(with: element)
+                } else {
+                    continuation.finish()
+                }
+            } catch {
+                continuation.finish()
+            }
+        }
+
+        private func handle(event: T.Element) {
+
+            collectedElements.append(event)
+
+            guard let lastTime = lastTime else {
+                self.lastTime = Date()
+                if let value = latest ? collectedElements.last : collectedElements.first {
+                    continuation.yield(value)
+                }
+                collectedElements = []
+                return
+            }
+
+            let currentTime = Date()
+            let gapDuration = currentTime.timeIntervalSince(lastTime)
+
+            if gapDuration < interval {
+                guard waitingTask == nil else {
+                    return
+                }
+
+                let delay = interval - gapDuration
+                waitingTask = Task { [weak self] in
+                    try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+                    await self?.finishWaitingTask()
+                }
+
+            } else {
+                if let value = latest ? collectedElements.last : collectedElements.first {
+                    self.lastTime = Date()
+                    continuation.yield(value)
+                    collectedElements = []
+                }
+            }
+        }
+
+        private func finishWaitingTask() {
+            waitingTask = nil
+
+            if let value = latest ? collectedElements.last : collectedElements.first {
+                lastTime = Date()
+                continuation.yield(value)
+                collectedElements = []
+            }
+        }
     }
 }
 
