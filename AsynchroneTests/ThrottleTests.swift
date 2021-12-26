@@ -13,7 +13,7 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
     private var stream: AsyncStream<String>!
 
     override func setUpWithError() throws {
-        let values = "abcdefghijklmnopqrstuvwxyz"
+        let values = "abcd"
             .map { String(describing: $0) }
             .reduce([String]()) { values, next in
                 let new = (values.last ?? "") + next
@@ -42,15 +42,15 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
 
     func testThrottle() async throws {
 
-        let valuesStream = await self
+        let stream = self
             .stream
-            .throttle(0.1, latest: true)
-            .collect()
+            .throttle(0.25, latest: true)
+            .eraseToAnyAsyncSequence() as AnyAsyncSequence<String>
 
+        let valuesStream = try await stream.collect()
 
         XCTAssertEqual(valuesStream[0], "a")
-        XCTAssertEqual(valuesStream[1], "ab")
-        XCTAssertEqual(valuesStream[2], "abc")
-        XCTAssertEqual(valuesStream[3], "abcd")
+        XCTAssertEqual(valuesStream[1], "abc")
+        XCTAssertEqual(valuesStream[2], "abcd")
     }
 }

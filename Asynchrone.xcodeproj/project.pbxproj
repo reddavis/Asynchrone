@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6470FF6B2775F8E5009CD087 /* ThrottleAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6470FF6A2775F8E5009CD087 /* ThrottleAsyncSequence.swift */; };
+		64A0D8322778664300FAD4C9 /* AnyAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0D8312778664300FAD4C9 /* AnyAsyncSequence.swift */; };
+		64A0D83427787C0000FAD4C9 /* AnyAsyncIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0D83327787C0000FAD4C9 /* AnyAsyncIterator.swift */; };
 		64ED0337277732EC000AD024 /* ThrottleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ED0336277732EC000AD024 /* ThrottleTests.swift */; };
 		A45E0EB927748F5A006B64E1 /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EB827748F5A006B64E1 /* Just.swift */; };
 		A45E0EBB277491F1006B64E1 /* JustTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EBA277491F1006B64E1 /* JustTests.swift */; };
@@ -48,6 +50,8 @@
 
 /* Begin PBXFileReference section */
 		6470FF6A2775F8E5009CD087 /* ThrottleAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleAsyncSequence.swift; sourceTree = "<group>"; };
+		64A0D8312778664300FAD4C9 /* AnyAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAsyncSequence.swift; sourceTree = "<group>"; };
+		64A0D83327787C0000FAD4C9 /* AnyAsyncIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAsyncIterator.swift; sourceTree = "<group>"; };
 		64ED0336277732EC000AD024 /* ThrottleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleTests.swift; sourceTree = "<group>"; };
 		A45E0EB827748F5A006B64E1 /* Just.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Just.swift; sourceTree = "<group>"; };
 		A45E0EBA277491F1006B64E1 /* JustTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustTests.swift; sourceTree = "<group>"; };
@@ -194,6 +198,8 @@
 				A4C361F02772246C00511525 /* ZipAsyncSequence.swift */,
 				A4C361F42772319100511525 /* Zip3AsyncSequence.swift */,
 				6470FF6A2775F8E5009CD087 /* ThrottleAsyncSequence.swift */,
+				64A0D8312778664300FAD4C9 /* AnyAsyncSequence.swift */,
+				64A0D83327787C0000FAD4C9 /* AnyAsyncIterator.swift */,
 			);
 			path = Sequence;
 			sourceTree = "<group>";
@@ -324,8 +330,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A45E0EBD27749897006B64E1 /* Fail.swift in Sources */,
+				64A0D83427787C0000FAD4C9 /* AnyAsyncIterator.swift in Sources */,
 				6470FF6B2775F8E5009CD087 /* ThrottleAsyncSequence.swift in Sources */,
 				A4C361C7276A603B00511525 /* AsyncStream+Extension.swift in Sources */,
+				64A0D8322778664300FAD4C9 /* AnyAsyncSequence.swift in Sources */,
 				A4C361F12772246C00511525 /* ZipAsyncSequence.swift in Sources */,
 				A4C361E82770F67E00511525 /* CombineLatest3AsyncSequence.swift in Sources */,
 				A45E0EB927748F5A006B64E1 /* Just.swift in Sources */,

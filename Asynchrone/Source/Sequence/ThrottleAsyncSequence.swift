@@ -7,19 +7,22 @@
 
 import Foundation
 
+// MARK: - ThrottleAsyncSequence
+
 public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
 
     /// The kind of elements streamed.
     public typealias Element = T.Element
 
-    // Private
-    private var base: T
-    private var stream: AsyncStream<T.Element>!
-    private var iterator: AsyncStream<T.Element>.Iterator!
-    private var continuation: AsyncStream<T.Element>.Continuation!
-    private var inner: ThrottleAsyncSequence.Inner<T>!
+    // MARK: ThrottleAsyncSequence (Private Properties)
 
-    // MARK: Initialization
+    private var base: T
+    private var stream: AsyncStream<T.Element>
+    private var iterator: AsyncStream<T.Element>.Iterator
+    private var continuation: AsyncStream<T.Element>.Continuation
+    private var inner: ThrottleAsyncSequence.Inner<T>
+
+    // MARK: ThrottleAsyncSequence (Public Properties)
 
     /// Creates an async sequence that emits an element once.
     /// - Parameters:
@@ -37,7 +40,7 @@ public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
         self.inner = ThrottleAsyncSequence.Inner<T>(base: base, continuation: streamContinuation, interval: interval, latest: latest)
 
         Task { [inner] in
-            await inner?.start()
+            await inner.start()
         }
     }
 }
@@ -57,14 +60,19 @@ extension ThrottleAsyncSequence: AsyncIteratorProtocol {
     }
 }
 
+// MARK: ThrottleAsyncSequence > Inner
+
 extension ThrottleAsyncSequence {
+
     private actor Inner<T: AsyncSequence> {
 
         public typealias Element = T.Element
 
-        private var continuation: AsyncStream<Element>.Continuation
+        // MARK: Inner (Private Properties)
 
-        public let interval: TimeInterval
+        private let interval: TimeInterval
+
+        private var continuation: AsyncStream<Element>.Continuation
 
         private var collectedElements: [Element] = []
 
@@ -73,6 +81,8 @@ extension ThrottleAsyncSequence {
         private let latest: Bool
 
         private var waitingTask: Task<Void, Never>?
+
+        // MARK: Inner (Internal Methods)
 
         internal init(base: T, continuation: AsyncStream<Element>.Continuation, interval: TimeInterval, latest: Bool) {
             self.base = base
@@ -95,6 +105,8 @@ extension ThrottleAsyncSequence {
                 continuation.finish()
             }
         }
+
+        // MARK: Inner (Private Methods)
 
         private func handle(event: T.Element) {
 
