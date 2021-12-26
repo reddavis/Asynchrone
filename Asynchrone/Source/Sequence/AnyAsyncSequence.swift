@@ -39,17 +39,17 @@ public struct AnyAsyncSequence<T>: AsyncSequence, AsyncIteratorProtocol {
     }
 }
 
-// MARK: - AnyThrowingAsyncSequence
+// MARK: - AnyAsyncThrowingSequence
 
-public struct AnyThrowingAsyncSequence<T>: AsyncSequence, AsyncIteratorProtocol {
+public struct AnyAsyncThrowingSequence<T>: AsyncSequence, AsyncIteratorProtocol {
     public typealias Element = T
 
-    // MARK: AnyAsyncSequence (Private Properties)
+    // MARK: AnyAsyncThrowingSequence (Private Properties)
 
     private let base: Any
     private var iterator: AnyAsyncIterator<T>
 
-    // MARK: AnyAsyncSequence (Public Methods)
+    // MARK: AnyAsyncThrowingSequence (Public Methods)
 
     public init<U: AsyncSequence>(base: U) where U.Element == T {
         self.base = base
@@ -73,7 +73,7 @@ extension AsyncSequence {
         AnyAsyncSequence<Element>(base: self)
     }
 
-    public func eraseToAnyThrowingAsyncSequence() -> AnyThrowingAsyncSequence<Element> {
-        AnyThrowingAsyncSequence<Element>(base: self)
+    public func eraseToAnyAsyncThrowingSequence() -> AnyAsyncThrowingSequence<Element> {
+        AnyAsyncThrowingSequence<Element>(base: self)
     }
 }
