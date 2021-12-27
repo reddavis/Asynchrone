@@ -59,6 +59,12 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Structs/AnyAsyncSequenceable.html">AnyAsyncSequenceable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AnyThrowingAsyncSequenceable.html">AnyThrowingAsyncSequenceable</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/CombineLatest3AsyncSequence.html">CombineLatest3AsyncSequence</a>
               </li>
               <li class="nav-group-task">
@@ -106,6 +112,87 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sci10AsynchroneE27eraseToAnyAsyncSequenceableAA0deF0Vy7ElementQzGyF"></a>
+                    <a name="//apple_ref/swift/Method/eraseToAnyAsyncSequenceable()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci10AsynchroneE27eraseToAnyAsyncSequenceableAA0deF0Vy7ElementQzGyF">eraseToAnyAsyncSequenceable()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a type erasing async sequence.</p>
+
+<p>If the async sequence that you wish to type erase can throw,
+then use <code><a href="../Extensions/AsyncSequence.html#/s:Sci10AsynchroneE35eraseToAnyThrowingAsyncSequenceableAA0defG0Vy7ElementQzGyF">eraseToAnyThrowingAsyncSequenceable()</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">eraseToAnyAsyncSequenceable</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/AnyAsyncSequenceable.html">AnyAsyncSequenceable</a></span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A typed erased async sequence.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Erasure"></a>
+                <a name="//apple_ref/swift/Section/Erasure" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Erasure"></a>
+                  <h3 class="section-name"><span>Erasure</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sci10AsynchroneE35eraseToAnyThrowingAsyncSequenceableAA0defG0Vy7ElementQzGyF"></a>
+                    <a name="//apple_ref/swift/Method/eraseToAnyThrowingAsyncSequenceable()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci10AsynchroneE35eraseToAnyThrowingAsyncSequenceableAA0defG0Vy7ElementQzGyF">eraseToAnyThrowingAsyncSequenceable()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a throwing type erasing async sequence.</p>
+
+<p>If the async sequence that you wish to type erase deson&rsquo;t throw,
+then use <code><a href="../Extensions/AsyncSequence.html#/s:Sci10AsynchroneE27eraseToAnyAsyncSequenceableAA0deF0Vy7ElementQzGyF">eraseToAnyAsyncSequenceable()</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">eraseToAnyThrowingAsyncSequenceable</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/AnyThrowingAsyncSequenceable.html">AnyThrowingAsyncSequenceable</a></span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A typed erased async sequence.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -856,7 +943,7 @@ Return true from this closure to indicate that the second element is a duplicate
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2021-12-23)</p>
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2021-12-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

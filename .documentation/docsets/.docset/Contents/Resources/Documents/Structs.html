@@ -59,6 +59,12 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Structs/AnyAsyncSequenceable.html">AnyAsyncSequenceable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AnyThrowingAsyncSequenceable.html">AnyThrowingAsyncSequenceable</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/CombineLatest3AsyncSequence.html">CombineLatest3AsyncSequence</a>
               </li>
               <li class="nav-group-task">
@@ -99,6 +105,68 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone20AnyAsyncSequenceableV"></a>
+                    <a name="//apple_ref/swift/Struct/AnyAsyncSequenceable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone20AnyAsyncSequenceableV">AnyAsyncSequenceable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An async sequence that performs type erasure by wrapping another async sequence.</p>
+
+<p>If the async sequence that you wish to type erase can throw, then use <code><a href="Structs/AnyThrowingAsyncSequenceable.html">AnyThrowingAsyncSequenceable</a></code>.</p>
+
+                        <a href="Structs/AnyAsyncSequenceable.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AnyAsyncSequenceable</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">AnyAsyncSequenceable</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone28AnyThrowingAsyncSequenceableV"></a>
+                    <a name="//apple_ref/swift/Struct/AnyThrowingAsyncSequenceable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone28AnyThrowingAsyncSequenceableV">AnyThrowingAsyncSequenceable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A throwing async sequence that performs type erasure by wrapping another throwing async sequence.</p>
+
+<p>If the async sequence that you wish to type erase doesn&rsquo;t throw, then use <code><a href="Structs/AnyAsyncSequenceable.html">AnyAsyncSequenceable</a></code>.</p>
+
+                        <a href="Structs/AnyThrowingAsyncSequenceable.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AnyThrowingAsyncSequenceable</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">AnyThrowingAsyncSequenceable</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -601,7 +669,7 @@ then emits both elements as a tuple.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2021-12-23)</p>
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2021-12-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

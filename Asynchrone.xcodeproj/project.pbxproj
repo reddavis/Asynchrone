@@ -14,6 +14,10 @@
 		A45E0EBD27749897006B64E1 /* Fail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EBC27749897006B64E1 /* Fail.swift */; };
 		A45E0EBF27749C07006B64E1 /* FailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EBE27749C07006B64E1 /* FailTests.swift */; };
 		A45E0EC227749D18006B64E1 /* Assertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EC127749D17006B64E1 /* Assertion.swift */; };
+		A45E0EC72774E50A006B64E1 /* AnyAsyncSequenceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EC62774E50A006B64E1 /* AnyAsyncSequenceable.swift */; };
+		A45E0EC92774E8D3006B64E1 /* AnyAsyncSequenceableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EC82774E8D3006B64E1 /* AnyAsyncSequenceableTests.swift */; };
+		A45E0ECB2775E301006B64E1 /* AnyThrowingAsyncSequenceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0ECA2775E301006B64E1 /* AnyThrowingAsyncSequenceable.swift */; };
+		A45E0ECD2775E6E2006B64E1 /* AnyThrowingAsyncSequenceableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0ECC2775E6E2006B64E1 /* AnyThrowingAsyncSequenceableTests.swift */; };
 		A4C361AF276A5EF200511525 /* Asynchrone.docc in Sources */ = {isa = PBXBuildFile; fileRef = A4C361AE276A5EF200511525 /* Asynchrone.docc */; };
 		A4C361B5276A5EF200511525 /* Asynchrone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C361AA276A5EF200511525 /* Asynchrone.framework */; };
 		A4C361BB276A5EF200511525 /* Asynchrone.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C361AD276A5EF200511525 /* Asynchrone.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,6 +58,10 @@
 		A45E0EBC27749897006B64E1 /* Fail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fail.swift; sourceTree = "<group>"; };
 		A45E0EBE27749C07006B64E1 /* FailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailTests.swift; sourceTree = "<group>"; };
 		A45E0EC127749D17006B64E1 /* Assertion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assertion.swift; sourceTree = "<group>"; };
+		A45E0EC62774E50A006B64E1 /* AnyAsyncSequenceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAsyncSequenceable.swift; sourceTree = "<group>"; };
+		A45E0EC82774E8D3006B64E1 /* AnyAsyncSequenceableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAsyncSequenceableTests.swift; sourceTree = "<group>"; };
+		A45E0ECA2775E301006B64E1 /* AnyThrowingAsyncSequenceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyThrowingAsyncSequenceable.swift; sourceTree = "<group>"; };
+		A45E0ECC2775E6E2006B64E1 /* AnyThrowingAsyncSequenceableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyThrowingAsyncSequenceableTests.swift; sourceTree = "<group>"; };
 		A4C361AA276A5EF200511525 /* Asynchrone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Asynchrone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4C361AD276A5EF200511525 /* Asynchrone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Asynchrone.h; sourceTree = "<group>"; };
 		A4C361AE276A5EF200511525 /* Asynchrone.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Asynchrone.docc; sourceTree = "<group>"; };
@@ -139,6 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				A45E0EC027749D09006B64E1 /* Supporting Files */,
+				A45E0EC82774E8D3006B64E1 /* AnyAsyncSequenceableTests.swift */,
+				A45E0ECC2775E6E2006B64E1 /* AnyThrowingAsyncSequenceableTests.swift */,
 				A4C361DC276D080F00511525 /* AsyncSequenceTests.swift */,
 				A4C361D4276CDDB500511525 /* CombineLatestAsyncSequenceTests.swift */,
 				A4C361E92770FA7C00511525 /* CombineLatest3AsyncSequenceTests.swift */,
@@ -183,6 +193,8 @@
 		A4C361CD276A686400511525 /* Sequence */ = {
 			isa = PBXGroup;
 			children = (
+				A45E0EC62774E50A006B64E1 /* AnyAsyncSequenceable.swift */,
+				A45E0ECA2775E301006B64E1 /* AnyThrowingAsyncSequenceable.swift */,
 				A4C361D6276CE9DC00511525 /* AsyncSequence+Extension.swift */,
 				A4C361D2276BB14300511525 /* CombineLatestAsyncSequence.swift */,
 				A4C361E72770F67E00511525 /* CombineLatest3AsyncSequence.swift */,
@@ -331,7 +343,9 @@
 				A45E0EB927748F5A006B64E1 /* Just.swift in Sources */,
 				A4C361F52772319100511525 /* Zip3AsyncSequence.swift in Sources */,
 				A4C361D7276CE9DC00511525 /* AsyncSequence+Extension.swift in Sources */,
+				A45E0ECB2775E301006B64E1 /* AnyThrowingAsyncSequenceable.swift in Sources */,
 				A4C361ED2771B13D00511525 /* MergeAsyncSequence.swift in Sources */,
+				A45E0EC72774E50A006B64E1 /* AnyAsyncSequenceable.swift in Sources */,
 				A4C361DF2770984700511525 /* AsyncThrowingStream+Extension.swift in Sources */,
 				A4C361AF276A5EF200511525 /* Asynchrone.docc in Sources */,
 				A4C361E42770E52B00511525 /* Merge3AsyncSequence.swift in Sources */,
@@ -346,6 +360,7 @@
 			files = (
 				A4C361D1276B39F600511525 /* RemoveDuplicatesAsyncSequenceTests.swift in Sources */,
 				A4C361E62770EE9200511525 /* Merge3AsyncSequenceTests.swift in Sources */,
+				A45E0ECD2775E6E2006B64E1 /* AnyThrowingAsyncSequenceableTests.swift in Sources */,
 				A4C361F327722D4600511525 /* ZipAsyncSequenceTests.swift in Sources */,
 				A45E0EBF27749C07006B64E1 /* FailTests.swift in Sources */,
 				A4C361DB276D05C400511525 /* MergeAsyncSequenceTests.swift in Sources */,
@@ -354,6 +369,7 @@
 				A4C361D5276CDDB500511525 /* CombineLatestAsyncSequenceTests.swift in Sources */,
 				A45E0EBB277491F1006B64E1 /* JustTests.swift in Sources */,
 				A45E0EC227749D18006B64E1 /* Assertion.swift in Sources */,
+				A45E0EC92774E8D3006B64E1 /* AnyAsyncSequenceableTests.swift in Sources */,
 				A4C361DD276D080F00511525 /* AsyncSequenceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

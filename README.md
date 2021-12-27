@@ -28,6 +28,9 @@ Documentation can be found [here](https://distracted-austin-575f34.netlify.app).
 ### AsyncSequence
 
 - [Extensions](https://distracted-austin-575f34.netlify.app/extensions/asyncsequence)
+
+- [AnyAsyncSequenceable](https://distracted-austin-575f34.netlify.app/structs/anyasyncsequenceable)
+- [AnyThrowingAsyncSequenceable](https://distracted-austin-575f34.netlify.app/structs/anythrowingasyncsequenceable)
 - [CombineLatestAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/combinelatestasyncsequence)
 - [CombineLatest3AsyncSequence](https://distracted-austin-575f34.netlify.app/structs/combinelatest3asyncsequence)
 - [Fail](https://distracted-austin-575f34.netlify.app/structs/fail)
