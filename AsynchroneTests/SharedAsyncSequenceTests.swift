@@ -55,7 +55,7 @@ final class SharedAsyncSequenceTests: XCTestCase {
 
         Task {
             var valuesStream: [String] = []
-            for try await value in self.stream {
+            for await value in self.stream.eraseToAnyAsyncSequenceable() {
                 valuesStream.append(value)
             }
             XCTAssertEqual(valuesStream[0], "a")
