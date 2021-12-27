@@ -75,13 +75,18 @@ extension SharedAsyncSequence {
 
         private func add(stream: AsyncThrowingStream<T.Element, Error>,
                          continuation: AsyncThrowingStream<T.Element, Error>.Continuation) {
+            modify {
+                multicastStreams.append(stream)
+                continuations.append(continuation)
+
+                subscribeToBaseStreamIfNeeded()
+            }
+        }
+
+        private func modify(_ block: () -> Void) {
             lock.lock()
-            defer { lock.unlock() }
-
-            multicastStreams.append(stream)
-            continuations.append(continuation)
-
-            subscribeToBaseStreamIfNeeded()
+            block()
+            lock.unlock()
         }
 
         private func subscribeToBaseStreamIfNeeded() {
@@ -91,11 +96,17 @@ extension SharedAsyncSequence {
             Task {
                 do {
                     for try await value in base {
-                        continuations.forEach { $0.yield(value) }
+                        modify {
+                            continuations.forEach { $0.yield(value) }
+                        }
                     }
-                    continuations.forEach { $0.finish(throwing: nil) }
+                    modify {
+                        continuations.forEach { $0.finish(throwing: nil) }
+                    }
                 } catch {
-                    continuations.forEach { $0.finish(throwing: error) }
+                    modify {
+                        continuations.forEach { $0.finish(throwing: error) }
+                    }
                 }
             }
         }
