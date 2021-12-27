@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - AsyncIteratorProtocolBox
+
 private protocol AsyncIteratorProtocolBox {
 
     /// Asynchronously advances to the next element and returns it, or ends the
@@ -17,6 +19,8 @@ private protocol AsyncIteratorProtocolBox {
     mutating func nextObject() async throws -> Any?
 }
 
+// MARK: - ConcreteAsyncIteratorBox
+
 private struct ConcreteAsyncIteratorBox<Base: AsyncIteratorProtocol>: AsyncIteratorProtocolBox {
 
     fileprivate private(set) var originalValue: Base
@@ -26,7 +30,32 @@ private struct ConcreteAsyncIteratorBox<Base: AsyncIteratorProtocol>: AsyncItera
     }
 }
 
+// MARK: - AnyAsyncIterator
+
 public struct AnyAsyncIterator<T>: AsyncIteratorProtocol {
+
+    public typealias Element = T
+
+    // MARK: AnyAsyncIterator (Private Properties)
+
+    private var base: AsyncIteratorProtocolBox
+
+    // MARK: AnyAsyncIterator (Public Methods)
+
+    public init<I: AsyncIteratorProtocol>(_ base: I) where I.Element == T {
+        self.base = ConcreteAsyncIteratorBox(originalValue: base)
+    }
+
+    // MARK: AsyncIteratorProtocol
+
+    public mutating func next() async -> T? {
+        try? await base.nextObject() as? T
+    }
+}
+
+// MARK: - AnyThrowingAsyncIterator
+
+public struct AnyThrowingAsyncIterator<T>: AsyncIteratorProtocol {
 
     public typealias Element = T
 

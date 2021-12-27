@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6469FFEA2779DDAA00EC13C5 /* AnyAsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6469FFE92779DDAA00EC13C5 /* AnyAsyncSequenceTests.swift */; };
+		6469FFEE2779DF9500EC13C5 /* AnyThrowingAsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6469FFED2779DF9500EC13C5 /* AnyThrowingAsyncSequenceTests.swift */; };
 		6470FF6B2775F8E5009CD087 /* ThrottleAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6470FF6A2775F8E5009CD087 /* ThrottleAsyncSequence.swift */; };
 		64A0D8322778664300FAD4C9 /* AnyAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0D8312778664300FAD4C9 /* AnyAsyncSequence.swift */; };
 		64A0D83427787C0000FAD4C9 /* AnyAsyncIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0D83327787C0000FAD4C9 /* AnyAsyncIterator.swift */; };
@@ -49,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6469FFE92779DDAA00EC13C5 /* AnyAsyncSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAsyncSequenceTests.swift; sourceTree = "<group>"; };
+		6469FFED2779DF9500EC13C5 /* AnyThrowingAsyncSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyThrowingAsyncSequenceTests.swift; sourceTree = "<group>"; };
 		6470FF6A2775F8E5009CD087 /* ThrottleAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleAsyncSequence.swift; sourceTree = "<group>"; };
 		64A0D8312778664300FAD4C9 /* AnyAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAsyncSequence.swift; sourceTree = "<group>"; };
 		64A0D83327787C0000FAD4C9 /* AnyAsyncIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAsyncIterator.swift; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 				A4C361D0276B39F600511525 /* RemoveDuplicatesAsyncSequenceTests.swift */,
 				A4C361F227722D4600511525 /* ZipAsyncSequenceTests.swift */,
 				64ED0336277732EC000AD024 /* ThrottleTests.swift */,
+				6469FFE92779DDAA00EC13C5 /* AnyAsyncSequenceTests.swift */,
+				6469FFED2779DF9500EC13C5 /* AnyThrowingAsyncSequenceTests.swift */,
 			);
 			path = AsynchroneTests;
 			sourceTree = "<group>";
@@ -356,7 +362,9 @@
 				A4C361E62770EE9200511525 /* Merge3AsyncSequenceTests.swift in Sources */,
 				A4C361F327722D4600511525 /* ZipAsyncSequenceTests.swift in Sources */,
 				A45E0EBF27749C07006B64E1 /* FailTests.swift in Sources */,
+				6469FFEA2779DDAA00EC13C5 /* AnyAsyncSequenceTests.swift in Sources */,
 				A4C361DB276D05C400511525 /* MergeAsyncSequenceTests.swift in Sources */,
+				6469FFEE2779DF9500EC13C5 /* AnyThrowingAsyncSequenceTests.swift in Sources */,
 				A4C361EA2770FA7C00511525 /* CombineLatest3AsyncSequenceTests.swift in Sources */,
 				64ED0337277732EC000AD024 /* ThrottleTests.swift in Sources */,
 				A4C361D5276CDDB500511525 /* CombineLatestAsyncSequenceTests.swift in Sources */,

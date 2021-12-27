@@ -40,7 +40,7 @@ public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
         self.inner = ThrottleAsyncSequence.Inner<T>(base: base, continuation: streamContinuation, interval: interval, latest: latest)
 
         Task { [inner] in
-            await inner.start()
+            await inner.startAwaitingForBaseSequence()
         }
     }
 }
@@ -72,7 +72,7 @@ extension ThrottleAsyncSequence {
 
         private let interval: TimeInterval
 
-        private var continuation: AsyncStream<Element>.Continuation
+        private var continuation: AsyncStream<Element>.Continuation?
 
         private var collectedElements: [Element] = []
 
@@ -80,9 +80,14 @@ extension ThrottleAsyncSequence {
         private var base: T
         private let latest: Bool
 
-        private var waitingTask: Task<Void, Never>?
+        private var scheduledTask: Task<Void, Never>?
 
         // MARK: Inner (Internal Methods)
+
+        deinit {
+            scheduledTask?.cancel()
+            continuation = nil
+        }
 
         internal init(base: T, continuation: AsyncStream<Element>.Continuation, interval: TimeInterval, latest: Bool) {
             self.base = base
@@ -91,19 +96,20 @@ extension ThrottleAsyncSequence {
             self.latest = latest
         }
 
-        internal func start() async {
+        internal func startAwaitingForBaseSequence() async {
             do {
                 for try await event in base {
                     handle(event: event)
                 }
                 if let element = latest ? collectedElements.last : collectedElements.first {
-                    continuation.finish(with: element)
+                    continuation?.finish(with: element)
                 } else {
-                    continuation.finish()
+                    continuation?.finish()
                 }
             } catch {
-                continuation.finish()
+                continuation?.finish()
             }
+            continuation = nil
         }
 
         // MARK: Inner (Private Methods)
@@ -113,45 +119,43 @@ extension ThrottleAsyncSequence {
             collectedElements.append(event)
 
             guard let lastTime = lastTime else {
-                self.lastTime = Date()
-                if let value = latest ? collectedElements.last : collectedElements.first {
-                    continuation.yield(value)
-                }
-                collectedElements = []
+                deliverCollectedValue()
                 return
             }
 
             let currentTime = Date()
-            let gapDuration = currentTime.timeIntervalSince(lastTime)
+            let gap = currentTime.timeIntervalSince(lastTime)
 
-            if gapDuration < interval {
-                guard waitingTask == nil else {
+            if gap < interval {
+                guard scheduledTask == nil else {
                     return
                 }
 
-                let delay = interval - gapDuration
-                waitingTask = Task { [weak self] in
+                let delay = interval - gap
+                scheduledTask = Task { [weak self] in
                     try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
-                    await self?.finishWaitingTask()
+
+                    guard !Task.isCancelled else { return }
+
+                    await self?.deliverScheduledValue()
                 }
 
             } else {
-                if let value = latest ? collectedElements.last : collectedElements.first {
-                    self.lastTime = Date()
-                    continuation.yield(value)
-                    collectedElements = []
-                }
+                deliverCollectedValue()
             }
         }
 
-        private func finishWaitingTask() {
-            waitingTask = nil
+        private func deliverScheduledValue() {
+            scheduledTask = nil
+            deliverCollectedValue()
+        }
 
+        private func deliverCollectedValue() {
+            lastTime = Date()
             if let value = latest ? collectedElements.last : collectedElements.first {
-                lastTime = Date()
-                continuation.yield(value)
-                collectedElements = []
+                continuation?.yield(value)
             }
+            collectedElements = []
         }
     }
 }

@@ -45,9 +45,9 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
         let stream = self
             .stream
             .throttle(0.25, latest: true)
-            .eraseToAnyAsyncSequence() as AnyAsyncSequence<String>
+            .eraseToAnyAsyncSequence()
 
-        let valuesStream = try await stream.collect()
+        let valuesStream = await stream.collect()
 
         XCTAssertEqual(valuesStream[0], "a")
         XCTAssertEqual(valuesStream[1], "abc")
