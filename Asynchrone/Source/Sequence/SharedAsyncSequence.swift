@@ -47,13 +47,17 @@ extension SharedAsyncSequence {
         private var multicastStreams: [AsyncThrowingStream<T.Element, Error>] = []
         private var continuations: [AsyncThrowingStream<T.Element, Error>.Continuation] = []
 
-        private var isSubscribedToBaseStream: Bool = false
+        private var subscriptionTask: Task<Void, Never>?
 
         private var base: T
 
         private let lock = NSLock()
 
         // MARK: Inner (Public Methods)
+
+        deinit {
+            subscriptionTask?.cancel()
+        }
 
         public init(_ base: T) {
             self.base = base
@@ -90,22 +94,30 @@ extension SharedAsyncSequence {
         }
 
         private func subscribeToBaseStreamIfNeeded() {
-            guard !isSubscribedToBaseStream else { return }
-            isSubscribedToBaseStream = true
+            guard subscriptionTask == nil else { return }
 
-            Task {
+            subscriptionTask = Task { [weak self] in
+                guard let self = self else { return }
+
+                guard !Task.isCancelled else {
+                    self.modify {
+                        self.continuations.forEach { $0.finish(throwing: CancellationError()) }
+                    }
+                    return
+                }
+
                 do {
-                    for try await value in base {
-                        modify {
-                            continuations.forEach { $0.yield(value) }
+                    for try await value in self.base {
+                        self.modify {
+                            self.continuations.forEach { $0.yield(value) }
                         }
                     }
-                    modify {
-                        continuations.forEach { $0.finish(throwing: nil) }
+                    self.modify {
+                        self.continuations.forEach { $0.finish(throwing: nil) }
                     }
                 } catch {
-                    modify {
-                        continuations.forEach { $0.finish(throwing: error) }
+                    self.modify {
+                        self.continuations.forEach { $0.finish(throwing: error) }
                     }
                 }
             }
