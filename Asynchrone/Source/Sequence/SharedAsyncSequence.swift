@@ -70,6 +70,7 @@ extension SharedAsyncSequence {
             let stream = AsyncThrowingStream<T.Element, Error> { (continuation: AsyncThrowingStream<T.Element, Error>.Continuation) in
                 streamContinuation = continuation
             }
+
             add(stream: stream, continuation: streamContinuation)
 
             return stream.makeAsyncIterator()
@@ -96,7 +97,7 @@ extension SharedAsyncSequence {
         private func subscribeToBaseStreamIfNeeded() {
             guard subscriptionTask == nil else { return }
 
-            subscriptionTask = Task { [weak self] in
+            subscriptionTask = Task { [weak self, base] in
                 guard let self = self else { return }
 
                 guard !Task.isCancelled else {
@@ -107,7 +108,7 @@ extension SharedAsyncSequence {
                 }
 
                 do {
-                    for try await value in self.base {
+                    for try await value in base {
                         self.modify {
                             self.continuations.forEach { $0.yield(value) }
                         }
