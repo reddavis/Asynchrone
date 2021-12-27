@@ -30,7 +30,7 @@ public struct SharedAsyncSequence<T: AsyncSequence>: AsyncSequence {
 
     /// Creates an async iterator that emits elements of this async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public __consuming func makeAsyncIterator() -> AsyncThrowingStream<T.Element, Error>.Iterator {
+    public func makeAsyncIterator() -> AsyncThrowingStream<T.Element, Error>.Iterator {
         inner.makeAsyncIterator()
     }
 }
