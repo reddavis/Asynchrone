@@ -20,17 +20,15 @@ final class SharedAsyncSequenceTests: XCTestCase {
         }
 
         let stream = AsyncStream<String> { continuation in
-            Task {
-                values.enumerated().forEach { i, value in
-                    let delay = TimeInterval(i) / 10.0
+            values.enumerated().forEach { i, value in
+                let delay = TimeInterval(i) / 100.0
 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                        if i == values.count - 1 {
-                            continuation.yield(value)
-                            continuation.finish()
-                        } else {
-                            continuation.yield(value)
-                        }
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    if i == values.count - 1 {
+                        continuation.yield(value)
+                        continuation.finish()
+                    } else {
+                        continuation.yield(value)
                     }
                 }
             }
@@ -41,10 +39,6 @@ final class SharedAsyncSequenceTests: XCTestCase {
 
     func testSharedStreamShouldNotThrowExceptionAndReceiveAllValues() async throws {
 
-        let valuesStream = try await self.stream
-            .throttle(0.25, latest: true)
-            .collect()
-
         Task {
             let valuesStream = try await self.stream.collect()
             XCTAssertEqual(valuesStream[0], "a")
@@ -53,7 +47,7 @@ final class SharedAsyncSequenceTests: XCTestCase {
             XCTAssertEqual(valuesStream[3], "abcd")
         }
 
-        Task {
+        Task.detached {
             var valuesStream: [String] = []
             for await value in self.stream.eraseToAnyAsyncSequenceable() {
                 valuesStream.append(value)
@@ -64,8 +58,11 @@ final class SharedAsyncSequenceTests: XCTestCase {
             XCTAssertEqual(valuesStream[3], "abcd")
         }
 
+        let valuesStream = try await self.stream.collect()
+
         XCTAssertEqual(valuesStream[0], "a")
-        XCTAssertEqual(valuesStream[1], "abc")
-        XCTAssertEqual(valuesStream[2], "abcd")
+        XCTAssertEqual(valuesStream[1], "ab")
+        XCTAssertEqual(valuesStream[2], "abc")
+        XCTAssertEqual(valuesStream[3], "abcd")
     }
 }
