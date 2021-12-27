@@ -20,17 +20,15 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
         }
 
         self.stream = .init { continuation in
-            Task {
-                values.enumerated().forEach { i, value in
-                    let delay = TimeInterval(i) / 10.0
+            values.enumerated().forEach { i, value in
+                let delay = TimeInterval(i) / 10.0
 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                        if i == values.count - 1 {
-                            continuation.yield(value)
-                            continuation.finish()
-                        } else {
-                            continuation.yield(value)
-                        }
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    if i == values.count - 1 {
+                        continuation.yield(value)
+                        continuation.finish()
+                    } else {
+                        continuation.yield(value)
                     }
                 }
             }
@@ -39,7 +37,7 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
 
     // MARK: Tests
 
-    func testThrottle() async throws {
+    func testThrottleLatest() async throws {
 
         let stream = self
             .stream
@@ -49,6 +47,19 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
 
         XCTAssertEqual(valuesStream[0], "a")
         XCTAssertEqual(valuesStream[1], "abc")
+        XCTAssertEqual(valuesStream[2], "abcd")
+    }
+
+    func testThrottle() async throws {
+
+        let stream = self
+            .stream
+            .throttle(0.25, latest: false)
+
+        let valuesStream = try await stream.collect()
+
+        XCTAssertEqual(valuesStream[0], "a")
+        XCTAssertEqual(valuesStream[1], "ab")
         XCTAssertEqual(valuesStream[2], "abcd")
     }
 
