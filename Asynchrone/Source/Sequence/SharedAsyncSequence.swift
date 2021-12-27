@@ -44,7 +44,7 @@ extension SharedAsyncSequence {
 
         // MARK: Inner (Private Properties)
 
-        private var multicastStreams: [AsyncThrowingStream<T.Element, Error>] = []
+        private var streams: [AsyncThrowingStream<T.Element, Error>] = []
         private var continuations: [AsyncThrowingStream<T.Element, Error>.Continuation] = []
 
         private var subscriptionTask: Task<Void, Never>?
@@ -80,7 +80,7 @@ extension SharedAsyncSequence {
         private func add(stream: AsyncThrowingStream<T.Element, Error>,
                          continuation: AsyncThrowingStream<T.Element, Error>.Continuation) {
             modify {
-                multicastStreams.append(stream)
+                streams.append(stream)
                 continuations.append(continuation)
 
                 subscribeToBaseStreamIfNeeded()
