@@ -7,7 +7,6 @@
 
 import XCTest
 @testable import Asynchrone
-import Combine
 
 final class ThrottleAsyncSequenceTests: XCTestCase {
     private var stream: AsyncStream<String>!
@@ -45,12 +44,25 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
         let stream = self
             .stream
             .throttle(0.25, latest: true)
-            .eraseToAnyAsyncSequence()
 
-        let valuesStream = await stream.collect()
+        let valuesStream = try await stream.collect()
 
         XCTAssertEqual(valuesStream[0], "a")
         XCTAssertEqual(valuesStream[1], "abc")
         XCTAssertEqual(valuesStream[2], "abcd")
     }
+
+    func testThrowingThrottle() async throws {
+        await XCTAssertAsyncThrowsError {
+            _ = try await Fail<Int, TestError>(error: TestError.a)
+                .throttle(0.2, latest: true)
+                .collect()
+        }
+    }
+}
+
+// MARK: Error
+
+fileprivate enum TestError: Error {
+    case a
 }

@@ -17,9 +17,9 @@ public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
     // MARK: ThrottleAsyncSequence (Private Properties)
 
     private var base: T
-    private var stream: AsyncStream<T.Element>
-    private var iterator: AsyncStream<T.Element>.Iterator
-    private var continuation: AsyncStream<T.Element>.Continuation
+    private var stream: AsyncThrowingStream<T.Element, Error>
+    private var iterator: AsyncThrowingStream<T.Element, Error>.Iterator
+    private var continuation: AsyncThrowingStream<T.Element, Error>.Continuation
     private var inner: ThrottleAsyncSequence.Inner<T>
 
     // MARK: ThrottleAsyncSequence (Public Properties)
@@ -29,8 +29,8 @@ public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
     ///   - element: The element to emit.
     public init(_ base: T, interval: TimeInterval, latest: Bool) {
 
-        var streamContinuation: AsyncStream<T.Element>.Continuation!
-        let stream = AsyncStream<T.Element> { (continuation: AsyncStream<T.Element>.Continuation) in
+        var streamContinuation: AsyncThrowingStream<T.Element, Error>.Continuation!
+        let stream = AsyncThrowingStream<T.Element, Error> { (continuation: AsyncThrowingStream<T.Element, Error>.Continuation) in
             streamContinuation = continuation
         }
         self.base = base
@@ -49,13 +49,13 @@ public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
 
 extension ThrottleAsyncSequence: AsyncIteratorProtocol {
 
-    public mutating func next() async -> Element? {
-        await self.iterator.next()
+    public mutating func next() async throws -> Element? {
+        try await self.iterator.next()
     }
 
     /// Creates an async iterator that emits elements of this async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> AsyncStream<Element>.Iterator {
+    public func makeAsyncIterator() -> AsyncThrowingStream<Element, Error>.Iterator {
         iterator
     }
 }
@@ -72,7 +72,7 @@ extension ThrottleAsyncSequence {
 
         private let interval: TimeInterval
 
-        private var continuation: AsyncStream<Element>.Continuation?
+        private var continuation: AsyncThrowingStream<Element, Error>.Continuation?
 
         private var collectedElements: [Element] = []
 
@@ -89,7 +89,7 @@ extension ThrottleAsyncSequence {
             continuation = nil
         }
 
-        internal init(base: T, continuation: AsyncStream<Element>.Continuation, interval: TimeInterval, latest: Bool) {
+        internal init(base: T, continuation: AsyncThrowingStream<Element, Error>.Continuation, interval: TimeInterval, latest: Bool) {
             self.base = base
             self.continuation = continuation
             self.interval = interval
@@ -107,7 +107,7 @@ extension ThrottleAsyncSequence {
                     continuation?.finish()
                 }
             } catch {
-                continuation?.finish()
+                continuation?.finish(throwing: error)
             }
             continuation = nil
         }
