@@ -1,7 +1,5 @@
 # Asynchone
 
-[![Build Status](https://app.bitrise.io/app/8dc0c58b91b2be43/status.svg?token=q7Um_wO1cQzKn2RawUmQxg&branch=main)](https://app.bitrise.io/app/8dc0c58b91b2be43)
-
 Extensions and additions to `AsyncSequence`, `AsyncStream` and `AsyncThrowingStream`.
 
 ## Requirements
