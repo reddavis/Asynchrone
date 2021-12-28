@@ -38,6 +38,8 @@ Documentation can be found [here](https://distracted-austin-575f34.netlify.app).
 - [MergeAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/mergeasyncsequence)
 - [Merge3AsyncSequence](https://distracted-austin-575f34.netlify.app/structs/merge3asyncsequence)
 - [RemoveDuplicatesAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/removeduplicatesasyncsequence)
+- [SharedAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/sharedasyncsequence)
+- [ThrottleAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/throttleasyncsequence)
 - [ZipAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/zipasyncsequence)
 - [Zip3AsyncSequence](https://distracted-austin-575f34.netlify.app/structs/zip3asyncsequence)
 

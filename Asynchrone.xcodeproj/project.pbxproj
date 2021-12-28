@@ -200,7 +200,6 @@
 			children = (
 				A45E0EC62774E50A006B64E1 /* AnyAsyncSequenceable.swift */,
 				A45E0ECA2775E301006B64E1 /* AnyThrowingAsyncSequenceable.swift */,
-				644E0F0A277A27480006CEB8 /* SharedAsyncSequence.swift */,
 				A4C361D6276CE9DC00511525 /* AsyncSequence+Extension.swift */,
 				A4C361D2276BB14300511525 /* CombineLatestAsyncSequence.swift */,
 				A4C361E72770F67E00511525 /* CombineLatest3AsyncSequence.swift */,
@@ -208,10 +207,11 @@
 				A45E0EB827748F5A006B64E1 /* Just.swift */,
 				A4C361EC2771B13D00511525 /* MergeAsyncSequence.swift */,
 				A4C361E32770E52B00511525 /* Merge3AsyncSequence.swift */,
+				644E0F0A277A27480006CEB8 /* SharedAsyncSequence.swift */,
 				A4C361CE276A68BF00511525 /* RemoveDuplicatesAsyncSequence.swift */,
+				6470FF6A2775F8E5009CD087 /* ThrottleAsyncSequence.swift */,
 				A4C361F02772246C00511525 /* ZipAsyncSequence.swift */,
 				A4C361F42772319100511525 /* Zip3AsyncSequence.swift */,
-				6470FF6A2775F8E5009CD087 /* ThrottleAsyncSequence.swift */,
 			);
 			path = Sequence;
 			sourceTree = "<group>";
@@ -585,10 +585,11 @@
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 97KW7JU3Q3;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -598,6 +599,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.reddavis.AsynchroneTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SDKROOT = "";
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;
@@ -611,10 +614,11 @@
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 97KW7JU3Q3;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -624,6 +628,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.reddavis.AsynchroneTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SDKROOT = "";
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;

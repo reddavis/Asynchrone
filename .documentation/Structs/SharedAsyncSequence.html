@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Zip3AsyncSequence Structure Reference</title>
+    <title>SharedAsyncSequence Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/Zip3AsyncSequence" class="dashAnchor"></a>
-    <a title="Zip3AsyncSequence Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/SharedAsyncSequence" class="dashAnchor"></a>
+    <a title="SharedAsyncSequence Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (95% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        Zip3AsyncSequence Structure Reference
+        SharedAsyncSequence Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -104,50 +104,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Zip3AsyncSequence</h1>
+            <h1>SharedAsyncSequence</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Zip3AsyncSequence</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">,</span> <span class="kt">Q</span><span class="p">,</span> <span class="kt">R</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Q</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">R</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Zip3AsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SharedAsyncSequence</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 
                 </div>
               </div>
-            <p>An asynchronous sequence that applys a zip function to the three async sequences.</p>
-
-<p>Use <code>Zip3AsyncSequence</code> to combine the latest elements from three async sequcnes and emit a tuple.</p>
-
-<p>The async sequence waits until both provided async sequences have emitted an element,
-then emits both elements as a tuple.</p>
-
-<p>If one sequence never emits a value or raises an error then the zipped sequence will finish.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">streamA</span> <span class="o">=</span> <span class="o">.</span><span class="kd">init</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="k">let</span> <span class="nv">streamB</span> <span class="o">=</span> <span class="o">.</span><span class="kd">init</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="k">let</span> <span class="nv">streamC</span> <span class="o">=</span> <span class="o">.</span><span class="kd">init</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">streamA</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span><span class="n">streamB</span><span class="p">,</span> <span class="n">streamC</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">// Prints:</span>
-<span class="c1">// (1, 5, 8)</span>
-<span class="c1">// (2, 6, 9)</span>
-</code></pre>
+            <p>Undocumented</p>
 
           </section>
           <section class="section task-group-section">
@@ -156,9 +121,35 @@ then emits both elements as a tuple.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone17Zip3AsyncSequenceV7Elementa"></a>
+                    <a name="/s:Sci13AsyncIteratorQa"></a>
+                    <a name="//apple_ref/swift/Alias/AsyncIterator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci13AsyncIteratorQa">AsyncIterator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">AsyncIterator</span> <span class="o">=</span> <span class="kt">AsyncThrowingStream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">.</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;.</span><span class="kt">Iterator</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone19SharedAsyncSequenceV7Elementa"></a>
                     <a name="//apple_ref/swift/Alias/Element" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone17Zip3AsyncSequenceV7Elementa">Element</a>
+                    <a class="token" href="#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -173,7 +164,7 @@ then emits both elements as a tuple.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Element</span> <span class="o">=</span> <span class="p">(</span><span class="kt">P</span><span class="o">.</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Q</span><span class="o">.</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">R</span><span class="o">.</span><span class="kt">Element</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Element</span> <span class="o">=</span> <span class="kt">T</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 
                         </div>
                       </div>
@@ -184,11 +175,11 @@ then emits both elements as a tuple.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/AsyncIteratorProtocol"></a>
-                <a name="//apple_ref/swift/Section/AsyncIteratorProtocol" class="dashAnchor"></a>
+                <a name="/SharedAsyncSequence%20%28Public%20Properties%29"></a>
+                <a name="//apple_ref/swift/Section/SharedAsyncSequence (Public Properties)" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/AsyncIteratorProtocol"></a>
-                  <h3 class="section-name"><span>AsyncIteratorProtocol</span>
+                  <a class="section-name-link" href="#/SharedAsyncSequence%20%28Public%20Properties%29"></a>
+                  <h3 class="section-name"><span>SharedAsyncSequence (Public Properties)</span>
 </h3>
                 </div>
               </div>
@@ -196,39 +187,45 @@ then emits both elements as a tuple.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone17Zip3AsyncSequenceV4next7ElementQz_AEQy_AEQy0_tSgyYaKF"></a>
-                    <a name="//apple_ref/swift/Method/next()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone17Zip3AsyncSequenceV4next7ElementQz_AEQy_AEQy0_tSgyYaKF">next()</a>
+                    <a name="/s:10Asynchrone19SharedAsyncSequenceVyACyxGxcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone19SharedAsyncSequenceVyACyxGxcfc">init(_:<wbr>)</a>
                     </code>
-                      <span class="declaration-note">
-                        Asynchronous
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Produces the next element in the sequence.</p>
-
-<p>Continues to call <code>next()</code> on it&rsquo;s base iterator and iterator of
-it&rsquo;s combined sequence.</p>
-
-<p>If any iterator returns <code>nil</code>, indicating the end of the sequence, this
-iterator returns <code>nil</code>.</p>
+                        <p>Creates an async that emits elements to multiple streams.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">next</span><span class="p">()</span> <span class="k">async</span> <span class="k">rethrows</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Zip3AsyncSequence.html#/s:10Asynchrone17Zip3AsyncSequenceV7Elementa">Element</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">base</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div>
-                        <h4>Return Value</h4>
-                        <p>The next element or <code>nil</code> if the end of the sequence is reached.</p>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>base</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The async sequence in which this sequence receives it&rsquo;s elements.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -236,9 +233,9 @@ iterator returns <code>nil</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone17Zip3AsyncSequenceV04makeC8IteratorACyxq_q0_GyF"></a>
+                    <a name="/s:10Asynchrone19SharedAsyncSequenceV04makeC8IteratorScs0F0Vy7ElementQzs5Error_p_GyF"></a>
                     <a name="//apple_ref/swift/Method/makeAsyncIterator()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone17Zip3AsyncSequenceV04makeC8IteratorACyxq_q0_GyF">makeAsyncIterator()</a>
+                    <a class="token" href="#/s:10Asynchrone19SharedAsyncSequenceV04makeC8IteratorScs0F0Vy7ElementQzs5Error_p_GyF">makeAsyncIterator()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -253,7 +250,7 @@ iterator returns <code>nil</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Zip3AsyncSequence</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">,</span> <span class="kt">Q</span><span class="p">,</span> <span class="kt">R</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">AsyncThrowingStream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">.</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;.</span><span class="kt">Iterator</span></code></pre>
 
                         </div>
                       </div>
