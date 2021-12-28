@@ -38,8 +38,10 @@ public struct Merge3AsyncSequence<T: AsyncSequence>: AsyncSequence {
     public typealias Element = T.Element
     
     // Private
+    // swiftlint:disable implicitly_unwrapped_optional
     private var stream: AsyncThrowingStream<Element, Error>!
     private var iterator: AsyncThrowingStream<Element, Error>.Iterator!
+    // swiftlint:enable implicitly_unwrapped_optional
     
     // MARK: Initialization
     
