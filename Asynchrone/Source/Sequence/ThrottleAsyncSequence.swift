@@ -85,7 +85,7 @@ extension ThrottleAsyncSequence {
         private let latest: Bool
         
         private var collectedElements: [Element] = []
-        private var lastTime: Date?
+        private var lastEmission: Date?
         private var scheduledTask: Task<Void, Never>?
 
         // MARK: Initialization
@@ -117,7 +117,7 @@ extension ThrottleAsyncSequence {
                     self.handle(event: event)
                 }
                 
-                if let lastTime = self.lastTime {
+                if let lastTime = self.lastEmission {
                     let gap = Date.now.timeIntervalSince(lastTime)
                     if gap < self.interval {
                         let delay = self.interval - gap
@@ -143,7 +143,7 @@ extension ThrottleAsyncSequence {
         private func handle(event: T.Element) {
             self.collectedElements.append(event)
 
-            guard let lastTime = self.lastTime else {
+            guard let lastTime = self.lastEmission else {
                 self.emitNextElement()
                 return
             }
@@ -155,7 +155,7 @@ extension ThrottleAsyncSequence {
         }
 
         private func emitNextElement() {
-            self.lastTime = Date()
+            self.lastEmission = Date()
             if let element = self.nextElement() {
                 self.continuation?.yield(element)
             }
