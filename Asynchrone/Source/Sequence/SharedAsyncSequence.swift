@@ -1,14 +1,37 @@
-//
-//  SharedAsyncSequence.swift
-//  Asynchrone
-//
-//  Created by Michal Zaborowski on 2021-12-27.
-//
-
 import Foundation
 
-// MARK: - SharedAsyncSequence
 
+/// An async sequence that can be shared between multiple tasks.
+///
+/// ```swift
+/// let values = [
+///     "a",
+///     "ab",
+///     "abc",
+///     "abcd"
+/// ]
+///
+/// let stream = AsyncStream { continuation in
+///     for value in values {
+///         continuation.yield(value)
+///     }
+///     continuation.finish()
+/// }
+/// .shared()
+///
+/// Task {
+///     let values = try await self.stream.collect()
+///     // ...
+/// }
+///
+/// Task.detached {
+///     let values = try await self.stream.collect()
+///     // ...
+/// }
+///
+/// let values = try await self.stream.collect()
+/// // ...
+/// ```
 public struct SharedAsyncSequence<T: AsyncSequence>: AsyncSequence {
     public typealias AsyncIterator = AsyncThrowingStream<T.Element, Error>.Iterator
 
@@ -21,7 +44,7 @@ public struct SharedAsyncSequence<T: AsyncSequence>: AsyncSequence {
 
     // MARK: SharedAsyncSequence (Public Properties)
 
-    /// Creates an async that emits elements to multiple streams.
+    /// Creates a shareable async sequence that can be used across multiple tasks.
     /// - Parameters:
     ///   - base: The async sequence in which this sequence receives it's elements.
     public init(_ base: T) {
@@ -35,37 +58,40 @@ public struct SharedAsyncSequence<T: AsyncSequence>: AsyncSequence {
     }
 }
 
+
+
 // MARK: - SharedAsyncSequence > Inner
 
 extension SharedAsyncSequence {
 
-    private final class Inner<T: AsyncSequence> {
-        public typealias Element = T.Element
+    fileprivate final class Inner<T: AsyncSequence> {
+        
+        fileprivate typealias Element = T.Element
 
         // MARK: Inner (Private Properties)
 
+        private var base: T
+        
+        private let lock = NSLock()
         private var streams: [AsyncThrowingStream<T.Element, Error>] = []
         private var continuations: [AsyncThrowingStream<T.Element, Error>.Continuation] = []
-
         private var subscriptionTask: Task<Void, Never>?
 
-        private var base: T
+        // MARK: Initialization
 
-        private let lock = NSLock()
-
-        // MARK: Inner (Public Methods)
-
+        fileprivate init(_ base: T) {
+            self.base = base
+        }
+        
         deinit {
             subscriptionTask?.cancel()
         }
-
-        public init(_ base: T) {
-            self.base = base
-        }
-
+        
+        // MARK: API
+        
         /// Creates an new stream and returns its async iterator that emits elements of base async sequence.
         /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-        public func makeAsyncIterator() -> AsyncThrowingStream<T.Element, Error>.Iterator {
+        fileprivate func makeAsyncIterator() -> AsyncThrowingStream<T.Element, Error>.Iterator {
             var streamContinuation: AsyncThrowingStream<T.Element, Error>.Continuation!
             let stream = AsyncThrowingStream<T.Element, Error> { (continuation: AsyncThrowingStream<T.Element, Error>.Continuation) in
                 streamContinuation = continuation
@@ -78,12 +104,13 @@ extension SharedAsyncSequence {
 
         // MARK: Inner (Private Methods)
 
-        private func add(stream: AsyncThrowingStream<T.Element, Error>,
-                         continuation: AsyncThrowingStream<T.Element, Error>.Continuation) {
+        private func add(
+            stream: AsyncThrowingStream<T.Element, Error>,
+            continuation: AsyncThrowingStream<T.Element, Error>.Continuation
+        ) {
             modify {
                 streams.append(stream)
                 continuations.append(continuation)
-
                 subscribeToBaseStreamIfNeeded()
             }
         }
@@ -126,8 +153,13 @@ extension SharedAsyncSequence {
     }
 }
 
+
+
+// MARK: Shared
+
 extension AsyncSequence {
 
+    /// Creates a shareable async sequence that can be used across multiple tasks.
     public func shared() -> SharedAsyncSequence<Self> {
         .init(self)
     }
