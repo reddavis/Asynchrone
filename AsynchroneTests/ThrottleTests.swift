@@ -1,16 +1,13 @@
-//
-//  ThrottleTests.swift
-//  AsynchroneTests
-//
-//  Created by Michal Zaborowski on 2021-12-25.
-//
-
 import XCTest
 @testable import Asynchrone
 
-final class ThrottleAsyncSequenceTests: XCTestCase {
-    private var stream: AsyncStream<String>!
 
+final class ThrottleAsyncSequenceTests: XCTestCase {
+    
+    private var stream: AsyncStream<String>!
+    
+    // MARK: Setup
+    
     override func setUpWithError() throws {
         let values = "abcd"
             .map { String(describing: $0) }
@@ -38,10 +35,9 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
     // MARK: Tests
 
     func testThrottleLatest() async throws {
-
         let stream = self
             .stream
-            .throttle(0.25, latest: true)
+            .throttle(for: 0.25, latest: true)
 
         let valuesStream = try await stream.collect()
 
@@ -51,10 +47,9 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
     }
 
     func testThrottle() async throws {
-
         let stream = self
             .stream
-            .throttle(0.25, latest: false)
+            .throttle(for: 0.25, latest: false)
 
         let valuesStream = try await stream.collect()
 
@@ -66,11 +61,13 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
     func testThrowingThrottle() async throws {
         await XCTAssertAsyncThrowsError {
             _ = try await Fail<Int, TestError>(error: TestError.a)
-                .throttle(0.2, latest: true)
+                .throttle(for: 0.2, latest: true)
                 .collect()
         }
     }
 }
+
+
 
 // MARK: Error
 
