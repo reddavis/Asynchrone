@@ -6,6 +6,34 @@
       "symbol": "RemoveDuplicatesAsyncSequence.Predicate",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
+    },
+    {
+      "file": "/Users/reddavis/Documents/Projects/Asynchrone/Asynchrone/Source/Sequence/SharedAsyncSequence.swift",
+      "line": 12,
+      "symbol": "SharedAsyncSequence",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/reddavis/Documents/Projects/Asynchrone/Asynchrone/Source/Sequence/SharedAsyncSequence.swift",
+      "line": 131,
+      "symbol": "AsyncSequence.shared()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/reddavis/Documents/Projects/Asynchrone/Asynchrone/Source/Sequence/ThrottleAsyncSequence.swift",
+      "line": 12,
+      "symbol": "ThrottleAsyncSequence",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/reddavis/Documents/Projects/Asynchrone/Asynchrone/Source/Sequence/ThrottleAsyncSequence.swift",
+      "line": 50,
+      "symbol": "ThrottleAsyncSequence",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
     }
   ],
   "source_directory": "/Users/reddavis/Documents/Projects/Asynchrone"
