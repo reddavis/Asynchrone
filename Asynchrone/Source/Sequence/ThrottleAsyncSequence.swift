@@ -1,14 +1,8 @@
-//
-//  Throttle.swift
-//  Asynchrone
-//
-//  Created by Michal Zaborowski on 2021-12-24.
-//
-
 import Foundation
 
-// MARK: - ThrottleAsyncSequence
 
+/// An asynchronous sequence that emits either the most-recent or first element emitted
+/// by the base async sequence in a specified time interval.
 public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
 
     /// The kind of elements streamed.
@@ -22,17 +16,23 @@ public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
     private var continuation: AsyncThrowingStream<T.Element, Error>.Continuation
     private var inner: ThrottleAsyncSequence.Inner<T>
 
-    // MARK: ThrottleAsyncSequence (Public Properties)
+    // MARK: Initialization
 
-    /// Creates an async sequence that emits an element once.
+    /// Creates an async sequence that emits either the most-recent or first element
+    /// emitted by the base async sequence in a specified time interval.
     /// - Parameters:
-    ///   - element: The element to emit.
-    public init(_ base: T, interval: TimeInterval, latest: Bool) {
-
+    ///   - base: The async sequence in which this sequence receives it's elements.
+    ///   - interval: The interval in which to emit the most recent element.
+    ///   - latest: A Boolean value indicating whether to emit the most recent element.
+    ///   If false, the async sequence emits the first element received during the interval.
+    public init(
+        _ base: T,
+        interval: TimeInterval,
+        latest: Bool
+    ) {
         var streamContinuation: AsyncThrowingStream<T.Element, Error>.Continuation!
-        let stream = AsyncThrowingStream<T.Element, Error> { (continuation: AsyncThrowingStream<T.Element, Error>.Continuation) in
-            streamContinuation = continuation
-        }
+        let stream = AsyncThrowingStream<T.Element, Error> { streamContinuation = $0 }
+        
         self.base = base
         self.stream = stream
         self.iterator = stream.makeAsyncIterator()
@@ -60,47 +60,53 @@ extension ThrottleAsyncSequence: AsyncIteratorProtocol {
     }
 }
 
+
+
 // MARK: ThrottleAsyncSequence > Inner
 
 extension ThrottleAsyncSequence {
 
-    private actor Inner<T: AsyncSequence> {
+    fileprivate actor Inner<T: AsyncSequence> {
 
-        public typealias Element = T.Element
+        fileprivate typealias Element = T.Element
 
-        // MARK: Inner (Private Properties)
-
-        private let interval: TimeInterval
-
-        private var continuation: AsyncThrowingStream<Element, Error>.Continuation?
-
-        private var collectedElements: [Element] = []
-
-        private var lastTime: Date?
+        // Private
         private var base: T
+        private var continuation: AsyncThrowingStream<Element, Error>.Continuation?
+        private let interval: TimeInterval
         private let latest: Bool
-
+        
+        private var collectedElements: [Element] = []
+        private var lastTime: Date?
         private var scheduledTask: Task<Void, Never>?
 
-        // MARK: Inner (Internal Methods)
+        // MARK: Initialization
 
-        deinit {
-            scheduledTask?.cancel()
-            continuation = nil
-        }
-
-        internal init(base: T, continuation: AsyncThrowingStream<Element, Error>.Continuation, interval: TimeInterval, latest: Bool) {
+        fileprivate init(
+            base: T,
+            continuation: AsyncThrowingStream<Element, Error>.Continuation,
+            interval: TimeInterval,
+            latest: Bool
+        ) {
             self.base = base
             self.continuation = continuation
             self.interval = interval
             self.latest = latest
         }
-
-        internal func startAwaitingForBaseSequence() async {
+        
+        deinit {
+            scheduledTask?.cancel()
+            continuation = nil
+        }
+        
+        // MARK: API
+        
+        fileprivate func startAwaitingForBaseSequence() async {
             do {
                 for try await event in base {
                     handle(event: event)
                 }
+                
                 if let element = latest ? collectedElements.last : collectedElements.first {
                     continuation?.finish(with: element)
                 } else {
@@ -115,7 +121,6 @@ extension ThrottleAsyncSequence {
         // MARK: Inner (Private Methods)
 
         private func handle(event: T.Element) {
-
             collectedElements.append(event)
 
             guard let lastTime = lastTime else {
@@ -160,11 +165,19 @@ extension ThrottleAsyncSequence {
     }
 }
 
+
+
+// MARK: Throttle
+
 extension AsyncSequence {
 
-    /// Emits only elements that don't match the previous element.
-    /// - Returns: A `AsyncRemoveDuplicatesSequence` instance.
-    public func throttle(_ interval: TimeInterval, latest: Bool) -> ThrottleAsyncSequence<Self> {
+    /// Emits either the most-recent or first element emitted by the base async
+    /// sequence in the specified time interval.
+    /// - Parameters:
+    ///   - interval: The interval in which to emit the most recent element.
+    ///   - latest: A Boolean value indicating whether to emit the most recent element.
+    /// - Returns: A `ThrottleAsyncSequence` instance.
+    public func throttle(for interval: TimeInterval, latest: Bool) -> ThrottleAsyncSequence<Self> {
         .init(self, interval: interval, latest: latest)
     }
 }
