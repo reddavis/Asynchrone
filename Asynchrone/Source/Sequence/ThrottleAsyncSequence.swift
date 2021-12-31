@@ -1,8 +1,11 @@
 import Foundation
 
 
-/// An asynchronous sequence that emits either the most-recent or first element emitted
+/// An async sequence that emits either the most-recent or first element emitted
 /// by the base async sequence in a specified time interval.
+///
+/// ThrottleAsyncSequence selectively emits elements from a base async sequence during an
+/// interval you specify. Other elements received within the throttling interval aren’t emitted.
 public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
 
     /// The kind of elements streamed.
@@ -37,7 +40,12 @@ public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
         self.stream = stream
         self.iterator = stream.makeAsyncIterator()
         self.continuation = streamContinuation
-        self.inner = ThrottleAsyncSequence.Inner<T>(base: base, continuation: streamContinuation, interval: interval, latest: latest)
+        self.inner = ThrottleAsyncSequence.Inner<T>(
+            base: base,
+            continuation: streamContinuation,
+            interval: interval,
+            latest: latest
+        )
 
         Task { [inner] in
             await inner.startAwaitingForBaseSequence()
@@ -95,72 +103,63 @@ extension ThrottleAsyncSequence {
         }
         
         deinit {
-            scheduledTask?.cancel()
-            continuation = nil
+            self.scheduledTask?.cancel()
+            self.continuation = nil
         }
         
         // MARK: API
         
         fileprivate func startAwaitingForBaseSequence() async {
+            defer { self.continuation = nil }
+            
             do {
-                for try await event in base {
-                    handle(event: event)
+                for try await event in self.base {
+                    self.handle(event: event)
                 }
                 
-                if let element = latest ? collectedElements.last : collectedElements.first {
-                    continuation?.finish(with: element)
-                } else {
-                    continuation?.finish()
+                if let lastTime = self.lastTime {
+                    let gap = Date.now.timeIntervalSince(lastTime)
+                    if gap < self.interval {
+                        let delay = self.interval - gap
+                        try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+                    }
                 }
+
+                self.emitNextElement()
+                self.continuation?.finish()
             } catch {
-                continuation?.finish(throwing: error)
+                self.continuation?.finish(throwing: error)
             }
-            continuation = nil
         }
 
         // MARK: Inner (Private Methods)
+        
+        private func nextElement() -> T.Element? {
+            self.latest
+            ? self.collectedElements.last
+            : self.collectedElements.first
+        }
 
         private func handle(event: T.Element) {
-            collectedElements.append(event)
+            self.collectedElements.append(event)
 
-            guard let lastTime = lastTime else {
-                deliverCollectedValue()
+            guard let lastTime = self.lastTime else {
+                self.emitNextElement()
                 return
             }
 
-            let currentTime = Date()
-            let gap = currentTime.timeIntervalSince(lastTime)
-
-            if gap < interval {
-                guard scheduledTask == nil else {
-                    return
-                }
-
-                let delay = interval - gap
-                scheduledTask = Task { [weak self] in
-                    try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
-
-                    guard !Task.isCancelled else { return }
-
-                    await self?.deliverScheduledValue()
-                }
-
-            } else {
-                deliverCollectedValue()
+            let gap = Date.now.timeIntervalSince(lastTime)
+            if gap >= self.interval {
+                self.emitNextElement()
             }
         }
 
-        private func deliverScheduledValue() {
-            scheduledTask = nil
-            deliverCollectedValue()
-        }
-
-        private func deliverCollectedValue() {
-            lastTime = Date()
-            if let value = latest ? collectedElements.last : collectedElements.first {
-                continuation?.yield(value)
+        private func emitNextElement() {
+            self.lastTime = Date()
+            if let element = self.nextElement() {
+                self.continuation?.yield(element)
             }
-            collectedElements = []
+            self.collectedElements = []
         }
     }
 }
@@ -173,6 +172,9 @@ extension AsyncSequence {
 
     /// Emits either the most-recent or first element emitted by the base async
     /// sequence in the specified time interval.
+    ///
+    /// ThrottleAsyncSequence selectively emits elements from a base async sequence during an
+    /// interval you specify. Other elements received within the throttling interval aren’t emitted.
     /// - Parameters:
     ///   - interval: The interval in which to emit the most recent element.
     ///   - latest: A Boolean value indicating whether to emit the most recent element.
