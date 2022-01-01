@@ -23,26 +23,21 @@ final class RemoveDuplicatesAsyncSequenceTests: XCTestCase {
     // MARK: Tests
     
     func testDuplicatesRemoved() async {
-        var values: [Int] = []
-        for await value in self.stream.removeDuplicates() {
-            values.append(value)
-        }
+        let values = await self
+            .stream
+            .removeDuplicates()
+            .collect()
         
         XCTAssertEqual(values, [1, 2, 3, 1])
     }
     
     func testRemovingDuplicatesWithPredicate() async {
-        var values: [Int] = []
-        
-        let stream = self
+        let values = await self
             .stream
             .removeDuplicates { previous, current in
                 previous >= current
             }
-        
-        for await value in stream {
-            values.append(value)
-        }
+            .collect()
         
         XCTAssertEqual(values, [1, 2, 3])
     }

@@ -11,9 +11,9 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
     override func setUpWithError() throws {
         self.stream = AsyncStream<Int> { continuation in
             continuation.yield(0)
-            try? await Task.sleep(nanoseconds: 200_000_000)
+            try? await Task.sleep(nanoseconds: 100_000_000)
             continuation.yield(1)
-            try? await Task.sleep(nanoseconds: 200_000_000)
+            try? await Task.sleep(nanoseconds: 100_000_000)
             continuation.yield(2)
             continuation.yield(3)
             continuation.yield(4)
@@ -26,22 +26,35 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
     
     func testThrottle() async throws {
         let values = try await self.stream
-            .throttle(for: 0.1, latest: false)
+            .throttle(for: 0.05, latest: false)
             .collect()
-        XCTAssertEqual(values[0], 0)
-        XCTAssertEqual(values[1], 1)
-        XCTAssertEqual(values[2], 2)
-        XCTAssertEqual(values[3], 3)
+        
+        XCTAssertEqual(values, [0, 1, 2, 3])
     }
 
     func testThrottleLatest() async throws {
         let values = try await self.stream
-            .throttle(for: 0.1, latest: true)
+            .throttle(for: 0.05, latest: true)
             .collect()
         
-        XCTAssertEqual(values[0], 0)
-        XCTAssertEqual(values[1], 1)
-        XCTAssertEqual(values[2], 2)
-        XCTAssertEqual(values[3], 5)
+        XCTAssertEqual(values, [0, 1, 2, 5])
+    }
+    
+    func testThrottleWithNoValues() async throws {
+        let values = try await AsyncStream<Int> {
+            $0.finish()
+        }
+        .throttle(for: 0.05, latest: true)
+        .collect()
+        
+        XCTAssert(values.isEmpty)
+    }
+    
+    func testThrottleWithOneValue() async throws {
+        let values = try await Just(0)
+            .throttle(for: 0.05, latest: true)
+            .collect()
+        
+        XCTAssertEqual(values, [0])
     }
 }
