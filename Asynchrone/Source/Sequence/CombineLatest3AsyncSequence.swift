@@ -83,6 +83,14 @@ public struct CombineLatest3AsyncSequence<P: AsyncSequence, Q: AsyncSequence, R:
         self.r = r
         self.iteratorR = r.makeAsyncIterator()
     }
+    
+    // MARK: AsyncSequence
+    
+    /// Creates an async iterator that emits elements of this async sequence.
+    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
+    public func makeAsyncIterator() -> Self {
+        .init(self.p, self.q, self.r)
+    }
 }
 
 // MARK: AsyncIteratorProtocol
@@ -126,12 +134,6 @@ extension CombineLatest3AsyncSequence: AsyncIteratorProtocol {
         self.previousElementR = unwrappedElementR
         
         return (unwrappedElementP, unwrappedElementQ, unwrappedElementR)
-    }
-    
-    /// Creates an async iterator that emits elements of this async sequence.
-    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> Self {
-        .init(self.p, self.q, self.r)
     }
 }
 

@@ -69,6 +69,14 @@ public struct CombineLatestAsyncSequence<P: AsyncSequence, Q: AsyncSequence>: As
         self.q = q
         self.iteratorQ = q.makeAsyncIterator()
     }
+    
+    // MARK: AsyncSequence
+    
+    /// Creates an async iterator that emits elements of this async sequence.
+    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
+    public func makeAsyncIterator() -> Self {
+        .init(self.p, self.q)
+    }
 }
 
 // MARK: AsyncIteratorProtocol
@@ -108,12 +116,6 @@ extension CombineLatestAsyncSequence: AsyncIteratorProtocol {
         self.previousElementQ = unwrappedElementQ
         
         return (unwrappedElementP, unwrappedElementQ)
-    }
-    
-    /// Creates an async iterator that emits elements of this async sequence.
-    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> Self {
-        .init(self.p, self.q)
     }
 }
 

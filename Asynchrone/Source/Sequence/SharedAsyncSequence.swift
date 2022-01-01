@@ -50,7 +50,9 @@ public struct SharedAsyncSequence<T: AsyncSequence>: AsyncSequence {
     public init(_ base: T) {
         self.inner = Inner<T>(base)
     }
-
+    
+    // MARK: AsyncSequence
+    
     /// Creates an async iterator that emits elements of this async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
     public func makeAsyncIterator() -> AsyncThrowingStream<T.Element, Error>.Iterator {

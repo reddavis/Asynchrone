@@ -43,6 +43,14 @@ public struct DebounceAsyncSequence<T: AsyncSequence>: AsyncSequence {
             await innerSequence.startAwaitingForBaseSequence()
         }
     }
+    
+    // MARK: AsyncSequence
+    
+    /// Creates an async iterator that emits elements of this async sequence.
+    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
+    public func makeAsyncIterator() -> AsyncThrowingStream<Element, Error>.Iterator {
+        self.iterator
+    }
 }
 
 // MARK: AsyncIteratorProtocol
@@ -53,12 +61,6 @@ extension DebounceAsyncSequence: AsyncIteratorProtocol {
     /// - Returns: The next element or `nil` if the end of the sequence is reached.
     public mutating func next() async throws -> Element? {
         try await self.iterator.next()
-    }
-
-    /// Creates an async iterator that emits elements of this async sequence.
-    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> AsyncThrowingStream<Element, Error>.Iterator {
-        self.iterator
     }
 }
 

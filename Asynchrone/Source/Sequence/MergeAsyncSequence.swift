@@ -84,6 +84,14 @@ public struct MergeAsyncSequence<T: AsyncSequence>: AsyncSequence {
             continuation.finish()
         }
     }
+    
+    // MARK: AsyncSequence
+    
+    /// Creates an async iterator that emits elements of this async sequence.
+    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
+    public func makeAsyncIterator() -> AsyncStream<Element>.Iterator {
+        self.iterator
+    }
 }
 
 // MARK: AsyncIteratorProtocol
@@ -100,12 +108,6 @@ extension MergeAsyncSequence: AsyncIteratorProtocol {
     /// - Returns: The next element or `nil` if the end of the sequence is reached.
     public mutating func next() async rethrows -> Element? {
         await self.iterator.next()
-    }
-    
-    /// Creates an async iterator that emits elements of this async sequence.
-    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> AsyncStream<Element>.Iterator {
-        self.iterator
     }
 }
 

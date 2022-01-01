@@ -30,6 +30,14 @@ public struct Fail<Element, Failure>: AsyncSequence where Failure: Error {
     public init(error: Failure) {
         self.error = error
     }
+    
+    // MARK: AsyncSequence
+    
+    /// Creates an async iterator that emits elements of this async sequence.
+    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
+    public func makeAsyncIterator() -> Self {
+        .init(error: self.error)
+    }
 }
 
 // MARK: AsyncIteratorProtocol
@@ -40,11 +48,5 @@ extension Fail: AsyncIteratorProtocol {
     /// - Returns: The next element or `nil` if the end of the sequence is reached.
     public mutating func next() async throws -> Element? {
         throw self.error
-    }
-    
-    /// Creates an async iterator that emits elements of this async sequence.
-    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> Self {
-        .init(error: self.error)
     }
 }

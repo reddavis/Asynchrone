@@ -51,6 +51,14 @@ public struct RemoveDuplicatesAsyncSequence<Base: AsyncSequence>: AsyncSequence 
         self.predicate = predicate
         self.iterator = base.makeAsyncIterator()
     }
+    
+    // MARK: AsyncSequence
+    
+    /// Creates an async iterator that emits elements of this async sequence.
+    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
+    public func makeAsyncIterator() -> Self {
+        .init(self.base, predicate: self.predicate)
+    }
 }
 
 // MARK: AsyncIteratorProtocol
@@ -82,12 +90,6 @@ extension RemoveDuplicatesAsyncSequence: AsyncIteratorProtocol {
         } else {
             return element
         }
-    }
-    
-    /// Creates an async iterator that emits elements of this async sequence.
-    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> Self {
-        .init(self.base, predicate: self.predicate)
     }
 }
 

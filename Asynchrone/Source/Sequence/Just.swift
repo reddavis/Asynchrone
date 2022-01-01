@@ -27,6 +27,14 @@ public struct Just<Element>: AsyncSequence {
     public init(_ element: Element) {
         self.element = element
     }
+    
+    // MARK: AsyncSequence
+    
+    /// Creates an async iterator that emits elements of this async sequence.
+    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
+    public func makeAsyncIterator() -> Self {
+        .init(self.element)
+    }
 }
 
 // MARK: AsyncIteratorProtocol
@@ -40,11 +48,5 @@ extension Just: AsyncIteratorProtocol {
         defer { self.emittedElement = true }
         
         return self.element
-    }
-    
-    /// Creates an async iterator that emits elements of this async sequence.
-    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> Self {
-        .init(self.element)
     }
 }

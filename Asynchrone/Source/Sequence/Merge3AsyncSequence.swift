@@ -86,6 +86,14 @@ public struct Merge3AsyncSequence<T: AsyncSequence>: AsyncSequence {
             }
         }
     }
+    
+    // MARK: AsyncSequence
+    
+    /// Creates an async iterator that emits elements of this async sequence.
+    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
+    public func makeAsyncIterator() -> AsyncThrowingStream<Element, Error>.Iterator {
+        self.iterator
+    }
 }
 
 // MARK: AsyncIteratorProtocol
@@ -107,12 +115,6 @@ extension Merge3AsyncSequence: AsyncIteratorProtocol {
         catch {
             return nil
         }
-    }
-    
-    /// Creates an async iterator that emits elements of this async sequence.
-    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> AsyncThrowingStream<Element, Error>.Iterator {
-        self.iterator
     }
 }
 
