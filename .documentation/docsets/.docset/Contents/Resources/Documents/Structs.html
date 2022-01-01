@@ -71,6 +71,9 @@
                 <a href="Structs/CombineLatestAsyncSequence.html">CombineLatestAsyncSequence</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/DebounceAsyncSequence.html">DebounceAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Fail.html">Fail</a>
               </li>
               <li class="nav-group-task">
@@ -297,6 +300,60 @@ when any of them emit a value.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CombineLatestAsyncSequence</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">,</span> <span class="kt">Q</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Q</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CombineLatestAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone21DebounceAsyncSequenceV"></a>
+                    <a name="//apple_ref/swift/Struct/DebounceAsyncSequence" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone21DebounceAsyncSequenceV">DebounceAsyncSequence</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A async sequence that emits elements only after a specified time interval elapses between emissions.</p>
+
+<p>Use <code>DebounceAsyncSequence</code> async sequence to control the number of values and time between
+delivery of values from the base async sequence. This async sequence is useful to process bursty
+or high-volume async sequences where you need to reduce the number of elements emitted to a rate you specify.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">stream</span> <span class="o">=</span> <span class="kt">AsyncStream</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">?</span> <span class="k">await</span> <span class="kt">Task</span><span class="o">.</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">nanoseconds</span><span class="p">:</span> <span class="mi">200_000_000</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">?</span> <span class="k">await</span> <span class="kt">Task</span><span class="o">.</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">nanoseconds</span><span class="p">:</span> <span class="mi">200_000_000</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="k">try</span> <span class="k">await</span> <span class="k">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="nf">debounce</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// 0</span>
+<span class="c1">// 1</span>
+<span class="c1">// 5</span>
+</code></pre>
+
+                        <a href="Structs/DebounceAsyncSequence.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DebounceAsyncSequence</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">DebounceAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
 
                         </div>
                       </div>
@@ -624,6 +681,28 @@ by the base async sequence in a specified time interval.</p>
 
 <p>ThrottleAsyncSequence selectively emits elements from a base async sequence during an
 interval you specify. Other elements received within the throttling interval aren’t emitted.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">stream</span> <span class="o">=</span> <span class="kt">AsyncStream</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">?</span> <span class="k">await</span> <span class="kt">Task</span><span class="o">.</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">nanoseconds</span><span class="p">:</span> <span class="mi">100_000_000</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">?</span> <span class="k">await</span> <span class="kt">Task</span><span class="o">.</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">nanoseconds</span><span class="p">:</span> <span class="mi">100_000_000</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="k">try</span> <span class="k">await</span> <span class="k">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="nf">throttle</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span> <span class="nv">latest</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// 0</span>
+<span class="c1">// 1</span>
+<span class="c1">// 2</span>
+<span class="c1">// 5</span>
+</code></pre>
 
                         <a href="Structs/ThrottleAsyncSequence.html" class="slightly-smaller">See more</a>
                       </div>
@@ -764,7 +843,7 @@ then emits both elements as a tuple.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2021-12-31)</p>
+          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-01-01)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

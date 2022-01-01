@@ -6,6 +6,30 @@ import Foundation
 ///
 /// ThrottleAsyncSequence selectively emits elements from a base async sequence during an
 /// interval you specify. Other elements received within the throttling interval aren’t emitted.
+///
+/// ```swift
+/// let stream = AsyncStream<Int> { continuation in
+///     continuation.yield(0)
+///     try? await Task.sleep(nanoseconds: 100_000_000)
+///     continuation.yield(1)
+///     try? await Task.sleep(nanoseconds: 100_000_000)
+///     continuation.yield(2)
+///     continuation.yield(3)
+///     continuation.yield(4)
+///     continuation.yield(5)
+///     continuation.finish()
+/// }
+///
+/// for element in try await self.stream.throttle(for: 0.05, latest: true) {
+///     print(element)
+/// }
+///
+/// // Prints:
+/// // 0
+/// // 1
+/// // 2
+/// // 5
+/// ```
 public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
 
     /// The kind of elements streamed.
@@ -177,6 +201,30 @@ extension AsyncSequence {
     ///
     /// ThrottleAsyncSequence selectively emits elements from a base async sequence during an
     /// interval you specify. Other elements received within the throttling interval aren’t emitted.
+    ///
+    /// ```swift
+    /// let stream = AsyncStream<Int> { continuation in
+    ///     continuation.yield(0)
+    ///     try? await Task.sleep(nanoseconds: 100_000_000)
+    ///     continuation.yield(1)
+    ///     try? await Task.sleep(nanoseconds: 100_000_000)
+    ///     continuation.yield(2)
+    ///     continuation.yield(3)
+    ///     continuation.yield(4)
+    ///     continuation.yield(5)
+    ///     continuation.finish()
+    /// }
+    ///
+    /// for element in try await self.stream.throttle(for: 0.05, latest: true) {
+    ///     print(element)
+    /// }
+    ///
+    /// // Prints:
+    /// // 0
+    /// // 1
+    /// // 2
+    /// // 5
+    /// ```
     /// - Parameters:
     ///   - interval: The interval in which to emit the most recent element.
     ///   - latest: A Boolean value indicating whether to emit the most recent element.

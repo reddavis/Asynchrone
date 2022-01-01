@@ -6,6 +6,29 @@ import Foundation
 /// Use `DebounceAsyncSequence` async sequence to control the number of values and time between
 /// delivery of values from the base async sequence. This async sequence is useful to process bursty
 /// or high-volume async sequences where you need to reduce the number of elements emitted to a rate you specify.
+///
+/// ```swift
+/// let stream = AsyncStream<Int> { continuation in
+///     continuation.yield(0)
+///     try? await Task.sleep(nanoseconds: 200_000_000)
+///     continuation.yield(1)
+///     try? await Task.sleep(nanoseconds: 200_000_000)
+///     continuation.yield(2)
+///     continuation.yield(3)
+///     continuation.yield(4)
+///     continuation.yield(5)
+///     continuation.finish()
+/// }
+///
+/// for element in try await self.stream.debounce(for: 0.1) {
+///     print(element)
+/// }
+///
+/// // Prints:
+/// // 0
+/// // 1
+/// // 5
+/// ```
 public struct DebounceAsyncSequence<T: AsyncSequence>: AsyncSequence {
 
     /// The kind of elements streamed.
@@ -160,6 +183,29 @@ extension AsyncSequence {
     /// Use the `debounce` operator to control the number of values and time between
     /// delivery of values from the base async sequence. This operator is useful to process bursty
     /// or high-volume async sequences where you need to reduce the number of elements emitted to a rate you specify.
+    ///
+    /// ```swift
+    /// let stream = AsyncStream<Int> { continuation in
+    ///     continuation.yield(0)
+    ///     try? await Task.sleep(nanoseconds: 200_000_000)
+    ///     continuation.yield(1)
+    ///     try? await Task.sleep(nanoseconds: 200_000_000)
+    ///     continuation.yield(2)
+    ///     continuation.yield(3)
+    ///     continuation.yield(4)
+    ///     continuation.yield(5)
+    ///     continuation.finish()
+    /// }
+    ///
+    /// for element in try await self.stream.debounce(for: 0.1) {
+    ///     print(element)
+    /// }
+    ///
+    /// // Prints:
+    /// // 0
+    /// // 1
+    /// // 5
+    /// ```
     /// - Parameters:
     ///   - base: The async sequence in which this sequence receives it's elements.
     ///   - dueTime: The amount of time the async sequence should wait before emitting an element.
