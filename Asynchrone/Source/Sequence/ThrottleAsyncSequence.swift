@@ -57,6 +57,8 @@ public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
 
 extension ThrottleAsyncSequence: AsyncIteratorProtocol {
 
+    /// Produces the next element in the sequence.
+    /// - Returns: The next element or `nil` if the end of the sequence is reached.
     public mutating func next() async throws -> Element? {
         try await self.iterator.next()
     }
@@ -86,7 +88,6 @@ extension ThrottleAsyncSequence {
         
         private var collectedElements: [Element] = []
         private var lastEmission: Date?
-        private var scheduledTask: Task<Void, Never>?
 
         // MARK: Initialization
 
@@ -103,7 +104,6 @@ extension ThrottleAsyncSequence {
         }
         
         deinit {
-            self.scheduledTask?.cancel()
             self.continuation = nil
         }
         
@@ -113,8 +113,8 @@ extension ThrottleAsyncSequence {
             defer { self.continuation = nil }
             
             do {
-                for try await event in self.base {
-                    self.handle(event: event)
+                for try await element in self.base {
+                    self.handle(element: element)
                 }
                 
                 if let lastTime = self.lastEmission {
@@ -140,8 +140,8 @@ extension ThrottleAsyncSequence {
             : self.collectedElements.first
         }
 
-        private func handle(event: T.Element) {
-            self.collectedElements.append(event)
+        private func handle(element: T.Element) {
+            self.collectedElements.append(element)
 
             guard let lastTime = self.lastEmission else {
                 self.emitNextElement()
