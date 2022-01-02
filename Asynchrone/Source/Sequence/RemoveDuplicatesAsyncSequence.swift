@@ -44,7 +44,7 @@ public struct RemoveDuplicatesAsyncSequence<Base: AsyncSequence>: AsyncSequence 
     ///   - base: The async sequence in which this sequence receives it's elements.
     ///   - predicate: A closure to evaluate whether two elements are equivalent.
     public init(
-        _ base: Base,
+        base: Base,
         predicate: @escaping Predicate
     ) {
         self.base = base
@@ -57,7 +57,7 @@ public struct RemoveDuplicatesAsyncSequence<Base: AsyncSequence>: AsyncSequence 
     /// Creates an async iterator that emits elements of this async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
     public func makeAsyncIterator() -> Self {
-        .init(self.base, predicate: self.predicate)
+        .init(base: self.base, predicate: self.predicate)
     }
 }
 
@@ -102,7 +102,7 @@ extension AsyncSequence where Element: Equatable {
     /// Emits only elements that don't match the previous element.
     /// - Returns: A `AsyncRemoveDuplicatesSequence` instance.
     public func removeDuplicates() -> RemoveDuplicatesAsyncSequence<Self> {
-        .init(self) { $0 == $1 }
+        .init(base: self) { $0 == $1 }
     }
     
     /// Omits any element that the predicate determines is equal to the previous element.
@@ -112,6 +112,6 @@ extension AsyncSequence where Element: Equatable {
     public func removeDuplicates(
         by predicate: @escaping RemoveDuplicatesAsyncSequence<Self>.Predicate
     ) -> RemoveDuplicatesAsyncSequence<Self> {
-        .init(self, predicate: predicate)
+        .init(base: self, predicate: predicate)
     }
 }

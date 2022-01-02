@@ -5,17 +5,9 @@ import XCTest
 final class AnyThrowingAsyncSequenceableTests: XCTestCase {
     func testErasingFail() async throws {
         await XCTAssertAsyncThrowsError {
-            _ = try await Fail<Int, TestError>(error: TestError.a)
+            _ = try await Fail<Int, TestError>(error: .init())
                 .eraseToAnyThrowingAsyncSequenceable()
                 .collect()
         }
     }
-}
-
-
-
-// MARK: Error
-
-fileprivate enum TestError: Error {
-    case a
 }

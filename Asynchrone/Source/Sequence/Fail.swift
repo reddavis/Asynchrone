@@ -3,6 +3,8 @@ import Combine
 
 /// An asynchronous sequence that immediately throws an error when iterated.
 ///
+/// Once the error has been thrown, the iterator will return nil to mark the end of the sequence.
+///
 /// ```swift
 /// let stream = Fail<Int, TestError>(error: TestError())
 ///
@@ -21,6 +23,7 @@ public struct Fail<Element, Failure>: AsyncSequence where Failure: Error {
     
     // Private
     let error: Failure
+    var hasThownError = false
     
     // MARK: Initialization
     
@@ -47,6 +50,9 @@ extension Fail: AsyncIteratorProtocol {
     /// Produces the next element in the sequence.
     /// - Returns: The next element or `nil` if the end of the sequence is reached.
     public mutating func next() async throws -> Element? {
+        defer { self.hasThownError = true }
+        guard !self.hasThownError else { return nil }
+        
         throw self.error
     }
 }

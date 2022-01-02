@@ -3,17 +3,23 @@ import XCTest
 
 
 final class FailTests: XCTestCase {
-    func testEmittedElements() async {
+    
+    func testErrorThrown() async {
         await XCTAssertAsyncThrowsError {
             _ = try await Fail<Int, TestError>(
                 error: TestError()
             ).collect()
         }
     }
+    
+    func testErrorOnlyThrownOnce() async {
+        let replacement = 0
+        let values = await Fail<Int, TestError>(
+            error: TestError()
+        )
+        .replaceError(with: replacement)
+        .collect()
+        
+        XCTAssertEqual(values, [0])
+    }
 }
-
-
-
-// MARK: Test error
-
-fileprivate struct TestError: Error { }
