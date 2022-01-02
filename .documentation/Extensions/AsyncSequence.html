@@ -89,6 +89,9 @@
                 <a href="../Structs/RemoveDuplicatesAsyncSequence.html">RemoveDuplicatesAsyncSequence</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ReplaceErrorAsyncSequence.html">ReplaceErrorAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/SharedAsyncSequence.html">SharedAsyncSequence</a>
               </li>
               <li class="nav-group-task">
@@ -762,6 +765,81 @@ or high-volume async sequences where you need to reduce the number of elements e
             </div>
             <div class="task-group">
               <div class="task-name-container">
+                <a name="/Replace%20error"></a>
+                <a name="//apple_ref/swift/Section/Replace error" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Replace%20error"></a>
+                  <h3 class="section-name"><span>Replace error</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sci10AsynchroneE12replaceError4withAA07ReplaceC13AsyncSequenceVyxG7ElementQz_tF"></a>
+                    <a name="//apple_ref/swift/Method/replaceError(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci10AsynchroneE12replaceError4withAA07ReplaceC13AsyncSequenceVyxG7ElementQz_tF">replaceError(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Replaces any errors in the async sequence with the provided element.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">TestError</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="nv">error</span><span class="p">:</span> <span class="kt">TestError</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="o">.</span><span class="nf">replaceError</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">stream</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// 0</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">replaceError</span><span class="p">(</span><span class="n">with</span> <span class="nv">output</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ReplaceErrorAsyncSequence.html">ReplaceErrorAsyncSequence</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>output</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The element with which to replace errors from the base async sequence.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code><a href="../Structs/ReplaceErrorAsyncSequence.html">ReplaceErrorAsyncSequence</a></code> instance.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
                 <a name="/Shared"></a>
                 <a name="//apple_ref/swift/Section/Shared" class="dashAnchor"></a>
                 <div class="section-name-container">
@@ -1193,7 +1271,7 @@ Return true from this closure to indicate that the second element is a duplicate
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-01-01)</p>
+          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-01-02)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

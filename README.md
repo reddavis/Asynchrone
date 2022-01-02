@@ -256,6 +256,22 @@ for await value in stream.removeDuplicates() {
 // 3
 ```
 
+### [ReplaceErrorAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/replaceerrorasyncsequence)
+
+```swift
+let sequence = Fail<Int, TestError>(
+    error: TestError()
+)
+.replaceError(with: 0)
+
+for await value in stream {
+    print(value)
+}
+
+// Prints:
+// 0
+```
+
 ### [SharedAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/sharedasyncsequence)
 
 ```swift
