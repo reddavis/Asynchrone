@@ -4,7 +4,7 @@ Extensions and additions to `AsyncSequence`, `AsyncStream` and `AsyncThrowingStr
 
 ## Requirements
 
-- iOS 15.0+
+- iOS 14.0+
 - macOS 12.0+
 
 ## Installation
