@@ -114,6 +114,26 @@ for await value in streamA.combineLatest(streamB, streamC) {
 // (4, 9, 11)
 ```
 
+### [CurrentElementAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/currentelementasyncsequence)
+
+```swift
+let sequence = CurrentElementAsyncSequence(0)
+print(await sequence.element)
+
+await stream.yield(1)
+print(await sequence.element)
+
+await stream.yield(2)
+await stream.yield(3)
+await stream.yield(4)
+print(await sequence.element)
+
+// Prints:
+// 0
+// 1
+// 4
+```
+
 ### [DebounceAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/debounceasyncsequence)
 
 ```swift
