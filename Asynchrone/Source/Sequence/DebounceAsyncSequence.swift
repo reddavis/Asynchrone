@@ -141,7 +141,7 @@ fileprivate actor _DebounceAsyncSequence<T: AsyncSequence> {
             {
                 self.scheduledTask?.cancel()
                 
-                let delay = UInt64(self.dueTime - Date.now.timeIntervalSince(lastEmission)) * 1_000_000_000
+                let delay = UInt64(self.dueTime - Date().timeIntervalSince(lastEmission)) * 1_000_000_000
                 try? await Task.sleep(nanoseconds: delay)
                 self.continuation?.finish(with: lastElement)
             } else {
@@ -160,7 +160,7 @@ fileprivate actor _DebounceAsyncSequence<T: AsyncSequence> {
         
         // Restart scheduled task
         self.lastElement = element
-        self.lastEmission = .now
+        self.lastEmission = Date()
         
         self.scheduledTask = Task { [dueTime, element, continuation] in
             try? await Task.sleep(nanoseconds: UInt64(dueTime * 1_000_000_000))

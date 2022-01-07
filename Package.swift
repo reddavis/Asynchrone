@@ -7,7 +7,7 @@ import PackageDescription
 let package = Package(
     name: "Asynchrone",
     platforms: [
-        .iOS("15.0"),
+        .iOS("14.0"),
         .macOS("12.0")
     ],
     products: [

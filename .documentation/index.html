@@ -93,6 +93,9 @@
                 <a href="Structs/MergeAsyncSequence.html">MergeAsyncSequence</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/PassthroughAsyncSequence.html">PassthroughAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/RemoveDuplicatesAsyncSequence.html">RemoveDuplicatesAsyncSequence</a>
               </li>
               <li class="nav-group-task">
@@ -103,6 +106,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ThrottleAsyncSequence.html">ThrottleAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ThrowingPassthroughAsyncSequence.html">ThrowingPassthroughAsyncSequence</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Zip3AsyncSequence.html">Zip3AsyncSequence</a>
@@ -124,7 +130,7 @@
 <h2 id='requirements' class='heading'>Requirements</h2>
 
 <ul>
-<li>iOS 15.0+</li>
+<li>iOS 14.0+</li>
 <li>macOS 12.0+</li>
 </ul>
 <h2 id='installation' class='heading'>Installation</h2>
@@ -344,6 +350,22 @@
 <span class="c1">// 3</span>
 <span class="c1">// 4</span>
 </code></pre>
+<h3 id='a-href-https-distracted-austin-575f34-netlify-app-structs-passthroughasyncsequence-passthroughasyncsequence-a' class='heading'><a href="https://distracted-austin-575f34.netlify.app/structs/passthroughasyncsequence">PassthroughAsyncSequence</a></h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">PassthroughAsyncSequence</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">sequence</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">sequence</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sequence</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sequence</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">sequence</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// 0</span>
+<span class="c1">// 1</span>
+<span class="c1">// 2</span>
+</code></pre>
 <h3 id='a-href-https-distracted-austin-575f34-netlify-app-structs-removeduplicatesasyncsequence-removeduplicatesasyncsequence-a' class='heading'><a href="https://distracted-austin-575f34.netlify.app/structs/removeduplicatesasyncsequence">RemoveDuplicatesAsyncSequence</a></h3>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">stream</span> <span class="o">=</span> <span class="o">.</span><span class="kd">init</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -426,6 +448,27 @@
 <span class="c1">// 1</span>
 <span class="c1">// 2</span>
 <span class="c1">// 5</span>
+</code></pre>
+<h3 id='a-href-https-distracted-austin-575f34-netlify-app-structs-throwingpassthroughasyncsequence-throwingpassthroughasyncsequence-a' class='heading'><a href="https://distracted-austin-575f34.netlify.app/structs/throwingpassthroughasyncsequence">ThrowingPassthroughAsyncSequence</a></h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">ThrowingPassthroughAsyncSequence</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">sequence</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">sequence</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sequence</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sequence</span><span class="o">.</span><span class="nf">finish</span><span class="p">(</span><span class="nv">throwing</span><span class="p">:</span> <span class="kt">TestError</span><span class="p">())</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="k">try</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">sequence</span> <span class="p">{</span>
+      <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Error!"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// 0</span>
+<span class="c1">// 1</span>
+<span class="c1">// 2</span>
+<span class="c1">// Error!</span>
 </code></pre>
 <h3 id='a-href-https-distracted-austin-575f34-netlify-app-structs-zipasyncsequence-zipasyncsequence-a' class='heading'><a href="https://distracted-austin-575f34.netlify.app/structs/zipasyncsequence">ZipAsyncSequence</a></h3>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">streamA</span> <span class="o">=</span> <span class="o">.</span><span class="kd">init</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
