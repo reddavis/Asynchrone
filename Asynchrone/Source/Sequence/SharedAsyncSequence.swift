@@ -32,124 +32,97 @@ import Foundation
 /// let values = try await self.stream.collect()
 /// // ...
 /// ```
-public struct SharedAsyncSequence<T: AsyncSequence>: AsyncSequence {
-    public typealias AsyncIterator = AsyncThrowingStream<T.Element, Error>.Iterator
+public struct SharedAsyncSequence<Base: AsyncSequence>: AsyncSequence {
+    public typealias AsyncIterator = AsyncThrowingStream<Base.Element, Error>.Iterator
 
     /// The kind of elements streamed.
-    public typealias Element = T.Element
+    public typealias Element = Base.Element
 
-    // MARK: SharedAsyncSequence (Private Properties)
-
-    private let inner: Inner<T>
+    // Private
+    private let manager: SubSequenceManager<Base>
 
     // MARK: SharedAsyncSequence (Public Properties)
 
     /// Creates a shareable async sequence that can be used across multiple tasks.
     /// - Parameters:
     ///   - base: The async sequence in which this sequence receives it's elements.
-    public init(_ base: T) {
-        self.inner = Inner<T>(base)
+    public init(_ base: Base) {
+        self.manager = SubSequenceManager<Base>(base)
     }
     
     // MARK: AsyncSequence
     
     /// Creates an async iterator that emits elements of this async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> AsyncThrowingStream<T.Element, Error>.Iterator {
-        inner.makeAsyncIterator()
+    public func makeAsyncIterator() -> AsyncThrowingStream<Base.Element, Error>.Iterator {
+        self.manager.makeAsyncIterator()
     }
 }
 
 
 
-// MARK: - SharedAsyncSequence > Inner
+// MARK: Sub sequence manager
 
-extension SharedAsyncSequence {
+fileprivate actor SubSequenceManager<Base: AsyncSequence>{
+    
+    fileprivate typealias Element = Base.Element
 
-    fileprivate final class Inner<T: AsyncSequence> {
-        
-        fileprivate typealias Element = T.Element
+    // Private
+    private var base: Base
+    private var sequences: [ThrowingPassthroughAsyncSequence<Base.Element>] = []
+    private var subscriptionTask: Task<Void, Never>?
 
-        // MARK: Inner (Private Properties)
+    // MARK: Initialization
 
-        private var base: T
-        
-        private let lock = NSLock()
-        private var streams: [AsyncThrowingStream<T.Element, Error>] = []
-        private var continuations: [AsyncThrowingStream<T.Element, Error>.Continuation] = []
-        private var subscriptionTask: Task<Void, Never>?
-
-        // MARK: Initialization
-
-        fileprivate init(_ base: T) {
-            self.base = base
+    fileprivate init(_ base: Base) {
+        self.base = base
+    }
+    
+    deinit {
+        self.subscriptionTask?.cancel()
+    }
+    
+    // MARK: API
+    
+    /// Creates an new stream and returns its async iterator that emits elements of base async sequence.
+    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
+    nonisolated fileprivate func makeAsyncIterator() -> ThrowingPassthroughAsyncSequence<Base.Element>.AsyncIterator {
+        let sequence = ThrowingPassthroughAsyncSequence<Base.Element>()
+        Task { [sequence] in
+            await self.add(sequence: sequence)
         }
         
-        deinit {
-            subscriptionTask?.cancel()
-        }
-        
-        // MARK: API
-        
-        /// Creates an new stream and returns its async iterator that emits elements of base async sequence.
-        /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-        fileprivate func makeAsyncIterator() -> AsyncThrowingStream<T.Element, Error>.Iterator {
-            var streamContinuation: AsyncThrowingStream<T.Element, Error>.Continuation!
-            let stream = AsyncThrowingStream<T.Element, Error> { (continuation: AsyncThrowingStream<T.Element, Error>.Continuation) in
-                streamContinuation = continuation
+        return sequence.makeAsyncIterator()
+    }
+
+    // MARK: Sequence management
+
+    private func add(sequence: ThrowingPassthroughAsyncSequence<Base.Element>) {
+        self.sequences.append(sequence)
+        self.subscribeToBaseSequenceIfNeeded()
+    }
+    
+    private func subscribeToBaseSequenceIfNeeded() {
+        guard self.subscriptionTask == nil else { return }
+
+        self.subscriptionTask = Task { [weak self, base] in
+            guard let self = self else { return }
+
+            guard !Task.isCancelled else {
+                await self.sequences.forEach {
+                    $0.finish(throwing: CancellationError())
+                }
+                return
             }
 
-            add(stream: stream, continuation: streamContinuation)
-
-            return stream.makeAsyncIterator()
-        }
-
-        // MARK: Inner (Private Methods)
-
-        private func add(
-            stream: AsyncThrowingStream<T.Element, Error>,
-            continuation: AsyncThrowingStream<T.Element, Error>.Continuation
-        ) {
-            modify {
-                streams.append(stream)
-                continuations.append(continuation)
-                subscribeToBaseStreamIfNeeded()
-            }
-        }
-
-        private func modify(_ block: () -> Void) {
-            lock.lock()
-            block()
-            lock.unlock()
-        }
-
-        private func subscribeToBaseStreamIfNeeded() {
-            guard subscriptionTask == nil else { return }
-
-            subscriptionTask = Task { [weak self, base] in
-                guard let self = self else { return }
-
-                guard !Task.isCancelled else {
-                    self.modify {
-                        self.continuations.forEach { $0.finish(throwing: CancellationError()) }
-                    }
-                    return
+            do {
+                for try await value in base {
+                    await self.sequences.forEach { $0.yield(value) }
                 }
-
-                do {
-                    for try await value in base {
-                        self.modify {
-                            self.continuations.forEach { $0.yield(value) }
-                        }
-                    }
-                    self.modify {
-                        self.continuations.forEach { $0.finish(throwing: nil) }
-                    }
-                } catch {
-                    self.modify {
-                        self.continuations.forEach { $0.finish(throwing: error) }
-                    }
-                }
+                
+                await self.sequences.forEach { $0.finish() }
+            } catch {
+                await self.sequences.forEach { $0.finish(throwing: error) }
             }
         }
     }
