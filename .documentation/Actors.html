@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Extensions  Reference</title>
+    <title>Actors  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Section/Extensions" class="dashAnchor"></a>
-    <a title="Extensions  Reference"></a>
+    <a name="//apple_ref/swift/Section/Actors" class="dashAnchor"></a>
+    <a title="Actors  Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="index.html"> Docs</a> (99% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="index.html"> Reference</a>
         <img id="carat" src="img/carat.png" alt=""/>
-        Extensions  Reference
+        Actors  Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -124,28 +124,19 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Extensions</h1>
-            <p>The following extensions are available globally.</p>
+            <h1>Actors</h1>
+            <p>The following actors are available globally.</p>
 
           </section>
           <section class="section task-group-section">
             <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Erasure"></a>
-                <a name="//apple_ref/swift/Section/Erasure" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Erasure"></a>
-                  <h3 class="section-name"><span>Erasure</span>
-</h3>
-                </div>
-              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Sci"></a>
-                    <a name="//apple_ref/swift/Extension/AsyncSequence" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sci">AsyncSequence</a>
+                    <a name="/s:10Asynchrone27CurrentElementAsyncSequenceC"></a>
+                    <a name="//apple_ref/swift/Actor/CurrentElementAsyncSequence" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone27CurrentElementAsyncSequenceC">CurrentElementAsyncSequence</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -153,69 +144,31 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
-                        <a href="Extensions/AsyncSequence.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">AsyncSequence</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">Element</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+                        <p>A async sequence that wraps a single value and emits a new element whenever the element changes.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">CurrentElementAsyncSequence</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
 
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:ScS"></a>
-                    <a name="//apple_ref/swift/Extension/AsyncStream" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ScS">AsyncStream</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/AsyncStream.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">AsyncStream</span></code></pre>
+<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
 
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Scs"></a>
-                    <a name="//apple_ref/swift/Extension/AsyncThrowingStream" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Scs">AsyncThrowingStream</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/AsyncThrowingStream.html" class="slightly-smaller">See more</a>
+<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// 0</span>
+<span class="c1">// 1</span>
+<span class="c1">// 4</span>
+</code></pre>
+
+                        <a href="Actors/CurrentElementAsyncSequence.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">AsyncThrowingStream</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">actor</span> <span class="kt">CurrentElementAsyncSequence</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 
                         </div>
                       </div>

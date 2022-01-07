@@ -35,6 +35,14 @@
       <nav class="sidebar">
         <ul class="nav-groups">
           <li class="nav-group-name">
+            <a href="Actors.html">Actors</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Actors/CurrentElementAsyncSequence.html">CurrentElementAsyncSequence</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -122,7 +130,7 @@
 <h2 id='requirements' class='heading'>Requirements</h2>
 
 <ul>
-<li>iOS 15.0+</li>
+<li>iOS 14.0+</li>
 <li>macOS 12.0+</li>
 </ul>
 <h2 id='installation' class='heading'>Installation</h2>
@@ -218,6 +226,23 @@
 <span class="c1">// (3, 7, 11)</span>
 <span class="c1">// (4, 8, 11)</span>
 <span class="c1">// (4, 9, 11)</span>
+</code></pre>
+<h3 id='a-href-https-distracted-austin-575f34-netlify-app-structs-currentelementasyncsequence-currentelementasyncsequence-a' class='heading'><a href="https://distracted-austin-575f34.netlify.app/structs/currentelementasyncsequence">CurrentElementAsyncSequence</a></h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">CurrentElementAsyncSequence</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
+
+<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
+
+<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// 0</span>
+<span class="c1">// 1</span>
+<span class="c1">// 4</span>
 </code></pre>
 <h3 id='a-href-https-distracted-austin-575f34-netlify-app-structs-debounceasyncsequence-debounceasyncsequence-a' class='heading'><a href="https://distracted-austin-575f34.netlify.app/structs/debounceasyncsequence">DebounceAsyncSequence</a></h3>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">stream</span> <span class="o">=</span> <span class="kt">AsyncStream</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>

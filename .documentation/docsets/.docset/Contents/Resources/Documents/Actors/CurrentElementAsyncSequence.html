@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>PassthroughAsyncSequence Structure Reference</title>
+    <title>CurrentElementAsyncSequence Actor Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/PassthroughAsyncSequence" class="dashAnchor"></a>
-    <a title="PassthroughAsyncSequence Structure Reference"></a>
+    <a name="//apple_ref/swift/Actor/CurrentElementAsyncSequence" class="dashAnchor"></a>
+    <a title="CurrentElementAsyncSequence Actor Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (99% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        PassthroughAsyncSequence Structure Reference
+        CurrentElementAsyncSequence Actor Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -124,33 +124,65 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>PassthroughAsyncSequence</h1>
+            <h1>CurrentElementAsyncSequence</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PassthroughAsyncSequence</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">actor</span> <span class="kt">CurrentElementAsyncSequence</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 
                 </div>
               </div>
-            <p>A async sequence that broadcasts elements.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">PassthroughAsyncSequence</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">()</span>
-<span class="n">sequence</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">sequence</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">sequence</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">sequence</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
+            <p>A async sequence that wraps a single value and emits a new element whenever the element changes.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">CurrentElementAsyncSequence</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">sequence</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-<span class="p">}</span>
+<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
+
+<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
 
 <span class="c1">// Prints:</span>
 <span class="c1">// 0</span>
 <span class="c1">// 1</span>
-<span class="c1">// 2</span>
+<span class="c1">// 4</span>
 </code></pre>
 
           </section>
           <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone27CurrentElementAsyncSequenceC7elementxvp"></a>
+                    <a name="//apple_ref/swift/Property/element" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone27CurrentElementAsyncSequenceC7elementxvp">element</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The element wrapped by this async sequence, emitted as a new element whenever it changes.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">element</span><span class="p">:</span> <span class="kt">Element</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
             <div class="task-group">
               <div class="task-name-container">
                 <a name="/Initialization"></a>
@@ -165,9 +197,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone24PassthroughAsyncSequenceVACyxGycfc"></a>
-                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone24PassthroughAsyncSequenceVACyxGycfc">init()</a>
+                    <a name="/s:10Asynchrone27CurrentElementAsyncSequenceCyACyxGxcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone27CurrentElementAsyncSequenceCyACyxGxcfc">init(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -175,16 +207,35 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates an async sequence that broadcasts elements.</p>
+                        <p>Creates an async sequence that emits elements only after a specified time interval elapses between emissions.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">element</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>element</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The async sequence in which this sequence receives it&rsquo;s elements.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -205,9 +256,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone24PassthroughAsyncSequenceV04makeC8IteratorScS0F0Vyx_GyF"></a>
+                    <a name="/s:10Asynchrone27CurrentElementAsyncSequenceC04makeD8IteratorScS0G0Vyx_GyF"></a>
                     <a name="//apple_ref/swift/Method/makeAsyncIterator()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone24PassthroughAsyncSequenceV04makeC8IteratorScS0F0Vyx_GyF">makeAsyncIterator()</a>
+                    <a class="token" href="#/s:10Asynchrone27CurrentElementAsyncSequenceC04makeD8IteratorScS0G0Vyx_GyF">makeAsyncIterator()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -222,7 +273,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">AsyncStream</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;.</span><span class="kt">Iterator</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">nonisolated</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">AsyncStream</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;.</span><span class="kt">Iterator</span></code></pre>
 
                         </div>
                       </div>
@@ -249,9 +300,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone24PassthroughAsyncSequenceV5yieldyyxF"></a>
+                    <a name="/s:10Asynchrone27CurrentElementAsyncSequenceC5yieldyyxF"></a>
                     <a name="//apple_ref/swift/Method/yield(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone24PassthroughAsyncSequenceV5yieldyyxF">yield(_:<wbr>)</a>
+                    <a class="token" href="#/s:10Asynchrone27CurrentElementAsyncSequenceC5yieldyyxF">yield(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -261,7 +312,7 @@
                       <div class="abstract">
                         <p>Yield a new element to the sequence.</p>
 
-<p>Yielding a new element will update this async sequence&rsquo;s <code>element</code> property
+<p>Yielding a new element will update this async sequence&rsquo;s <code><a href="../Actors/CurrentElementAsyncSequence.html#/s:10Asynchrone27CurrentElementAsyncSequenceC7elementxvp">element</a></code> property
 along with emitting it through the sequence.</p>
 
                       </div>
@@ -298,9 +349,9 @@ along with emitting it through the sequence.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone24PassthroughAsyncSequenceV6finishyyF"></a>
+                    <a name="/s:10Asynchrone27CurrentElementAsyncSequenceC6finishyyF"></a>
                     <a name="//apple_ref/swift/Method/finish()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone24PassthroughAsyncSequenceV6finishyyF">finish()</a>
+                    <a class="token" href="#/s:10Asynchrone27CurrentElementAsyncSequenceC6finishyyF">finish()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -327,9 +378,9 @@ along with emitting it through the sequence.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone24PassthroughAsyncSequenceV6finish4withyx_tF"></a>
+                    <a name="/s:10Asynchrone27CurrentElementAsyncSequenceC6finish4withyx_tF"></a>
                     <a name="//apple_ref/swift/Method/finish(with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone24PassthroughAsyncSequenceV6finish4withyx_tF">finish(with:<wbr>)</a>
+                    <a class="token" href="#/s:10Asynchrone27CurrentElementAsyncSequenceC6finish4withyx_tF">finish(with:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
