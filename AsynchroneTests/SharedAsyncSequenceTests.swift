@@ -43,7 +43,7 @@ final class SharedAsyncSequenceTests: XCTestCase {
             XCTAssertEqual(values[2], "abc")
             XCTAssertEqual(values[3], "abcd")
         }
-
+        
         let values = try await self.stream.collect()
         XCTAssertEqual(values.count, 4)
         XCTAssertEqual(values[0], "a")
