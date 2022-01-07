@@ -1,10 +1,10 @@
 import Foundation
 
 
-/// A async sequence that wraps a single value and emits a new element whenever the element changes.
+/// A async sequence that broadcasts elements.
 ///
 /// ```swift
-/// let sequence = ThrowingPassthroughAsyncSequence()
+/// let sequence = ThrowingPassthroughAsyncSequence<Int>()
 /// sequence.yield(0)
 /// sequence.yield(1)
 /// sequence.yield(2)
@@ -32,9 +32,7 @@ public struct ThrowingPassthroughAsyncSequence<Element>: AsyncSequence {
 
     // MARK: Initialization
 
-    /// Creates an async sequence that emits elements only after a specified time interval elapses between emissions.
-    /// - Parameters:
-    ///   - element: The async sequence in which this sequence receives it's elements.
+    /// Creates an async sequence that broadcasts elements.
     public init() {
         self.stream = .init { self.continuation = $0 }
     }
