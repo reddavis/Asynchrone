@@ -144,7 +144,7 @@ extension ThrottleAsyncSequence {
                 }
                 
                 if let lastTime = self.lastEmission {
-                    let gap = Date.now.timeIntervalSince(lastTime)
+                    let gap = Date().timeIntervalSince(lastTime)
                     if gap < self.interval {
                         let delay = self.interval - gap
                         try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
@@ -174,7 +174,7 @@ extension ThrottleAsyncSequence {
                 return
             }
 
-            let gap = Date.now.timeIntervalSince(lastTime)
+            let gap = Date().timeIntervalSince(lastTime)
             if gap >= self.interval {
                 self.emitNextElement()
             }
