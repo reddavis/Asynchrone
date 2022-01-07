@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ZipAsyncSequence Structure Reference</title>
+    <title>PassthroughAsyncSequence Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/ZipAsyncSequence" class="dashAnchor"></a>
-    <a title="ZipAsyncSequence Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/PassthroughAsyncSequence" class="dashAnchor"></a>
+    <a title="PassthroughAsyncSequence Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (99% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        ZipAsyncSequence Structure Reference
+        PassthroughAsyncSequence Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -116,55 +116,50 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ZipAsyncSequence</h1>
+            <h1>PassthroughAsyncSequence</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ZipAsyncSequence</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">,</span> <span class="kt">Q</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Q</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ZipAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PassthroughAsyncSequence</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 
                 </div>
               </div>
-            <p>An asynchronous sequence that applys a zip function to the two async sequences.</p>
+            <p>A async sequence that broadcasts elements.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">PassthroughAsyncSequence</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">sequence</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">sequence</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sequence</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sequence</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
 
-<p>Use <code>ZipAsyncSequence</code> to combine the latest elements from two async sequences and emit a tuple.</p>
-
-<p>The async sequence waits until both provided async sequences have emitted an element,
-then emits both elements as a tuple.</p>
-
-<p>If one sequence never emits a value or raises an error then the zipped sequence will finish.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">streamA</span> <span class="o">=</span> <span class="o">.</span><span class="kd">init</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="k">let</span> <span class="nv">streamB</span> <span class="o">=</span> <span class="o">.</span><span class="kd">init</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">streamA</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span><span class="n">streamB</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">sequence</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1">// Prints:</span>
-<span class="c1">// (1, 5)</span>
-<span class="c1">// (2, 6)</span>
+<span class="c1">// 0</span>
+<span class="c1">// 1</span>
+<span class="c1">// 2</span>
 </code></pre>
 
           </section>
           <section class="section task-group-section">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initialization"></a>
+                <a name="//apple_ref/swift/Section/Initialization" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Initialization"></a>
+                  <h3 class="section-name"><span>Initialization</span>
+</h3>
+                </div>
+              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone16ZipAsyncSequenceV7Elementa"></a>
-                    <a name="//apple_ref/swift/Alias/Element" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone16ZipAsyncSequenceV7Elementa">Element</a>
+                    <a name="/s:10Asynchrone24PassthroughAsyncSequenceVACyxGycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone24PassthroughAsyncSequenceVACyxGycfc">init()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -172,14 +167,14 @@ then emits both elements as a tuple.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The kind of elements streamed.</p>
+                        <p>Creates an async sequence that broadcasts elements.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Element</span> <span class="o">=</span> <span class="p">(</span><span class="kt">P</span><span class="o">.</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Q</span><span class="o">.</span><span class="kt">Element</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -202,9 +197,9 @@ then emits both elements as a tuple.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone16ZipAsyncSequenceV04makeC8IteratorACyxq_GyF"></a>
+                    <a name="/s:10Asynchrone24PassthroughAsyncSequenceV04makeC8IteratorScS0F0Vyx_GyF"></a>
                     <a name="//apple_ref/swift/Method/makeAsyncIterator()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone16ZipAsyncSequenceV04makeC8IteratorACyxq_GyF">makeAsyncIterator()</a>
+                    <a class="token" href="#/s:10Asynchrone24PassthroughAsyncSequenceV04makeC8IteratorScS0F0Vyx_GyF">makeAsyncIterator()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -219,7 +214,7 @@ then emits both elements as a tuple.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">ZipAsyncSequence</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">,</span> <span class="kt">Q</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">AsyncStream</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;.</span><span class="kt">Iterator</span></code></pre>
 
                         </div>
                       </div>
@@ -234,11 +229,11 @@ then emits both elements as a tuple.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/AsyncIteratorProtocol"></a>
-                <a name="//apple_ref/swift/Section/AsyncIteratorProtocol" class="dashAnchor"></a>
+                <a name="/API"></a>
+                <a name="//apple_ref/swift/Section/API" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/AsyncIteratorProtocol"></a>
-                  <h3 class="section-name"><span>AsyncIteratorProtocol</span>
+                  <a class="section-name-link" href="#/API"></a>
+                  <h3 class="section-name"><span>API</span>
 </h3>
                 </div>
               </div>
@@ -246,39 +241,125 @@ then emits both elements as a tuple.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone16ZipAsyncSequenceV4next7ElementQz_AEQy_tSgyYaKF"></a>
-                    <a name="//apple_ref/swift/Method/next()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone16ZipAsyncSequenceV4next7ElementQz_AEQy_tSgyYaKF">next()</a>
+                    <a name="/s:10Asynchrone24PassthroughAsyncSequenceV5yieldyyxF"></a>
+                    <a name="//apple_ref/swift/Method/yield(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone24PassthroughAsyncSequenceV5yieldyyxF">yield(_:<wbr>)</a>
                     </code>
-                      <span class="declaration-note">
-                        Asynchronous
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Produces the next element in the sequence.</p>
+                        <p>Yield a new element to the sequence.</p>
 
-<p>Continues to call <code>next()</code> on it&rsquo;s base iterator and iterator of
-it&rsquo;s combined sequence.</p>
-
-<p>If any iterator returns <code>nil</code>, indicating the end of the sequence, this
-iterator returns <code>nil</code>.</p>
+<p>Yielding a new element will update this async sequence&rsquo;s <code>element</code> property
+along with emitting it through the sequence.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">next</span><span class="p">()</span> <span class="k">async</span> <span class="k">rethrows</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ZipAsyncSequence.html#/s:10Asynchrone16ZipAsyncSequenceV7Elementa">Element</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">yield</span><span class="p">(</span><span class="n">_</span> <span class="nv">element</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div>
-                        <h4>Return Value</h4>
-                        <p>The next element or <code>nil</code> if the end of the sequence is reached.</p>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>element</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The element to yield.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone24PassthroughAsyncSequenceV6finishyyF"></a>
+                    <a name="//apple_ref/swift/Method/finish()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone24PassthroughAsyncSequenceV6finishyyF">finish()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Mark the sequence as finished by having it&rsquo;s iterator emit nil.</p>
+
+<p>Once finished, any calls to yield will result in no change.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">finish</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone24PassthroughAsyncSequenceV6finish4withyx_tF"></a>
+                    <a name="//apple_ref/swift/Method/finish(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone24PassthroughAsyncSequenceV6finish4withyx_tF">finish(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Emit one last element beford marking the sequence as finished by having it&rsquo;s iterator emit nil.</p>
+
+<p>Once finished, any calls to yield will result in no change.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">finish</span><span class="p">(</span><span class="n">with</span> <span class="nv">element</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>element</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The element to emit.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>

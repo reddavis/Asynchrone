@@ -235,6 +235,25 @@ for await value in self.streamA.merge(with: self.streamB, self.streamC) {
 // 4
 ```
 
+### [PassthroughAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/passthroughasyncsequence)
+
+```swift
+let sequence = PassthroughAsyncSequence<Int>()
+sequence.yield(0)
+sequence.yield(1)
+sequence.yield(2)
+sequence.finish()
+
+for await value in sequence {
+    print(value)
+}
+
+// Prints:
+// 0
+// 1
+// 2
+```
+
 ### [RemoveDuplicatesAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/removeduplicatesasyncsequence)
 
 ```swift
@@ -328,6 +347,30 @@ for element in try await self.stream.throttle(for: 0.05, latest: true) {
 // 1
 // 2
 // 5
+```
+
+### [ThrowingPassthroughAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/throwingpassthroughasyncsequence)
+
+```swift
+let sequence = ThrowingPassthroughAsyncSequence<Int>()
+sequence.yield(0)
+sequence.yield(1)
+sequence.yield(2)
+sequence.finish(throwing: TestError())
+
+do {
+    for try await value in sequence {
+      print(value)
+    }
+} catch {
+    print("Error!")
+}
+
+// Prints:
+// 0
+// 1
+// 2
+// Error!
 ```
 
 ### [ZipAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/zipasyncsequence)
