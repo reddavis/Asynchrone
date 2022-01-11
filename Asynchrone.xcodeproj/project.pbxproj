@@ -17,6 +17,9 @@
 		A40B6E462788885800CA6502 /* PassthroughAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B6E452788885800CA6502 /* PassthroughAsyncSequence.swift */; };
 		A40B6E482788904000CA6502 /* ThrowingPassthroughAsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B6E472788904000CA6502 /* ThrowingPassthroughAsyncSequenceTests.swift */; };
 		A40B6E4A2788925500CA6502 /* PassthroughAsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B6E492788925500CA6502 /* PassthroughAsyncSequenceTests.swift */; };
+		A40B6E4C278CA97700CA6502 /* Task+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B6E4B278CA97700CA6502 /* Task+Extension.swift */; };
+		A40B6E4E278CAB5700CA6502 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B6E4D278CAB5700CA6502 /* TimeInterval+Extension.swift */; };
+		A40B6E53278CABEA00CA6502 /* TimeIntervalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B6E52278CABEA00CA6502 /* TimeIntervalTests.swift */; };
 		A45E0EB927748F5A006B64E1 /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EB827748F5A006B64E1 /* Just.swift */; };
 		A45E0EBB277491F1006B64E1 /* JustTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EBA277491F1006B64E1 /* JustTests.swift */; };
 		A45E0EBD27749897006B64E1 /* Fail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EBC27749897006B64E1 /* Fail.swift */; };
@@ -74,6 +77,9 @@
 		A40B6E452788885800CA6502 /* PassthroughAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughAsyncSequence.swift; sourceTree = "<group>"; };
 		A40B6E472788904000CA6502 /* ThrowingPassthroughAsyncSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowingPassthroughAsyncSequenceTests.swift; sourceTree = "<group>"; };
 		A40B6E492788925500CA6502 /* PassthroughAsyncSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughAsyncSequenceTests.swift; sourceTree = "<group>"; };
+		A40B6E4B278CA97700CA6502 /* Task+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extension.swift"; sourceTree = "<group>"; };
+		A40B6E4D278CAB5700CA6502 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
+		A40B6E52278CABEA00CA6502 /* TimeIntervalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalTests.swift; sourceTree = "<group>"; };
 		A45E0EB827748F5A006B64E1 /* Just.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Just.swift; sourceTree = "<group>"; };
 		A45E0EBA277491F1006B64E1 /* JustTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustTests.swift; sourceTree = "<group>"; };
 		A45E0EBC27749897006B64E1 /* Fail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fail.swift; sourceTree = "<group>"; };
@@ -132,6 +138,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A40B6E4F278CAB7400CA6502 /* Sequences */ = {
+			isa = PBXGroup;
+			children = (
+				A45E0EC82774E8D3006B64E1 /* AnyAsyncSequenceableTests.swift */,
+				A45E0ECC2775E6E2006B64E1 /* AnyThrowingAsyncSequenceableTests.swift */,
+				A4C361D4276CDDB500511525 /* CombineLatestAsyncSequenceTests.swift */,
+				A4C361E92770FA7C00511525 /* CombineLatest3AsyncSequenceTests.swift */,
+				A40B6E4127883FD300CA6502 /* CurrentElementAsyncSequenceTests.swift */,
+				A45E0F6C2780C0A6006B64E1 /* DebounceAsyncSequenceTests.swift */,
+				A45E0EBE27749C07006B64E1 /* FailTests.swift */,
+				A45E0EBA277491F1006B64E1 /* JustTests.swift */,
+				A4C361DA276D05C400511525 /* MergeAsyncSequenceTests.swift */,
+				A4C361E52770EE9200511525 /* Merge3AsyncSequenceTests.swift */,
+				A40B6E492788925500CA6502 /* PassthroughAsyncSequenceTests.swift */,
+				A4C361D0276B39F600511525 /* RemoveDuplicatesAsyncSequenceTests.swift */,
+				A45E0F752781BDB1006B64E1 /* ReplaceErrorAsyncSequenceTests.swift */,
+				644E0F08277A27300006CEB8 /* SharedAsyncSequenceTests.swift */,
+				A40B6E472788904000CA6502 /* ThrowingPassthroughAsyncSequenceTests.swift */,
+				64ED0336277732EC000AD024 /* ThrottleAsyncSequenceTests.swift */,
+				A4C361F227722D4600511525 /* ZipAsyncSequenceTests.swift */,
+			);
+			path = Sequences;
+			sourceTree = "<group>";
+		};
+		A40B6E50278CAB8600CA6502 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				A40B6E51278CAB8E00CA6502 /* Extensions */,
+				A40B6E4F278CAB7400CA6502 /* Sequences */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		A40B6E51278CAB8E00CA6502 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A4C361DC276D080F00511525 /* AsyncSequenceTests.swift */,
+				A40B6E52278CABEA00CA6502 /* TimeIntervalTests.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A45E0EC027749D09006B64E1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,25 +221,8 @@
 		A4C361B8276A5EF200511525 /* AsynchroneTests */ = {
 			isa = PBXGroup;
 			children = (
+				A40B6E50278CAB8600CA6502 /* Tests */,
 				A45E0EC027749D09006B64E1 /* Supporting Files */,
-				A45E0EC82774E8D3006B64E1 /* AnyAsyncSequenceableTests.swift */,
-				A45E0ECC2775E6E2006B64E1 /* AnyThrowingAsyncSequenceableTests.swift */,
-				A4C361DC276D080F00511525 /* AsyncSequenceTests.swift */,
-				A4C361D4276CDDB500511525 /* CombineLatestAsyncSequenceTests.swift */,
-				A4C361E92770FA7C00511525 /* CombineLatest3AsyncSequenceTests.swift */,
-				A45E0F6C2780C0A6006B64E1 /* DebounceAsyncSequenceTests.swift */,
-				A45E0EBE27749C07006B64E1 /* FailTests.swift */,
-				A45E0EBA277491F1006B64E1 /* JustTests.swift */,
-				A4C361DA276D05C400511525 /* MergeAsyncSequenceTests.swift */,
-				A4C361E52770EE9200511525 /* Merge3AsyncSequenceTests.swift */,
-				A40B6E492788925500CA6502 /* PassthroughAsyncSequenceTests.swift */,
-				A4C361D0276B39F600511525 /* RemoveDuplicatesAsyncSequenceTests.swift */,
-				A45E0F752781BDB1006B64E1 /* ReplaceErrorAsyncSequenceTests.swift */,
-				644E0F08277A27300006CEB8 /* SharedAsyncSequenceTests.swift */,
-				A40B6E472788904000CA6502 /* ThrowingPassthroughAsyncSequenceTests.swift */,
-				64ED0336277732EC000AD024 /* ThrottleAsyncSequenceTests.swift */,
-				A4C361F227722D4600511525 /* ZipAsyncSequenceTests.swift */,
-				A40B6E4127883FD300CA6502 /* CurrentElementAsyncSequenceTests.swift */,
 			);
 			path = AsynchroneTests;
 			sourceTree = "<group>";
@@ -199,8 +230,8 @@
 		A4C361C4276A5F2D00511525 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				A4C361CD276A686400511525 /* Sequence */,
-				A4C361CC276A685B00511525 /* Stream */,
+				A4C361CC276A685B00511525 /* Extensions */,
+				A4C361CD276A686400511525 /* Sequences */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -214,16 +245,18 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A4C361CC276A685B00511525 /* Stream */ = {
+		A4C361CC276A685B00511525 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				A4C361C6276A603B00511525 /* AsyncStream+Extension.swift */,
 				A4C361DE2770984700511525 /* AsyncThrowingStream+Extension.swift */,
+				A40B6E4B278CA97700CA6502 /* Task+Extension.swift */,
+				A40B6E4D278CAB5700CA6502 /* TimeInterval+Extension.swift */,
 			);
-			path = Stream;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
-		A4C361CD276A686400511525 /* Sequence */ = {
+		A4C361CD276A686400511525 /* Sequences */ = {
 			isa = PBXGroup;
 			children = (
 				A45E0EC62774E50A006B64E1 /* AnyAsyncSequenceable.swift */,
@@ -246,7 +279,7 @@
 				A4C361F02772246C00511525 /* ZipAsyncSequence.swift */,
 				A4C361F42772319100511525 /* Zip3AsyncSequence.swift */,
 			);
-			path = Sequence;
+			path = Sequences;
 			sourceTree = "<group>";
 		};
 		A4C361E02770DB8900511525 /* Documentation */ = {
@@ -385,9 +418,11 @@
 				A4C361F52772319100511525 /* Zip3AsyncSequence.swift in Sources */,
 				A4C361D7276CE9DC00511525 /* AsyncSequence+Extension.swift in Sources */,
 				A45E0F742781B978006B64E1 /* ReplaceErrorAsyncSequence.swift in Sources */,
+				A40B6E4E278CAB5700CA6502 /* TimeInterval+Extension.swift in Sources */,
 				A45E0ECB2775E301006B64E1 /* AnyThrowingAsyncSequenceable.swift in Sources */,
 				A4C361ED2771B13D00511525 /* MergeAsyncSequence.swift in Sources */,
 				A45E0EC72774E50A006B64E1 /* AnyAsyncSequenceable.swift in Sources */,
+				A40B6E4C278CA97700CA6502 /* Task+Extension.swift in Sources */,
 				A4C361DF2770984700511525 /* AsyncThrowingStream+Extension.swift in Sources */,
 				A4C361AF276A5EF200511525 /* Asynchrone.docc in Sources */,
 				A4C361E42770E52B00511525 /* Merge3AsyncSequence.swift in Sources */,
@@ -403,6 +438,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A40B6E53278CABEA00CA6502 /* TimeIntervalTests.swift in Sources */,
 				A4C361D1276B39F600511525 /* RemoveDuplicatesAsyncSequenceTests.swift in Sources */,
 				A4C361E62770EE9200511525 /* Merge3AsyncSequenceTests.swift in Sources */,
 				A40B6E4227883FD300CA6502 /* CurrentElementAsyncSequenceTests.swift in Sources */,
