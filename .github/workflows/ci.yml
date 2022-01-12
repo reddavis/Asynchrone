@@ -12,6 +12,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set Default Scheme
@@ -28,4 +31,4 @@ jobs:
           if [ $scheme = default ]; then scheme=$(cat default); fi
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild test -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=iOS Simulator,name=iPhone 13 Pro,OS=15.0"
+          xcodebuild test -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=iOS Simulator,name=iPhone 13 Pro,OS=15.2"
