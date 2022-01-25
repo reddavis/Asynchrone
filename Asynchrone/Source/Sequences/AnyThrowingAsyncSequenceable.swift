@@ -1,6 +1,3 @@
-import Foundation
-
-
 /// A throwing async sequence that performs type erasure by wrapping another throwing async sequence.
 ///
 /// If the async sequence that you wish to type erase doesn't throw, then use `AnyAsyncSequenceable`.

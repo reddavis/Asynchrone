@@ -1,6 +1,3 @@
-import Foundation
-import Combine
-
 /// An asynchronous sequence that immediately throws an error when iterated.
 ///
 /// Once the error has been thrown, the iterator will return nil to mark the end of the sequence.

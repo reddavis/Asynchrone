@@ -1,6 +1,3 @@
-import Foundation
-
-
 /// An asynchronous sequence that only emits the provided value once.
 ///
 /// ```swift

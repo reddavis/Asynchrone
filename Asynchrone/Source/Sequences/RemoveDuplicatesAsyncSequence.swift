@@ -1,6 +1,3 @@
-import Foundation
-
-
 /// An asynchronous sequence that streams only elements from the base asynchronous sequence
 /// that don’t match the previous element.
 ///

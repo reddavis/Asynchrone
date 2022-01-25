@@ -1,6 +1,3 @@
-import Foundation
-
-
 /// An asynchronous sequence that combines three async sequences.
 ///
 /// The combined sequence emits a tuple of the most-recent elements from each sequence

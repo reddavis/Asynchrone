@@ -1,6 +1,3 @@
-import Foundation
-
-
 extension AsyncStream {
     // MARK: Initialization
     

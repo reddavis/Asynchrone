@@ -1,6 +1,3 @@
-import Foundation
-
-
 /// An async sequence that replaces any errors in the sequence with a provided element.
 ///
 /// ```swift
