@@ -27,7 +27,79 @@ Documentation can be found [here](https://distracted-austin-575f34.netlify.app).
 
 ### AsyncSequence
 
-- [Extensions](https://distracted-austin-575f34.netlify.app/extensions/asyncsequence)
+### [Extensions](https://distracted-austin-575f34.netlify.app/extensions/asyncsequence)
+
+#### First
+
+```swift
+let sequence = AsyncStream<Int> { continuation in
+    continuation.yield(1)
+    continuation.yield(2)
+    continuation.yield(3)
+    continuation.finish()
+}
+
+print(await sequence.first())
+
+// Prints:
+// 1
+```
+
+#### Collect
+
+```swift
+let sequence = AsyncStream<Int> { continuation in
+    continuation.yield(1)
+    continuation.yield(2)
+    continuation.yield(3)
+    continuation.finish()
+}
+
+print(await sequence.collect())
+
+// Prints:
+// [1, 2, 3]
+```
+
+#### Sink
+
+```swift
+let sequence = .init { continuation in
+    continuation.yield(1)
+    continuation.yield(2)
+    continuation.yield(3)
+    continuation.finish()
+}
+
+sequence.sink { print($0) }
+
+// Prints:
+// 1
+// 2
+// 3
+```
+
+#### Sink with completion
+
+```swift
+let sequence = .init { continuation in
+    continuation.yield(1)
+    continuation.yield(2)
+    continuation.yield(3)
+    continuation.finish(throwing: TestError())
+}
+
+sequence.sink(
+    receiveValue: { print("Value: \($0)") },
+    receiveCompletion: { print("Complete: \($0)") }
+)
+
+// Prints:
+// Value: 1
+// Value: 2
+// Value: 3
+// Complete: failure(TestError())
+```
 
 ### [AnyAsyncSequenceable](https://distracted-austin-575f34.netlify.app/structs/anyasyncsequenceable)
 

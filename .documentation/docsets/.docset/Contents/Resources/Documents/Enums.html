@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Actors  Reference</title>
+    <title>Enumerations  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Section/Actors" class="dashAnchor"></a>
-    <a title="Actors  Reference"></a>
+    <a name="//apple_ref/swift/Section/Enumerations" class="dashAnchor"></a>
+    <a title="Enumerations  Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="index.html"> Docs</a> (99% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="index.html"> Reference</a>
         <img id="carat" src="img/carat.png" alt=""/>
-        Actors  Reference
+        Enumerations  Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -135,8 +135,8 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Actors</h1>
-            <p>The following actors are available globally.</p>
+            <h1>Enumerations</h1>
+            <p>The following enumerations are available globally.</p>
 
           </section>
           <section class="section task-group-section">
@@ -145,9 +145,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone27CurrentElementAsyncSequenceC"></a>
-                    <a name="//apple_ref/swift/Actor/CurrentElementAsyncSequence" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone27CurrentElementAsyncSequenceC">CurrentElementAsyncSequence</a>
+                    <a name="/s:10Asynchrone23AsyncSequenceCompletionO"></a>
+                    <a name="//apple_ref/swift/Enum/AsyncSequenceCompletion" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone23AsyncSequenceCompletionO">AsyncSequenceCompletion</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -155,31 +155,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A async sequence that wraps a single value and emits a new element whenever the element changes.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">CurrentElementAsyncSequence</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
+                        <p>Describes how an async sequence has completed.</p>
 
-<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
-
-<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
-
-<span class="c1">// Prints:</span>
-<span class="c1">// 0</span>
-<span class="c1">// 1</span>
-<span class="c1">// 4</span>
-</code></pre>
-
-                        <a href="Actors/CurrentElementAsyncSequence.html" class="slightly-smaller">See more</a>
+                        <a href="Enums/AsyncSequenceCompletion.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">actor</span> <span class="kt">CurrentElementAsyncSequence</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">AsyncSequenceCompletion</span><span class="o">&lt;</span><span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Failure</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
 
                         </div>
                       </div>

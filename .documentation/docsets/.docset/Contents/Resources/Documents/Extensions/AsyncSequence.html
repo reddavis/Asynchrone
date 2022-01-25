@@ -44,6 +44,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/AsyncSequenceCompletion.html">AsyncSequenceCompletion</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -60,6 +68,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/AsyncThrowingStream/Continuation.html">– Continuation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Task.html">Task</a>
               </li>
             </ul>
           </li>
@@ -141,87 +152,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Sci10AsynchroneE27eraseToAnyAsyncSequenceableAA0deF0Vy7ElementQzGyF"></a>
-                    <a name="//apple_ref/swift/Method/eraseToAnyAsyncSequenceable()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sci10AsynchroneE27eraseToAnyAsyncSequenceableAA0deF0Vy7ElementQzGyF">eraseToAnyAsyncSequenceable()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Creates a type erasing async sequence.</p>
-
-<p>If the async sequence that you wish to type erase can throw,
-then use <code><a href="../Extensions/AsyncSequence.html#/s:Sci10AsynchroneE35eraseToAnyThrowingAsyncSequenceableAA0defG0Vy7ElementQzGyF">eraseToAnyThrowingAsyncSequenceable()</a></code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">eraseToAnyAsyncSequenceable</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/AnyAsyncSequenceable.html">AnyAsyncSequenceable</a></span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>A typed erased async sequence.</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Erasure"></a>
-                <a name="//apple_ref/swift/Section/Erasure" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Erasure"></a>
-                  <h3 class="section-name"><span>Erasure</span>
-</h3>
-                </div>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Sci10AsynchroneE35eraseToAnyThrowingAsyncSequenceableAA0defG0Vy7ElementQzGyF"></a>
-                    <a name="//apple_ref/swift/Method/eraseToAnyThrowingAsyncSequenceable()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sci10AsynchroneE35eraseToAnyThrowingAsyncSequenceableAA0defG0Vy7ElementQzGyF">eraseToAnyThrowingAsyncSequenceable()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Creates a throwing type erasing async sequence.</p>
-
-<p>If the async sequence that you wish to type erase deson&rsquo;t throw,
-then use <code><a href="../Extensions/AsyncSequence.html#/s:Sci10AsynchroneE27eraseToAnyAsyncSequenceableAA0deF0Vy7ElementQzGyF">eraseToAnyAsyncSequenceable()</a></code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">eraseToAnyThrowingAsyncSequenceable</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/AnyThrowingAsyncSequenceable.html">AnyThrowingAsyncSequenceable</a></span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>A typed erased async sequence.</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:Sci10AsynchroneE5first7ElementQzSgyYaKF"></a>
                     <a name="//apple_ref/swift/Method/first()" class="dashAnchor"></a>
                     <a class="token" href="#/s:Sci10AsynchroneE5first7ElementQzSgyYaKF">first()</a>
@@ -279,6 +209,237 @@ then use <code><a href="../Extensions/AsyncSequence.html#/s:Sci10AsynchroneE27er
                       <div>
                         <h4>Return Value</h4>
                         <p>An array of all elements.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sci10AsynchroneE4sinkyScTyyts5Error_pGy7ElementQzcF"></a>
+                    <a name="//apple_ref/swift/Method/sink(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci10AsynchroneE4sinkyScTyyts5Error_pGy7ElementQzcF">sink(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Consume the async sequence and pass the element&rsquo;s to a closure.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="o">.</span><span class="kd">init</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="n">sequence</span><span class="o">.</span><span class="n">sink</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">}</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// 1</span>
+<span class="c1">// 2</span>
+<span class="c1">// 3</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">sink</span><span class="p">(</span><span class="n">_</span> <span class="nv">receiveValue</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>receiveValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to execute on receipt of a value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A task instance.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sci10AsynchroneE4sink12receiveValue0C10CompletionScTyyts5NeverOGy7ElementQzc_yAA013AsyncSequenceE0Oys5Error_pGctF"></a>
+                    <a name="//apple_ref/swift/Method/sink(receiveValue:receiveCompletion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci10AsynchroneE4sink12receiveValue0C10CompletionScTyyts5NeverOGy7ElementQzc_yAA013AsyncSequenceE0Oys5Error_pGctF">sink(receiveValue:<wbr>receiveCompletion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Consume the async sequence and pass the element&rsquo;s and it&rsquo;s completion
+state to two closures.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="o">.</span><span class="kd">init</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">(</span><span class="nv">throwing</span><span class="p">:</span> <span class="kt">TestError</span><span class="p">())</span>
+<span class="p">}</span>
+
+<span class="n">sequence</span><span class="o">.</span><span class="nf">sink</span><span class="p">(</span>
+    <span class="nv">receiveValue</span><span class="p">:</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"Value: </span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">},</span>
+    <span class="nv">receiveCompletion</span><span class="p">:</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"Complete: </span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// Value: 1</span>
+<span class="c1">// Value: 2</span>
+<span class="c1">// Value: 3</span>
+<span class="c1">// Complete: failure(TestError())</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">sink</span><span class="p">(</span>
+    <span class="nv">receiveValue</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span>
+    <span class="nv">receiveCompletion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/AsyncSequenceCompletion.html">AsyncSequenceCompletion</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>receiveValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to execute on receipt of a value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>receiveCompletion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to execute on completion.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A task instance.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Erasure"></a>
+                <a name="//apple_ref/swift/Section/Erasure" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Erasure"></a>
+                  <h3 class="section-name"><span>Erasure</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sci10AsynchroneE27eraseToAnyAsyncSequenceableAA0deF0Vy7ElementQzGyF"></a>
+                    <a name="//apple_ref/swift/Method/eraseToAnyAsyncSequenceable()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci10AsynchroneE27eraseToAnyAsyncSequenceableAA0deF0Vy7ElementQzGyF">eraseToAnyAsyncSequenceable()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a type erasing async sequence.</p>
+
+<p>If the async sequence that you wish to type erase can throw,
+then use <code><a href="../Extensions/AsyncSequence.html#/s:Sci10AsynchroneE35eraseToAnyThrowingAsyncSequenceableAA0defG0Vy7ElementQzGyF">eraseToAnyThrowingAsyncSequenceable()</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">eraseToAnyAsyncSequenceable</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/AnyAsyncSequenceable.html">AnyAsyncSequenceable</a></span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A typed erased async sequence.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sci10AsynchroneE35eraseToAnyThrowingAsyncSequenceableAA0defG0Vy7ElementQzGyF"></a>
+                    <a name="//apple_ref/swift/Method/eraseToAnyThrowingAsyncSequenceable()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci10AsynchroneE35eraseToAnyThrowingAsyncSequenceableAA0defG0Vy7ElementQzGyF">eraseToAnyThrowingAsyncSequenceable()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a throwing type erasing async sequence.</p>
+
+<p>If the async sequence that you wish to type erase deson&rsquo;t throw,
+then use <code><a href="../Extensions/AsyncSequence.html#/s:Sci10AsynchroneE27eraseToAnyAsyncSequenceableAA0deF0Vy7ElementQzGyF">eraseToAnyAsyncSequenceable()</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">eraseToAnyThrowingAsyncSequenceable</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/AnyThrowingAsyncSequenceable.html">AnyThrowingAsyncSequenceable</a></span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A typed erased async sequence.</p>
                       </div>
                     </section>
                   </div>
@@ -1285,7 +1446,7 @@ Return true from this closure to indicate that the second element is a duplicate
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-01-07)</p>
+          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-01-25)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
