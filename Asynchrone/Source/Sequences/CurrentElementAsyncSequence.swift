@@ -1,6 +1,3 @@
-import Foundation
-
-
 /// A async sequence that wraps a single value and emits a new element whenever the element changes.
 ///
 /// ```swift

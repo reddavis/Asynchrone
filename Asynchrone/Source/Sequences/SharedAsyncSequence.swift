@@ -1,6 +1,3 @@
-import Foundation
-
-
 /// An async sequence that can be shared between multiple tasks.
 ///
 /// ```swift

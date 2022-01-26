@@ -1,6 +1,3 @@
-import Foundation
-
-
 /// An asynchronous sequence that merges two async sequences.
 ///
 /// The sequences are iterated through in parallel.

@@ -20,6 +20,7 @@
 		A40B6E4C278CA97700CA6502 /* Task+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B6E4B278CA97700CA6502 /* Task+Extension.swift */; };
 		A40B6E4E278CAB5700CA6502 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B6E4D278CAB5700CA6502 /* TimeInterval+Extension.swift */; };
 		A40B6E53278CABEA00CA6502 /* TimeIntervalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B6E52278CABEA00CA6502 /* TimeIntervalTests.swift */; };
+		A40EE2A727A063FC00663E6C /* AsyncSequenceCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40EE2A627A063FC00663E6C /* AsyncSequenceCompletion.swift */; };
 		A45E0EB927748F5A006B64E1 /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EB827748F5A006B64E1 /* Just.swift */; };
 		A45E0EBB277491F1006B64E1 /* JustTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EBA277491F1006B64E1 /* JustTests.swift */; };
 		A45E0EBD27749897006B64E1 /* Fail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EBC27749897006B64E1 /* Fail.swift */; };
@@ -80,6 +81,7 @@
 		A40B6E4B278CA97700CA6502 /* Task+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extension.swift"; sourceTree = "<group>"; };
 		A40B6E4D278CAB5700CA6502 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		A40B6E52278CABEA00CA6502 /* TimeIntervalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalTests.swift; sourceTree = "<group>"; };
+		A40EE2A627A063FC00663E6C /* AsyncSequenceCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncSequenceCompletion.swift; sourceTree = "<group>"; };
 		A45E0EB827748F5A006B64E1 /* Just.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Just.swift; sourceTree = "<group>"; };
 		A45E0EBA277491F1006B64E1 /* JustTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustTests.swift; sourceTree = "<group>"; };
 		A45E0EBC27749897006B64E1 /* Fail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fail.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 		A4C361CC276A685B00511525 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A4C361D6276CE9DC00511525 /* AsyncSequence+Extension.swift */,
 				A4C361C6276A603B00511525 /* AsyncStream+Extension.swift */,
 				A4C361DE2770984700511525 /* AsyncThrowingStream+Extension.swift */,
 				A40B6E4B278CA97700CA6502 /* Task+Extension.swift */,
@@ -261,7 +264,7 @@
 			children = (
 				A45E0EC62774E50A006B64E1 /* AnyAsyncSequenceable.swift */,
 				A45E0ECA2775E301006B64E1 /* AnyThrowingAsyncSequenceable.swift */,
-				A4C361D6276CE9DC00511525 /* AsyncSequence+Extension.swift */,
+				A40EE2A627A063FC00663E6C /* AsyncSequenceCompletion.swift */,
 				A4C361D2276BB14300511525 /* CombineLatestAsyncSequence.swift */,
 				A4C361E72770F67E00511525 /* CombineLatest3AsyncSequence.swift */,
 				A40B6E3F2787618800CA6502 /* CurrentElementAsyncSequence.swift */,
@@ -407,6 +410,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A40EE2A727A063FC00663E6C /* AsyncSequenceCompletion.swift in Sources */,
 				A40B6E44278877CC00CA6502 /* ThrowingPassthroughAsyncSequence.swift in Sources */,
 				A45E0EBD27749897006B64E1 /* Fail.swift in Sources */,
 				6470FF6B2775F8E5009CD087 /* ThrottleAsyncSequence.swift in Sources */,

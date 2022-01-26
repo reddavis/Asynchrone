@@ -1,6 +1,3 @@
-import Foundation
-
-
 /// A async sequence that broadcasts elements.
 ///
 /// ```swift

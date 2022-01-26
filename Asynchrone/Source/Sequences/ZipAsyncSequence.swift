@@ -1,6 +1,3 @@
-import Foundation
-
-
 /// An asynchronous sequence that applys a zip function to the two async sequences.
 ///
 /// Use `ZipAsyncSequence` to combine the latest elements from two async sequences and emit a tuple.

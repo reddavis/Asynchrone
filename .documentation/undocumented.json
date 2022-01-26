@@ -1,8 +1,8 @@
 {
   "warnings": [
     {
-      "file": "/Users/reddavis/Documents/Projects/Asynchrone/Asynchrone/Source/Sequence/RemoveDuplicatesAsyncSequence.swift",
-      "line": 31,
+      "file": "/Users/reddavis/Documents/Projects/Asynchrone/Asynchrone/Source/Sequences/RemoveDuplicatesAsyncSequence.swift",
+      "line": 28,
       "symbol": "RemoveDuplicatesAsyncSequence.Predicate",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
