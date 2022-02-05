@@ -536,7 +536,3 @@ for await value in streamA.zip(streamB, streamC) {
 ### AsyncThrowingStream.Continuation
 
 - [Extensions](https://distracted-austin-575f34.netlify.app/extensions/asyncthrowingstream/continuation)
-
-## License
-
-Whatevs.
