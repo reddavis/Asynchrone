@@ -30,12 +30,15 @@
 /// // ...
 /// ```
 public struct SharedAsyncSequence<Base: AsyncSequence>: AsyncSequence {
+    
+    /// The type of async iterator.
     public typealias AsyncIterator = AsyncThrowingStream<Base.Element, Error>.Iterator
-
-    /// The kind of elements streamed.
+    
+    /// The type of elements streamed.
     public typealias Element = Base.Element
-
+    
     // Private
+    private var base: Base
     private let manager: SubSequenceManager<Base>
 
     // MARK: SharedAsyncSequence (Public Properties)
@@ -44,6 +47,7 @@ public struct SharedAsyncSequence<Base: AsyncSequence>: AsyncSequence {
     /// - Parameters:
     ///   - base: The async sequence in which this sequence receives it's elements.
     public init(_ base: Base) {
+        self.base = base
         self.manager = SubSequenceManager<Base>(base)
     }
     
@@ -53,6 +57,68 @@ public struct SharedAsyncSequence<Base: AsyncSequence>: AsyncSequence {
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
     public func makeAsyncIterator() -> AsyncThrowingStream<Base.Element, Error>.Iterator {
         self.manager.makeAsyncIterator()
+    }
+}
+
+// MARK: CurrentElementAsyncSequence extension
+
+extension SharedAsyncSequence {
+    
+    /// Yield a new element to the sequence.
+    ///
+    /// Yielding a new element will update this async sequence's `element` property
+    /// along with emitting it through the sequence.
+    /// - Parameter element: The element to yield.
+    public func yield<Element>(_ element: Element) async where Base == CurrentElementAsyncSequence<Element>  {
+        await self.base.yield(element)
+    }
+    
+    /// Mark the sequence as finished by having it's iterator emit nil.
+    ///
+    /// Once finished, any calls to yield will result in no change.
+    public func finish<Element>() async where Base == CurrentElementAsyncSequence<Element> {
+        await self.base.finish()
+    }
+    
+    /// Emit one last element beford marking the sequence as finished by having it's iterator emit nil.
+    ///
+    /// Once finished, any calls to yield will result in no change.
+    /// - Parameter element: The element to emit.
+    public func finish<Element>(with element: Element) async where Base == CurrentElementAsyncSequence<Element> {
+        await self.base.finish(with: element)
+    }
+    
+    /// The element wrapped by this async sequence, emitted as a new element whenever it changes.
+    public func element<Element>() async -> Element where Base == CurrentElementAsyncSequence<Element> {
+        await self.base.element
+    }
+}
+
+// MARK: PassthroughAsyncSequence extension
+
+extension SharedAsyncSequence {
+    
+    /// Yield a new element to the sequence.
+    ///
+    /// Yielding a new element will emit it through the sequence.
+    /// - Parameter element: The element to yield.
+    public func yield<Element>(_ element: Element) where Base == PassthroughAsyncSequence<Element>  {
+        self.base.yield(element)
+    }
+    
+    /// Mark the sequence as finished by having it's iterator emit nil.
+    ///
+    /// Once finished, any calls to yield will result in no change.
+    public func finish<Element>() where Base == PassthroughAsyncSequence<Element> {
+        self.base.finish()
+    }
+    
+    /// Emit one last element beford marking the sequence as finished by having it's iterator emit nil.
+    ///
+    /// Once finished, any calls to yield will result in no change.
+    /// - Parameter element: The element to emit.
+    public func finish<Element>(with element: Element) where Base == PassthroughAsyncSequence<Element> {
+        self.base.finish(with: element)
     }
 }
 
