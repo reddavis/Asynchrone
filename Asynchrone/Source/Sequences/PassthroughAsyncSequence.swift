@@ -41,8 +41,7 @@ public struct PassthroughAsyncSequence<Element>: AsyncSequence {
     
     /// Yield a new element to the sequence.
     ///
-    /// Yielding a new element will update this async sequence's `element` property
-    /// along with emitting it through the sequence.
+    /// Yielding a new element will emit it through the sequence.
     /// - Parameter element: The element to yield.
     public func yield(_ element: Element) {
         self.continuation.yield(element)

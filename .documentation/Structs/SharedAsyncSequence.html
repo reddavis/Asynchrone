@@ -180,9 +180,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Sci13AsyncIteratorQa"></a>
+                    <a name="/s:10Asynchrone19SharedAsyncSequenceV0C8Iteratora"></a>
                     <a name="//apple_ref/swift/Alias/AsyncIterator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sci13AsyncIteratorQa">AsyncIterator</a>
+                    <a class="token" href="#/s:10Asynchrone19SharedAsyncSequenceV0C8Iteratora">AsyncIterator</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -190,7 +190,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>The type of async iterator.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -216,7 +217,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The kind of elements streamed.</p>
+                        <p>The type of elements streamed.</p>
 
                       </div>
                       <div class="declaration">
@@ -335,10 +336,326 @@
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/CurrentElementAsyncSequence%20extension"></a>
+                <a name="//apple_ref/swift/Section/CurrentElementAsyncSequence extension" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/CurrentElementAsyncSequence%20extension"></a>
+                  <h3 class="section-name"><span>CurrentElementAsyncSequence extension</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone19SharedAsyncSequenceV5yieldyyqd__YaAA014CurrentElementcD0Cyqd__GRszlF"></a>
+                    <a name="//apple_ref/swift/Method/yield(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone19SharedAsyncSequenceV5yieldyyqd__YaAA014CurrentElementcD0Cyqd__GRszlF">yield(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Yield a new element to the sequence.</p>
+
+<p>Yielding a new element will update this async sequence&rsquo;s <code>element</code> property
+along with emitting it through the sequence.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">yield</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">element</span><span class="p">:</span> <span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">where</span> <span class="kt">Base</span> <span class="o">==</span> <span class="kt"><a href="../Actors/CurrentElementAsyncSequence.html">CurrentElementAsyncSequence</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>element</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The element to yield.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone19SharedAsyncSequenceV6finishyyYaAA014CurrentElementcD0Cyqd__GRszlF"></a>
+                    <a name="//apple_ref/swift/Method/finish()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone19SharedAsyncSequenceV6finishyyYaAA014CurrentElementcD0Cyqd__GRszlF">finish()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Mark the sequence as finished by having it&rsquo;s iterator emit nil.</p>
+
+<p>Once finished, any calls to yield will result in no change.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">finish</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span><span class="p">()</span> <span class="k">async</span> <span class="k">where</span> <span class="kt">Base</span> <span class="o">==</span> <span class="kt"><a href="../Actors/CurrentElementAsyncSequence.html">CurrentElementAsyncSequence</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone19SharedAsyncSequenceV6finish4withyqd___tYaAA014CurrentElementcD0Cyqd__GRszlF"></a>
+                    <a name="//apple_ref/swift/Method/finish(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone19SharedAsyncSequenceV6finish4withyqd___tYaAA014CurrentElementcD0Cyqd__GRszlF">finish(with:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Emit one last element beford marking the sequence as finished by having it&rsquo;s iterator emit nil.</p>
+
+<p>Once finished, any calls to yield will result in no change.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">finish</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">with</span> <span class="nv">element</span><span class="p">:</span> <span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">where</span> <span class="kt">Base</span> <span class="o">==</span> <span class="kt"><a href="../Actors/CurrentElementAsyncSequence.html">CurrentElementAsyncSequence</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>element</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The element to emit.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone19SharedAsyncSequenceV7elementqd__yYaAA014CurrentElementcD0Cyqd__GRszlF"></a>
+                    <a name="//apple_ref/swift/Method/element()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone19SharedAsyncSequenceV7elementqd__yYaAA014CurrentElementcD0Cyqd__GRszlF">element()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The element wrapped by this async sequence, emitted as a new element whenever it changes.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">element</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span><span class="p">()</span> <span class="k">async</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span> <span class="k">where</span> <span class="kt">Base</span> <span class="o">==</span> <span class="kt"><a href="../Actors/CurrentElementAsyncSequence.html">CurrentElementAsyncSequence</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/PassthroughAsyncSequence%20extension"></a>
+                <a name="//apple_ref/swift/Section/PassthroughAsyncSequence extension" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/PassthroughAsyncSequence%20extension"></a>
+                  <h3 class="section-name"><span>PassthroughAsyncSequence extension</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone19SharedAsyncSequenceV5yieldyyqd__AA011PassthroughcD0Vyqd__GRszlF"></a>
+                    <a name="//apple_ref/swift/Method/yield(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone19SharedAsyncSequenceV5yieldyyqd__AA011PassthroughcD0Vyqd__GRszlF">yield(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Yield a new element to the sequence.</p>
+
+<p>Yielding a new element will emit it through the sequence.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">yield</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">element</span><span class="p">:</span> <span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="p">)</span> <span class="k">where</span> <span class="kt">Base</span> <span class="o">==</span> <span class="kt"><a href="../Structs/PassthroughAsyncSequence.html">PassthroughAsyncSequence</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>element</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The element to yield.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone19SharedAsyncSequenceV6finishyyAA011PassthroughcD0Vyqd__GRszlF"></a>
+                    <a name="//apple_ref/swift/Method/finish()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone19SharedAsyncSequenceV6finishyyAA011PassthroughcD0Vyqd__GRszlF">finish()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Mark the sequence as finished by having it&rsquo;s iterator emit nil.</p>
+
+<p>Once finished, any calls to yield will result in no change.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">finish</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span><span class="p">()</span> <span class="k">where</span> <span class="kt">Base</span> <span class="o">==</span> <span class="kt"><a href="../Structs/PassthroughAsyncSequence.html">PassthroughAsyncSequence</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone19SharedAsyncSequenceV6finish4withyqd___tAA011PassthroughcD0Vyqd__GRszlF"></a>
+                    <a name="//apple_ref/swift/Method/finish(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone19SharedAsyncSequenceV6finish4withyqd___tAA011PassthroughcD0Vyqd__GRszlF">finish(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Emit one last element beford marking the sequence as finished by having it&rsquo;s iterator emit nil.</p>
+
+<p>Once finished, any calls to yield will result in no change.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">finish</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">with</span> <span class="nv">element</span><span class="p">:</span> <span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="p">)</span> <span class="k">where</span> <span class="kt">Base</span> <span class="o">==</span> <span class="kt"><a href="../Structs/PassthroughAsyncSequence.html">PassthroughAsyncSequence</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SharedAsyncSequence.html#/s:10Asynchrone19SharedAsyncSequenceV7Elementa">Element</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>element</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The element to emit.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-01-25)</p>
+          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-02-07)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
