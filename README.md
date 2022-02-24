@@ -231,6 +231,25 @@ for element in try await self.stream.debounce(for: 0.1) {
 // 5
 ```
 
+### [Empty](https://distracted-austin-575f34.netlify.app/structs/empty)
+
+```swift
+Empty<Int>().sink(
+    receiveValue: { print($0) },
+    receiveCompletion: { completion in
+        switch completion {
+        case .finished:
+            print("Finished")
+        case .failure:
+            print("Failed")
+        }
+    }
+)
+
+// Prints:
+// Finished
+```
+
 ### [Fail](https://distracted-austin-575f34.netlify.app/structs/fail)
 
 ```swift
