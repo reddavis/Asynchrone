@@ -3,7 +3,6 @@ import XCTest
 
 
 final class DebounceAsyncSequenceTests: XCTestCase {
-    
     private var stream: AsyncStream<Int>!
     
     // MARK: Setup
