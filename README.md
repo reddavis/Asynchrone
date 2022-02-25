@@ -250,6 +250,26 @@ for element in try await self.stream.delay(for: 0.5) {
 // 0 - 0.5
 // 1 - 1.0
 // 2 - 1.5
+>>>>>>> main
+```
+
+### [Empty](https://distracted-austin-575f34.netlify.app/structs/empty)
+
+```swift
+Empty<Int>().sink(
+    receiveValue: { print($0) },
+    receiveCompletion: { completion in
+        switch completion {
+        case .finished:
+            print("Finished")
+        case .failure:
+            print("Failed")
+        }
+    }
+)
+
+// Prints:
+// Finished
 ```
 
 ### [Fail](https://distracted-austin-575f34.netlify.app/structs/fail)
