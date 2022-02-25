@@ -173,8 +173,7 @@ fileprivate actor _DebounceAsyncSequence<T: AsyncSequence> {
 
 
 
-
-// MARK: Throttle
+// MARK: Debounce
 
 extension AsyncSequence {
 

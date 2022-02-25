@@ -231,6 +231,28 @@ for element in try await self.stream.debounce(for: 0.1) {
 // 5
 ```
 
+### [DelayAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/delayasyncsequence)
+
+```swift
+let stream = AsyncStream<Int> { continuation in
+    continuation.yield(0)
+    continuation.yield(1)
+    continuation.yield(2)
+    continuation.finish()
+}
+
+let start = Date.now
+for element in try await self.stream.delay(for: 0.5) {
+    print("\(element) - \(Date.now.timeIntervalSince(start))")
+}
+
+// Prints:
+// 0 - 0.5
+// 1 - 1.0
+// 2 - 1.5
+>>>>>>> main
+```
+
 ### [Empty](https://distracted-austin-575f34.netlify.app/structs/empty)
 
 ```swift

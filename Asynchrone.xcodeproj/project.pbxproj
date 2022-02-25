@@ -38,6 +38,8 @@
 		A47BE65B27C75FE60011ECE6 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47BE65A27C75FE60011ECE6 /* Empty.swift */; };
 		A47BE65D27C78D2D0011ECE6 /* EmptyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47BE65C27C78D2D0011ECE6 /* EmptyTests.swift */; };
 		A47BE66727C8FDC20011ECE6 /* Asynchrone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C361AA276A5EF200511525 /* Asynchrone.framework */; };
+		A47BE66127C7D9280011ECE6 /* DelayAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47BE66027C7D9280011ECE6 /* DelayAsyncSequence.swift */; };
+		A47BE66327C7E6CD0011ECE6 /* DelayAsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47BE66227C7E6CD0011ECE6 /* DelayAsyncSequenceTests.swift */; };
 		A4C361BB276A5EF200511525 /* Asynchrone.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C361AD276A5EF200511525 /* Asynchrone.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A4C361C7276A603B00511525 /* AsyncStream+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C361C6276A603B00511525 /* AsyncStream+Extension.swift */; };
 		A4C361CF276A68BF00511525 /* RemoveDuplicatesAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C361CE276A68BF00511525 /* RemoveDuplicatesAsyncSequence.swift */; };
@@ -89,6 +91,8 @@
 		A45E0F772781C8C4006B64E1 /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		A47BE65A27C75FE60011ECE6 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		A47BE65C27C78D2D0011ECE6 /* EmptyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTests.swift; sourceTree = "<group>"; };
+		A47BE66027C7D9280011ECE6 /* DelayAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayAsyncSequence.swift; sourceTree = "<group>"; };
+		A47BE66227C7E6CD0011ECE6 /* DelayAsyncSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayAsyncSequenceTests.swift; sourceTree = "<group>"; };
 		A4C361AA276A5EF200511525 /* Asynchrone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Asynchrone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4C361AD276A5EF200511525 /* Asynchrone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Asynchrone.h; sourceTree = "<group>"; };
 		A4C361AE276A5EF200511525 /* Asynchrone.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Asynchrone.docc; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 				A40B6E4127883FD300CA6502 /* CurrentElementAsyncSequenceTests.swift */,
 				A45E0F6C2780C0A6006B64E1 /* DebounceAsyncSequenceTests.swift */,
 				A47BE65C27C78D2D0011ECE6 /* EmptyTests.swift */,
+				A47BE66227C7E6CD0011ECE6 /* DelayAsyncSequenceTests.swift */,
 				A45E0EBE27749C07006B64E1 /* FailTests.swift */,
 				A45E0EBA277491F1006B64E1 /* JustTests.swift */,
 				A4C361DA276D05C400511525 /* MergeAsyncSequenceTests.swift */,
@@ -272,6 +277,7 @@
 				A40B6E3F2787618800CA6502 /* CurrentElementAsyncSequence.swift */,
 				A45E0F6A2780AE94006B64E1 /* DebounceAsyncSequence.swift */,
 				A47BE65A27C75FE60011ECE6 /* Empty.swift */,
+				A47BE66027C7D9280011ECE6 /* DelayAsyncSequence.swift */,
 				A45E0EBC27749897006B64E1 /* Fail.swift */,
 				A45E0EB827748F5A006B64E1 /* Just.swift */,
 				A4C361EC2771B13D00511525 /* MergeAsyncSequence.swift */,
@@ -431,6 +437,7 @@
 				A45E0EC72774E50A006B64E1 /* AnyAsyncSequenceable.swift in Sources */,
 				A40B6E4C278CA97700CA6502 /* Task+Extension.swift in Sources */,
 				A4C361DF2770984700511525 /* AsyncThrowingStream+Extension.swift in Sources */,
+				A47BE66127C7D9280011ECE6 /* DelayAsyncSequence.swift in Sources */,
 				A4C361E42770E52B00511525 /* Merge3AsyncSequence.swift in Sources */,
 				A4C361CF276A68BF00511525 /* RemoveDuplicatesAsyncSequence.swift in Sources */,
 				A4C361D3276BB14300511525 /* CombineLatestAsyncSequence.swift in Sources */,
@@ -458,6 +465,7 @@
 				A45E0F6D2780C0A7006B64E1 /* DebounceAsyncSequenceTests.swift in Sources */,
 				A40B6E482788904000CA6502 /* ThrowingPassthroughAsyncSequenceTests.swift in Sources */,
 				A4C361EA2770FA7C00511525 /* CombineLatest3AsyncSequenceTests.swift in Sources */,
+				A47BE66327C7E6CD0011ECE6 /* DelayAsyncSequenceTests.swift in Sources */,
 				64ED0337277732EC000AD024 /* ThrottleAsyncSequenceTests.swift in Sources */,
 				A4C361D5276CDDB500511525 /* CombineLatestAsyncSequenceTests.swift in Sources */,
 				A45E0EBB277491F1006B64E1 /* JustTests.swift in Sources */,
