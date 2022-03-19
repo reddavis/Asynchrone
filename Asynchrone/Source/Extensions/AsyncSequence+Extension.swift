@@ -34,10 +34,10 @@ extension AsyncSequence {
     /// - Parameter receiveValue: The closure to execute on receipt of a value.
     /// - Returns: A task instance.
     @discardableResult
-    public func sink(_ receiveValue: @escaping (Element) -> Void) -> Task<Void, Error> {
+    public func sink(_ receiveValue: @escaping (Element) async -> Void) -> Task<Void, Error> {
         Task {
             for try await element in self {
-                receiveValue(element)
+                await receiveValue(element)
             }
         }
     }
@@ -70,18 +70,18 @@ extension AsyncSequence {
     /// - Returns: A task instance.
     @discardableResult
     public func sink(
-        receiveValue: @escaping (Element) -> Void,
-        receiveCompletion: @escaping (AsyncSequenceCompletion<Error>) -> Void
+        receiveValue: @escaping (Element) async -> Void,
+        receiveCompletion: @escaping (AsyncSequenceCompletion<Error>) async -> Void
     ) -> Task<Void, Never> {
         Task {
             do {
                 for try await element in self {
-                    receiveValue(element)
+                    await receiveValue(element)
                 }
                 
-                receiveCompletion(.finished)
+                await receiveCompletion(.finished)
             } catch {
-                receiveCompletion(.failure(error))
+                await receiveCompletion(.failure(error))
             }
         }
     }
