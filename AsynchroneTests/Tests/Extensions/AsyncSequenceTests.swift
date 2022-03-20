@@ -30,6 +30,11 @@ final class AsyncSequenceTests: XCTestCase {
         XCTAssertEqual(values, [1, 2, 3])
     }
     
+    func testCollectWithLimit() async {
+        let values = await self.sequence.collect(2)
+        XCTAssertEqual(values, [1, 2])
+    }
+    
     // MARK: Sink
     
     func testSink() async {
