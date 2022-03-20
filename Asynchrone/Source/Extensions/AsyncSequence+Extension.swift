@@ -6,12 +6,41 @@ extension AsyncSequence {
         }
     }
     
-    /// Collect all elements from a sequence.
-    /// - Returns: An array of all elements.
-    public func collect() async rethrows -> [Element] {
-        try await self.reduce(into: [Element]()) { result, element in
-            result.append(element)
+    /// Collect elements from a sequence.
+    ///
+    /// ```swift
+    /// // Collect all elements.
+    /// var values = await self.sequence.collect()
+    /// print(values)
+    ///
+    /// // Prints:
+    /// // [1, 2, 3]
+    ///
+    /// // Collect only 2 elements.
+    /// values = await self.sequence.collect(2)
+    /// print(values)
+    ///
+    /// // Prints:
+    /// // [1, 2]
+    /// ```
+    ///
+    /// - Parameter numberOfElements: The number of elements to collect. By default
+    /// this is `nil` which indicates all elements will be collected. If the number of elements
+    /// in the sequence is less than the number of elements requested, then all the elements will
+    /// be collected.
+    /// - Returns: Returns: An array of all elements.
+    public func collect(_ numberOfElements: Int? = .none) async rethrows -> [Element] {
+        var results: [Element] = []
+        for try await element in self {
+            results.append(element)
+            
+            if let numberOfElements = numberOfElements,
+               results.count >= numberOfElements {
+               break
+            }
         }
+        
+        return results
     }
     
     /// Consume the async sequence and pass the element's to a closure.
