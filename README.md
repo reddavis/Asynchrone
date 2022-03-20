@@ -29,6 +29,32 @@ Documentation can be found [here](https://distracted-austin-575f34.netlify.app).
 
 ### [Extensions](https://distracted-austin-575f34.netlify.app/extensions/asyncsequence)
 
+#### Assign
+
+```swift
+class MyClass {
+    var value: Int = 0 {
+        didSet { print("Set to \(self.value)") }
+    }
+}
+
+
+let sequence = AsyncStream<Int> { continuation in
+    continuation.yield(1)
+    continuation.yield(2)
+    continuation.yield(3)
+    continuation.finish()
+}
+
+let object = MyClass()
+sequence.assign(to: \.value, on: object)
+
+// Prints:
+// Set to 1
+// Set to 2
+// Set to 3
+```
+
 #### First
 
 ```swift
