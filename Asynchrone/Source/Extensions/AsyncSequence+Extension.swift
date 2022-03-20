@@ -1,4 +1,48 @@
 extension AsyncSequence {
+    
+    /// Assigns each element from an async sequence to a property on an object.
+    ///
+    /// ```swift
+    /// class MyClass {
+    ///     var value: Int = 0 {
+    ///         didSet { print("Set to \(self.value)") }
+    ///     }
+    /// }
+    ///
+    ///
+    /// let sequence = AsyncStream<Int> { continuation in
+    ///     continuation.yield(1)
+    ///     continuation.yield(2)
+    ///     continuation.yield(3)
+    ///     continuation.finish()
+    /// }
+    ///
+    /// let object = MyClass()
+    /// sequence.assign(to: \.value, on: object)
+    ///
+    /// // Prints:
+    /// // Set to 1
+    /// // Set to 2
+    /// // Set to 3
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - keyPath: A key path to indicate the property to be assign.
+    ///   - object: The object that contains the property.
+    /// - Returns: A `Task<Void, Error>`. It is not required to keep reference to the task,
+    /// but it does give the ability to cancel the assign by calling `cancel()`.
+    @discardableResult
+    public func assign<Root>(
+        to keyPath: ReferenceWritableKeyPath<Root, Element>,
+        on object: Root
+    ) rethrows -> Task<Void, Error> {
+        Task {
+            for try await element in self {
+                object[keyPath: keyPath] = element
+            }
+        }
+    }
+    
     /// The first element of the sequence, if there is one.
     public func first() async rethrows -> Element? {
         try await self.first { _ in

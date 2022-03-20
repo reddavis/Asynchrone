@@ -4,7 +4,7 @@ import XCTest
 
 final class AsyncSequenceTests: XCTestCase {
     private var sequence: AsyncStream<Int>!
-    
+     
     // MARK: Setup
     
     override func setUpWithError() throws {
@@ -14,6 +14,18 @@ final class AsyncSequenceTests: XCTestCase {
             continuation.yield(3)
             continuation.finish()
         }
+    }
+    
+    // MARK: Assign
+    
+    private var assignableValue: Int = 0
+    
+    func testAssign() async {
+        self.sequence.assign(to: \.assignableValue, on: self)
+        await XCTAssertEventuallyEqual(
+            { self.assignableValue },
+            { 3 }
+        )
     }
     
     // MARK: First
