@@ -23,6 +23,7 @@
 		A40EE2A727A063FC00663E6C /* AsyncSequenceCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40EE2A627A063FC00663E6C /* AsyncSequenceCompletion.swift */; };
 		A4109A4A27E66C9B0023469A /* TimerAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4109A4927E66C9B0023469A /* TimerAsyncSequence.swift */; };
 		A4109A4C27E675880023469A /* TimerAsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4109A4B27E675880023469A /* TimerAsyncSequenceTests.swift */; };
+		A4109A4E27E765540023469A /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4109A4D27E765540023469A /* Date+Extension.swift */; };
 		A45E0EB927748F5A006B64E1 /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EB827748F5A006B64E1 /* Just.swift */; };
 		A45E0EBB277491F1006B64E1 /* JustTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EBA277491F1006B64E1 /* JustTests.swift */; };
 		A45E0EBD27749897006B64E1 /* Fail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EBC27749897006B64E1 /* Fail.swift */; };
@@ -79,6 +80,7 @@
 		A40EE2A627A063FC00663E6C /* AsyncSequenceCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncSequenceCompletion.swift; sourceTree = "<group>"; };
 		A4109A4927E66C9B0023469A /* TimerAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAsyncSequence.swift; sourceTree = "<group>"; };
 		A4109A4B27E675880023469A /* TimerAsyncSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAsyncSequenceTests.swift; sourceTree = "<group>"; };
+		A4109A4D27E765540023469A /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		A45E0EB827748F5A006B64E1 /* Just.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Just.swift; sourceTree = "<group>"; };
 		A45E0EBA277491F1006B64E1 /* JustTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustTests.swift; sourceTree = "<group>"; };
 		A45E0EBC27749897006B64E1 /* Fail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fail.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				A4C361DE2770984700511525 /* AsyncThrowingStream+Extension.swift */,
 				A40B6E4B278CA97700CA6502 /* Task+Extension.swift */,
 				A40B6E4D278CAB5700CA6502 /* TimeInterval+Extension.swift */,
+				A4109A4D27E765540023469A /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				A4C361CF276A68BF00511525 /* RemoveDuplicatesAsyncSequence.swift in Sources */,
 				A4C361D3276BB14300511525 /* CombineLatestAsyncSequence.swift in Sources */,
 				A40B6E402787618800CA6502 /* CurrentElementAsyncSequence.swift in Sources */,
+				A4109A4E27E765540023469A /* Date+Extension.swift in Sources */,
 				A45E0F6B2780AE94006B64E1 /* DebounceAsyncSequence.swift in Sources */,
 				644E0F0B277A27480006CEB8 /* SharedAsyncSequence.swift in Sources */,
 			);
