@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Fail Structure Reference</title>
+    <title>Empty Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/Fail" class="dashAnchor"></a>
-    <a title="Fail Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/Empty" class="dashAnchor"></a>
+    <a title="Empty Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (100% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        Fail Structure Reference
+        Empty Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -149,30 +149,30 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Fail</h1>
+            <h1>Empty</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">Failure</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Fail</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Empty</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Empty</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
 
                 </div>
               </div>
-            <p>An asynchronous sequence that immediately throws an error when iterated.</p>
-
-<p>Once the error has been thrown, the iterator will return nil to mark the end of the sequence.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">stream</span> <span class="o">=</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">TestError</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">TestError</span><span class="p">())</span>
-
-<span class="k">do</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="k">try</span> <span class="n">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">stream</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <p>An asynchronous sequence that only emits the provided value once.</p>
+<pre class="highlight swift"><code><span class="kt">Empty</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">()</span><span class="o">.</span><span class="nf">sink</span><span class="p">(</span>
+    <span class="nv">receiveValue</span><span class="p">:</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">},</span>
+    <span class="nv">receiveCompletion</span><span class="p">:</span> <span class="p">{</span> <span class="n">completion</span> <span class="k">in</span>
+        <span class="k">switch</span> <span class="n">completion</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">finished</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Finished"</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">failure</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Failed"</span><span class="p">)</span>
+        <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"Error!"</span><span class="p">)</span>
-<span class="p">}</span>
+<span class="p">)</span>
 
 <span class="c1">// Prints:</span>
-<span class="c1">// Error!</span>
+<span class="c1">// Finished</span>
 </code></pre>
 
           </section>
@@ -191,9 +191,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone4FailV5errorACyxq_Gq__tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(error:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone4FailV5errorACyxq_Gq__tcfc">init(error:<wbr>)</a>
+                    <a name="/s:10Asynchrone5EmptyV19completeImmediatelyACyxGSb_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(completeImmediately:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone5EmptyV19completeImmediatelyACyxGSb_tcfc">init(completeImmediately:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -201,14 +201,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates an async sequence that throws an error.</p>
+                        <p>Creates an empty async sequence.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Failure</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">completeImmediately</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -219,12 +219,13 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>error</em>
+                                <em>completeImmediately</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The error to throw.</p>
+                                  <p>A Boolean value that indicates whether
+the async sequence should immediately finish.</p>
                                 </div>
                               </td>
                             </tr>
@@ -250,9 +251,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone4FailV17makeAsyncIteratorACyxq_GyF"></a>
+                    <a name="/s:10Asynchrone5EmptyV17makeAsyncIteratorACyxGyF"></a>
                     <a name="//apple_ref/swift/Method/makeAsyncIterator()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone4FailV17makeAsyncIteratorACyxq_GyF">makeAsyncIterator()</a>
+                    <a class="token" href="#/s:10Asynchrone5EmptyV17makeAsyncIteratorACyxGyF">makeAsyncIterator()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -267,7 +268,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Empty</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -294,9 +295,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone4FailV4nextxSgyYaKF"></a>
+                    <a name="/s:10Asynchrone5EmptyV4nextxSgyYaF"></a>
                     <a name="//apple_ref/swift/Method/next()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone4FailV4nextxSgyYaKF">next()</a>
+                    <a class="token" href="#/s:10Asynchrone5EmptyV4nextxSgyYaF">next()</a>
                     </code>
                       <span class="declaration-note">
                         Asynchronous
@@ -309,18 +310,20 @@
                       <div class="abstract">
                         <p>Produces the next element in the sequence.</p>
 
+<p>Because this is an empty sequence, this will always be nil.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">next</span><span class="p">()</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Element</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">next</span><span class="p">()</span> <span class="n">async</span> <span class="o">-&gt;</span> <span class="kt">Element</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>The next element or <code>nil</code> if the end of the sequence is reached.</p>
+                        <p><code>nil</code> as this is an empty sequence.</p>
                       </div>
                     </section>
                   </div>
