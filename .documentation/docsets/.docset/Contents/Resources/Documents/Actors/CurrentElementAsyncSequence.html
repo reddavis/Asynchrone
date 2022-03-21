@@ -17,7 +17,7 @@
     <a title="CurrentElementAsyncSequence Actor Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (99% documented)</p>
+        <p><a href="../index.html"> Docs</a> (100% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -40,6 +40,14 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Actors/CurrentElementAsyncSequence.html">CurrentElementAsyncSequence</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/TimerAsyncSequence.html">TimerAsyncSequence</a>
               </li>
             </ul>
           </li>
@@ -93,6 +101,12 @@
                 <a href="../Structs/DebounceAsyncSequence.html">DebounceAsyncSequence</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/DelayAsyncSequence.html">DelayAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Empty.html">Empty</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Fail.html">Fail</a>
               </li>
               <li class="nav-group-task">
@@ -139,21 +153,21 @@
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">actor</span> <span class="kt">CurrentElementAsyncSequence</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="n">actor</span> <span class="kt">CurrentElementAsyncSequence</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 
                 </div>
               </div>
             <p>A async sequence that wraps a single value and emits a new element whenever the element changes.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">CurrentElementAsyncSequence</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
 
-<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
+<span class="n">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
 
-<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="k">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
+<span class="n">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">await</span> <span class="n">stream</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">await</span> <span class="n">sequence</span><span class="o">.</span><span class="n">element</span><span class="p">)</span>
 
 <span class="c1">// Prints:</span>
 <span class="c1">// 0</span>
@@ -284,7 +298,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">nonisolated</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">AsyncStream</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;.</span><span class="kt">Iterator</span></code></pre>
+                          <pre class="highlight swift"><code><span class="n">nonisolated</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">AsyncStream</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;.</span><span class="kt">Iterator</span></code></pre>
 
                         </div>
                       </div>
@@ -439,8 +453,8 @@ along with emitting it through the sequence.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-02-07)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-03-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>

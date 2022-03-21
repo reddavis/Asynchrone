@@ -17,7 +17,7 @@
     <a title="AsyncSequence Extension Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (99% documented)</p>
+        <p><a href="../index.html"> Docs</a> (100% documented)</p>
         <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -40,6 +40,14 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Actors/CurrentElementAsyncSequence.html">CurrentElementAsyncSequence</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/TimerAsyncSequence.html">TimerAsyncSequence</a>
               </li>
             </ul>
           </li>
@@ -91,6 +99,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DebounceAsyncSequence.html">DebounceAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DelayAsyncSequence.html">DelayAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Empty.html">Empty</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Fail.html">Fail</a>
@@ -152,6 +166,95 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:Sci10AsynchroneE6assign2to2onScTyyts5Error_pGs24ReferenceWritableKeyPathCyqd__7ElementQzG_qd__tKlF"></a>
+                    <a name="//apple_ref/swift/Method/assign(to:on:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci10AsynchroneE6assign2to2onScTyyts5Error_pGs24ReferenceWritableKeyPathCyqd__7ElementQzG_qd__tKlF">assign(to:<wbr>on:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Assigns each element from an async sequence to a property on an object.</p>
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">MyClass</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">{</span>
+        <span class="k">didSet</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"Set to </span><span class="se">\(</span><span class="k">self</span><span class="o">.</span><span class="n">value</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">AsyncStream</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">object</span> <span class="o">=</span> <span class="kt">MyClass</span><span class="p">()</span>
+<span class="n">sequence</span><span class="o">.</span><span class="nf">assign</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="nv">on</span><span class="p">:</span> <span class="n">object</span><span class="p">)</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// Set to 1</span>
+<span class="c1">// Set to 2</span>
+<span class="c1">// Set to 3</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">assign</span><span class="o">&lt;</span><span class="kt">Root</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">to</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">ReferenceWritableKeyPath</span><span class="o">&lt;</span><span class="kt">Root</span><span class="p">,</span> <span class="kt">Element</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">on</span> <span class="nv">object</span><span class="p">:</span> <span class="kt">Root</span>
+<span class="p">)</span> <span class="k">rethrows</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A key path to indicate the property to be assign.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The object that contains the property.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>Task&lt;Void, Error&gt;</code>. It is not required to keep reference to the task,
+but it does give the ability to cancel the assign by calling <code>cancel()</code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:Sci10AsynchroneE5first7ElementQzSgyYaKF"></a>
                     <a name="//apple_ref/swift/Method/first()" class="dashAnchor"></a>
                     <a class="token" href="#/s:Sci10AsynchroneE5first7ElementQzSgyYaKF">first()</a>
@@ -172,7 +275,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">first</span><span class="p">()</span> <span class="k">async</span> <span class="k">rethrows</span> <span class="o">-&gt;</span> <span class="kt">Element</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">first</span><span class="p">()</span> <span class="n">async</span> <span class="k">rethrows</span> <span class="o">-&gt;</span> <span class="kt">Element</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -182,9 +285,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Sci10AsynchroneE7collectSay7ElementQzGyYaKF"></a>
-                    <a name="//apple_ref/swift/Method/collect()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sci10AsynchroneE7collectSay7ElementQzGyYaKF">collect()</a>
+                    <a name="/s:Sci10AsynchroneE7collectySay7ElementQzGSiSgYaKF"></a>
+                    <a name="//apple_ref/swift/Method/collect(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci10AsynchroneE7collectySay7ElementQzGSiSgYaKF">collect(_:<wbr>)</a>
                     </code>
                       <span class="declaration-note">
                         Asynchronous
@@ -195,20 +298,56 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Collect all elements from a sequence.</p>
+                        <p>Collect elements from a sequence.</p>
+<pre class="highlight swift"><code><span class="c1">// Collect all elements.</span>
+<span class="k">var</span> <span class="nv">values</span> <span class="o">=</span> <span class="n">await</span> <span class="k">self</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="nf">collect</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// [1, 2, 3]</span>
+
+<span class="c1">// Collect only 2 elements.</span>
+<span class="n">values</span> <span class="o">=</span> <span class="n">await</span> <span class="k">self</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="nf">collect</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// [1, 2]</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">collect</span><span class="p">()</span> <span class="k">async</span> <span class="k">rethrows</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Element</span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">collect</span><span class="p">(</span><span class="n">_</span> <span class="nv">numberOfElements</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">)</span> <span class="n">async</span> <span class="k">rethrows</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Element</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
                       <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>numberOfElements</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of elements to collect. By default
+this is <code>nil</code> which indicates all elements will be collected. If the number of elements
+in the sequence is less than the number of elements requested, then all the elements will
+be collected.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
                         <h4>Return Value</h4>
-                        <p>An array of all elements.</p>
+                        <p>Returns: An array of all elements.</p>
                       </div>
                     </section>
                   </div>
@@ -216,9 +355,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Sci10AsynchroneE4sinkyScTyyts5Error_pGy7ElementQzcF"></a>
+                    <a name="/s:Sci10AsynchroneE4sinkyScTyyts5Error_pGy7ElementQzYacF"></a>
                     <a name="//apple_ref/swift/Method/sink(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sci10AsynchroneE4sinkyScTyyts5Error_pGy7ElementQzcF">sink(_:<wbr>)</a>
+                    <a class="token" href="#/s:Sci10AsynchroneE4sinkyScTyyts5Error_pGy7ElementQzYacF">sink(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -248,7 +387,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">sink</span><span class="p">(</span><span class="n">_</span> <span class="nv">receiveValue</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">sink</span><span class="p">(</span><span class="n">_</span> <span class="nv">receiveValue</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="n">async</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -281,9 +420,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Sci10AsynchroneE4sink12receiveValue0C10CompletionScTyyts5NeverOGy7ElementQzc_yAA013AsyncSequenceE0Oys5Error_pGctF"></a>
+                    <a name="/s:Sci10AsynchroneE4sink12receiveValue0C10CompletionScTyyts5NeverOGy7ElementQzYac_yAA013AsyncSequenceE0Oys5Error_pGYactF"></a>
                     <a name="//apple_ref/swift/Method/sink(receiveValue:receiveCompletion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sci10AsynchroneE4sink12receiveValue0C10CompletionScTyyts5NeverOGy7ElementQzc_yAA013AsyncSequenceE0Oys5Error_pGctF">sink(receiveValue:<wbr>receiveCompletion:<wbr>)</a>
+                    <a class="token" href="#/s:Sci10AsynchroneE4sink12receiveValue0C10CompletionScTyyts5NeverOGy7ElementQzYac_yAA013AsyncSequenceE0Oys5Error_pGYactF">sink(receiveValue:<wbr>receiveCompletion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -319,8 +458,8 @@ state to two closures.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">sink</span><span class="p">(</span>
-    <span class="nv">receiveValue</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span>
-    <span class="nv">receiveCompletion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/AsyncSequenceCompletion.html">AsyncSequenceCompletion</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+    <span class="nv">receiveValue</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="n">async</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span>
+    <span class="nv">receiveCompletion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/AsyncSequenceCompletion.html">AsyncSequenceCompletion</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="n">async</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span></code></pre>
 
                         </div>
@@ -499,7 +638,7 @@ when any of them emit a value.</p>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">streamA</span><span class="o">.</span><span class="nf">combineLatest</span><span class="p">(</span><span class="n">streamB</span><span class="p">,</span> <span class="n">streamC</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span> <span class="n">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">streamA</span><span class="o">.</span><span class="nf">combineLatest</span><span class="p">(</span><span class="n">streamB</span><span class="p">,</span> <span class="n">streamC</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -595,7 +734,7 @@ when any of them emit a value.</p>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="k">self</span><span class="o">.</span><span class="n">streamA</span><span class="o">.</span><span class="nf">combineLatest</span><span class="p">(</span><span class="k">self</span><span class="o">.</span><span class="n">streamB</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span> <span class="n">await</span> <span class="n">value</span> <span class="k">in</span> <span class="k">self</span><span class="o">.</span><span class="n">streamA</span><span class="o">.</span><span class="nf">combineLatest</span><span class="p">(</span><span class="k">self</span><span class="o">.</span><span class="n">streamB</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -648,11 +787,11 @@ when any of them emit a value.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Throttle"></a>
-                <a name="//apple_ref/swift/Section/Throttle" class="dashAnchor"></a>
+                <a name="/Debounce"></a>
+                <a name="//apple_ref/swift/Section/Debounce" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/Throttle"></a>
-                  <h3 class="section-name"><span>Throttle</span>
+                  <a class="section-name-link" href="#/Debounce"></a>
+                  <h3 class="section-name"><span>Debounce</span>
 </h3>
                 </div>
               </div>
@@ -677,9 +816,9 @@ delivery of values from the base async sequence. This operator is useful to proc
 or high-volume async sequences where you need to reduce the number of elements emitted to a rate you specify.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">stream</span> <span class="o">=</span> <span class="kt">AsyncStream</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">?</span> <span class="k">await</span> <span class="kt">Task</span><span class="o">.</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">nanoseconds</span><span class="p">:</span> <span class="mi">200_000_000</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">?</span> <span class="n">await</span> <span class="kt">Task</span><span class="o">.</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">nanoseconds</span><span class="p">:</span> <span class="mi">200_000_000</span><span class="p">)</span>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">?</span> <span class="k">await</span> <span class="kt">Task</span><span class="o">.</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">nanoseconds</span><span class="p">:</span> <span class="mi">200_000_000</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">?</span> <span class="n">await</span> <span class="kt">Task</span><span class="o">.</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">nanoseconds</span><span class="p">:</span> <span class="mi">200_000_000</span><span class="p">)</span>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -687,7 +826,7 @@ or high-volume async sequences where you need to reduce the number of elements e
     <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="k">try</span> <span class="k">await</span> <span class="k">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="nf">debounce</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="k">try</span> <span class="n">await</span> <span class="k">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="nf">debounce</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -726,6 +865,98 @@ or high-volume async sequences where you need to reduce the number of elements e
                               <td>
                                 <code>
                                 <em>dueTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The amount of time the async sequence should wait before emitting an element.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code><a href="../Structs/DebounceAsyncSequence.html">DebounceAsyncSequence</a></code> instance.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Delay"></a>
+                <a name="//apple_ref/swift/Section/Delay" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Delay"></a>
+                  <h3 class="section-name"><span>Delay</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sci10AsynchroneE5delay3forAA18DelayAsyncSequenceVyxGSd_tF"></a>
+                    <a name="//apple_ref/swift/Method/delay(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci10AsynchroneE5delay3forAA18DelayAsyncSequenceVyxGSd_tF">delay(for:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delays emission of all elements by the provided interval.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">stream</span> <span class="o">=</span> <span class="kt">AsyncStream</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">start</span> <span class="o">=</span> <span class="kt">Date</span><span class="o">.</span><span class="n">now</span>
+<span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="k">try</span> <span class="n">await</span> <span class="k">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="nf">delay</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">element</span><span class="se">)</span><span class="s"> - </span><span class="se">\(</span><span class="kt">Date</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="nf">timeIntervalSince</span><span class="p">(</span><span class="n">start</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// 0 - 0.5</span>
+<span class="c1">// 1 - 1.0</span>
+<span class="c1">// 2 - 1.5</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">delay</span><span class="p">(</span><span class="k">for</span> <span class="nv">interval</span><span class="p">:</span> <span class="kt">TimeInterval</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/DelayAsyncSequence.html">DelayAsyncSequence</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>base</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The async sequence in which this sequence receives it&rsquo;s elements.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>interval</em>
                                 </code>
                               </td>
                               <td>
@@ -789,7 +1020,7 @@ or high-volume async sequences where you need to reduce the number of elements e
     <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">streamA</span><span class="o">.</span><span class="nf">merge</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">streamB</span><span class="p">,</span> <span class="n">streamC</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span> <span class="n">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">streamA</span><span class="o">.</span><span class="nf">merge</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">streamB</span><span class="p">,</span> <span class="n">streamC</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -883,7 +1114,7 @@ or high-volume async sequences where you need to reduce the number of elements e
     <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">streamA</span><span class="o">.</span><span class="nf">merge</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">streamB</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span> <span class="n">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">streamA</span><span class="o">.</span><span class="nf">merge</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">streamB</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -968,7 +1199,7 @@ or high-volume async sequences where you need to reduce the number of elements e
 <span class="p">)</span>
 <span class="o">.</span><span class="nf">replaceError</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">stream</span> <span class="p">{</span>
+<span class="k">for</span> <span class="n">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">stream</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -1055,10 +1286,10 @@ or high-volume async sequences where you need to reduce the number of elements e
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Throttle2"></a>
+                <a name="/Throttle"></a>
                 <a name="//apple_ref/swift/Section/Throttle" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/Throttle2"></a>
+                  <a class="section-name-link" href="#/Throttle"></a>
                   <h3 class="section-name"><span>Throttle</span>
 </h3>
                 </div>
@@ -1084,9 +1315,9 @@ sequence in the specified time interval.</p>
 interval you specify. Other elements received within the throttling interval aren’t emitted.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">stream</span> <span class="o">=</span> <span class="kt">AsyncStream</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">?</span> <span class="k">await</span> <span class="kt">Task</span><span class="o">.</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">nanoseconds</span><span class="p">:</span> <span class="mi">100_000_000</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">?</span> <span class="n">await</span> <span class="kt">Task</span><span class="o">.</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">nanoseconds</span><span class="p">:</span> <span class="mi">100_000_000</span><span class="p">)</span>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">?</span> <span class="k">await</span> <span class="kt">Task</span><span class="o">.</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">nanoseconds</span><span class="p">:</span> <span class="mi">100_000_000</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">?</span> <span class="n">await</span> <span class="kt">Task</span><span class="o">.</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">nanoseconds</span><span class="p">:</span> <span class="mi">100_000_000</span><span class="p">)</span>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -1094,7 +1325,7 @@ interval you specify. Other elements received within the throttling interval are
     <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="k">try</span> <span class="k">await</span> <span class="k">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="nf">throttle</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span> <span class="nv">latest</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="k">try</span> <span class="n">await</span> <span class="k">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="nf">throttle</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span> <span class="nv">latest</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -1205,7 +1436,7 @@ then emits both elements as a tuple.</p>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">streamA</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span><span class="n">streamB</span><span class="p">,</span> <span class="n">streamC</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span> <span class="n">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">streamA</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span><span class="n">streamB</span><span class="p">,</span> <span class="n">streamC</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -1298,7 +1529,7 @@ then emits both elements as a tuple.</p>
     <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">streamA</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span><span class="n">streamB</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span> <span class="n">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">streamA</span><span class="o">.</span><span class="nf">zip</span><span class="p">(</span><span class="n">streamB</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -1446,8 +1677,8 @@ Return true from this closure to indicate that the second element is a duplicate
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-02-07)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-03-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>

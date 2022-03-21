@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Fail Structure Reference</title>
+    <title>TimerAsyncSequence Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/Fail" class="dashAnchor"></a>
-    <a title="Fail Structure Reference"></a>
+    <a name="//apple_ref/swift/Class/TimerAsyncSequence" class="dashAnchor"></a>
+    <a title="TimerAsyncSequence Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (100% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        Fail Structure Reference
+        TimerAsyncSequence Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -149,34 +149,61 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Fail</h1>
+            <h1>TimerAsyncSequence</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">Failure</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Fail</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">TimerAsyncSequence</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 
                 </div>
               </div>
-            <p>An asynchronous sequence that immediately throws an error when iterated.</p>
+            <p>An async sequence that emits the current date on a given interval.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">TimerAsyncSequence</span><span class="p">(</span><span class="nv">interval</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
 
-<p>Once the error has been thrown, the iterator will return nil to mark the end of the sequence.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">stream</span> <span class="o">=</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">TestError</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">TestError</span><span class="p">())</span>
-
-<span class="k">do</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="k">try</span> <span class="n">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">stream</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"Error!"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">start</span> <span class="o">=</span> <span class="kt">Date</span><span class="o">.</span><span class="n">now</span>
+<span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="n">await</span> <span class="n">sequence</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1">// Prints:</span>
-<span class="c1">// Error!</span>
+<span class="c1">// 2022-03-19 20:49:30 +0000</span>
+<span class="c1">// 2022-03-19 20:49:31 +0000</span>
+<span class="c1">// 2022-03-19 20:49:32 +0000</span>
 </code></pre>
 
           </section>
           <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone18TimerAsyncSequenceC7Elementa"></a>
+                    <a name="//apple_ref/swift/Alias/Element" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone18TimerAsyncSequenceC7Elementa">Element</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The kind of elements streamed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Element</span> <span class="o">=</span> <span class="kt">Date</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
             <div class="task-group">
               <div class="task-name-container">
                 <a name="/Initialization"></a>
@@ -191,9 +218,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone4FailV5errorACyxq_Gq__tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(error:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone4FailV5errorACyxq_Gq__tcfc">init(error:<wbr>)</a>
+                    <a name="/s:10Asynchrone18TimerAsyncSequenceC8intervalACSd_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(interval:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone18TimerAsyncSequenceC8intervalACSd_tcfc">init(interval:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -201,14 +228,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates an async sequence that throws an error.</p>
+                        <p>Creates an async sequence that emits the current date on a given interval.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Failure</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">interval</span><span class="p">:</span> <span class="kt">TimeInterval</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -219,17 +246,57 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>error</em>
+                                <em>interval</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The error to throw.</p>
+                                  <p>The interval on which to emit elements.</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Timer"></a>
+                <a name="//apple_ref/swift/Section/Timer" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Timer"></a>
+                  <h3 class="section-name"><span>Timer</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone18TimerAsyncSequenceC6cancelyyF"></a>
+                    <a name="//apple_ref/swift/Method/cancel()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone18TimerAsyncSequenceC6cancelyyF">cancel()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Cancel the sequence from emitting anymore elements.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">cancel</span><span class="p">()</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -250,9 +317,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone4FailV17makeAsyncIteratorACyxq_GyF"></a>
+                    <a name="/s:10Asynchrone18TimerAsyncSequenceC04makeC8IteratorScS0F0Vy10Foundation4DateV_GyF"></a>
                     <a name="//apple_ref/swift/Method/makeAsyncIterator()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone4FailV17makeAsyncIteratorACyxq_GyF">makeAsyncIterator()</a>
+                    <a class="token" href="#/s:10Asynchrone18TimerAsyncSequenceC04makeC8IteratorScS0F0Vy10Foundation4DateV_GyF">makeAsyncIterator()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -267,60 +334,13 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/PassthroughAsyncSequence.html">PassthroughAsyncSequence</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/TimerAsyncSequence.html#/s:10Asynchrone18TimerAsyncSequenceC7Elementa">Element</a></span><span class="o">&gt;.</span><span class="kt">AsyncIterator</span></code></pre>
 
                         </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
                         <p>An instance that conforms to <code>AsyncIteratorProtocol</code>.</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/AsyncIteratorProtocol"></a>
-                <a name="//apple_ref/swift/Section/AsyncIteratorProtocol" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/AsyncIteratorProtocol"></a>
-                  <h3 class="section-name"><span>AsyncIteratorProtocol</span>
-</h3>
-                </div>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10Asynchrone4FailV4nextxSgyYaKF"></a>
-                    <a name="//apple_ref/swift/Method/next()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone4FailV4nextxSgyYaKF">next()</a>
-                    </code>
-                      <span class="declaration-note">
-                        Asynchronous
-                      </span>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Produces the next element in the sequence.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">next</span><span class="p">()</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Element</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The next element or <code>nil</code> if the end of the sequence is reached.</p>
                       </div>
                     </section>
                   </div>

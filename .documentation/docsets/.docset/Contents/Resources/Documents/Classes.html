@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Enumerations  Reference</title>
+    <title>Classes  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Section/Enumerations" class="dashAnchor"></a>
-    <a title="Enumerations  Reference"></a>
+    <a name="//apple_ref/swift/Section/Classes" class="dashAnchor"></a>
+    <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="index.html"> Docs</a> (100% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="index.html"> Reference</a>
         <img id="carat" src="img/carat.png" alt=""/>
-        Enumerations  Reference
+        Classes  Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -149,8 +149,8 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Enumerations</h1>
-            <p>The following enumerations are available globally.</p>
+            <h1>Classes</h1>
+            <p>The following classes are available globally.</p>
 
           </section>
           <section class="section task-group-section">
@@ -159,9 +159,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone23AsyncSequenceCompletionO"></a>
-                    <a name="//apple_ref/swift/Enum/AsyncSequenceCompletion" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone23AsyncSequenceCompletionO">AsyncSequenceCompletion</a>
+                    <a name="/s:10Asynchrone18TimerAsyncSequenceC"></a>
+                    <a name="//apple_ref/swift/Class/TimerAsyncSequence" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone18TimerAsyncSequenceC">TimerAsyncSequence</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -169,15 +169,27 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Describes how an async sequence has completed.</p>
+                        <p>An async sequence that emits the current date on a given interval.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">TimerAsyncSequence</span><span class="p">(</span><span class="nv">interval</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
 
-                        <a href="Enums/AsyncSequenceCompletion.html" class="slightly-smaller">See more</a>
+<span class="k">let</span> <span class="nv">start</span> <span class="o">=</span> <span class="kt">Date</span><span class="o">.</span><span class="n">now</span>
+<span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="n">await</span> <span class="n">sequence</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// 2022-03-19 20:49:30 +0000</span>
+<span class="c1">// 2022-03-19 20:49:31 +0000</span>
+<span class="c1">// 2022-03-19 20:49:32 +0000</span>
+</code></pre>
+
+                        <a href="Classes/TimerAsyncSequence.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">AsyncSequenceCompletion</span><span class="o">&lt;</span><span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Failure</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">TimerAsyncSequence</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 
                         </div>
                       </div>

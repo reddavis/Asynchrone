@@ -532,6 +532,22 @@ do {
 // Error!
 ```
 
+### [TimerAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/timerasyncsequence)
+
+```swift
+let sequence = TimerAsyncSequence(interval: 1)
+
+let start = Date.now
+for element in await sequence {
+    print(element)
+}
+
+// Prints:
+// 2022-03-19 20:49:30 +0000
+// 2022-03-19 20:49:31 +0000
+// 2022-03-19 20:49:32 +0000
+```
+
 ### [ZipAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/zipasyncsequence)
 
 ```swift
