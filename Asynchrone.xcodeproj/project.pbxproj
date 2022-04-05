@@ -24,6 +24,8 @@
 		A4109A4A27E66C9B0023469A /* TimerAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4109A4927E66C9B0023469A /* TimerAsyncSequence.swift */; };
 		A4109A4C27E675880023469A /* TimerAsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4109A4B27E675880023469A /* TimerAsyncSequenceTests.swift */; };
 		A4109A4E27E765540023469A /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4109A4D27E765540023469A /* Date+Extension.swift */; };
+		A4482EDD27FC9FFD0004941D /* ChainAsyncSequenceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4482EDC27FC9FFD0004941D /* ChainAsyncSequenceable.swift */; };
+		A4482EDF27FCAACE0004941D /* ChainAsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4482EDE27FCAACE0004941D /* ChainAsyncSequenceTests.swift */; };
 		A45E0EB927748F5A006B64E1 /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EB827748F5A006B64E1 /* Just.swift */; };
 		A45E0EBB277491F1006B64E1 /* JustTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EBA277491F1006B64E1 /* JustTests.swift */; };
 		A45E0EBD27749897006B64E1 /* Fail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0EBC27749897006B64E1 /* Fail.swift */; };
@@ -81,6 +83,8 @@
 		A4109A4927E66C9B0023469A /* TimerAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAsyncSequence.swift; sourceTree = "<group>"; };
 		A4109A4B27E675880023469A /* TimerAsyncSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAsyncSequenceTests.swift; sourceTree = "<group>"; };
 		A4109A4D27E765540023469A /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		A4482EDC27FC9FFD0004941D /* ChainAsyncSequenceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAsyncSequenceable.swift; sourceTree = "<group>"; };
+		A4482EDE27FCAACE0004941D /* ChainAsyncSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAsyncSequenceTests.swift; sourceTree = "<group>"; };
 		A45E0EB827748F5A006B64E1 /* Just.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Just.swift; sourceTree = "<group>"; };
 		A45E0EBA277491F1006B64E1 /* JustTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustTests.swift; sourceTree = "<group>"; };
 		A45E0EBC27749897006B64E1 /* Fail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fail.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 			children = (
 				A45E0EC82774E8D3006B64E1 /* AnyAsyncSequenceableTests.swift */,
 				A45E0ECC2775E6E2006B64E1 /* AnyThrowingAsyncSequenceableTests.swift */,
+				A4482EDE27FCAACE0004941D /* ChainAsyncSequenceTests.swift */,
 				A4C361D4276CDDB500511525 /* CombineLatestAsyncSequenceTests.swift */,
 				A4C361E92770FA7C00511525 /* CombineLatest3AsyncSequenceTests.swift */,
 				A40B6E4127883FD300CA6502 /* CurrentElementAsyncSequenceTests.swift */,
@@ -280,6 +285,7 @@
 				A45E0EC62774E50A006B64E1 /* AnyAsyncSequenceable.swift */,
 				A45E0ECA2775E301006B64E1 /* AnyThrowingAsyncSequenceable.swift */,
 				A40EE2A627A063FC00663E6C /* AsyncSequenceCompletion.swift */,
+				A4482EDC27FC9FFD0004941D /* ChainAsyncSequenceable.swift */,
 				A4C361D2276BB14300511525 /* CombineLatestAsyncSequence.swift */,
 				A4C361E72770F67E00511525 /* CombineLatest3AsyncSequence.swift */,
 				A40B6E3F2787618800CA6502 /* CurrentElementAsyncSequence.swift */,
@@ -433,6 +439,7 @@
 				A45E0EBD27749897006B64E1 /* Fail.swift in Sources */,
 				6470FF6B2775F8E5009CD087 /* ThrottleAsyncSequence.swift in Sources */,
 				A4C361C7276A603B00511525 /* AsyncStream+Extension.swift in Sources */,
+				A4482EDD27FC9FFD0004941D /* ChainAsyncSequenceable.swift in Sources */,
 				A4C361F12772246C00511525 /* ZipAsyncSequence.swift in Sources */,
 				A4C361E82770F67E00511525 /* CombineLatest3AsyncSequence.swift in Sources */,
 				A40B6E462788885800CA6502 /* PassthroughAsyncSequence.swift in Sources */,
@@ -482,6 +489,7 @@
 				A4C361D5276CDDB500511525 /* CombineLatestAsyncSequenceTests.swift in Sources */,
 				A45E0EBB277491F1006B64E1 /* JustTests.swift in Sources */,
 				A45E0EC227749D18006B64E1 /* Assertion.swift in Sources */,
+				A4482EDF27FCAACE0004941D /* ChainAsyncSequenceTests.swift in Sources */,
 				A45E0EC92774E8D3006B64E1 /* AnyAsyncSequenceableTests.swift in Sources */,
 				644E0F09277A27300006CEB8 /* SharedAsyncSequenceTests.swift in Sources */,
 				A4C361DD276D080F00511525 /* AsyncSequenceTests.swift in Sources */,
