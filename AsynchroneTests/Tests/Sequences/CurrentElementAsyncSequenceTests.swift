@@ -3,8 +3,6 @@ import XCTest
 
 
 final class CurrentElementAsyncSequenceTests: XCTestCase {
-    
-    // Private
     private var sequence: CurrentElementAsyncSequence<Int>!
     
     // MARK: Setup

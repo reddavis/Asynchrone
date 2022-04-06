@@ -3,32 +3,22 @@ import XCTest
 
 
 final class ZipAsyncSequenceTests: XCTestCase {
-    private var streamA: AsyncStream<Int>!
-    private var streamB: AsyncStream<Int>!
+    private var sequenceA: AnyAsyncSequenceable<Int>!
+    private var sequenceB: AnyAsyncSequenceable<Int>!
     
     // MARK: Setup
     
     override func setUpWithError() throws {
-        self.streamA = .init { continuation in
-            continuation.yield(1)
-            continuation.yield(2)
-            continuation.finish()
-        }
-        
-        self.streamB = .init { continuation in
-            continuation.yield(5)
-            continuation.yield(6)
-            continuation.yield(7)
-            continuation.finish()
-        }
+        self.sequenceA = [1, 2].async.eraseToAnyAsyncSequenceable()
+        self.sequenceB = [5, 6, 7].async.eraseToAnyAsyncSequenceable()
     }
     
     // MARK: Tests
     
     func testZippingTwoSequences() async {
         let values = await self
-            .streamA
-            .zip(self.streamB)
+            .sequenceA
+            .zip(self.sequenceB)
             .collect()
         
         XCTAssertEqual(values.count, 2)

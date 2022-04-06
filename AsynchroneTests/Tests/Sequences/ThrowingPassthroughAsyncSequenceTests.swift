@@ -3,8 +3,6 @@ import XCTest
 
 
 final class ThrowingPassthroughAsyncSequenceTests: XCTestCase {
-    
-    // Private
     private var sequence: ThrowingPassthroughAsyncSequence<Int>!
     
     // MARK: Setup
@@ -27,7 +25,7 @@ final class ThrowingPassthroughAsyncSequenceTests: XCTestCase {
     func testSequenceThrows() async throws {
         self.sequence.finish(throwing: TestError())
         
-        await XCTAsyncAssertThrowsError {
+        await XCTAsyncAssertThrow {
             try await self.sequence.collect()
         }
     }

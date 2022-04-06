@@ -22,10 +22,7 @@ final class AsyncSequenceTests: XCTestCase {
     
     func testAssign() async {
         self.sequence.assign(to: \.assignableValue, on: self)
-        await XCTAssertEventuallyEqual(
-            { self.assignableValue },
-            { 3 }
-        )
+        XCTAssertEventuallyEqual(self.assignableValue, 3)
     }
     
     // MARK: First
@@ -53,10 +50,7 @@ final class AsyncSequenceTests: XCTestCase {
         var values: [Int] = []
         self.sequence.sink { values.append($0) }
         
-        await XCTAssertEventuallyEqual(
-            { values },
-            { [1, 2, 3] }
-        )
+        XCTAssertEventuallyEqual(values, [1, 2, 3])
     }
     
     func testSinkWithFinishedCompletion() async {
@@ -72,10 +66,7 @@ final class AsyncSequenceTests: XCTestCase {
             }
         )
         
-        await XCTAssertEventuallyEqual(
-            { values },
-            { [1, 2, 3] }
-        )
+        XCTAssertEventuallyEqual(values, [1, 2, 3])
     }
     
     func testSinkWithFailedCompletion() async {
@@ -101,10 +92,6 @@ final class AsyncSequenceTests: XCTestCase {
         )
         
         await self.waitForExpectations(timeout: 5.0, handler: nil)
-        
-        await XCTAssertEventuallyEqual(
-            { values },
-            { [1, 2, 3] }
-        )
+        XCTAssertEventuallyEqual(values, [1, 2, 3])
     }
 }

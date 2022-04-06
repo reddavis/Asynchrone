@@ -3,39 +3,24 @@ import XCTest
 
 
 final class Merge3AsyncSequenceTests: XCTestCase {
-    private var streamA: AsyncStream<Int>!
-    private var streamB: AsyncStream<Int>!
-    private var streamC: AsyncStream<Int>!
+    private var sequenceA: AnyAsyncSequenceable<Int>!
+    private var sequenceB: AnyAsyncSequenceable<Int>!
+    private var sequenceC: AnyAsyncSequenceable<Int>!
     
     // MARK: Setup
     
     override func setUpWithError() throws {
-        self.streamA = .init { continuation in
-            continuation.yield(1)
-            continuation.yield(4)
-            continuation.finish()
-        }
-        
-        self.streamB = .init { continuation in
-            continuation.yield(2)
-            continuation.yield(5)
-            continuation.yield(7)
-            continuation.finish()
-        }
-        
-        self.streamC = .init { continuation in
-            continuation.yield(3)
-            continuation.yield(6)
-            continuation.finish()
-        }
+        self.sequenceA = [1, 4].async.eraseToAnyAsyncSequenceable()
+        self.sequenceB = [2, 5, 7].async.eraseToAnyAsyncSequenceable()
+        self.sequenceC = [3, 6].async.eraseToAnyAsyncSequenceable()
     }
     
     // MARK: Tests
     
     func testMergingThreeSequences() async throws {
         let values = try await self
-            .streamA
-            .merge(with: self.streamB, self.streamC)
+            .sequenceA
+            .merge(with: self.sequenceB, self.sequenceC)
             .collect()
         
         XCTAssertEqual(values.count, 7)

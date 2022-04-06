@@ -3,7 +3,6 @@ import XCTest
 
 
 final class ReplaceErrorTests: XCTestCase {
-    
     func testErrorReplaced() async {
         let replacement = 0
         
