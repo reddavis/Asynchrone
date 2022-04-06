@@ -490,6 +490,21 @@ for await value in stream {
 // 0
 ```
 
+### [SequenceAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/sequenceasyncsequence)
+
+```swift
+let sequence = [0, 1, 2, 3].async
+
+for await value in sequence {
+    print(value)
+}
+
+// Prints:
+// 1
+// 2
+// 3
+```
+
 ### [SharedAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/sharedasyncsequence)
 
 ```swift
