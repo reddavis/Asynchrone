@@ -3,13 +3,12 @@ import XCTest
 
 
 final class ThrottleAsyncSequenceTests: XCTestCase {
-    
-    private var stream: AsyncStream<Int>!
+    private var sequence: AsyncStream<Int>!
     
     // MARK: Setup
     
     override func setUpWithError() throws {
-        self.stream = AsyncStream<Int> { continuation in
+        self.sequence = AsyncStream<Int> { continuation in
             continuation.yield(0)
             try? await Task.sleep(nanoseconds: 100_000_000)
             continuation.yield(1)
@@ -25,7 +24,7 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
     // MARK: Tests
     
     func testThrottle() async throws {
-        let values = try await self.stream
+        let values = try await self.sequence
             .throttle(for: 0.05, latest: false)
             .collect()
         
@@ -33,7 +32,7 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
     }
 
     func testThrottleLatest() async throws {
-        let values = try await self.stream
+        let values = try await self.sequence
             .throttle(for: 0.05, latest: true)
             .collect()
         

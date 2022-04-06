@@ -5,7 +5,7 @@ import XCTest
 final class FailTests: XCTestCase {
     
     func testErrorThrown() async {
-        await XCTAssertAsyncThrowsError {
+        await XCTAsyncAssertThrow {
             _ = try await Fail<Int, TestError>(
                 error: TestError()
             ).collect()

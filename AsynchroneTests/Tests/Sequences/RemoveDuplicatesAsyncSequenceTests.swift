@@ -3,28 +3,19 @@ import XCTest
 
 
 final class RemoveDuplicatesAsyncSequenceTests: XCTestCase {
-    private var stream: AsyncStream<Int>!
+    private var sequence: AnyAsyncSequenceable<Int>!
     
     // MARK: Setup
     
     override func setUpWithError() throws {
-        self.stream = .init { continuation in
-            continuation.yield(1)
-            continuation.yield(1)
-            continuation.yield(2)
-            continuation.yield(2)
-            continuation.yield(3)
-            continuation.yield(3)
-            continuation.yield(1)
-            continuation.finish()
-        }
+        self.sequence = [1, 1, 2, 2, 3, 3, 1].async.eraseToAnyAsyncSequenceable()
     }
     
     // MARK: Tests
     
     func testDuplicatesRemoved() async {
         let values = await self
-            .stream
+            .sequence
             .removeDuplicates()
             .collect()
         
@@ -33,7 +24,7 @@ final class RemoveDuplicatesAsyncSequenceTests: XCTestCase {
     
     func testRemovingDuplicatesWithPredicate() async {
         let values = await self
-            .stream
+            .sequence
             .removeDuplicates { previous, current in
                 previous >= current
             }

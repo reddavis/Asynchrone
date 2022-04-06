@@ -3,88 +3,70 @@ import XCTest
 
 
 final class SharedAsyncSequenceTests: XCTestCase {
-    private var stream: SharedAsyncSequence<AsyncStream<String>>!
+    private var values: [Int]!
+    private var sequence: SharedAsyncSequence<SequenceAsyncSequence<[Int]>>!
 
     // MARK: Setup
     
     override func setUpWithError() throws {
-        let values = [
-            "a",
-            "ab",
-            "abc",
-            "abcd"
-        ]
-        
-        self.stream = AsyncStream { continuation in
-            for value in values {
-                continuation.yield(value)
-            }
-            continuation.finish()
-        }
-        .shared()
+        self.values = [0, 1, 2, 3, 4]
+        self.sequence = values.async.shared()
     }
 
     // MARK: Tests
     
     func testSharedStreamShouldNotThrowExceptionAndReceiveAllValues() async throws {
+        let taskCompleteExpectation = self.expectation(description: "Task complete")
         Task {
-            let values = try await self.stream.collect()
-            XCTAssertEqual(values[0], "a")
-            XCTAssertEqual(values[1], "ab")
-            XCTAssertEqual(values[2], "abc")
-            XCTAssertEqual(values[3], "abcd")
-        }
-
-        Task.detached {
-            let values = try await self.stream.collect()
-            XCTAssertEqual(values[0], "a")
-            XCTAssertEqual(values[1], "ab")
-            XCTAssertEqual(values[2], "abc")
-            XCTAssertEqual(values[3], "abcd")
+            let values = try await self.sequence.collect()
+            XCTAssertEqual(values, [0, 1, 2, 3, 4])
+            
+            taskCompleteExpectation.fulfill()
         }
         
-        let values = try await self.stream.collect()
-        XCTAssertEqual(values.count, 4)
-        XCTAssertEqual(values[0], "a")
-        XCTAssertEqual(values[1], "ab")
-        XCTAssertEqual(values[2], "abc")
-        XCTAssertEqual(values[3], "abcd")
+        let detachedTaskCompleteExpectation = self.expectation(description: "Detached task complete")
+        Task.detached {
+            let values = try await self.sequence.collect()
+            XCTAssertEqual(values, [0, 1, 2, 3, 4])
+            
+            detachedTaskCompleteExpectation.fulfill()
+        }
+        
+        let values = try await self.sequence.collect()
+        XCTAssertEqual(values, [0, 1, 2, 3, 4])
+        
+        await self.waitForExpectations(timeout: 5)
     }
     
     func testAccessingBaseCurrentElementAsyncSequenceFunctionality() async throws {
-        let valueA = "a"
-        let valueB = "b"
-        let valueC = "c"
+        let valueA = 0
+        let valueB = 1
+        let valueC = 2
         
-        let stream = CurrentElementAsyncSequence(valueA).shared()
+        let sequence = CurrentElementAsyncSequence(valueA).shared()
         
         // Yield new value
-        await stream.yield(valueB)
-        await stream.finish(with: valueC)
+        await sequence.yield(valueB)
+        await sequence.finish(with: valueC)
         
-        let values = try await stream.collect()
-        XCTAssertEqual(values[0], "a")
-        XCTAssertEqual(values[1], "b")
-        XCTAssertEqual(values[2], "c")
-        XCTAssertEqual(values.count, 3)
+        let values = try await sequence.collect()
+        XCTAssertEqual(values, [0, 1, 2])
         
-        let currentValue = await stream.element()
+        let currentValue = await sequence.element()
         XCTAssertEqual(currentValue, valueC)
     }
     
     func testAccessingBasePassthroughAsyncSequenceFunctionality() async throws {
-        let valueA = "a"
-        let valueB = "b"
+        let valueA = 0
+        let valueB = 1
         
-        let stream = PassthroughAsyncSequence<String>().shared()
+        let sequence = PassthroughAsyncSequence<Int>().shared()
         
         // Yield new value
-        stream.yield(valueA)
-        stream.finish(with: valueB)
+        sequence.yield(valueA)
+        sequence.finish(with: valueB)
         
-        let values = try await stream.collect()
-        XCTAssertEqual(values[0], "a")
-        XCTAssertEqual(values[1], "b")
-        XCTAssertEqual(values.count, 2)
+        let values = try await sequence.collect()
+        XCTAssertEqual(values, [0, 1])
     }
 }

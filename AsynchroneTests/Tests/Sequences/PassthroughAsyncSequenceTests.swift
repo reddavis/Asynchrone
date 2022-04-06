@@ -3,8 +3,6 @@ import XCTest
 
 
 final class PassthroughAsyncSequenceTests: XCTestCase {
-    
-    // Private
     private var sequence: PassthroughAsyncSequence<Int>!
     
     // MARK: Setup

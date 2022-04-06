@@ -3,17 +3,12 @@ import XCTest
 
 
 final class DelayAsyncSequenceTests: XCTestCase {
-    private var stream: AsyncStream<Int>!
+    private var sequence: AnyAsyncSequenceable<Int>!
     
     // MARK: Setup
     
     override func setUpWithError() throws {
-        self.stream = AsyncStream<Int> { continuation in
-            continuation.yield(0)
-            continuation.yield(1)
-            continuation.yield(2)
-            continuation.finish()
-        }
+        self.sequence = [0, 1, 2].async.eraseToAnyAsyncSequenceable()
     }
 
     // MARK: Tests
@@ -21,7 +16,7 @@ final class DelayAsyncSequenceTests: XCTestCase {
     func testDelay() async throws {
         var values: [TimestampedValue<Int>] = []
         
-        for try await value in self.stream.delay(for: 0.5) {
+        for try await value in self.sequence.delay(for: 0.5) {
             values.append(.init(value: value))
         }
         
