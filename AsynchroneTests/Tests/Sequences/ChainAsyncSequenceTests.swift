@@ -18,16 +18,15 @@ final class ChainAsyncSequenceTests: XCTestCase {
     // MARK: Tests
     
     func testChainingTwoSequences() async {
-        let values = await (self.sequenceA <> self.sequenceB).collect()
+        let values = await self.sequenceA.chain(with: self.sequenceB).collect()
         XCTAssertEqual(values, [1, 2, 3, 4, 5, 6])
     }
     
     func testChainingThreeSequences() async {
-        let values = await (
-            self.sequenceA <>
-            self.sequenceB <>
-            self.sequenceC
-        ).collect()
+        let values = await self.sequenceA
+            .chain(with: self.sequenceB)
+            .chain(with: self.sequenceC)
+            .collect()
         
         XCTAssertEqual(values, [1, 2, 3, 4, 5, 6, 7, 8, 9])
     }

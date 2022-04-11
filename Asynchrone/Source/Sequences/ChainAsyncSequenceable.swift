@@ -97,62 +97,55 @@ extension ChainAsyncSequence: AsyncIteratorProtocol {
 
 // MARK: Chain
 
-precedencegroup ChainOperatorPrecedence {
-    associativity: left
-}
-infix operator <>: ChainOperatorPrecedence
-
-/// An asynchronous sequence that chains two async sequences.
-///
-/// The combined sequence first emits the all the values from the first sequence
-/// and then emits all values from the second.
-///
-/// ```swift
-/// let sequenceA = AsyncStream<Int> { continuation in
-///     continuation.yield(1)
-///     continuation.yield(2)
-///     continuation.yield(3)
-///     continuation.finish()
-/// }
-///
-/// let sequenceB = AsyncStream<Int> { continuation in
-///     continuation.yield(4)
-///     continuation.yield(5)
-///     continuation.yield(6)
-///     continuation.finish()
-/// }
-///
-/// let sequenceC = AsyncStream<Int> { continuation in
-///     continuation.yield(7)
-///     continuation.yield(8)
-///     continuation.yield(9)
-///     continuation.finish()
-/// }
-///
-/// for await value in sequenceA <> sequenceB <> sequenceC {
-///     print(value)
-/// }
-///
-/// // Prints:
-/// // 1
-/// // 2
-/// // 3
-/// // 4
-/// // 5
-/// // 6
-/// // 7
-/// // 8
-/// // 9
-/// ```
-/// - Parameters:
-///   - lhs: The first async sequence to iterate through.
-///   - rhs: The second async sequence to iterate through.
-/// - Returns: A async sequence chains the two sequences.
 extension AsyncSequence {
-    public static func <><P>(
-        lhs: Self,
-        rhs: P
-    ) -> ChainAsyncSequence<Self, P> where P: AsyncSequence {
-        .init(lhs, rhs)
+
+    /// An asynchronous sequence that chains two async sequences.
+    ///
+    /// The combined sequence first emits the all the values from the first sequence
+    /// and then emits all values from the second.
+    ///
+    /// ```swift
+    /// let sequenceA = AsyncStream<Int> { continuation in
+    ///     continuation.yield(1)
+    ///     continuation.yield(2)
+    ///     continuation.yield(3)
+    ///     continuation.finish()
+    /// }
+    ///
+    /// let sequenceB = AsyncStream<Int> { continuation in
+    ///     continuation.yield(4)
+    ///     continuation.yield(5)
+    ///     continuation.yield(6)
+    ///     continuation.finish()
+    /// }
+    ///
+    /// let sequenceC = AsyncStream<Int> { continuation in
+    ///     continuation.yield(7)
+    ///     continuation.yield(8)
+    ///     continuation.yield(9)
+    ///     continuation.finish()
+    /// }
+    ///
+    /// for await value in sequenceA.chain(with: sequenceB).chain(with: sequenceC) {
+    ///     print(value)
+    /// }
+    ///
+    /// // Prints:
+    /// // 1
+    /// // 2
+    /// // 3
+    /// // 4
+    /// // 5
+    /// // 6
+    /// // 7
+    /// // 8
+    /// // 9
+    /// ```
+    /// - Parameters:
+    ///   - lhs: The first async sequence to iterate through.
+    ///   - rhs: The second async sequence to iterate through.
+    /// - Returns: A async sequence chains the two sequences.
+    public func chain<P>(with sequence: P) -> ChainAsyncSequence<Self, P> where P: AsyncSequence {
+        .init(self, sequence)
     }
 }
