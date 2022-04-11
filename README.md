@@ -166,7 +166,7 @@ let sequenceC = AsyncStream<Int> { continuation in
     continuation.finish()
 }
 
-for await value in sequenceA <> sequenceB <> sequenceC {
+for await value in sequenceA.chain(with: sequenceB).chain(with: sequenceC) {
     print(value)
 }
 
