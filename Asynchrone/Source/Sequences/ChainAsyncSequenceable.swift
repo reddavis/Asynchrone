@@ -148,9 +148,11 @@ infix operator <>: ChainOperatorPrecedence
 ///   - lhs: The first async sequence to iterate through.
 ///   - rhs: The second async sequence to iterate through.
 /// - Returns: A async sequence chains the two sequences.
-public func <><P, Q>(
-    lhs: P,
-    rhs: Q
-) -> ChainAsyncSequence<P, Q> where P: AsyncSequence, Q: AsyncSequence {
-    .init(lhs, rhs)
+extension AsyncSequence {
+    public static func <><P>(
+        lhs: Self,
+        rhs: P
+    ) -> ChainAsyncSequence<Self, P> where P: AsyncSequence {
+        .init(lhs, rhs)
+    }
 }
