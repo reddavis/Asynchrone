@@ -3,37 +3,38 @@ import XCTest
 
 
 final class SharedAsyncSequenceTests: XCTestCase {
-    private var values: [Int]!
-    private var sequence: SharedAsyncSequence<SequenceAsyncSequence<[Int]>>!
+    private var sequence: SharedAsyncSequence<PassthroughAsyncSequence<Int>>!
 
     // MARK: Setup
     
     override func setUpWithError() throws {
-        self.values = [0, 1, 2, 3, 4]
-        self.sequence = values.async.shared()
+        self.sequence = PassthroughAsyncSequence<Int>().shared()
     }
 
     // MARK: Tests
     
-    func testSharedStreamShouldNotThrowExceptionAndReceiveAllValues() async throws {
+    func testSharedStreamShouldNotThrowExceptionAndReceiveAllValues() async {
         let taskCompleteExpectation = self.expectation(description: "Task complete")
         Task {
             let values = try await self.sequence.collect()
-            XCTAssertEqual(values, [0, 1, 2, 3, 4])
-            
+            XCTAssertEqual(values, [0, 1, 2, 3])
             taskCompleteExpectation.fulfill()
         }
         
         let detachedTaskCompleteExpectation = self.expectation(description: "Detached task complete")
         Task.detached {
             let values = try await self.sequence.collect()
-            XCTAssertEqual(values, [0, 1, 2, 3, 4])
-            
+            XCTAssertEqual(values, [0, 1, 2, 3])
             detachedTaskCompleteExpectation.fulfill()
         }
         
-        let values = try await self.sequence.collect()
-        XCTAssertEqual(values, [0, 1, 2, 3, 4])
+        Task.detached {
+            try? await Task.sleep(seconds: 0.5)
+            self.sequence.yield(0)
+            self.sequence.yield(1)
+            self.sequence.yield(2)
+            self.sequence.finish(with: 3)
+        }
         
         await self.waitForExpectations(timeout: 5)
     }

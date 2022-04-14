@@ -15,14 +15,14 @@ final class TimerAsyncSequenceTests: XCTestCase {
     
     func testTimerEmissions() async throws {
         var values: [Date] = []
-        let start = Date.now
-        var end = Date.now
+        let start = Date()
+        var end = Date()
         
         for await value in self.sequence {
             values.append(value)
             
             if values.count == 3 {
-                end = .now
+                end = Date()
                 self.sequence.cancel()
             }
         }
