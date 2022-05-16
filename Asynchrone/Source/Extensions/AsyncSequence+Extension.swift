@@ -104,11 +104,16 @@ extension AsyncSequence {
     /// // 2
     /// // 3
     /// ```
-    /// - Parameter receiveValue: The closure to execute on receipt of a value.
+    /// - Parameters:
+    ///   - priority: The priority of the task. Pass nil to use the priority from `Task.currentPriority`.
+    ///   - receiveValue: The closure to execute on receipt of a value.
     /// - Returns: A task instance.
     @discardableResult
-    public func sink(_ receiveValue: @escaping (Element) async -> Void) -> Task<Void, Error> {
-        Task {
+    public func sink(
+        priority: TaskPriority? = nil,
+        receiveValue: @escaping (Element) async -> Void
+    ) -> Task<Void, Error> {
+        Task(priority: priority) {
             for try await element in self {
                 await receiveValue(element)
             }
@@ -138,15 +143,17 @@ extension AsyncSequence {
     /// // Complete: failure(TestError())
     /// ```
     /// - Parameters:
+    ///   - priority: The priority of the task. Pass nil to use the priority from `Task.currentPriority`.
     ///   - receiveValue: The closure to execute on receipt of a value.
     ///   - receiveCompletion: The closure to execute on completion.
     /// - Returns: A task instance.
     @discardableResult
     public func sink(
+        priority: TaskPriority? = nil,
         receiveValue: @escaping (Element) async -> Void,
         receiveCompletion: @escaping (AsyncSequenceCompletion<Error>) async -> Void
     ) -> Task<Void, Never> {
-        Task {
+        Task(priority: priority) {
             do {
                 for try await element in self {
                     await receiveValue(element)
