@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Merge3AsyncSequence Structure Reference</title>
+    <title>SequenceAsyncSequence Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/Merge3AsyncSequence" class="dashAnchor"></a>
-    <a title="Merge3AsyncSequence Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/SequenceAsyncSequence" class="dashAnchor"></a>
+    <a title="SequenceAsyncSequence Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (100% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        Merge3AsyncSequence Structure Reference
+        SequenceAsyncSequence Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -161,35 +161,19 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Merge3AsyncSequence</h1>
+            <h1>SequenceAsyncSequence</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Merge3AsyncSequence</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Merge3AsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SequenceAsyncSequence</span><span class="o">&lt;</span><span class="kt">P</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt">Sequence</span></code></pre>
 
                 </div>
               </div>
-            <p>An asynchronous sequence that merges three async sequences.</p>
+            <p>An async version of <code>Sequence</code>. Generally used to turn any <code>Sequence</code> into
+it&rsquo;s async counterpart.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="k">async</span>
 
-<p>The sequences are iterated through in parallel.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">streamA</span> <span class="o">=</span> <span class="o">.</span><span class="kd">init</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="k">let</span> <span class="nv">streamB</span> <span class="o">=</span> <span class="o">.</span><span class="kd">init</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="k">let</span> <span class="nv">streamC</span> <span class="o">=</span> <span class="o">.</span><span class="kd">init</span> <span class="p">{</span> <span class="n">continuation</span> <span class="k">in</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">continuation</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="k">self</span><span class="o">.</span><span class="n">streamA</span><span class="o">.</span><span class="nf">merge</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">streamB</span><span class="p">,</span> <span class="k">self</span><span class="o">.</span><span class="n">streamC</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">sequence</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -197,7 +181,6 @@
 <span class="c1">// 1</span>
 <span class="c1">// 2</span>
 <span class="c1">// 3</span>
-<span class="c1">// 4</span>
 </code></pre>
 
           </section>
@@ -207,9 +190,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone19Merge3AsyncSequenceV7Elementa"></a>
+                    <a name="/s:10Asynchrone013SequenceAsyncB0V7Elementa"></a>
                     <a name="//apple_ref/swift/Alias/Element" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone19Merge3AsyncSequenceV7Elementa">Element</a>
+                    <a class="token" href="#/s:10Asynchrone013SequenceAsyncB0V7Elementa">Element</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -224,7 +207,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Element</span> <span class="o">=</span> <span class="kt">T</span><span class="o">.</span><span class="kt">Element</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Element</span> <span class="o">=</span> <span class="kt">P</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 
                         </div>
                       </div>
@@ -247,9 +230,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone19Merge3AsyncSequenceVyACyxGx_xxtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(_:_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone19Merge3AsyncSequenceVyACyxGx_xxtcfc">init(_:<wbr>_:<wbr>_:<wbr>)</a>
+                    <a name="/s:10Asynchrone013SequenceAsyncB0VyACyxGxcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone013SequenceAsyncB0VyACyxGxcfc">init(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -257,18 +240,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates an async sequence that merges the provided async sequence&rsquo;s.</p>
+                        <p>Creates an async sequence that combines the two async sequence.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">p</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span>
-    <span class="n">_</span> <span class="nv">q</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span>
-    <span class="n">_</span> <span class="nv">r</span><span class="p">:</span> <span class="kt">T</span>
-<span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">sequence</span><span class="p">:</span> <span class="kt">P</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -284,19 +263,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>An async sequence.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>q</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An async sequence.</p>
+                                  <p>A sequence.</p>
                                 </div>
                               </td>
                             </tr>
@@ -322,9 +289,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone19Merge3AsyncSequenceV04makeC8IteratorScs0F0Vy7ElementQzs5Error_p_GyF"></a>
+                    <a name="/s:10Asynchrone013SequenceAsyncB0V04makeC8IteratorAA0bcbE0VyxGyF"></a>
                     <a name="//apple_ref/swift/Method/makeAsyncIterator()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone19Merge3AsyncSequenceV04makeC8IteratorScs0F0Vy7ElementQzs5Error_p_GyF">makeAsyncIterator()</a>
+                    <a class="token" href="#/s:10Asynchrone013SequenceAsyncB0V04makeC8IteratorAA0bcbE0VyxGyF">makeAsyncIterator()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -339,66 +306,13 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">AsyncThrowingStream</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Merge3AsyncSequence.html#/s:10Asynchrone19Merge3AsyncSequenceV7Elementa">Element</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;.</span><span class="kt">Iterator</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeAsyncIterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/SequenceAsyncSequenceIterator.html">SequenceAsyncSequenceIterator</a></span><span class="o">&lt;</span><span class="kt">P</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
                         <p>An instance that conforms to <code>AsyncIteratorProtocol</code>.</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/AsyncIteratorProtocol"></a>
-                <a name="//apple_ref/swift/Section/AsyncIteratorProtocol" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/AsyncIteratorProtocol"></a>
-                  <h3 class="section-name"><span>AsyncIteratorProtocol</span>
-</h3>
-                </div>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10Asynchrone19Merge3AsyncSequenceV4next7ElementQzSgyYaKF"></a>
-                    <a name="//apple_ref/swift/Method/next()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone19Merge3AsyncSequenceV4next7ElementQzSgyYaKF">next()</a>
-                    </code>
-                      <span class="declaration-note">
-                        Asynchronous
-                      </span>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Produces the next element in the sequence.</p>
-
-<p>Continues to call <code>next()</code> on it&rsquo;s base iterator and iterator of
-it&rsquo;s combined sequence.</p>
-
-<p>If both iterator&rsquo;s return <code>nil</code>, indicating the end of the sequence, this
-iterator returns <code>nil</code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">next</span><span class="p">()</span> <span class="k">async</span> <span class="k">rethrows</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Merge3AsyncSequence.html#/s:10Asynchrone19Merge3AsyncSequenceV7Elementa">Element</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The next element or <code>nil</code> if the end of the sequence is reached.</p>
                       </div>
                     </section>
                   </div>
