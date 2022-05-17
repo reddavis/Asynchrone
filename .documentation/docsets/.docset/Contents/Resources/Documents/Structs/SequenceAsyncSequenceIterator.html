@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>AsyncSequenceCompletion Enumeration Reference</title>
+    <title>SequenceAsyncSequenceIterator Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/AsyncSequenceCompletion" class="dashAnchor"></a>
-    <a title="AsyncSequenceCompletion Enumeration Reference"></a>
+    <a name="//apple_ref/swift/Struct/SequenceAsyncSequenceIterator" class="dashAnchor"></a>
+    <a title="SequenceAsyncSequenceIterator Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (100% documented)</p>
@@ -29,7 +29,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        AsyncSequenceCompletion Enumeration Reference
+        SequenceAsyncSequenceIterator Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -161,26 +161,34 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>AsyncSequenceCompletion</h1>
+            <h1>SequenceAsyncSequenceIterator</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">AsyncSequenceCompletion</span><span class="o">&lt;</span><span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Failure</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SequenceAsyncSequenceIterator</span><span class="o">&lt;</span><span class="kt">P</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span> <span class="k">where</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt">Sequence</span></code></pre>
 
                 </div>
               </div>
-            <p>Describes how an async sequence has completed.</p>
-
+            
           </section>
           <section class="section task-group-section">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initialization"></a>
+                <a name="//apple_ref/swift/Section/Initialization" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Initialization"></a>
+                  <h3 class="section-name"><span>Initialization</span>
+</h3>
+                </div>
+              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone23AsyncSequenceCompletionO8finishedyACyxGAEms5ErrorRzlF"></a>
-                    <a name="//apple_ref/swift/Element/finished" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone23AsyncSequenceCompletionO8finishedyACyxGAEms5ErrorRzlF">finished</a>
+                    <a name="/s:10Asynchrone013SequenceAsyncB8IteratorVyACyxG0D0Qzcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone013SequenceAsyncB8IteratorVyACyxG0D0Qzcfc">init(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -188,44 +196,62 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The async sequence finished normally.</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">finished</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">iterator</span><span class="p">:</span> <span class="kt">P</span><span class="o">.</span><span class="kt">Iterator</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/AsyncIteratorProtocol"></a>
+                <a name="//apple_ref/swift/Section/AsyncIteratorProtocol" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/AsyncIteratorProtocol"></a>
+                  <h3 class="section-name"><span>AsyncIteratorProtocol</span>
+</h3>
+                </div>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10Asynchrone23AsyncSequenceCompletionO7failureyACyxGxcAEms5ErrorRzlF"></a>
-                    <a name="//apple_ref/swift/Element/failure(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone23AsyncSequenceCompletionO7failureyACyxGxcAEms5ErrorRzlF">failure(_:<wbr>)</a>
+                    <a name="/s:10Asynchrone013SequenceAsyncB8IteratorV4next7ElementQzSgyYaF"></a>
+                    <a name="//apple_ref/swift/Method/next()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone013SequenceAsyncB8IteratorV4next7ElementQzSgyYaF">next()</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The async sequence stopped emitting elements due to
-the indicated error.</p>
+                        <p>Produces the next element in the sequence.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">failure</span><span class="p">(</span><span class="kt">Failure</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">next</span><span class="p">()</span> <span class="k">async</span> <span class="o">-&gt;</span> <span class="kt">P</span><span class="o">.</span><span class="kt">Element</span><span class="p">?</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The next element or <code>nil</code> if the end of the sequence is reached.</p>
                       </div>
                     </section>
                   </div>
