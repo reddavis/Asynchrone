@@ -142,6 +142,24 @@ let stream = Fail<Int, TestError>(error: TestError.a)
     .eraseToAnyThrowingAsyncSequenceable()
 ```
 
+### [CatchErrorAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/catcherrorasyncsequenceable)
+
+```swift
+let sequence = Fail<Int, TestError>(
+    error: TestError()
+)
+.catch { error in
+    Just(-1)
+}
+
+for await value in sequence {
+    print(value)
+}
+
+// Prints:
+// -1
+```
+
 ### [ChainAsyncSequenceable](https://distracted-austin-575f34.netlify.app/structs/chainasyncsequenceable)
 
 ```swift

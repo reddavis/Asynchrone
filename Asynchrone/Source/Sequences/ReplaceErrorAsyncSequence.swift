@@ -6,7 +6,7 @@
 /// )
 /// .replaceError(with: 0)
 ///
-/// for await value in stream {
+/// for await value in sequence {
 ///     print(value)
 /// }
 ///
@@ -73,7 +73,7 @@ extension AsyncSequence {
     /// )
     /// .replaceError(with: 0)
     ///
-    /// for await value in stream {
+    /// for await value in sequence {
     ///     print(value)
     /// }
     ///
