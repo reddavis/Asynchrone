@@ -152,7 +152,7 @@ let sequence = Fail<Int, TestError>(
     Just(-1)
 }
 
-for await value in stream {
+for await value in sequence {
     print(value)
 }
 
