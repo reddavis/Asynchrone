@@ -95,6 +95,9 @@
                 <a href="../Structs/AnyThrowingAsyncSequenceable.html">AnyThrowingAsyncSequenceable</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CatchErrorAsyncSequence.html">CatchErrorAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/ChainAsyncSequence.html">ChainAsyncSequence</a>
               </li>
               <li class="nav-group-task">
@@ -367,9 +370,9 @@ be collected.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Sci10AsynchroneE4sinkyScTyyts5Error_pGy7ElementQzYacF"></a>
-                    <a name="//apple_ref/swift/Method/sink(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sci10AsynchroneE4sinkyScTyyts5Error_pGy7ElementQzYacF">sink(_:<wbr>)</a>
+                    <a name="/s:Sci10AsynchroneE4sink8priority12receiveValueScTyyts5Error_pGScPSg_y7ElementQzYactF"></a>
+                    <a name="//apple_ref/swift/Method/sink(priority:receiveValue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci10AsynchroneE4sink8priority12receiveValueScTyyts5Error_pGScPSg_y7ElementQzYactF">sink(priority:<wbr>receiveValue:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -399,7 +402,10 @@ be collected.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">sink</span><span class="p">(</span><span class="n">_</span> <span class="nv">receiveValue</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="k">async</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">sink</span><span class="p">(</span>
+    <span class="nv">priority</span><span class="p">:</span> <span class="kt">TaskPriority</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">receiveValue</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="k">async</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -407,6 +413,18 @@ be collected.</p>
                         <h4>Parameters</h4>
                         <table class="graybox">
                           <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>priority</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The priority of the task. Pass nil to use the priority from <code>Task.currentPriority</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
                             <tr>
                               <td>
                                 <code>
@@ -432,9 +450,9 @@ be collected.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Sci10AsynchroneE4sink12receiveValue0C10CompletionScTyyts5NeverOGy7ElementQzYac_yAA013AsyncSequenceE0Oys5Error_pGYactF"></a>
-                    <a name="//apple_ref/swift/Method/sink(receiveValue:receiveCompletion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sci10AsynchroneE4sink12receiveValue0C10CompletionScTyyts5NeverOGy7ElementQzYac_yAA013AsyncSequenceE0Oys5Error_pGYactF">sink(receiveValue:<wbr>receiveCompletion:<wbr>)</a>
+                    <a name="/s:Sci10AsynchroneE4sink8priority12receiveValue0D10CompletionScTyyts5NeverOGScPSg_y7ElementQzYacyAA013AsyncSequenceF0Oys5Error_pGYactF"></a>
+                    <a name="//apple_ref/swift/Method/sink(priority:receiveValue:receiveCompletion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci10AsynchroneE4sink8priority12receiveValue0D10CompletionScTyyts5NeverOGScPSg_y7ElementQzYacyAA013AsyncSequenceF0Oys5Error_pGYactF">sink(priority:<wbr>receiveValue:<wbr>receiveCompletion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -470,6 +488,7 @@ state to two closures.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">sink</span><span class="p">(</span>
+    <span class="nv">priority</span><span class="p">:</span> <span class="kt">TaskPriority</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">receiveValue</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="k">async</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">,</span>
     <span class="nv">receiveCompletion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/AsyncSequenceCompletion.html">AsyncSequenceCompletion</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">async</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Task</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span></code></pre>
@@ -480,6 +499,18 @@ state to two closures.</p>
                         <h4>Parameters</h4>
                         <table class="graybox">
                           <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>priority</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The priority of the task. Pass nil to use the priority from <code>Task.currentPriority</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
                             <tr>
                               <td>
                                 <code>
@@ -591,6 +622,86 @@ then use <code><a href="../Extensions/AsyncSequence.html#/s:Sci10AsynchroneE27er
                       <div>
                         <h4>Return Value</h4>
                         <p>A typed erased async sequence.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Catch%20error"></a>
+                <a name="//apple_ref/swift/Section/Catch error" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Catch%20error"></a>
+                  <h3 class="section-name"><span>Catch error</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sci10AsynchroneE5catchyAA23CatchErrorAsyncSequenceVyxqd__Gqd__s0D0_pcSciRd__7ElementQyd__AGRtzlF"></a>
+                    <a name="//apple_ref/swift/Method/catch(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sci10AsynchroneE5catchyAA23CatchErrorAsyncSequenceVyxqd__Gqd__s0D0_pcSciRd__7ElementQyd__AGRtzlF">catch(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Catches any errors in the async sequence and replaces it
+with the provided async sequence.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">TestError</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="nv">error</span><span class="p">:</span> <span class="kt">TestError</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="o">.</span><span class="k">catch</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="kt">Just</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">stream</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// -1</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="p">`</span><span class="nv">catch</span><span class="p">`</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">S</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/CatchErrorAsyncSequence.html">CatchErrorAsyncSequence</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">S</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">S</span><span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>handler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that takes an Error and returns a new async sequence.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code><a href="../Structs/CatchErrorAsyncSequence.html">CatchErrorAsyncSequence</a></code> instance.</p>
                       </div>
                     </section>
                   </div>
@@ -1803,7 +1914,7 @@ Return true from this closure to indicate that the second element is a duplicate
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-05-17)</p>
+          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-05-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

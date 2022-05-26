@@ -95,6 +95,9 @@
                 <a href="Structs/AnyThrowingAsyncSequenceable.html">AnyThrowingAsyncSequenceable</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/CatchErrorAsyncSequence.html">CatchErrorAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/ChainAsyncSequence.html">ChainAsyncSequence</a>
               </li>
               <li class="nav-group-task">
@@ -224,6 +227,53 @@
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AnyThrowingAsyncSequenceable</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">AnyThrowingAsyncSequenceable</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10Asynchrone23CatchErrorAsyncSequenceV"></a>
+                    <a name="//apple_ref/swift/Struct/CatchErrorAsyncSequence" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Asynchrone23CatchErrorAsyncSequenceV">CatchErrorAsyncSequence</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Catches any errors in the async sequence and replaces it
+with the provided async sequence.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">TestError</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="nv">error</span><span class="p">:</span> <span class="kt">TestError</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="o">.</span><span class="k">catch</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="kt">Just</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="k">await</span> <span class="n">value</span> <span class="k">in</span> <span class="n">stream</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Prints:</span>
+<span class="c1">// -1</span>
+</code></pre>
+
+                        <a href="Structs/CatchErrorAsyncSequence.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CatchErrorAsyncSequence</span><span class="o">&lt;</span><span class="kt">Base</span><span class="p">,</span> <span class="kt">NewAsyncSequence</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span>
+<span class="kt">Base</span><span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span>
+<span class="kt">NewAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span>
+<span class="kt">Base</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">NewAsyncSequence</span><span class="o">.</span><span class="kt">Element</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CatchErrorAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
 
                         </div>
                       </div>
@@ -1269,7 +1319,7 @@ then emits both elements as a tuple.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-05-17)</p>
+          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-05-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
