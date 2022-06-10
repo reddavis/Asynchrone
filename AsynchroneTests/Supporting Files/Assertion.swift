@@ -25,7 +25,7 @@ func XCTAssertEventuallyEqual<T: Equatable>(
         case true:
             return
         // False and timed out.
-        case false where Date.now.compare(timeoutDate) == .orderedDescending:
+        case false where Date().compare(timeoutDate) == .orderedDescending:
             let error = XCTAssertEventuallyEqualError(
                 resultA: resultA,
                 resultB: resultB
@@ -69,7 +69,7 @@ func XCTAsyncAssertEventuallyEqual<T: Equatable>(
         case true:
             return
         // False and timed out.
-        case false where Date.now.compare(timeoutDate) == .orderedDescending:
+        case false where Date().compare(timeoutDate) == .orderedDescending:
             let error = XCTAssertEventuallyEqualError(
                 resultA: resultA,
                 resultB: resultB
