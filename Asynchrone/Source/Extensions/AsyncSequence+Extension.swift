@@ -157,8 +157,10 @@ extension AsyncSequence {
             do {
                 for try await element in self {
                     await receiveValue(element)
+                    try Task.checkCancellation()
                 }
-                
+
+                try Task.checkCancellation()
                 await receiveCompletion(.finished)
             } catch {
                 await receiveCompletion(.failure(error))

@@ -22,7 +22,7 @@ final class AsyncSequenceTests: XCTestCase {
     
     func testAssign() async {
         self.sequence.assign(to: \.assignableValue, on: self)
-        XCTAssertEventuallyEqual(self.assignableValue, 3)
+        await XCTAssertEventuallyEqual(self.assignableValue, 3)
     }
     
     // MARK: First
@@ -50,7 +50,7 @@ final class AsyncSequenceTests: XCTestCase {
         var values: [Int] = []
         self.sequence.sink { values.append($0) }
         
-        XCTAssertEventuallyEqual(values, [1, 2, 3])
+        await XCTAssertEventuallyEqual(values, [1, 2, 3])
     }
     
     func testSinkWithFinishedCompletion() async {
@@ -66,7 +66,7 @@ final class AsyncSequenceTests: XCTestCase {
             }
         )
         
-        XCTAssertEventuallyEqual(values, [1, 2, 3])
+        await XCTAssertEventuallyEqual(values, [1, 2, 3])
     }
     
     func testSinkWithFailedCompletion() async {
@@ -92,6 +92,32 @@ final class AsyncSequenceTests: XCTestCase {
         )
         
         await self.waitForExpectations(timeout: 5.0, handler: nil)
-        XCTAssertEventuallyEqual(values, [1, 2, 3])
+        await XCTAssertEventuallyEqual(values, [1, 2, 3])
+    }
+    
+    func testSinkWithCancellation() async {
+        let completionExpectation = self.expectation(description: "Completion called")
+        let sequence = AsyncThrowingStream<Int, Error> { continuation in
+            continuation.yield(1)
+        }
+        
+        var values: [Int] = []
+        let task = sequence.sink(
+            receiveValue: { values.append($0) },
+            receiveCompletion: {
+                switch $0 {
+                case .failure(let error) where error is CancellationError:
+                    completionExpectation.fulfill()
+                case .failure(let error):
+                    XCTFail("Invalid failure error: \(error)")
+                case .finished:
+                    XCTFail("Invalid completion case: Finished")
+                }
+            }
+        )
+        
+        task.cancel()
+        await self.waitForExpectations(timeout: 5.0, handler: nil)
+        await XCTAssertEventuallyEqual(values, [1])
     }
 }

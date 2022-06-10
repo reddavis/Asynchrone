@@ -1,5 +1,49 @@
 import XCTest
 
+/// Assert two expressions are eventually equal.
+/// - Parameters:
+///   - expressionA: Expression A
+///   - expressionB: Expression B
+///   - timeout: Time to wait for store state changes. Defaults to `5`
+///   - file: The file where this assertion is being called. Defaults to `#filePath`.
+///   - line: The line in the file where this assertion is being called. Defaults to `#line`.
+func XCTAssertEventuallyEqual<T: Equatable>(
+    _ expressionA: @escaping @autoclosure () -> T?,
+    _ expressionB: @escaping @autoclosure () -> T?,
+    timeout: TimeInterval = 5.0,
+    file: StaticString = #filePath,
+    line: UInt = #line
+) async {
+    let timeoutDate = Date(timeIntervalSinceNow: timeout)
+    
+    while true {
+        let resultA = expressionA()
+        let resultB = expressionB()
+        
+        switch resultA == resultB {
+        // All good!
+        case true:
+            return
+        // False and timed out.
+        case false where Date.now.compare(timeoutDate) == .orderedDescending:
+            let error = XCTAssertEventuallyEqualError(
+                resultA: resultA,
+                resultB: resultB
+            )
+
+            XCTFail(
+                error.message,
+                file: file,
+                line: line
+            )
+            return
+        // False but still within timeout limit.
+        case false:
+            try? await Task.sleep(nanoseconds: 10000000)
+        }
+    }
+}
+
 /// Assert two async expressions are eventually equal.
 /// - Parameters:
 ///   - expressionA: Expression A
@@ -7,67 +51,43 @@ import XCTest
 ///   - timeout: Time to wait for store state changes. Defaults to `5`
 ///   - file: The file where this assertion is being called. Defaults to `#filePath`.
 ///   - line: The line in the file where this assertion is being called. Defaults to `#line`.
-public func XCTAssertEventuallyEqual<T: Equatable>(
-    _ expressionA: @escaping @autoclosure () -> T?,
-    _ expressionB: @escaping @autoclosure () -> T?,
+func XCTAsyncAssertEventuallyEqual<T: Equatable>(
+    _ expressionA: @escaping () async -> T?,
+    _ expressionB: @escaping () async -> T?,
     timeout: TimeInterval = 5.0,
     file: StaticString = #filePath,
     line: UInt = #line
-) {
-    Task.detached(priority: .low) {
-        let timeoutDate = Date(timeIntervalSinceNow: timeout)
+) async {
+    let timeoutDate = Date(timeIntervalSinceNow: timeout)
+    
+    while true {
+        let resultA = await expressionA()
+        let resultB = await expressionB()
+        
+        switch resultA == resultB {
+        // All good!
+        case true:
+            return
+        // False and timed out.
+        case false where Date.now.compare(timeoutDate) == .orderedDescending:
+            let error = XCTAssertEventuallyEqualError(
+                resultA: resultA,
+                resultB: resultB
+            )
 
-        while true {
-            let resultA = expressionA()
-            let resultB = expressionB()
-
-            switch resultA == resultB {
-            // All good!
-            case true:
-                return
-            // False and timed out.
-            case false where Date().compare(timeoutDate) == .orderedDescending:
-                let error = XCTAssertEventuallyEqualError(
-                    resultA: resultA,
-                    resultB: resultB
-                )
-
-                XCTFail(
-                    error.message,
-                    file: file,
-                    line: line
-                )
-                return
-            // False but still within timeout limit.
-            case false: ()
-            }
-
-            try? await Task.sleep(nanoseconds: 50000000)
-            await Task.yield()
+            XCTFail(
+                error.message,
+                file: file,
+                line: line
+            )
+            return
+        // False but still within timeout limit.
+        case false:
+            try? await Task.sleep(nanoseconds: 10000000)
         }
     }
 }
 
-/// Assert a value is eventually true.
-/// - Parameters:
-///   - expression: The value to assert eventually is true.
-///   - timeout: Time to wait for store state changes. Defaults to `5`
-///   - file: The file where this assertion is being called. Defaults to `#filePath`.
-///   - line: The line in the file where this assertion is being called. Defaults to `#line`.
-public func XCTAssertEventuallyTrue(
-    _ expression: @escaping @autoclosure () -> Bool,
-    timeout: TimeInterval = 5.0,
-    file: StaticString = #filePath,
-    line: UInt = #line
-) {
-    XCTAssertEventuallyEqual(
-        expression(),
-        true,
-        timeout: timeout,
-        file: file,
-        line: line
-    )
-}
 
 /// Assert an async closure thorws an error.
 /// - Parameters:
