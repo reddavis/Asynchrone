@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// An async sequence that emits either the most-recent or first element emitted
 /// by the base async sequence in a specified time interval.
 ///
@@ -8,7 +7,7 @@ import Foundation
 /// interval you specify. Other elements received within the throttling interval aren’t emitted.
 ///
 /// ```swift
-/// let stream = AsyncStream<Int> { continuation in
+/// let sequence = AsyncStream<Int> { continuation in
 ///     continuation.yield(0)
 ///     try? await Task.sleep(nanoseconds: 100_000_000)
 ///     continuation.yield(1)
@@ -20,7 +19,7 @@ import Foundation
 ///     continuation.finish()
 /// }
 ///
-/// for element in try await self.stream.throttle(for: 0.05, latest: true) {
+/// for element in try await sequence.throttle(for: 0.05, latest: true) {
 ///     print(element)
 /// }
 ///
@@ -28,20 +27,15 @@ import Foundation
 /// // 0
 /// // 1
 /// // 2
-/// // 5
 /// ```
 public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
-
     /// The kind of elements streamed.
     public typealias Element = T.Element
 
-    // MARK: ThrottleAsyncSequence (Private Properties)
-
+    // Private
     private var base: T
-    private var stream: AsyncThrowingStream<T.Element, Error>
-    private var iterator: AsyncThrowingStream<T.Element, Error>.Iterator
-    private var continuation: AsyncThrowingStream<T.Element, Error>.Continuation
-    private var inner: ThrottleAsyncSequence.Inner<T>
+    private var interval: TimeInterval
+    private var latest: Bool
 
     // MARK: Initialization
 
@@ -57,140 +51,67 @@ public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
         interval: TimeInterval,
         latest: Bool
     ) {
-        var streamContinuation: AsyncThrowingStream<T.Element, Error>.Continuation!
-        let stream = AsyncThrowingStream<T.Element, Error> { streamContinuation = $0 }
-        
         self.base = base
-        self.stream = stream
-        self.iterator = stream.makeAsyncIterator()
-        self.continuation = streamContinuation
-        self.inner = ThrottleAsyncSequence.Inner<T>(
-            base: base,
-            continuation: streamContinuation,
-            interval: interval,
-            latest: latest
-        )
-
-        Task { [inner] in
-            await inner.startAwaitingForBaseSequence()
-        }
+        self.interval = interval
+        self.latest = latest
     }
     
     // MARK: AsyncSequence
     
     /// Creates an async iterator that emits elements of this async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> AsyncThrowingStream<Element, Error>.Iterator {
-        self.iterator
+    public func makeAsyncIterator() -> Iterator {
+        Iterator(base: self.base.makeAsyncIterator(), interval: self.interval, latest: self.latest)
     }
 }
-
-// MARK: AsyncIteratorProtocol
-
-extension ThrottleAsyncSequence: AsyncIteratorProtocol {
-
-    /// Produces the next element in the sequence.
-    /// - Returns: The next element or `nil` if the end of the sequence is reached.
-    public mutating func next() async throws -> Element? {
-        try await self.iterator.next()
-    }
-}
-
-
-
-// MARK: ThrottleAsyncSequence > Inner
 
 extension ThrottleAsyncSequence {
-
-    fileprivate actor Inner<T: AsyncSequence> {
-
-        fileprivate typealias Element = T.Element
-
-        // Private
-        private var base: T
-        private var continuation: AsyncThrowingStream<Element, Error>.Continuation?
-        private let interval: TimeInterval
-        private let latest: Bool
+    public struct Iterator: AsyncIteratorProtocol {
+        var base: T.AsyncIterator
+        var interval: TimeInterval
+        var latest: Bool
         
+        // Private
         private var collectedElements: [Element] = []
-        private var lastEmission: Date?
-
+        private var lastEmission: Date? = nil
+        
         // MARK: Initialization
-
-        fileprivate init(
-            base: T,
-            continuation: AsyncThrowingStream<Element, Error>.Continuation,
+        
+        init(
+            base: T.AsyncIterator,
             interval: TimeInterval,
-            latest: Bool
-        ) {
+            latest: Bool)
+        {
             self.base = base
-            self.continuation = continuation
             self.interval = interval
             self.latest = latest
         }
         
-        deinit {
-            self.continuation = nil
-        }
+        // MARK: AsyncIteratorProtocol
         
-        // MARK: API
-        
-        fileprivate func startAwaitingForBaseSequence() async {
-            defer { self.continuation = nil }
-            
-            do {
-                for try await element in self.base {
-                    self.handle(element: element)
+        public mutating func next() async rethrows -> Element? {
+            while true {
+                guard let value = try await self.base.next() else {
+                    return nil
                 }
                 
-                if let lastTime = self.lastEmission {
-                    let gap = Date().timeIntervalSince(lastTime)
-                    if gap < self.interval {
-                        let delay = self.interval - gap
-                        try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
-                    }
+                guard let lastEmission = self.lastEmission else {
+                    self.lastEmission = Date()
+                    return value
                 }
-
-                self.emitNextElement()
-                self.continuation?.finish()
-            } catch {
-                self.continuation?.finish(throwing: error)
+                
+                self.collectedElements.append(value)
+                let element = (self.latest ? self.collectedElements.last : self.collectedElements.first) ?? value
+                let gap = Date().timeIntervalSince(lastEmission)
+                if gap >= self.interval {
+                    self.lastEmission = Date()
+                    self.collectedElements.removeAll()
+                    return element
+                }
             }
-        }
-
-        // MARK: Inner (Private Methods)
-        
-        private func nextElement() -> T.Element? {
-            self.latest
-            ? self.collectedElements.last
-            : self.collectedElements.first
-        }
-
-        private func handle(element: T.Element) {
-            self.collectedElements.append(element)
-
-            guard let lastTime = self.lastEmission else {
-                self.emitNextElement()
-                return
-            }
-
-            let gap = Date().timeIntervalSince(lastTime)
-            if gap >= self.interval {
-                self.emitNextElement()
-            }
-        }
-
-        private func emitNextElement() {
-            self.lastEmission = Date()
-            if let element = self.nextElement() {
-                self.continuation?.yield(element)
-            }
-            self.collectedElements = []
         }
     }
 }
-
-
 
 // MARK: Throttle
 
@@ -203,7 +124,7 @@ extension AsyncSequence {
     /// interval you specify. Other elements received within the throttling interval aren’t emitted.
     ///
     /// ```swift
-    /// let stream = AsyncStream<Int> { continuation in
+    /// let sequence = AsyncStream<Int> { continuation in
     ///     continuation.yield(0)
     ///     try? await Task.sleep(nanoseconds: 100_000_000)
     ///     continuation.yield(1)
@@ -215,7 +136,7 @@ extension AsyncSequence {
     ///     continuation.finish()
     /// }
     ///
-    /// for element in try await self.stream.throttle(for: 0.05, latest: true) {
+    /// for element in try await sequence.throttle(for: 0.05, latest: true) {
     ///     print(element)
     /// }
     ///
@@ -223,7 +144,6 @@ extension AsyncSequence {
     /// // 0
     /// // 1
     /// // 2
-    /// // 5
     /// ```
     /// - Parameters:
     ///   - interval: The interval in which to emit the most recent element.

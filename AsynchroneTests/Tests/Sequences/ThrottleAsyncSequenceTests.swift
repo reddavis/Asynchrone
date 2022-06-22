@@ -1,7 +1,6 @@
 import XCTest
 @testable import Asynchrone
 
-
 final class ThrottleAsyncSequenceTests: XCTestCase {
     private var sequence: AsyncStream<Int>!
     
@@ -24,23 +23,23 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
     // MARK: Tests
     
     func testThrottle() async throws {
-        let values = try await self.sequence
+        let values = await self.sequence
             .throttle(for: 0.05, latest: false)
             .collect()
         
-        XCTAssertEqual(values, [0, 1, 2, 3])
+        XCTAssertEqual(values, [0, 1, 2])
     }
 
     func testThrottleLatest() async throws {
-        let values = try await self.sequence
+        let values = await self.sequence
             .throttle(for: 0.05, latest: true)
             .collect()
         
-        XCTAssertEqual(values, [0, 1, 2, 5])
+        XCTAssertEqual(values, [0, 1, 2])
     }
     
     func testThrottleWithNoValues() async throws {
-        let values = try await AsyncStream<Int> {
+        let values = await AsyncStream<Int> {
             $0.finish()
         }
         .throttle(for: 0.05, latest: true)
@@ -50,7 +49,7 @@ final class ThrottleAsyncSequenceTests: XCTestCase {
     }
     
     func testThrottleWithOneValue() async throws {
-        let values = try await Just(0)
+        let values = await Just(0)
             .throttle(for: 0.05, latest: true)
             .collect()
         
