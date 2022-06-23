@@ -42,6 +42,7 @@
 		A45E0F742781B978006B64E1 /* ReplaceErrorAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0F732781B978006B64E1 /* ReplaceErrorAsyncSequence.swift */; };
 		A45E0F762781BDB1006B64E1 /* ReplaceErrorAsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0F752781BDB1006B64E1 /* ReplaceErrorAsyncSequenceTests.swift */; };
 		A45E0F782781C8C4006B64E1 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E0F772781C8C4006B64E1 /* TestError.swift */; };
+		A466453F28644CF6000F6527 /* RethrowingAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A466453E28644CF6000F6527 /* RethrowingAccessor.swift */; };
 		A47BE65B27C75FE60011ECE6 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47BE65A27C75FE60011ECE6 /* Empty.swift */; };
 		A47BE65D27C78D2D0011ECE6 /* EmptyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47BE65C27C78D2D0011ECE6 /* EmptyTests.swift */; };
 		A47BE66127C7D9280011ECE6 /* DelayAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47BE66027C7D9280011ECE6 /* DelayAsyncSequence.swift */; };
@@ -105,6 +106,7 @@
 		A45E0F732781B978006B64E1 /* ReplaceErrorAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceErrorAsyncSequence.swift; sourceTree = "<group>"; };
 		A45E0F752781BDB1006B64E1 /* ReplaceErrorAsyncSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceErrorAsyncSequenceTests.swift; sourceTree = "<group>"; };
 		A45E0F772781C8C4006B64E1 /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
+		A466453E28644CF6000F6527 /* RethrowingAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RethrowingAccessor.swift; sourceTree = "<group>"; };
 		A47BE65A27C75FE60011ECE6 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		A47BE65C27C78D2D0011ECE6 /* EmptyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTests.swift; sourceTree = "<group>"; };
 		A47BE66027C7D9280011ECE6 /* DelayAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayAsyncSequence.swift; sourceTree = "<group>"; };
@@ -212,6 +214,14 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A466453D28644CE7000F6527 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				A466453E28644CF6000F6527 /* RethrowingAccessor.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		A47BE66427C8D5F30011ECE6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +271,7 @@
 		A4C361C4276A5F2D00511525 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A466453D28644CE7000F6527 /* Common */,
 				A4C361CC276A685B00511525 /* Extensions */,
 				A4C361CD276A686400511525 /* Sequences */,
 			);
@@ -460,6 +471,7 @@
 				A47BE65B27C75FE60011ECE6 /* Empty.swift in Sources */,
 				A4C361F52772319100511525 /* Zip3AsyncSequence.swift in Sources */,
 				A4C361D7276CE9DC00511525 /* AsyncSequence+Extension.swift in Sources */,
+				A466453F28644CF6000F6527 /* RethrowingAccessor.swift in Sources */,
 				A45E0F742781B978006B64E1 /* ReplaceErrorAsyncSequence.swift in Sources */,
 				A40B6E4E278CAB5700CA6502 /* TimeInterval+Extension.swift in Sources */,
 				A45E0ECB2775E301006B64E1 /* AnyThrowingAsyncSequenceable.swift in Sources */,
