@@ -65,6 +65,8 @@ public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
     }
 }
 
+// MARK: Iterator
+
 extension ThrottleAsyncSequence {
     public struct Iterator: AsyncIteratorProtocol {
         var base: T.AsyncIterator
@@ -73,14 +75,15 @@ extension ThrottleAsyncSequence {
         
         // Private
         private var collectedElements: [Element] = []
-        private var lastEmission: Date? = nil
+        private var lastEmission: Date?
         
         // MARK: Initialization
         
         init(
             base: T.AsyncIterator,
             interval: TimeInterval,
-            latest: Bool)
+            latest: Bool
+        )
         {
             self.base = base
             self.interval = interval
