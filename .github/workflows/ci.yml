@@ -9,7 +9,7 @@ on:
 jobs:
   ios-latest:
     name: Unit Test - iOS 15.5, Xcode 13.4
-    runs-on: macOS-11
+    runs-on: macOS-12
     env: 
       DEVELOPER_DIR: /Applications/Xcode_13.4.app/Contents/Developer
     steps:
@@ -17,10 +17,10 @@ jobs:
       - name: Run Tests
         run: Scripts/test -d "OS=15.5,name=iPhone 13 Pro"
   ios-14-5:
-    name: Unit Test - iOS 14.5, Xcode 13.4
+    name: Unit Test - iOS 14.5, Xcode 13.2.1
     runs-on: macOS-11
     env: 
-      DEVELOPER_DIR: /Applications/Xcode_13.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_13.2.1.app/Contents/Developer
     steps:
       - uses: actions/checkout@v2
       - name: Symlink simulator
