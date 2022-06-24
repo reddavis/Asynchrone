@@ -151,7 +151,7 @@ fileprivate actor SubSequenceManager<Base: AsyncSequence>{
     nonisolated fileprivate func makeAsyncIterator() -> ThrowingPassthroughAsyncSequence<Base.Element>.AsyncIterator {
         let id = UUID()
         let sequence = AsyncThrowingStream<Element, Error> {
-            $0.onTermination = { _ in
+            $0.onTermination = { @Sendable _ in
                 self.remove(id)
             }
             
