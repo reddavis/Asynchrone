@@ -1,3 +1,5 @@
+import Foundation
+
 /// An async sequence that can be shared between multiple tasks.
 ///
 /// ```swift
@@ -122,17 +124,14 @@ extension SharedAsyncSequence {
     }
 }
 
-
-
 // MARK: Sub sequence manager
 
 fileprivate actor SubSequenceManager<Base: AsyncSequence>{
-    
     fileprivate typealias Element = Base.Element
 
     // Private
     private var base: Base
-    private var sequences: [ThrowingPassthroughAsyncSequence<Base.Element>] = []
+    private var continuations: [UUID : AsyncThrowingStream<Base.Element, Error>.Continuation] = [:]
     private var subscriptionTask: Task<Void, Never>?
 
     // MARK: Initialization
@@ -150,18 +149,38 @@ fileprivate actor SubSequenceManager<Base: AsyncSequence>{
     /// Creates an new stream and returns its async iterator that emits elements of base async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
     nonisolated fileprivate func makeAsyncIterator() -> ThrowingPassthroughAsyncSequence<Base.Element>.AsyncIterator {
-        let sequence = ThrowingPassthroughAsyncSequence<Base.Element>()
-        Task { [sequence] in
-            await self.add(sequence: sequence)
+        let id = UUID()
+        let sequence = AsyncThrowingStream<Element, Error> {
+            $0.onTermination = { _ in
+                self.terminated(id)
+            }
+            
+            self.add(id: id, continuation: $0)
         }
         
         return sequence.makeAsyncIterator()
     }
 
     // MARK: Sequence management
-
-    private func add(sequence: ThrowingPassthroughAsyncSequence<Base.Element>) {
-        self.sequences.append(sequence)
+    
+    nonisolated private func terminated(_ id: UUID) {
+        Task {
+            await self.remove(id)
+        }
+    }
+    
+    private func remove(_ id: UUID) {
+        self.continuations.removeValue(forKey: id)
+    }
+    
+    nonisolated private func add(id: UUID, continuation: AsyncThrowingStream<Base.Element, Error>.Continuation) {
+        Task {
+            await self._add(id: id, continuation: continuation)
+        }
+    }
+    
+    private func _add(id: UUID, continuation: AsyncThrowingStream<Base.Element, Error>.Continuation) {
+        self.continuations[id] = continuation
         self.subscribeToBaseSequenceIfNeeded()
     }
     
@@ -172,7 +191,7 @@ fileprivate actor SubSequenceManager<Base: AsyncSequence>{
             guard let self = self else { return }
 
             guard !Task.isCancelled else {
-                await self.sequences.forEach {
+                await self.continuations.values.forEach {
                     $0.finish(throwing: CancellationError())
                 }
                 return
@@ -180,12 +199,12 @@ fileprivate actor SubSequenceManager<Base: AsyncSequence>{
 
             do {
                 for try await value in base {
-                    await self.sequences.forEach { $0.yield(value) }
+                    await self.continuations.values.forEach { $0.yield(value) }
                 }
                 
-                await self.sequences.forEach { $0.finish() }
+                await self.continuations.values.forEach { $0.finish() }
             } catch {
-                await self.sequences.forEach { $0.finish(throwing: error) }
+                await self.continuations.values.forEach { $0.finish(throwing: error) }
             }
         }
     }
@@ -196,7 +215,6 @@ fileprivate actor SubSequenceManager<Base: AsyncSequence>{
 // MARK: Shared
 
 extension AsyncSequence {
-
     /// Creates a shareable async sequence that can be used across multiple tasks.
     public func shared() -> SharedAsyncSequence<Self> {
         .init(self)
