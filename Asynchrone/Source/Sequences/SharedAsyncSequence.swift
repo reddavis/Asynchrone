@@ -152,10 +152,10 @@ fileprivate actor SubSequenceManager<Base: AsyncSequence>{
         let id = UUID()
         let sequence = AsyncThrowingStream<Element, Error> {
             $0.onTermination = { _ in
-                self.terminated(id)
+                self.remove(id)
             }
             
-            self.add(id: id, continuation: $0)
+            await self.add(id: id, continuation: $0)
         }
         
         return sequence.makeAsyncIterator()
@@ -163,23 +163,17 @@ fileprivate actor SubSequenceManager<Base: AsyncSequence>{
 
     // MARK: Sequence management
     
-    nonisolated private func terminated(_ id: UUID) {
+    nonisolated private func remove(_ id: UUID) {
         Task {
-            await self.remove(id)
+            await self._remove(id)
         }
     }
     
-    private func remove(_ id: UUID) {
+    private func _remove(_ id: UUID) {
         self.continuations.removeValue(forKey: id)
     }
     
-    nonisolated private func add(id: UUID, continuation: AsyncThrowingStream<Base.Element, Error>.Continuation) {
-        Task {
-            await self._add(id: id, continuation: continuation)
-        }
-    }
-    
-    private func _add(id: UUID, continuation: AsyncThrowingStream<Base.Element, Error>.Continuation) {
+    private func add(id: UUID, continuation: AsyncThrowingStream<Base.Element, Error>.Continuation) {
         self.continuations[id] = continuation
         self.subscribeToBaseSequenceIfNeeded()
     }
@@ -209,8 +203,6 @@ fileprivate actor SubSequenceManager<Base: AsyncSequence>{
         }
     }
 }
-
-
 
 // MARK: Shared
 
