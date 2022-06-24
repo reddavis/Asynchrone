@@ -62,13 +62,13 @@ extension DelayAsyncSequence: AsyncIteratorProtocol {
 
     /// Produces the next element in the sequence.
     /// - Returns: The next element or `nil` if the end of the sequence is reached.
-    public mutating func next() async throws -> Element? {
+    public mutating func next() async rethrows -> Element? {
         defer { self.lastEmission = Date() }
         
         let lastEmission = self.lastEmission ?? Date()
         let delay = self.interval - Date().timeIntervalSince(lastEmission)
         if delay > 0 {
-            try await Task.sleep(seconds: delay)
+            try? await Task.sleep(seconds: delay)
         }
         
         return try await self.iterator.next()

@@ -17,7 +17,6 @@ import Foundation
 /// // 3
 /// ```
 public struct SequenceAsyncSequence<P: Sequence>: AsyncSequence {
-    
     /// The kind of elements streamed.
     public typealias Element = P.Element
     
@@ -62,12 +61,9 @@ public struct SequenceAsyncSequenceIterator<P: Sequence>: AsyncIteratorProtocol 
     }
 }
 
-
-
 // MARK: Sequence
 
 public extension Sequence {
-    
     /// An async sequence that contains all the elements of
     /// the current sequence.
     ///

@@ -36,7 +36,6 @@
 /// // (2, 6, 9)
 /// ```
 public struct Zip3AsyncSequence<P: AsyncSequence, Q: AsyncSequence, R: AsyncSequence>: AsyncSequence {
-    
     /// The kind of elements streamed.
     public typealias Element = (P.Element, Q.Element, R.Element)
     
@@ -109,12 +108,9 @@ extension Zip3AsyncSequence: AsyncIteratorProtocol {
     }
 }
 
-
-
 // MARK: Zip
 
 extension AsyncSequence {
-
     /// Create an asynchronous sequence that applys a zip function to the three async sequences.
     ///
     /// Combines the latest elements from three async sequences and emits a tuple.
