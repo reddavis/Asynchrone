@@ -1,26 +1,29 @@
 import Foundation
 
-
 /// A async sequence that emits elements only after a specified time interval elapses between emissions.
 ///
 /// Use `DebounceAsyncSequence` async sequence to control the number of values and time between
 /// delivery of values from the base async sequence. This async sequence is useful to process bursty
 /// or high-volume async sequences where you need to reduce the number of elements emitted to a rate you specify.
 ///
+/// HT to [swift-async-algorithms](https://github.com/apple/swift-async-algorithms) for helping
+/// realise my woes of rethrows.
+///
 /// ```swift
-/// let stream = AsyncStream<Int> { continuation in
+/// let sequence = AsyncStream<Int> { continuation in
 ///     continuation.yield(0)
-///     try? await Task.sleep(nanoseconds: 200_000_000)
+///     try? await Task.sleep(seconds: 0.1)
 ///     continuation.yield(1)
-///     try? await Task.sleep(nanoseconds: 200_000_000)
+///     try? await Task.sleep(seconds: 0.1)
 ///     continuation.yield(2)
 ///     continuation.yield(3)
 ///     continuation.yield(4)
 ///     continuation.yield(5)
+///     try? await Task.sleep(seconds: 0.1)
 ///     continuation.finish()
 /// }
 ///
-/// for element in try await self.stream.debounce(for: 0.1) {
+/// for element in try await sequence.debounce(for: 0.1) {
 ///     print(element)
 /// }
 ///
@@ -30,14 +33,12 @@ import Foundation
 /// // 5
 /// ```
 public struct DebounceAsyncSequence<T: AsyncSequence>: AsyncSequence {
-
     /// The kind of elements streamed.
     public typealias Element = T.Element
 
     // Private
     private var base: T
-    private var stream: AsyncThrowingStream<T.Element, Error>
-    private var iterator: AsyncThrowingStream<T.Element, Error>.Iterator
+    private var dueTime: TimeInterval
 
     // MARK: Initialization
 
@@ -49,134 +50,138 @@ public struct DebounceAsyncSequence<T: AsyncSequence>: AsyncSequence {
         _ base: T,
         dueTime: TimeInterval
     ) {
-        var streamContinuation: AsyncThrowingStream<T.Element, Error>.Continuation!
-        let stream = AsyncThrowingStream<T.Element, Error> { streamContinuation = $0 }
-        
         self.base = base
-        self.stream = stream
-        self.iterator = stream.makeAsyncIterator()
-        
-        let innerSequence = _DebounceAsyncSequence<T>(
-            base: base,
-            continuation: streamContinuation,
-            dueTime: dueTime
-        )
-
-        Task { [innerSequence] in
-            await innerSequence.startAwaitingForBaseSequence()
-        }
+        self.dueTime = dueTime
     }
     
     // MARK: AsyncSequence
     
     /// Creates an async iterator that emits elements of this async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> AsyncThrowingStream<Element, Error>.Iterator {
-        self.iterator
+    public func makeAsyncIterator() -> Iterator {
+        Iterator(base: self.base.makeAsyncIterator(), dueTime: self.dueTime)
     }
 }
 
-// MARK: AsyncIteratorProtocol
+// MARK: Iterator
 
-extension DebounceAsyncSequence: AsyncIteratorProtocol {
-
-    /// Produces the next element in the sequence.
-    /// - Returns: The next element or `nil` if the end of the sequence is reached.
-    public mutating func next() async throws -> Element? {
-        try await self.iterator.next()
-    }
-}
-
-
-
-// MARK: _DebounceAsyncSequence
-
-fileprivate actor _DebounceAsyncSequence<T: AsyncSequence> {
-
-    fileprivate typealias Element = T.Element
-
-    // Private
-    private var base: T
-    private var continuation: AsyncThrowingStream<Element, Error>.Continuation?
-    private let dueTime: TimeInterval
-    
-    private var lastElement: Element?
-    private var lastEmission: Date?
-    private var scheduledTask: Task<Void, Never>?
-
-    // MARK: Initialization
-
-    fileprivate init(
-        base: T,
-        continuation: AsyncThrowingStream<Element, Error>.Continuation,
-        dueTime: TimeInterval
-    ) {
-        self.base = base
-        self.continuation = continuation
-        self.dueTime = dueTime
-    }
-    
-    deinit {
-        self.scheduledTask?.cancel()
-        self.continuation = nil
-    }
-    
-    // MARK: API
-    
-    fileprivate func startAwaitingForBaseSequence() async {
-        defer { self.continuation = nil }
+extension DebounceAsyncSequence {
+    public struct Iterator: AsyncIteratorProtocol {
+        private var base: T.AsyncIterator
+        private var dueTime: TimeInterval
+        private var resultTask: Task<RaceResult, Never>?
         
-        do {
-            for try await element in self.base {
-                self.handle(element: element)
-            }
-            
-            // Reached the end of the base sequence.
-            // Cancel the scheduled task and emit the final element.
-            if
-                let scheduledTask = self.scheduledTask,
-                !scheduledTask.isCancelled,
-                let lastElement = self.lastElement,
-                let lastEmission = self.lastEmission
-            {
-                self.scheduledTask?.cancel()
+        // MARK: Initialization
+        
+        init(
+            base: T.AsyncIterator,
+            dueTime: TimeInterval
+        ) {
+            self.base = base
+            self.dueTime = dueTime
+        }
                 
-                let delay = UInt64(self.dueTime - Date().timeIntervalSince(lastEmission)) * 1_000_000_000
-                try? await Task.sleep(nanoseconds: delay)
-                self.continuation?.finish(with: lastElement)
-            } else {
-                self.continuation?.finish()
-            }
-        } catch {
-            self.continuation?.finish(throwing: error)
-        }
-    }
-
-    // MARK: Element handling
-
-    private func handle(element: T.Element) {
-        // Cancel previous task
-        self.scheduledTask?.cancel()
+        // MARK: AsyncIteratorProtocol
         
-        // Restart scheduled task
-        self.lastElement = element
-        self.lastEmission = Date()
-        
-        self.scheduledTask = Task { [dueTime, element, continuation] in
-            try? await Task.sleep(nanoseconds: UInt64(dueTime * 1_000_000_000))
-            guard !Task.isCancelled else { return }
+        public mutating func next() async rethrows -> Element? {
+            var lastResult: Result<Element?, Error>?
+            var lastEmission: Date = .init()
             
-            continuation?.yield(element)
+            while true {
+                let resultTask = self.resultTask ?? Task<RaceResult, Never> { [base] in
+                    var iterator = base
+                    do {
+                        let value = try await iterator.next()
+                        return .winner(.success(value), iterator: iterator)
+                    } catch {
+                        return .winner(.failure(error), iterator: iterator)
+                    }
+                }
+                self.resultTask = nil
+                
+                lastEmission = Date()
+                let delay = UInt64(self.dueTime - Date().timeIntervalSince(lastEmission)) * 1_000_000_000
+                let sleep = Task<RaceResult, Never> {
+                    try? await Task.sleep(nanoseconds: delay)
+                    return .sleep
+                }
+                
+                let tasks = [resultTask, sleep]
+                let firstTask = await { () async -> Task<RaceResult, Never> in
+                    let raceCoordinator = TaskRaceCoodinator<RaceResult, Never>()
+                    return await withTaskCancellationHandler(
+                        operation: {
+                            await withCheckedContinuation { continuation in
+                                for task in tasks {
+                                    Task<Void, Never> {
+                                        _ = await task.result
+                                        if await raceCoordinator.isFirstToCrossLine(task) {
+                                            continuation.resume(returning: task)
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        onCancel: {
+                            for task in tasks {
+                                task.cancel()
+                            }
+                        }
+                    )
+                }()
+                
+                switch await firstTask.value {
+                case .winner(let result, let iterator):
+                    lastResult = result
+                    lastEmission = Date()
+                    self.base = iterator
+                    
+                    switch result {
+                    case .success(let value):
+                        // Base sequence has reached it's end.
+                        if value == nil {
+                            return nil
+                        }
+                    case .failure:
+                        try result._rethrowError()
+                    }
+                case .sleep:
+                    self.resultTask = resultTask
+                    
+                    //
+                    if let result = lastResult {
+                        return try result._rethrowGet()
+                    }
+                }
+            }
         }
     }
 }
 
+// MARK: Race result
 
+extension DebounceAsyncSequence.Iterator {
+    fileprivate enum RaceResult {
+        case winner(Result<Element?, Error>, iterator: T.AsyncIterator)
+        case sleep
+    }
+}
+
+// MARK: Task race coordinator
+
+fileprivate actor TaskRaceCoodinator<Success, Failure: Error>  {
+    private var winner: Task<Success, Failure>?
+    
+    func isFirstToCrossLine(_ task: Task<Success, Failure>) -> Bool {
+        guard self.winner == nil else { return false }
+        self.winner = task
+        return true
+    }
+}
 
 // MARK: Debounce
 
 extension AsyncSequence {
-
     /// Emits elements only after a specified time interval elapses between emissions.
     ///
     /// Use the `debounce` operator to control the number of values and time between
@@ -184,19 +189,20 @@ extension AsyncSequence {
     /// or high-volume async sequences where you need to reduce the number of elements emitted to a rate you specify.
     ///
     /// ```swift
-    /// let stream = AsyncStream<Int> { continuation in
+    /// let sequence = AsyncStream<Int> { continuation in
     ///     continuation.yield(0)
-    ///     try? await Task.sleep(nanoseconds: 200_000_000)
+    ///     try? await Task.sleep(seconds: 0.1)
     ///     continuation.yield(1)
-    ///     try? await Task.sleep(nanoseconds: 200_000_000)
+    ///     try? await Task.sleep(seconds: 0.1)
     ///     continuation.yield(2)
     ///     continuation.yield(3)
     ///     continuation.yield(4)
     ///     continuation.yield(5)
+    ///     try? await Task.sleep(seconds: 0.1)
     ///     continuation.finish()
     /// }
     ///
-    /// for element in try await self.stream.debounce(for: 0.1) {
+    /// for element in try await sequence.debounce(for: 0.1) {
     ///     print(element)
     /// }
     ///
