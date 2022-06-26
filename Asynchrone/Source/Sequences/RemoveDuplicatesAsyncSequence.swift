@@ -20,7 +20,6 @@
 /// // 3
 /// ```
 public struct RemoveDuplicatesAsyncSequence<Base: AsyncSequence>: AsyncSequence where Base.Element: Equatable {
-    
     /// The kind of elements streamed.
     public typealias Element = Base.Element
     
@@ -61,7 +60,6 @@ public struct RemoveDuplicatesAsyncSequence<Base: AsyncSequence>: AsyncSequence 
 // MARK: AsyncIteratorProtocol
 
 extension RemoveDuplicatesAsyncSequence: AsyncIteratorProtocol {
-    
     /// Produces the next element in the sequence.
     ///
     /// Continues to call `next()` on it's base iterator and discard the
@@ -90,12 +88,9 @@ extension RemoveDuplicatesAsyncSequence: AsyncIteratorProtocol {
     }
 }
 
-
-
 // MARK: Remove duplicates
 
 extension AsyncSequence where Element: Equatable {
-    
     /// Emits only elements that don't match the previous element.
     /// - Returns: A `AsyncRemoveDuplicatesSequence` instance.
     public func removeDuplicates() -> RemoveDuplicatesAsyncSequence<Self> {

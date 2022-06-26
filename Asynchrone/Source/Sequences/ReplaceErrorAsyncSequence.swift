@@ -14,7 +14,6 @@
 /// // 0
 /// ```
 public struct ReplaceErrorAsyncSequence<Base: AsyncSequence>: AsyncSequence {
-    
     /// The kind of elements streamed.
     public typealias Element = Base.Element
     
@@ -47,7 +46,6 @@ public struct ReplaceErrorAsyncSequence<Base: AsyncSequence>: AsyncSequence {
 // MARK: AsyncIteratorProtocol
 
 extension ReplaceErrorAsyncSequence: AsyncIteratorProtocol {
-    
     /// Produces the next element in the sequence.
     /// - Returns: The next element or `nil` if the end of the sequence is reached.
     public mutating func next() async -> Element? {
@@ -59,12 +57,9 @@ extension ReplaceErrorAsyncSequence: AsyncIteratorProtocol {
     }
 }
 
-
-
 // MARK: Replace error
 
 extension AsyncSequence {
-    
     /// Replaces any errors in the async sequence with the provided element.
     ///
     /// ```swift

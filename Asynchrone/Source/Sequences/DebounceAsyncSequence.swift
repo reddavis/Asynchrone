@@ -147,8 +147,6 @@ extension DebounceAsyncSequence {
                     }
                 case .sleep:
                     self.resultTask = resultTask
-                    
-                    //
                     if let result = lastResult {
                         return try result._rethrowGet()
                     }

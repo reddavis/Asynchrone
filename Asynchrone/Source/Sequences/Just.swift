@@ -11,10 +11,8 @@
 /// // 1
 /// ```
 public struct Just<Element>: AsyncSequence {
-    
-    // Private
-    let element: Element
-    var emittedElement = false
+    private let element: Element
+    private var emittedElement = false
     
     // MARK: Initialization
     
@@ -37,7 +35,6 @@ public struct Just<Element>: AsyncSequence {
 // MARK: AsyncIteratorProtocol
 
 extension Just: AsyncIteratorProtocol {
-    
     /// Produces the next element in the sequence.
     /// - Returns: The next element or `nil` if the end of the sequence is reached.
     public mutating func next() async -> Element? {

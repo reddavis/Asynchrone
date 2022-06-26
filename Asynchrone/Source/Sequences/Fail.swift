@@ -17,10 +17,8 @@
 /// // Error!
 /// ```
 public struct Fail<Element, Failure>: AsyncSequence where Failure: Error {
-    
-    // Private
-    let error: Failure
-    var hasThownError = false
+    private let error: Failure
+    private var hasThownError = false
     
     // MARK: Initialization
     
@@ -43,7 +41,6 @@ public struct Fail<Element, Failure>: AsyncSequence where Failure: Error {
 // MARK: AsyncIteratorProtocol
 
 extension Fail: AsyncIteratorProtocol {
-    
     /// Produces the next element in the sequence.
     /// - Returns: The next element or `nil` if the end of the sequence is reached.
     public mutating func next() async throws -> Element? {

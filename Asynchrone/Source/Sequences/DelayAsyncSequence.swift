@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Delays emission of all elements by the provided interval.
 ///
 /// ```swift
@@ -22,7 +21,6 @@ import Foundation
 /// // 2 - 1.5
 /// ```
 public struct DelayAsyncSequence<T: AsyncSequence>: AsyncSequence {
-
     /// The kind of elements streamed.
     public typealias Element = T.Element
 
@@ -59,23 +57,18 @@ public struct DelayAsyncSequence<T: AsyncSequence>: AsyncSequence {
 // MARK: AsyncIteratorProtocol
 
 extension DelayAsyncSequence: AsyncIteratorProtocol {
-
-    /// Produces the next element in the sequence.
-    /// - Returns: The next element or `nil` if the end of the sequence is reached.
-    public mutating func next() async throws -> Element? {
+    public mutating func next() async rethrows -> Element? {
         defer { self.lastEmission = Date() }
         
         let lastEmission = self.lastEmission ?? Date()
         let delay = self.interval - Date().timeIntervalSince(lastEmission)
         if delay > 0 {
-            try await Task.sleep(seconds: delay)
+            try? await Task.sleep(seconds: delay)
         }
         
         return try await self.iterator.next()
     }
 }
-
-
 
 // MARK: Delay
 

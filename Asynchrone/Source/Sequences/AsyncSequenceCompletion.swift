@@ -1,6 +1,5 @@
 /// Describes how an async sequence has completed.
 public enum AsyncSequenceCompletion<Failure: Error> {
-    
     /// The async sequence finished normally.
     case finished
     

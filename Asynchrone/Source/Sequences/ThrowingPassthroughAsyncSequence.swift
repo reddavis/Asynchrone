@@ -22,8 +22,6 @@
 /// // Error!
 /// ```
 public struct ThrowingPassthroughAsyncSequence<Element>: AsyncSequence {
-    
-    // Private
     private var stream: AsyncThrowingStream<Element, Error>!
     private var continuation: AsyncThrowingStream<Element, Error>.Continuation!
 

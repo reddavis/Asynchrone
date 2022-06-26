@@ -17,8 +17,6 @@
 /// // 2
 /// ```
 public struct PassthroughAsyncSequence<Element>: AsyncSequence {
-    
-    // Private
     private var stream: AsyncStream<Element>!
     private var continuation: AsyncStream<Element>.Continuation!
 

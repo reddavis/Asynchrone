@@ -17,8 +17,6 @@
 /// // Finished
 /// ```
 public struct Empty<Element>: AsyncSequence {
-    
-    // Private
     private let completeImmediately: Bool
     
     // MARK: Initialization
@@ -43,7 +41,6 @@ public struct Empty<Element>: AsyncSequence {
 // MARK: AsyncIteratorProtocol
 
 extension Empty: AsyncIteratorProtocol {
-    
     /// Produces the next element in the sequence.
     ///
     /// Because this is an empty sequence, this will always be nil.
