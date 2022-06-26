@@ -18,7 +18,6 @@
 /// // 4
 /// ```
 public actor CurrentElementAsyncSequence<Element>: AsyncSequence {
-    
     /// The element wrapped by this async sequence, emitted as a new element whenever it changes.
     public private(set) var element: Element
     
@@ -71,8 +70,6 @@ public actor CurrentElementAsyncSequence<Element>: AsyncSequence {
         self.element = element
     }
 }
-
-
 
 // MARK: Stream
 

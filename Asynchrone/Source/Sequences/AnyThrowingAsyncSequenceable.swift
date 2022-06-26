@@ -2,8 +2,6 @@
 ///
 /// If the async sequence that you wish to type erase doesn't throw, then use `AnyAsyncSequenceable`.
 public struct AnyThrowingAsyncSequenceable<Element>: AsyncSequence {
-
-    // Private
     private var _next: () async throws -> Element?
     private var _makeAsyncIterator: () -> Self
 
@@ -38,16 +36,12 @@ public struct AnyThrowingAsyncSequenceable<Element>: AsyncSequence {
 // MARK: AsyncIteratorProtocol
 
 extension AnyThrowingAsyncSequenceable: AsyncIteratorProtocol {
-
     /// Produces the next element in the sequence.
     /// - Returns: The next element or `nil` if the end of the sequence is reached.
     public mutating func next() async throws -> Element? {
         try await self._next()
     }
 }
-
-
-
 
 // MARK: Erasure
 

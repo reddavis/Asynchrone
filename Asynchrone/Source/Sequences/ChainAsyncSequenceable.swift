@@ -41,7 +41,6 @@
 /// // 9
 /// ```
 public struct ChainAsyncSequence<P: AsyncSequence, Q: AsyncSequence>: AsyncSequence where P.Element == Q.Element {
-    
     /// The kind of elements streamed.
     public typealias Element = P.Element
     
@@ -81,9 +80,6 @@ public struct ChainAsyncSequence<P: AsyncSequence, Q: AsyncSequence>: AsyncSeque
 // MARK: AsyncIteratorProtocol
 
 extension ChainAsyncSequence: AsyncIteratorProtocol {
-    
-    /// Produces the next element in the sequence.
-    /// - Returns: The next element or `nil` if the end of the sequence is reached.
     public mutating func next() async rethrows -> Element? {
         if let element = try await self.iteratorP.next() {
             return element
@@ -93,12 +89,9 @@ extension ChainAsyncSequence: AsyncIteratorProtocol {
     }
 }
 
-
-
 // MARK: Chain
 
 extension AsyncSequence {
-
     /// An asynchronous sequence that chains two async sequences.
     ///
     /// The combined sequence first emits the all the values from the first sequence

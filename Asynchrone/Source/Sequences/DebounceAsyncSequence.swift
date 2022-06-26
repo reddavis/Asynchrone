@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// A async sequence that emits elements only after a specified time interval elapses between emissions.
 ///
 /// Use `DebounceAsyncSequence` async sequence to control the number of values and time between

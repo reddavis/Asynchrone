@@ -82,7 +82,6 @@ public struct Zip3AsyncSequence<P: AsyncSequence, Q: AsyncSequence, R: AsyncSequ
 // MARK: AsyncIteratorProtocol
 
 extension Zip3AsyncSequence: AsyncIteratorProtocol {
-    
     /// Produces the next element in the sequence.
     ///
     /// Continues to call `next()` on it's base iterator and iterator of

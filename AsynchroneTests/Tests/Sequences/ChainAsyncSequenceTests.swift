@@ -3,16 +3,16 @@ import XCTest
 
 
 final class ChainAsyncSequenceTests: XCTestCase {
-    private var sequenceA: AnyAsyncSequenceable<Int>!
-    private var sequenceB: AnyAsyncSequenceable<Int>!
-    private var sequenceC: AnyAsyncSequenceable<Int>!
+    private var sequenceA: SequenceAsyncSequence<[Int]>!
+    private var sequenceB: SequenceAsyncSequence<[Int]>!
+    private var sequenceC: SequenceAsyncSequence<[Int]>!
     
     // MARK: Setup
     
     override func setUpWithError() throws {
-        self.sequenceA = [1, 2, 3].async.eraseToAnyAsyncSequenceable()
-        self.sequenceB = [4, 5, 6].async.eraseToAnyAsyncSequenceable()
-        self.sequenceC = [7, 8, 9].async.eraseToAnyAsyncSequenceable()
+        self.sequenceA = [1, 2, 3].async
+        self.sequenceB = [4, 5, 6].async
+        self.sequenceC = [7, 8, 9].async
     }
     
     // MARK: Tests
