@@ -36,7 +36,6 @@
 /// // 9
 /// ```
 public struct MergeAsyncSequence<T: AsyncSequence>: AsyncSequence {
-    
     /// The kind of elements streamed.
     public typealias Element = T.Element
     

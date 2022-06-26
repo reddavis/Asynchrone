@@ -41,7 +41,6 @@
 /// // (4, 9, 11)
 /// ```
 public struct CombineLatest3AsyncSequence<P: AsyncSequence, Q: AsyncSequence, R: AsyncSequence>: AsyncSequence {
-    
     /// The kind of elements streamed.
     public typealias Element = (P.Element, Q.Element, R.Element)
     
@@ -93,7 +92,6 @@ public struct CombineLatest3AsyncSequence<P: AsyncSequence, Q: AsyncSequence, R:
 // MARK: AsyncIteratorProtocol
 
 extension CombineLatest3AsyncSequence: AsyncIteratorProtocol {
-    
     /// Produces the next element in the sequence.
     ///
     /// Continues to call `next()` on it's base iterator and iterator of
@@ -134,12 +132,9 @@ extension CombineLatest3AsyncSequence: AsyncIteratorProtocol {
     }
 }
 
-
-
 // MARK: Combine latest
 
 extension AsyncSequence {
-
     /// Combine three async sequences.
     ///
     /// The combined sequence emits a tuple of the most-recent elements from each sequence

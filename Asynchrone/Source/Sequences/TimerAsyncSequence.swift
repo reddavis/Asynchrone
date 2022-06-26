@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// An async sequence that emits the current date on a given interval.
 ///
 /// ```swift
@@ -17,7 +16,6 @@ import Foundation
 /// // 2022-03-19 20:49:32 +0000
 /// ```
 public final class TimerAsyncSequence: AsyncSequence {
-
     /// The kind of elements streamed.
     public typealias Element = Date
 
