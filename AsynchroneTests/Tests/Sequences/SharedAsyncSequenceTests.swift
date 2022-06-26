@@ -12,7 +12,7 @@ final class SharedAsyncSequenceTests: XCTestCase {
     }
 
     // MARK: Tests
-    
+
     func testSharedStreamShouldNotThrowExceptionAndReceiveAllValues() async {
         let taskCompleteExpectation = self.expectation(description: "Task complete")
         Task {
