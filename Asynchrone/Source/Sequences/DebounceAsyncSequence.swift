@@ -6,6 +6,9 @@ import Foundation
 /// delivery of values from the base async sequence. This async sequence is useful to process bursty
 /// or high-volume async sequences where you need to reduce the number of elements emitted to a rate you specify.
 ///
+/// HT to [swift-async-algorithms](https://github.com/apple/swift-async-algorithms) for helping
+/// realise my woes of rethrows.
+///
 /// ```swift
 /// let sequence = AsyncStream<Int> { continuation in
 ///     continuation.yield(0)
@@ -89,9 +92,9 @@ extension DebounceAsyncSequence {
                     var iterator = base
                     do {
                         let value = try await iterator.next()
-                        return .result(.success(value), iterator: iterator)
+                        return .winner(.success(value), iterator: iterator)
                     } catch {
-                        return .result(.failure(error), iterator: iterator)
+                        return .winner(.failure(error), iterator: iterator)
                     }
                 }
                 self.resultTask = nil
@@ -107,7 +110,7 @@ extension DebounceAsyncSequence {
                 let firstTask = await { () async -> Task<RaceResult, Never> in
                     let raceCoordinator = TaskRaceCoodinator<RaceResult, Never>()
                     return await withTaskCancellationHandler(
-                        operation: { () async -> Task<RaceResult, Never> in
+                        operation: {
                             await withCheckedContinuation { continuation in
                                 for task in tasks {
                                     Task<Void, Never> {
@@ -128,23 +131,25 @@ extension DebounceAsyncSequence {
                 }()
                 
                 switch await firstTask.value {
-                case .result(let result, let iterator):
+                case .winner(let result, let iterator):
                     lastResult = result
                     lastEmission = Date()
                     self.base = iterator
                     
                     switch result {
                     case .success(let value):
+                        // Base sequence has reached it's end.
                         if value == nil {
                             return nil
                         }
                     case .failure:
-                        try result._forceRethrowError()
+                        try result._rethrowError()
                     }
                 case .sleep:
                     self.resultTask = resultTask
+                    
                     if let result = lastResult {
-                        return try result._retrowValue()
+                        return try result._rethrowGet()
                     }
                 }
             }
@@ -156,7 +161,7 @@ extension DebounceAsyncSequence {
 
 extension DebounceAsyncSequence.Iterator {
     fileprivate enum RaceResult {
-        case result(Result<Element?, Error>, iterator: T.AsyncIterator)
+        case winner(Result<Element?, Error>, iterator: T.AsyncIterator)
         case sleep
     }
 }
@@ -176,7 +181,6 @@ fileprivate actor TaskRaceCoodinator<Success, Failure: Error>  {
 // MARK: Debounce
 
 extension AsyncSequence {
-
     /// Emits elements only after a specified time interval elapses between emissions.
     ///
     /// Use the `debounce` operator to control the number of values and time between

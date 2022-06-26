@@ -1,7 +1,6 @@
 import XCTest
 @testable import Asynchrone
 
-
 final class DebounceAsyncSequenceTests: XCTestCase {
     private var stream: AsyncStream<Int>!
     
