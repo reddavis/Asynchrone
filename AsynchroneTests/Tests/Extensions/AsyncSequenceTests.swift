@@ -28,8 +28,15 @@ final class AsyncSequenceTests: XCTestCase {
     // MARK: First
     
     func testFirst() async {
-        let firstValue = await self.sequence.first()
-        XCTAssertEqual(firstValue, 1)
+        let element = await self.sequence.first()
+        XCTAssertEqual(element, 1)
+    }
+    
+    // MARK: Last
+    
+    func testLast() async {
+        let element = await self.sequence.last()
+        XCTAssertEqual(element, 3)
     }
     
     // MARK: Collect

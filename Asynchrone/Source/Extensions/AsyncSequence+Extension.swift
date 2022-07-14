@@ -50,6 +50,16 @@ extension AsyncSequence {
         }
     }
     
+    /// The last element of the sequence, if there is one.
+    public func last() async rethrows -> Element? {
+        var latestElement: Element?
+        for try await element in self {
+            latestElement = element
+        }
+        
+        return latestElement
+    }
+    
     /// Collect elements from a sequence.
     ///
     /// ```swift
