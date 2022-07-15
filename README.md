@@ -71,6 +71,22 @@ print(await sequence.first())
 // 1
 ```
 
+#### Last
+
+```swift
+let sequence = AsyncStream<Int> { continuation in
+    continuation.yield(1)
+    continuation.yield(2)
+    continuation.yield(3)
+    continuation.finish()
+}
+
+print(await sequence.last())
+
+// Prints:
+// 3
+```
+
 #### Collect
 
 ```swift
