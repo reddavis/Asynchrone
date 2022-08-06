@@ -6,7 +6,7 @@ import Foundation
 /// let sequence = TimerAsyncSequence(interval: 1)
 ///
 /// let start = Date.now
-/// for element in await sequence {
+/// for await element in sequence {
 ///     print(element)
 /// }
 ///
