@@ -21,6 +21,7 @@
 		A40B6E4E278CAB5700CA6502 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B6E4D278CAB5700CA6502 /* TimeInterval+Extension.swift */; };
 		A40B6E53278CABEA00CA6502 /* TimeIntervalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B6E52278CABEA00CA6502 /* TimeIntervalTests.swift */; };
 		A40EE2A727A063FC00663E6C /* AsyncSequenceCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40EE2A627A063FC00663E6C /* AsyncSequenceCompletion.swift */; };
+		A40F8037289EE84100F11AA5 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = A40F8036289EE84100F11AA5 /* CustomDump */; };
 		A4109A4A27E66C9B0023469A /* TimerAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4109A4927E66C9B0023469A /* TimerAsyncSequence.swift */; };
 		A4109A4C27E675880023469A /* TimerAsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4109A4B27E675880023469A /* TimerAsyncSequenceTests.swift */; };
 		A4109A4E27E765540023469A /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4109A4D27E765540023469A /* Date+Extension.swift */; };
@@ -155,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A47BE66727C8FDC20011ECE6 /* Asynchrone.framework in Frameworks */,
+				A40F8037289EE84100F11AA5 /* CustomDump in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +401,9 @@
 			dependencies = (
 			);
 			name = AsynchroneTests;
+			packageProductDependencies = (
+				A40F8036289EE84100F11AA5 /* CustomDump */,
+			);
 			productName = AsynchroneTests;
 			productReference = A4C361B4276A5EF200511525 /* AsynchroneTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -430,6 +435,9 @@
 				Base,
 			);
 			mainGroup = A4C361A0276A5EF200511525;
+			packageReferences = (
+				A40F8035289EE84100F11AA5 /* XCRemoteSwiftPackageReference "swift-custom-dump" */,
+			);
 			productRefGroup = A4C361AB276A5EF200511525 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -818,6 +826,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A40F8035289EE84100F11AA5 /* XCRemoteSwiftPackageReference "swift-custom-dump" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-custom-dump.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A40F8036289EE84100F11AA5 /* CustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A40F8035289EE84100F11AA5 /* XCRemoteSwiftPackageReference "swift-custom-dump" */;
+			productName = CustomDump;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A4C361A1276A5EF200511525 /* Project object */;
 }

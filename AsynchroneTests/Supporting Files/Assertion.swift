@@ -1,4 +1,27 @@
+import CustomDump
 import XCTest
+
+/// Asserts that an async expression is not `nil`, and returns its unwrapped value.
+///
+/// Generates a failure when `expression == nil`.
+///
+/// - Parameters:
+///   - expression: An expression of type `T?` to compare against `nil`.
+///   Its type will determine the type of the returned value.
+///   - message: An optional description of the failure.
+///   - file: The file in which failure occurred. Defaults to the file name of the test case in which this function was called.
+///   - line: The line number on which failure occurred. Defaults to the line number on which this function was called.
+/// - Returns: A value of type `T`, the result of evaluating and unwrapping the given `expression`.
+/// - Throws: An error when `expression == nil`. It will also rethrow any error thrown while evaluating the given expression.
+func XCTAsyncUnwrap<T>(
+    _ expression: () async throws -> T?,
+    _ message: @autoclosure () -> String = "",
+    file: StaticString = #filePath,
+    line: UInt = #line
+) async throws -> T {
+    let value = try await expression()
+    return try XCTUnwrap(value, message(), file: file, line: line)
+}
 
 /// Assert two expressions are eventually equal.
 /// - Parameters:
@@ -8,14 +31,14 @@ import XCTest
 ///   - file: The file where this assertion is being called. Defaults to `#filePath`.
 ///   - line: The line in the file where this assertion is being called. Defaults to `#line`.
 func XCTAssertEventuallyEqual<T: Equatable>(
-    _ expressionA: @escaping @autoclosure () -> T?,
-    _ expressionB: @escaping @autoclosure () -> T?,
+    _ expressionA: @autoclosure @escaping () -> T?,
+    _ expressionB: @autoclosure @escaping () -> T?,
     timeout: TimeInterval = 5.0,
     file: StaticString = #filePath,
     line: UInt = #line
 ) async {
     let timeoutDate = Date(timeIntervalSinceNow: timeout)
-    
+            
     while true {
         let resultA = expressionA()
         let resultB = expressionB()
@@ -25,7 +48,7 @@ func XCTAssertEventuallyEqual<T: Equatable>(
         case true:
             return
         // False and timed out.
-        case false where Date().compare(timeoutDate) == .orderedDescending:
+        case false where Date.now.compare(timeoutDate) == .orderedDescending:
             let error = XCTAssertEventuallyEqualError(
                 resultA: resultA,
                 resultB: resultB
@@ -39,7 +62,7 @@ func XCTAssertEventuallyEqual<T: Equatable>(
             return
         // False but still within timeout limit.
         case false:
-            try? await Task.sleep(nanoseconds: 10000000)
+            try? await Task.sleep(nanoseconds: 1000000)
         }
     }
 }
@@ -51,7 +74,7 @@ func XCTAssertEventuallyEqual<T: Equatable>(
 ///   - timeout: Time to wait for store state changes. Defaults to `5`
 ///   - file: The file where this assertion is being called. Defaults to `#filePath`.
 ///   - line: The line in the file where this assertion is being called. Defaults to `#line`.
-func XCTAsyncAssertEventuallyEqual<T: Equatable>(
+func XCTAssertEventuallyEqual<T: Equatable>(
     _ expressionA: @escaping () async -> T?,
     _ expressionB: @escaping () async -> T?,
     timeout: TimeInterval = 5.0,
@@ -59,7 +82,7 @@ func XCTAsyncAssertEventuallyEqual<T: Equatable>(
     line: UInt = #line
 ) async {
     let timeoutDate = Date(timeIntervalSinceNow: timeout)
-    
+            
     while true {
         let resultA = await expressionA()
         let resultB = await expressionB()
@@ -69,7 +92,7 @@ func XCTAsyncAssertEventuallyEqual<T: Equatable>(
         case true:
             return
         // False and timed out.
-        case false where Date().compare(timeoutDate) == .orderedDescending:
+        case false where Date.now.compare(timeoutDate) == .orderedDescending:
             let error = XCTAssertEventuallyEqualError(
                 resultA: resultA,
                 resultB: resultB
@@ -83,18 +106,38 @@ func XCTAsyncAssertEventuallyEqual<T: Equatable>(
             return
         // False but still within timeout limit.
         case false:
-            try? await Task.sleep(nanoseconds: 10000000)
+            try? await Task.sleep(nanoseconds: 1000000)
         }
     }
 }
 
+/// Assert a value is eventually true.
+/// - Parameters:
+///   - expression: The value to assert eventually is true.
+///   - timeout: Time to wait for store state changes. Defaults to `5`
+///   - file: The file where this assertion is being called. Defaults to `#filePath`.
+///   - line: The line in the file where this assertion is being called. Defaults to `#line`.
+func XCTAssertEventuallyTrue(
+    _ expression: @escaping @autoclosure () -> Bool,
+    timeout: TimeInterval = 5.0,
+    file: StaticString = #filePath,
+    line: UInt = #line
+) async {
+    await XCTAssertEventuallyEqual(
+        expression(),
+        true,
+        timeout: timeout,
+        file: file,
+        line: line
+    )
+}
 
 /// Assert an async closure thorws an error.
 /// - Parameters:
 ///   - closure: The closure.
 ///   - file: The file where this assertion is being called. Defaults to `#filePath`.
 ///   - line: The line in the file where this assertion is being called. Defaults to `#line`.
-public func XCTAsyncAssertThrow<T>(
+func XCTAsyncAssertThrow<T>(
     _ closure: () async throws -> T,
     file: StaticString = #filePath,
     line: UInt = #line
@@ -114,7 +157,7 @@ public func XCTAsyncAssertThrow<T>(
 ///   - closure: The closure.
 ///   - file: The file where this assertion is being called. Defaults to `#filePath`.
 ///   - line: The line in the file where this assertion is being called. Defaults to `#line`.
-public func XCTAsyncAssertNoThrow<T>(
+func XCTAsyncAssertNoThrow<T>(
     _ closure: () async throws -> T,
     file: StaticString = #filePath,
     line: UInt = #line
@@ -135,7 +178,7 @@ public func XCTAsyncAssertNoThrow<T>(
 ///   - closure: The closure.
 ///   - file: The file where this assertion is being called. Defaults to `#filePath`.
 ///   - line: The line in the file where this assertion is being called. Defaults to `#line`.
-public func XCTAsyncAssertNil<T>(
+func XCTAsyncAssertNil<T>(
     _ closure: () async -> T?,
     file: StaticString = #filePath,
     line: UInt = #line
@@ -205,6 +248,9 @@ Failed To Assert Equality
 
 # Result B
 \(resultBDescription)
+
+# Difference
+\(diff(resultA, resultB) ?? "")
 
 ---------------------------
 """
