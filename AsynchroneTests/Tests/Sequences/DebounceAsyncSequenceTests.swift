@@ -9,14 +9,13 @@ final class DebounceAsyncSequenceTests: XCTestCase {
     override func setUpWithError() throws {
         self.stream = AsyncStream<Int> { continuation in
             continuation.yield(0)
-            try? await Task.sleep(seconds: 0.1)
             continuation.yield(1)
-            try? await Task.sleep(seconds: 0.1)
+            try? await Task.sleep(seconds: 0.2)
             continuation.yield(2)
             continuation.yield(3)
             continuation.yield(4)
             continuation.yield(5)
-            try? await Task.sleep(seconds: 0.1)
+            try? await Task.sleep(seconds: 0.2)
             continuation.finish()
         }
     }
@@ -28,7 +27,7 @@ final class DebounceAsyncSequenceTests: XCTestCase {
             .debounce(for: 0.1)
             .collect()
         
-        XCTAssertEqual(values, [0, 1, 5])
+        XCTAssertEqual(values, [1, 5])
     }
     
     func testDebounceWithNoValues() async {

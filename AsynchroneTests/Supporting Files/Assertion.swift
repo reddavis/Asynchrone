@@ -1,4 +1,3 @@
-import CustomDump
 import XCTest
 
 /// Asserts that an async expression is not `nil`, and returns its unwrapped value.
@@ -48,7 +47,7 @@ func XCTAssertEventuallyEqual<T: Equatable>(
         case true:
             return
         // False and timed out.
-        case false where Date.now.compare(timeoutDate) == .orderedDescending:
+        case false where Date().compare(timeoutDate) == .orderedDescending:
             let error = XCTAssertEventuallyEqualError(
                 resultA: resultA,
                 resultB: resultB
@@ -92,7 +91,7 @@ func XCTAssertEventuallyEqual<T: Equatable>(
         case true:
             return
         // False and timed out.
-        case false where Date.now.compare(timeoutDate) == .orderedDescending:
+        case false where Date().compare(timeoutDate) == .orderedDescending:
             let error = XCTAssertEventuallyEqualError(
                 resultA: resultA,
                 resultB: resultB
@@ -248,9 +247,6 @@ Failed To Assert Equality
 
 # Result B
 \(resultBDescription)
-
-# Difference
-\(diff(resultA, resultB) ?? "")
 
 ---------------------------
 """
