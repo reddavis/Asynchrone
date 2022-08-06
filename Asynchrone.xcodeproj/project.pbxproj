@@ -399,6 +399,8 @@
 			dependencies = (
 			);
 			name = AsynchroneTests;
+			packageProductDependencies = (
+			);
 			productName = AsynchroneTests;
 			productReference = A4C361B4276A5EF200511525 /* AsynchroneTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -430,6 +432,8 @@
 				Base,
 			);
 			mainGroup = A4C361A0276A5EF200511525;
+			packageReferences = (
+			);
 			productRefGroup = A4C361AB276A5EF200511525 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

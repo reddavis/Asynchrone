@@ -61,6 +61,7 @@ final class AsyncSequenceTests: XCTestCase {
     }
     
     func testSinkWithFinishedCompletion() async {
+        let completionExpectation = self.expectation(description: "Completion called")
         var values: [Int] = []
         self.sequence.sink(
             receiveValue: { values.append($0) },
@@ -68,12 +69,14 @@ final class AsyncSequenceTests: XCTestCase {
                 switch $0 {
                 case .failure(let error):
                     XCTFail("Invalid completion case: Failure \(error)")
-                case .finished:()
+                case .finished:
+                    completionExpectation.fulfill()
                 }
             }
         )
         
-        await XCTAssertEventuallyEqual(values, [1, 2, 3])
+        await self.waitForExpectations(timeout: 5.0, handler: nil)
+        XCTAssertEqual(values, [1, 2, 3])
     }
     
     func testSinkWithFailedCompletion() async {
@@ -99,7 +102,7 @@ final class AsyncSequenceTests: XCTestCase {
         )
         
         await self.waitForExpectations(timeout: 5.0, handler: nil)
-        await XCTAssertEventuallyEqual(values, [1, 2, 3])
+        XCTAssertEqual(values, [1, 2, 3])
     }
     
     func testSinkWithCancellation() async {
@@ -125,6 +128,6 @@ final class AsyncSequenceTests: XCTestCase {
         
         task.cancel()
         await self.waitForExpectations(timeout: 5.0, handler: nil)
-        await XCTAssertEventuallyEqual(values, [1])
+        XCTAssertEqual(values, [1])
     }
 }
