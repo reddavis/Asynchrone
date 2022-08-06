@@ -68,6 +68,8 @@
 		A4C361F12772246C00511525 /* ZipAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C361F02772246C00511525 /* ZipAsyncSequence.swift */; };
 		A4C361F327722D4600511525 /* ZipAsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C361F227722D4600511525 /* ZipAsyncSequenceTests.swift */; };
 		A4C361F52772319100511525 /* Zip3AsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C361F42772319100511525 /* Zip3AsyncSequence.swift */; };
+		A4F70C0D289D79D20053B2D2 /* NotificationCenterAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F70C0C289D79D20053B2D2 /* NotificationCenterAsyncSequence.swift */; };
+		A4F70C0F289E61890053B2D2 /* NotificationCenterAsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F70C0E289E61890053B2D2 /* NotificationCenterAsyncSequenceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,6 +138,8 @@
 		A4C361F02772246C00511525 /* ZipAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipAsyncSequence.swift; sourceTree = "<group>"; };
 		A4C361F227722D4600511525 /* ZipAsyncSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipAsyncSequenceTests.swift; sourceTree = "<group>"; };
 		A4C361F42772319100511525 /* Zip3AsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zip3AsyncSequence.swift; sourceTree = "<group>"; };
+		A4F70C0C289D79D20053B2D2 /* NotificationCenterAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterAsyncSequence.swift; sourceTree = "<group>"; };
+		A4F70C0E289E61890053B2D2 /* NotificationCenterAsyncSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterAsyncSequenceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +178,7 @@
 				A45E0EBA277491F1006B64E1 /* JustTests.swift */,
 				A4C361DA276D05C400511525 /* MergeAsyncSequenceTests.swift */,
 				A4C361E52770EE9200511525 /* Merge3AsyncSequenceTests.swift */,
+				A4F70C0E289E61890053B2D2 /* NotificationCenterAsyncSequenceTests.swift */,
 				A40B6E492788925500CA6502 /* PassthroughAsyncSequenceTests.swift */,
 				A4C361D0276B39F600511525 /* RemoveDuplicatesAsyncSequenceTests.swift */,
 				A45E0F752781BDB1006B64E1 /* ReplaceErrorAsyncSequenceTests.swift */,
@@ -293,9 +298,9 @@
 				A4C361D6276CE9DC00511525 /* AsyncSequence+Extension.swift */,
 				A4C361C6276A603B00511525 /* AsyncStream+Extension.swift */,
 				A4C361DE2770984700511525 /* AsyncThrowingStream+Extension.swift */,
+				A4109A4D27E765540023469A /* Date+Extension.swift */,
 				A40B6E4B278CA97700CA6502 /* Task+Extension.swift */,
 				A40B6E4D278CAB5700CA6502 /* TimeInterval+Extension.swift */,
-				A4109A4D27E765540023469A /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -318,6 +323,7 @@
 				A45E0EB827748F5A006B64E1 /* Just.swift */,
 				A4C361EC2771B13D00511525 /* MergeAsyncSequence.swift */,
 				A4C361E32770E52B00511525 /* Merge3AsyncSequence.swift */,
+				A4F70C0C289D79D20053B2D2 /* NotificationCenterAsyncSequence.swift */,
 				A40B6E452788885800CA6502 /* PassthroughAsyncSequence.swift */,
 				A4C361CE276A68BF00511525 /* RemoveDuplicatesAsyncSequence.swift */,
 				A45E0F732781B978006B64E1 /* ReplaceErrorAsyncSequence.swift */,
@@ -466,6 +472,7 @@
 				A4482EDD27FC9FFD0004941D /* ChainAsyncSequenceable.swift in Sources */,
 				A4C361F12772246C00511525 /* ZipAsyncSequence.swift in Sources */,
 				A4C361E82770F67E00511525 /* CombineLatest3AsyncSequence.swift in Sources */,
+				A4F70C0D289D79D20053B2D2 /* NotificationCenterAsyncSequence.swift in Sources */,
 				A40B6E462788885800CA6502 /* PassthroughAsyncSequence.swift in Sources */,
 				A45E0EB927748F5A006B64E1 /* Just.swift in Sources */,
 				A47BE65B27C75FE60011ECE6 /* Empty.swift in Sources */,
@@ -502,6 +509,7 @@
 				A4C361E62770EE9200511525 /* Merge3AsyncSequenceTests.swift in Sources */,
 				A40B6E4227883FD300CA6502 /* CurrentElementAsyncSequenceTests.swift in Sources */,
 				A45E0ECD2775E6E2006B64E1 /* AnyThrowingAsyncSequenceableTests.swift in Sources */,
+				A4F70C0F289E61890053B2D2 /* NotificationCenterAsyncSequenceTests.swift in Sources */,
 				A45E0F782781C8C4006B64E1 /* TestError.swift in Sources */,
 				A4C361F327722D4600511525 /* ZipAsyncSequenceTests.swift in Sources */,
 				A40B6E4A2788925500CA6502 /* PassthroughAsyncSequenceTests.swift in Sources */,

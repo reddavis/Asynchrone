@@ -468,6 +468,17 @@ for await value in self.streamA.merge(with: self.streamB, self.streamC) {
 // 4
 ```
 
+### [NotificationCenterAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/notificationcenterasyncsequence)
+
+```swift
+let sequence = NotificationCenter.default.sequence(for: UIDevice.orientationDidChangeNotification)
+
+for await element in sequence {
+    print(element)
+}
+
+```
+
 ### [PassthroughAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/passthroughasyncsequence)
 
 ```swift

@@ -120,7 +120,6 @@ extension Merge3AsyncSequence: AsyncIteratorProtocol {
 // MARK: Merge
 
 extension AsyncSequence {
-
     /// An asynchronous sequence that merges three async sequences.
     ///
     /// The sequences are iterated through in parallel.
