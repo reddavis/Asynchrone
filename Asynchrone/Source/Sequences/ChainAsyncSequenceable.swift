@@ -77,6 +77,13 @@ public struct ChainAsyncSequence<P: AsyncSequence, Q: AsyncSequence>: AsyncSeque
     }
 }
 
+extension ChainAsyncSequence: Sendable
+where
+P: Sendable,
+P.AsyncIterator: Sendable,
+Q: Sendable,
+Q.AsyncIterator: Sendable {}
+
 // MARK: AsyncIteratorProtocol
 
 extension ChainAsyncSequence: AsyncIteratorProtocol {

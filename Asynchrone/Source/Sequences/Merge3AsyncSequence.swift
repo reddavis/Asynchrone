@@ -29,15 +29,14 @@
 /// // 3
 /// // 4
 /// ```
-public struct Merge3AsyncSequence<T: AsyncSequence>: AsyncSequence {
+public struct Merge3AsyncSequence<T: AsyncSequence>: AsyncSequence
+where T: Sendable, T.AsyncIterator: Sendable, T.Element: Sendable {
     /// The kind of elements streamed.
     public typealias Element = T.Element
     
     // Private
-    // swiftlint:disable implicitly_unwrapped_optional
     private var stream: AsyncThrowingStream<Element, Error>!
     private var iterator: AsyncThrowingStream<Element, Error>.Iterator!
-    // swiftlint:enable implicitly_unwrapped_optional
     
     // MARK: Initialization
     
@@ -60,7 +59,7 @@ public struct Merge3AsyncSequence<T: AsyncSequence>: AsyncSequence {
         _ r: T
     ) -> AsyncThrowingStream<Element, Error> {
         .init { continuation in
-            let handler: (
+            let handler: @Sendable (
                 _ sequence: T,
                 _ continuation: AsyncThrowingStream<Element, Error>.Continuation
             ) async throws -> Void = { sequence, continuation in

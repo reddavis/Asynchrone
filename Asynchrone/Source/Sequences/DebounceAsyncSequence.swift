@@ -32,7 +32,9 @@ import Foundation
 /// // 1
 /// // 5
 /// ```
-public struct DebounceAsyncSequence<T: AsyncSequence>: AsyncSequence {
+public struct DebounceAsyncSequence<T: AsyncSequence>: AsyncSequence
+where
+T.AsyncIterator: Sendable {
     /// The kind of elements streamed.
     public typealias Element = T.Element
 
@@ -62,6 +64,10 @@ public struct DebounceAsyncSequence<T: AsyncSequence>: AsyncSequence {
         Iterator(base: self.base.makeAsyncIterator(), dueTime: self.dueTime)
     }
 }
+
+extension DebounceAsyncSequence: Sendable
+where
+T: Sendable {}
 
 // MARK: Iterator
 
@@ -156,6 +162,10 @@ extension DebounceAsyncSequence {
     }
 }
 
+extension DebounceAsyncSequence.Iterator: Sendable
+where
+T.AsyncIterator: Sendable {}
+
 // MARK: Race result
 
 extension DebounceAsyncSequence.Iterator {
@@ -167,7 +177,7 @@ extension DebounceAsyncSequence.Iterator {
 
 // MARK: Task race coordinator
 
-fileprivate actor TaskRaceCoodinator<Success, Failure: Error>  {
+fileprivate actor TaskRaceCoodinator<Success, Failure: Error> where Success: Sendable  {
     private var winner: Task<Success, Failure>?
     
     func isFirstToCrossLine(_ task: Task<Success, Failure>) -> Bool {

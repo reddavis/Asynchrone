@@ -32,6 +32,8 @@ public struct Just<Element>: AsyncSequence {
     }
 }
 
+extension Just: Sendable where Element: Sendable {}
+
 // MARK: AsyncIteratorProtocol
 
 extension Just: AsyncIteratorProtocol {

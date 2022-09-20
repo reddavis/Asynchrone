@@ -16,7 +16,8 @@
 /// // Prints:
 /// // -1
 /// ```
-public struct CatchErrorAsyncSequence<Base, NewAsyncSequence>: AsyncSequence where
+public struct CatchErrorAsyncSequence<Base, NewAsyncSequence>: AsyncSequence
+where
 Base: AsyncSequence,
 NewAsyncSequence: AsyncSequence,
 Base.Element == NewAsyncSequence.Element {
@@ -25,7 +26,7 @@ Base.Element == NewAsyncSequence.Element {
     
     // Private
     private let base: Base
-    private let handler: (Error) -> NewAsyncSequence
+    private let handler: @Sendable (Error) -> NewAsyncSequence
     private var iterator: Base.AsyncIterator
     private var caughtIterator: NewAsyncSequence.AsyncIterator?
     
@@ -37,7 +38,7 @@ Base.Element == NewAsyncSequence.Element {
     ///   - output: The element with which to replace errors from the base async sequence.
     public init(
         base: Base,
-        handler: @escaping (Error) -> NewAsyncSequence
+        handler: @Sendable @escaping (Error) -> NewAsyncSequence
     ) {
         self.base = base
         self.handler = handler
@@ -52,6 +53,9 @@ Base.Element == NewAsyncSequence.Element {
         .init(base: self.base, handler: self.handler)
     }
 }
+
+extension CatchErrorAsyncSequence: Sendable
+where Base: Sendable, NewAsyncSequence: Sendable, Base.AsyncIterator: Sendable, NewAsyncSequence.AsyncIterator: Sendable {}
 
 // MARK: AsyncIteratorProtocol
 
@@ -95,7 +99,7 @@ extension AsyncSequence {
     /// - Parameter handler: A closure that takes an Error and returns a new async sequence.
     /// - Returns: A `CatchErrorAsyncSequence` instance.
     public func `catch`<S>(
-        _ handler: @escaping (Error) -> S
+        _ handler: @Sendable @escaping (Error) -> S
     ) -> CatchErrorAsyncSequence<Self, S> where S: AsyncSequence, S.Element == Self.Element {
         .init(base: self, handler: handler)
     }

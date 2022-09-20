@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// An async version of `Sequence`. Generally used to turn any `Sequence` into
 /// it's async counterpart.
 ///
@@ -40,6 +39,8 @@ public struct SequenceAsyncSequence<P: Sequence>: AsyncSequence {
         .init(self.sequence.makeIterator())
     }
 }
+
+extension SequenceAsyncSequence: Sendable where P: Sendable {}
 
 // MARK: SequenceAsyncSequenceIterator
 

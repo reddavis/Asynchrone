@@ -54,6 +54,11 @@ public struct DelayAsyncSequence<T: AsyncSequence>: AsyncSequence {
     }
 }
 
+extension DelayAsyncSequence: Sendable
+where
+T: Sendable,
+T.AsyncIterator: Sendable {}
+
 // MARK: AsyncIteratorProtocol
 
 extension DelayAsyncSequence: AsyncIteratorProtocol {
@@ -73,7 +78,6 @@ extension DelayAsyncSequence: AsyncIteratorProtocol {
 // MARK: Delay
 
 extension AsyncSequence {
-
     /// Delays emission of all elements by the provided interval.
     ///
     /// ```swift

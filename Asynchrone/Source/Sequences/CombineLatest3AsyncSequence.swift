@@ -89,6 +89,18 @@ public struct CombineLatest3AsyncSequence<P: AsyncSequence, Q: AsyncSequence, R:
     }
 }
 
+extension CombineLatest3AsyncSequence: Sendable
+where
+P: Sendable,
+P.Element: Sendable,
+P.AsyncIterator: Sendable,
+Q: Sendable,
+Q.Element: Sendable,
+Q.AsyncIterator: Sendable,
+R: Sendable,
+R.Element: Sendable,
+R.AsyncIterator: Sendable {}
+
 // MARK: AsyncIteratorProtocol
 
 extension CombineLatest3AsyncSequence: AsyncIteratorProtocol {

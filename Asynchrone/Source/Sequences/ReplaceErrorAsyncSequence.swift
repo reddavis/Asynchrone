@@ -43,6 +43,12 @@ public struct ReplaceErrorAsyncSequence<Base: AsyncSequence>: AsyncSequence {
     }
 }
 
+extension ReplaceErrorAsyncSequence: Sendable
+where
+Base: Sendable,
+Base.Element: Sendable,
+Base.AsyncIterator: Sendable {}
+
 // MARK: AsyncIteratorProtocol
 
 extension ReplaceErrorAsyncSequence: AsyncIteratorProtocol {

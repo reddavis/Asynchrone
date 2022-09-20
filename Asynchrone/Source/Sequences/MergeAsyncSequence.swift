@@ -35,15 +35,14 @@
 /// // 8
 /// // 9
 /// ```
-public struct MergeAsyncSequence<T: AsyncSequence>: AsyncSequence {
+public struct MergeAsyncSequence<T: AsyncSequence>: AsyncSequence
+where T: Sendable, T.Element: Sendable {
     /// The kind of elements streamed.
     public typealias Element = T.Element
     
     // Private
-    // swiftlint:disable implicitly_unwrapped_optional
     private var stream: AsyncStream<Element>!
     private var iterator: AsyncStream<Element>.Iterator!
-    // swiftlint:enable implicitly_unwrapped_optional
     
     // MARK: Initialization
     
@@ -64,7 +63,7 @@ public struct MergeAsyncSequence<T: AsyncSequence>: AsyncSequence {
         _ q: T
     ) -> AsyncStream<Element> {
         .init { continuation in
-            let handler: (
+            let handler: @Sendable (
                 _ sequence: T,
                 _ continuation: AsyncStream<Element>.Continuation
             ) async throws -> Void = { sequence, continuation in
@@ -107,12 +106,9 @@ extension MergeAsyncSequence: AsyncIteratorProtocol {
     }
 }
 
-
-
 // MARK: Merge
 
 extension AsyncSequence {
-
     /// An asynchronous sequence that merges two async sequence.
     ///
     /// The sequences are iterated through in parallel.

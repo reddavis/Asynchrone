@@ -74,8 +74,6 @@ public actor CurrentElementAsyncSequence<Element>: AsyncSequence {
 // MARK: Stream
 
 fileprivate struct _Stream<Element>: AsyncSequence {
-    
-    // Private
     private var stream: AsyncStream<Element>!
     private var continuation: AsyncStream<Element>.Continuation!
     
