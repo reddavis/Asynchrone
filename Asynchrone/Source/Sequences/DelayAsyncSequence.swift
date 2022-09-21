@@ -27,8 +27,6 @@ public struct DelayAsyncSequence<T: AsyncSequence>: AsyncSequence {
     // Private
     private let base: T
     private let interval: TimeInterval
-    private var iterator: T.AsyncIterator
-    private var lastEmission: Date?
 
     // MARK: Initialization
 
@@ -42,38 +40,51 @@ public struct DelayAsyncSequence<T: AsyncSequence>: AsyncSequence {
     ) {
         self.base = base
         self.interval = interval
-        self.iterator = base.makeAsyncIterator()
     }
     
     // MARK: AsyncSequence
     
     /// Creates an async iterator that emits elements of this async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> Self {
-        .init(self.base, interval: self.interval)
+    public func makeAsyncIterator() -> Iterator {
+        Iterator(interval: self.interval, iterator: self.base.makeAsyncIterator())
     }
 }
 
 extension DelayAsyncSequence: Sendable
 where
-T: Sendable,
-T.AsyncIterator: Sendable {}
+T: Sendable {}
 
-// MARK: AsyncIteratorProtocol
+// MARK: Iterator
 
-extension DelayAsyncSequence: AsyncIteratorProtocol {
-    public mutating func next() async rethrows -> Element? {
-        defer { self.lastEmission = Date() }
+extension DelayAsyncSequence {
+    public struct Iterator: AsyncIteratorProtocol {
+        private let interval: TimeInterval
+        private var iterator: T.AsyncIterator
+        private var lastEmission: Date?
         
-        let lastEmission = self.lastEmission ?? Date()
-        let delay = self.interval - Date().timeIntervalSince(lastEmission)
-        if delay > 0 {
-            try? await Task.sleep(seconds: delay)
+        init(interval: TimeInterval, iterator: T.AsyncIterator) {
+            self.interval = interval
+            self.iterator = iterator
         }
         
-        return try await self.iterator.next()
+        public mutating func next() async rethrows -> Element? {
+            defer { self.lastEmission = Date() }
+            
+            let lastEmission = self.lastEmission ?? Date()
+            let delay = self.interval - Date().timeIntervalSince(lastEmission)
+            if delay > 0 {
+                try? await Task.sleep(seconds: delay)
+            }
+            
+            return try await self.iterator.next()
+        }
     }
 }
+
+extension DelayAsyncSequence.Iterator: Sendable
+where
+T.AsyncIterator: Sendable {}
 
 // MARK: Delay
 
