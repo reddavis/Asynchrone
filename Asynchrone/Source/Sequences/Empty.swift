@@ -16,7 +16,7 @@
 /// // Prints:
 /// // Finished
 /// ```
-public struct Empty<Element>: AsyncSequence {
+public struct Empty<Element>: AsyncSequence, Sendable {
     private let completeImmediately: Bool
     
     // MARK: Initialization
