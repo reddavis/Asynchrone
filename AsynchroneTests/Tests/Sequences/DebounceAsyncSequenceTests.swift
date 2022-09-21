@@ -33,7 +33,7 @@ final class DebounceAsyncSequenceTests: XCTestCase {
         let values = await AsyncStream<Int> {
             $0.finish()
         }
-        .debounce(for: 0.1)
+        .debounce(for: 0.3)
         .collect()
         
         XCTAssert(values.isEmpty)
@@ -41,9 +41,10 @@ final class DebounceAsyncSequenceTests: XCTestCase {
     
     func testWithSequenceInstantFinish() async {
         let values = await Just(0)
-            .debounce(for: 0.1)
+            .debounce(for: 0.3)
             .collect()
         
+        print(values)
         XCTAssert(values.isEmpty)
     }
 }
