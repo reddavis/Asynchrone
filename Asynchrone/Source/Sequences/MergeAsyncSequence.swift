@@ -35,12 +35,7 @@
 /// // 8
 /// // 9
 /// ```
-public struct MergeAsyncSequence<T: AsyncSequence>: AsyncSequence
-where T: Sendable, T.Element: Sendable {
-    /// The kind of elements streamed.
-    public typealias Element = T.Element
-    
-    // Private
+public struct MergeAsyncSequence<Element>: AsyncSequence {
     private var stream: AsyncStream<Element>!
     private var iterator: AsyncStream<Element>.Iterator!
     
@@ -50,18 +45,19 @@ where T: Sendable, T.Element: Sendable {
     /// - Parameters:
     ///   - p: An async sequence.
     ///   - q: An async sequence.
-    public init(
+    public init<T>(
         _ p: T,
         _ q: T
-    ) {
+    )
+    where T: AsyncSequence, T: Sendable, T.Element == Element {
         self.stream = self.buildStream(p, q)
         self.iterator = self.stream.makeAsyncIterator()
     }
     
-    private func buildStream(
+    private func buildStream<T>(
         _ p: T,
         _ q: T
-    ) -> AsyncStream<Element> {
+    ) -> AsyncStream<Element> where T: AsyncSequence, T: Sendable, T.Element == Element {
         .init { continuation in
             let handler: @Sendable (
                 _ sequence: T,
@@ -89,6 +85,8 @@ where T: Sendable, T.Element: Sendable {
     }
 }
 
+//extension MergeAsyncSequence: Sendable where Element: Sendable {}
+
 // MARK: AsyncIteratorProtocol
 
 extension MergeAsyncSequence: AsyncIteratorProtocol {
@@ -101,7 +99,7 @@ extension MergeAsyncSequence: AsyncIteratorProtocol {
     /// If both iterator's return `nil`, indicating the end of the sequence, this
     /// iterator returns `nil`.
     /// - Returns: The next element or `nil` if the end of the sequence is reached.
-    public mutating func next() async rethrows -> Element? {
+    public mutating func next() async -> Element? {
         await self.iterator.next()
     }
 }
@@ -151,7 +149,7 @@ extension AsyncSequence {
     /// - Returns: A async sequence merges elements from this and another async sequence.
     public func merge(
         with other: Self
-    ) -> MergeAsyncSequence<Self> where AsyncIterator: Sendable {
+    ) -> MergeAsyncSequence<Element> where Self: Sendable {
         .init(self, other)
     }
 }
