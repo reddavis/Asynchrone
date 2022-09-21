@@ -151,7 +151,7 @@ extension AsyncSequence {
     /// - Returns: A async sequence merges elements from this and another async sequence.
     public func merge(
         with other: Self
-    ) -> MergeAsyncSequence<Self> {
+    ) -> MergeAsyncSequence<Self> where AsyncIterator: Sendable {
         .init(self, other)
     }
 }

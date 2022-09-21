@@ -34,7 +34,8 @@ import Foundation
 /// ```
 public struct DebounceAsyncSequence<T: AsyncSequence>: AsyncSequence
 where
-T.AsyncIterator: Sendable {
+T.AsyncIterator: Sendable,
+T.Element: Sendable {
     /// The kind of elements streamed.
     public typealias Element = T.Element
 
@@ -164,7 +165,8 @@ extension DebounceAsyncSequence {
 
 extension DebounceAsyncSequence.Iterator: Sendable
 where
-T.AsyncIterator: Sendable {}
+T.AsyncIterator: Sendable,
+T.Element: Sendable {}
 
 // MARK: Race result
 
@@ -189,7 +191,7 @@ fileprivate actor TaskRaceCoodinator<Success, Failure: Error> where Success: Sen
 
 // MARK: Debounce
 
-extension AsyncSequence {
+extension AsyncSequence where AsyncIterator: Sendable, Element: Sendable {
     /// Emits elements only after a specified time interval elapses between emissions.
     ///
     /// Use the `debounce` operator to control the number of values and time between

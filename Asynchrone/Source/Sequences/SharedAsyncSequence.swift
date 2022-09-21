@@ -31,7 +31,7 @@ import Foundation
 /// let values = try await self.stream.collect()
 /// // ...
 /// ```
-public struct SharedAsyncSequence<Base: AsyncSequence>: AsyncSequence {
+public struct SharedAsyncSequence<Base: AsyncSequence>: AsyncSequence, Sendable where Base: Sendable {
     /// The type of async iterator.
     public typealias AsyncIterator = AsyncThrowingStream<Base.Element, Error>.Iterator
     
@@ -60,10 +60,6 @@ public struct SharedAsyncSequence<Base: AsyncSequence>: AsyncSequence {
         self.manager.makeAsyncIterator()
     }
 }
-
-extension SharedAsyncSequence: Sendable
-where
-Base: Sendable {}
 
 // MARK: CurrentElementAsyncSequence extension
 
@@ -210,7 +206,7 @@ fileprivate actor SubSequenceManager<Base: AsyncSequence> where Base: Sendable {
 
 extension AsyncSequence {
     /// Creates a shareable async sequence that can be used across multiple tasks.
-    public func shared() -> SharedAsyncSequence<Self> {
+    public func shared() -> SharedAsyncSequence<Self> where Self: Sendable {
         .init(self)
     }
 }

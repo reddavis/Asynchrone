@@ -1,5 +1,4 @@
 extension AsyncSequence {
-    
     /// Assigns each element from an async sequence to a property on an object.
     ///
     /// ```swift
@@ -35,7 +34,7 @@ extension AsyncSequence {
     public func assign<Root>(
         to keyPath: ReferenceWritableKeyPath<Root, Element>,
         on object: Root
-    ) rethrows -> Task<Void, Error> {
+    ) rethrows -> Task<Void, Error> where Self: Sendable, Root: Sendable {
         Task {
             for try await element in self {
                 object[keyPath: keyPath] = element
@@ -121,8 +120,8 @@ extension AsyncSequence {
     @discardableResult
     public func sink(
         priority: TaskPriority? = nil,
-        receiveValue: @escaping (Element) async -> Void
-    ) -> Task<Void, Error> {
+        receiveValue: @Sendable @escaping (Element) async -> Void
+    ) -> Task<Void, Error> where Self: Sendable {
         Task(priority: priority) {
             for try await element in self {
                 await receiveValue(element)
@@ -160,9 +159,9 @@ extension AsyncSequence {
     @discardableResult
     public func sink(
         priority: TaskPriority? = nil,
-        receiveValue: @escaping (Element) async -> Void,
-        receiveCompletion: @escaping (AsyncSequenceCompletion<Error>) async -> Void
-    ) -> Task<Void, Never> {
+        receiveValue: @Sendable @escaping (Element) async -> Void,
+        receiveCompletion: @Sendable @escaping (AsyncSequenceCompletion<Error>) async -> Void
+    ) -> Task<Void, Never> where Self: Sendable {
         Task(priority: priority) {
             do {
                 for try await element in self {

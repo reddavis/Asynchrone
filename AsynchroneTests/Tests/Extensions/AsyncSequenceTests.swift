@@ -54,17 +54,20 @@ final class AsyncSequenceTests: XCTestCase {
     // MARK: Sink
     
     func testSink() async {
-        var values: [Int] = []
-        self.sequence.sink { values.append($0) }
+        let store = Store<Int>()
+        self.sequence.sink { await store.append($0) }
         
-        await XCTAssertEventuallyEqual(values, [1, 2, 3])
+        await XCTAssertEventuallyEqual(
+            { await store.values },
+            { [1, 2, 3] }
+        )
     }
     
     func testSinkWithFinishedCompletion() async {
         let completionExpectation = self.expectation(description: "Completion called")
-        var values: [Int] = []
+        let store = Store<Int>()
         self.sequence.sink(
-            receiveValue: { values.append($0) },
+            receiveValue: { await store.append($0) },
             receiveCompletion: {
                 switch $0 {
                 case .failure(let error):
@@ -76,6 +79,8 @@ final class AsyncSequenceTests: XCTestCase {
         )
         
         await self.waitForExpectations(timeout: 5.0, handler: nil)
+        
+        let values = await store.values
         XCTAssertEqual(values, [1, 2, 3])
     }
     
@@ -88,9 +93,9 @@ final class AsyncSequenceTests: XCTestCase {
             continuation.finish(throwing: TestError())
         }
         
-        var values: [Int] = []
+        let store = Store<Int>()
         sequence.sink(
-            receiveValue: { values.append($0) },
+            receiveValue: { await store.append($0) },
             receiveCompletion: {
                 switch $0 {
                 case .failure:
@@ -102,6 +107,8 @@ final class AsyncSequenceTests: XCTestCase {
         )
         
         await self.waitForExpectations(timeout: 5.0, handler: nil)
+        
+        let values = await store.values
         XCTAssertEqual(values, [1, 2, 3])
     }
     
@@ -111,9 +118,9 @@ final class AsyncSequenceTests: XCTestCase {
             continuation.yield(1)
         }
         
-        var values: [Int] = []
+        let store = Store<Int>()
         let task = sequence.sink(
-            receiveValue: { values.append($0) },
+            receiveValue: { await store.append($0) },
             receiveCompletion: {
                 switch $0 {
                 case .failure(let error) where error is CancellationError:
@@ -128,6 +135,18 @@ final class AsyncSequenceTests: XCTestCase {
         
         task.cancel()
         await self.waitForExpectations(timeout: 5.0, handler: nil)
+        
+        let values = await store.values
         XCTAssertEqual(values, [1])
+    }
+}
+
+// MARK: Store
+
+fileprivate actor Store<T> {
+    var values: [T] = []
+    
+    fileprivate func append(_ newElement: T) {
+        self.values.append(newElement)
     }
 }

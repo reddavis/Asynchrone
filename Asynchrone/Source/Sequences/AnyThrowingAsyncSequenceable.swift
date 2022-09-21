@@ -1,45 +1,61 @@
 /// A throwing async sequence that performs type erasure by wrapping another throwing async sequence.
 ///
 /// If the async sequence that you wish to type erase doesn't throw, then use `AnyAsyncSequenceable`.
-public struct AnyThrowingAsyncSequenceable<Element>: AsyncSequence {
-    private var _next: () async throws -> Element?
-    private var _makeAsyncIterator: () -> Self
+public struct AnyThrowingAsyncSequenceable<Element>: AsyncSequence, Sendable {
+    private var _makeAsyncIterator: @Sendable () -> Iterator
 
     // MARK: Initialization
-
+    
     /// Creates a type erasing async sequence.
     /// - Parameters:
     ///   - sequence: The async sequence to type erase.
-    public init<T>(_ asyncSequence: T) where T: AsyncSequence, T.Element == Element {
-        var iterator = asyncSequence.makeAsyncIterator()
-        self._next = { try await iterator.next() }
-        self._makeAsyncIterator = { .init(asyncSequence) }
+    public init<T>(_ sequence: T)
+    where
+    T: AsyncSequence,
+    T: Sendable,
+    T.Element == Element {
+        self._makeAsyncIterator = { Iterator(sequence.makeAsyncIterator()) }
     }
 
     /// Creates an optional type erasing async sequence.
     /// - Parameters:
     ///   - sequence: An optional async sequence to type erase.
-    public init?<T>(_ asyncSequence: T?) where T: AsyncSequence, T.Element == Element {
+    public init?<T>(_ asyncSequence: T?)
+    where
+    T: AsyncSequence,
+    T: Sendable,
+    T.Element == Element {
         guard let asyncSequence = asyncSequence else { return nil }
         self = .init(asyncSequence)
     }
     
     // MARK: AsyncSequence
-    
-    /// Creates an async iterator that emits elements of this async sequence.
-    /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> Self {
+
+    public func makeAsyncIterator() -> Iterator {
         self._makeAsyncIterator()
     }
 }
 
-// MARK: AsyncIteratorProtocol
+// MARK: Iterator
 
-extension AnyThrowingAsyncSequenceable: AsyncIteratorProtocol {
-    /// Produces the next element in the sequence.
-    /// - Returns: The next element or `nil` if the end of the sequence is reached.
-    public mutating func next() async throws -> Element? {
-        try await self._next()
+extension AnyThrowingAsyncSequenceable {
+    public struct Iterator: AsyncIteratorProtocol {
+        private var iterator: any AsyncIteratorProtocol
+        
+        // MARK: Initialization
+        
+        public init<T>(_ iterator: T) where T: AsyncIteratorProtocol, T.Element == Element {
+            self.iterator = iterator
+        }
+        
+        // MARK: AsyncIteratorProtocol
+        
+        public mutating func next() async throws -> Element? {
+            // NOTE: When `AsyncSequence`, `AsyncIteratorProtocol` get their Element as
+            // their primary associated type we won't need the casting.
+            // https://github.com/apple/swift-evolution/blob/main/proposals/0358-primary-associated-types-in-stdlib.md#alternatives-considered
+            try await self.iterator.next() as? Element
+        }
     }
 }
 
@@ -52,7 +68,7 @@ extension AsyncSequence {
     /// If the async sequence that you wish to type erase deson't throw,
     /// then use `eraseToAnyAsyncSequenceable()`.
     /// - Returns: A typed erased async sequence.
-    public func eraseToAnyThrowingAsyncSequenceable() -> AnyThrowingAsyncSequenceable<Element> {
+    public func eraseToAnyThrowingAsyncSequenceable() -> AnyThrowingAsyncSequenceable<Element> where Self: Sendable {
         .init(self)
     }
 }

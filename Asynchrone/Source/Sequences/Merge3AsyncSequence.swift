@@ -157,7 +157,7 @@ extension AsyncSequence {
     public func merge(
         with q: Self,
         _ r: Self
-    ) -> Merge3AsyncSequence<Self> {
+    ) -> Merge3AsyncSequence<Self> where AsyncIterator: Sendable {
         .init(self, q, r)
     }
 }
