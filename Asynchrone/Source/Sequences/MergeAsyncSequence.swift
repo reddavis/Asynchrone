@@ -37,6 +37,8 @@
 /// ```
 public struct MergeAsyncSequence<T>: AsyncSequence, Sendable where T: AsyncSequence, T: Sendable {
     public typealias Element = T.Element
+    
+    // Private
     private let p: T
     private let q: T
     
@@ -67,7 +69,7 @@ public struct MergeAsyncSequence<T>: AsyncSequence, Sendable where T: AsyncSeque
 
 extension MergeAsyncSequence {
     public struct Iterator: AsyncIteratorProtocol {
-        private var _iterator: AsyncStream<Element>.Iterator!
+        private var _iterator: AsyncThrowingStream<Element, Error>.Iterator!
         
         // MARK: Initialization
         
@@ -75,20 +77,20 @@ extension MergeAsyncSequence {
             _ p: T,
             _ q: T
         ) {
-            let stream = self.buildStream(p, q)
+            let stream = self.merge(p, q)
             self._iterator = stream.makeAsyncIterator()
         }
         
         // MARK: Merge
         
-        private func buildStream(
+        private func merge(
             _ p: T,
             _ q: T
-        ) -> AsyncStream<Element> {
+        ) -> AsyncThrowingStream<Element, Error> {
             .init { continuation in
                 let handler: @Sendable (
                     _ sequence: T,
-                    _ continuation: AsyncStream<Element>.Continuation
+                    _ continuation: AsyncThrowingStream<Element, Error>.Continuation
                 ) async throws -> Void = { sequence, continuation in
                     for try await event in sequence {
                         continuation.yield(event)
@@ -98,15 +100,31 @@ extension MergeAsyncSequence {
                 async let resultA: () = handler(p, continuation)
                 async let resultB: () = handler(q, continuation)
                 
-                _ = try? await [resultA, resultB]
-                continuation.finish()
+                do {
+                    _ = try await [resultA, resultB]
+                    continuation.finish()
+                } catch {
+                    continuation.finish(throwing: error)
+                }
             }
         }
         
         // MARK: AsyncIteratorProtocol
         
-        public mutating func next() async -> Element? {
-            await self._iterator.next()
+        public mutating func next() async rethrows -> Element? {
+            var result: Result<Element?, Error>
+            do {
+                result = .success(try await self._iterator.next())
+            } catch {
+                result = .failure(error)
+            }
+            
+            switch result {
+            case .success(let element):
+                return element
+            case .failure:
+                try result._rethrowError()
+            }
         }
     }
 }

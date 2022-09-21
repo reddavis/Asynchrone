@@ -18,7 +18,7 @@ final class Merge3AsyncSequenceTests: XCTestCase {
     // MARK: Tests
     
     func testMergingThreeSequences() async throws {
-        let values = try await self
+        let values = await self
             .sequenceA
             .merge(with: self.sequenceB, self.sequenceC)
             .collect()
