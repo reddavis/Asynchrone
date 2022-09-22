@@ -23,8 +23,12 @@ extension AsyncStream {
         _ build: @escaping (AsyncStream<Element>.Continuation) async -> Void
     ) {
         self = AsyncStream(elementType, bufferingPolicy: limit) { continuation in
-            Task {
+            let task = Task {
                 await build(continuation)
+            }
+
+            continuation.onTermination = { _ in
+                task.cancel()
             }
         }
     }
