@@ -29,8 +29,6 @@ public struct RemoveDuplicatesAsyncSequence<Base: AsyncSequence>: AsyncSequence 
     // Private
     private let base: Base
     private let predicate: Predicate
-    private var iterator: Base.AsyncIterator
-    private var previousElement: Base.Element?
     
     // MARK: Initialization
     
@@ -45,54 +43,64 @@ public struct RemoveDuplicatesAsyncSequence<Base: AsyncSequence>: AsyncSequence 
     ) {
         self.base = base
         self.predicate = predicate
-        self.iterator = base.makeAsyncIterator()
     }
     
     // MARK: AsyncSequence
     
     /// Creates an async iterator that emits elements of this async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> Self {
-        .init(base: self.base, predicate: self.predicate)
+    public func makeAsyncIterator() -> Iterator {
+        Iterator(base: self.base, predicate: self.predicate)
     }
 }
 
 extension RemoveDuplicatesAsyncSequence: Sendable
 where
-Base: Sendable,
-Base.AsyncIterator: Sendable,
-Base.Element: Sendable {}
+Base: Sendable {}
 
-// MARK: AsyncIteratorProtocol
+// MARK: Iterator
 
-extension RemoveDuplicatesAsyncSequence: AsyncIteratorProtocol {
-    /// Produces the next element in the sequence.
-    ///
-    /// Continues to call `next()` on it's base iterator and discard the
-    /// results if the predicate returns true.
-    ///
-    /// The first element of the sequence is always returned.
-    ///
-    /// If the base iterator returns `nil`, indicating the end of the sequence, this
-    /// iterator returns `nil`.
-    /// - Returns: The next element or `nil` if the end of the sequence is reached.
-    public mutating func next() async rethrows -> Element? {
-        let element = try await self.iterator.next()
-        let previousElement = self.previousElement
+extension RemoveDuplicatesAsyncSequence {
+    public struct Iterator: AsyncIteratorProtocol {
+        private let predicate: Predicate
+        private var iterator: Base.AsyncIterator
+        private var previousElement: Base.Element?
         
-        // Update previous element
-        self.previousElement = element
+        // MARK: Initialization
         
-        guard let unwrappedElement = element,
-              let unwrappedPreviousElement = previousElement else { return element }
+        init(
+            base: Base,
+            predicate: @escaping Predicate
+        ) {
+            self.iterator = base.makeAsyncIterator()
+            self.predicate = predicate
+        }
         
-        if self.predicate(unwrappedPreviousElement, unwrappedElement) {
-            return try await self.next()
-        } else {
-            return element
+        // MARK: AsyncIteratorProtocol
+        
+        public mutating func next() async rethrows -> Element? {
+            let element = try await self.iterator.next()
+            let previousElement = self.previousElement
+            
+            // Update previous element
+            self.previousElement = element
+            
+            guard let unwrappedElement = element,
+                  let unwrappedPreviousElement = previousElement else { return element }
+            
+            if self.predicate(unwrappedPreviousElement, unwrappedElement) {
+                return try await self.next()
+            } else {
+                return element
+            }
         }
     }
 }
+
+extension RemoveDuplicatesAsyncSequence.Iterator: Sendable
+where
+Base.AsyncIterator: Sendable,
+Base.Element: Sendable {}
 
 // MARK: Remove duplicates
 

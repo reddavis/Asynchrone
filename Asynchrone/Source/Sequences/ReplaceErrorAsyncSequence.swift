@@ -20,7 +20,6 @@ public struct ReplaceErrorAsyncSequence<Base: AsyncSequence>: AsyncSequence {
     // Private
     private let base: Base
     private let replacement: Element
-    private var iterator: Base.AsyncIterator
     
     // MARK: Initialization
     
@@ -31,37 +30,55 @@ public struct ReplaceErrorAsyncSequence<Base: AsyncSequence>: AsyncSequence {
     public init(base: Base, output: Element) {
         self.base = base
         self.replacement = output
-        self.iterator = base.makeAsyncIterator()
     }
     
     // MARK: AsyncSequence
     
     /// Creates an async iterator that emits elements of this async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> Self {
-        .init(base: self.base, output: self.replacement)
+    public func makeAsyncIterator() -> Iterator {
+        Iterator(base: self.base, output: self.replacement)
     }
 }
 
 extension ReplaceErrorAsyncSequence: Sendable
 where
 Base: Sendable,
-Base.Element: Sendable,
-Base.AsyncIterator: Sendable {}
+Base.Element: Sendable {}
 
-// MARK: AsyncIteratorProtocol
+// MARK: Iterator
 
-extension ReplaceErrorAsyncSequence: AsyncIteratorProtocol {
-    /// Produces the next element in the sequence.
-    /// - Returns: The next element or `nil` if the end of the sequence is reached.
-    public mutating func next() async -> Element? {
-        do {
-            return try await self.iterator.next()
-        } catch {
-            return self.replacement
+extension ReplaceErrorAsyncSequence {
+    public struct Iterator: AsyncIteratorProtocol {
+        private let replacement: Element
+        private var iterator: Base.AsyncIterator
+        
+        // MARK: Initialization
+        
+        init(
+            base: Base,
+            output: Element
+        ) {
+            self.iterator = base.makeAsyncIterator()
+            self.replacement = output
+        }
+        
+        // MARK: AsyncIteratorProtocol
+        
+        public mutating func next() async -> Element? {
+            do {
+                return try await self.iterator.next()
+            } catch {
+                return self.replacement
+            }
         }
     }
 }
+
+extension ReplaceErrorAsyncSequence.Iterator: Sendable
+where
+Base.AsyncIterator: Sendable,
+Base.Element: Sendable {}
 
 // MARK: Replace error
 
