@@ -8,6 +8,15 @@ on:
 
 jobs:
   ios-latest:
+    name: Unit Test - iOS 16.0, Xcode 14.0
+    runs-on: macOS-12
+    env: 
+      DEVELOPER_DIR: /Applications/Xcode_14.0.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Tests
+        run: Scripts/test -d "OS=16.0,name=iPhone 14 Pro"
+  ios-15-5:
     name: Unit Test - iOS 15.5, Xcode 13.4
     runs-on: macOS-12
     env: 
