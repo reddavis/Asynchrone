@@ -16,7 +16,7 @@
 /// // Prints:
 /// // Error!
 /// ```
-public struct Fail<Element, Failure>: AsyncSequence where Failure: Error {
+public struct Fail<Element, Failure>: AsyncSequence, Sendable where Failure: Error {
     private let error: Failure
     private var hasThownError = false
     
