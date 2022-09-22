@@ -60,7 +60,7 @@ public final class TimerAsyncSequence: AsyncSequence {
     /// Creates an async iterator that emits elements of this async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
     public func makeAsyncIterator() -> PassthroughAsyncSequence<Element>.AsyncIterator {
-        self.start()
+        defer { self.start() }
         return self.passthroughSequence.makeAsyncIterator()
     }
 }

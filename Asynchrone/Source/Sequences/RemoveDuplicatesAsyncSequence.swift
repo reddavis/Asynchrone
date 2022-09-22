@@ -24,7 +24,7 @@ public struct RemoveDuplicatesAsyncSequence<Base: AsyncSequence>: AsyncSequence 
     public typealias Element = Base.Element
     
     // A predicate closure for evaluating whether two elements are duplicates.
-    public typealias Predicate = (_ previous: Base.Element, _ current: Base.Element) -> Bool
+    public typealias Predicate = @Sendable (_ previous: Base.Element, _ current: Base.Element) -> Bool
     
     // Private
     private let base: Base
@@ -56,6 +56,12 @@ public struct RemoveDuplicatesAsyncSequence<Base: AsyncSequence>: AsyncSequence 
         .init(base: self.base, predicate: self.predicate)
     }
 }
+
+extension RemoveDuplicatesAsyncSequence: Sendable
+where
+Base: Sendable,
+Base.AsyncIterator: Sendable,
+Base.Element: Sendable {}
 
 // MARK: AsyncIteratorProtocol
 

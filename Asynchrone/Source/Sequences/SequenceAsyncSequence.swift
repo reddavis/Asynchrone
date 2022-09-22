@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// An async version of `Sequence`. Generally used to turn any `Sequence` into
 /// it's async counterpart.
 ///
@@ -36,30 +35,36 @@ public struct SequenceAsyncSequence<P: Sequence>: AsyncSequence {
     
     /// Creates an async iterator that emits elements of this async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> SequenceAsyncSequenceIterator<P> {
+    public func makeAsyncIterator() -> Iterator {
         .init(self.sequence.makeIterator())
     }
 }
 
-// MARK: SequenceAsyncSequenceIterator
+extension SequenceAsyncSequence: Sendable where P: Sendable {}
 
-public struct SequenceAsyncSequenceIterator<P: Sequence>: AsyncIteratorProtocol {
-    private var iterator: P.Iterator
-    
-    // MARK: Initialization
-    
-    public init(_ iterator: P.Iterator) {
-        self.iterator = iterator
-    }
-    
-    // MARK: AsyncIteratorProtocol
-    
-    /// Produces the next element in the sequence.
-    /// - Returns: The next element or `nil` if the end of the sequence is reached.
-    public mutating func next() async -> P.Element? {
-        self.iterator.next()
+// MARK: Iterator
+
+extension SequenceAsyncSequence {
+    public struct Iterator: AsyncIteratorProtocol {
+        private var iterator: P.Iterator
+        
+        // MARK: Initialization
+        
+        init(_ iterator: P.Iterator) {
+            self.iterator = iterator
+        }
+        
+        // MARK: AsyncIteratorProtocol
+        
+        /// Produces the next element in the sequence.
+        /// - Returns: The next element or `nil` if the end of the sequence is reached.
+        public mutating func next() async -> P.Element? {
+            self.iterator.next()
+        }
     }
 }
+
+extension SequenceAsyncSequence.Iterator: Sendable where P.Iterator: Sendable {}
 
 // MARK: Sequence
 

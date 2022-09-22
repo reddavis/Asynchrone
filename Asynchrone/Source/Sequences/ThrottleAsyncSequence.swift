@@ -65,6 +65,10 @@ public struct ThrottleAsyncSequence<T: AsyncSequence>: AsyncSequence {
     }
 }
 
+extension ThrottleAsyncSequence: Sendable
+where
+T: Sendable {}
+
 // MARK: Iterator
 
 extension ThrottleAsyncSequence {
@@ -115,6 +119,11 @@ extension ThrottleAsyncSequence {
         }
     }
 }
+
+extension ThrottleAsyncSequence.Iterator: Sendable
+where
+T.AsyncIterator: Sendable,
+T.Element: Sendable {}
 
 // MARK: Throttle
 

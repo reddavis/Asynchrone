@@ -1,0 +1,42 @@
+version: 2.1
+
+## Orbs
+orbs:
+  macos: circleci/macos@2
+
+## Jobs
+jobs:
+  unit_test:
+    macos:
+      xcode: 14.0.1
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+    steps:
+      - macos/preboot-simulator:
+          version: "16.0"
+          platform: "iOS"
+          device: "iPhone 14 Pro"
+      - macos/preboot-simulator:
+          version: "15.5"
+          platform: "iOS"
+          device: "iPhone 13 Pro"
+      - checkout
+      - run: 
+          name: Install xcpretty
+          command: gem install xcpretty
+      - run: 
+          name: Run iOS16 unit tests
+          command: Scripts/test -d "OS=16.0,name=iPhone 14 Pro" | xcpretty --color --report junit --output ~/test-results/ios16-results.xml
+      - run: 
+          name: Run iOS15.5 unit tests
+          command: Scripts/test -d "OS=15.5,name=iPhone 13 Pro" | xcpretty --color --report junit --output ~/test-results/ios15-results.xml
+      - store_test_results:
+          path: ~/test-results
+      - store_artifacts:
+          path: ~/Library/Logs/DiagnosticReports
+
+## Workflows
+workflows:
+  on_push:
+    jobs:
+      - unit_test

@@ -20,7 +20,7 @@ extension AsyncThrowingStream {
     public init(
         _ elementType: Element.Type = Element.self,
         bufferingPolicy limit: AsyncThrowingStream<Element, Failure>.Continuation.BufferingPolicy = .unbounded,
-        _ build: @escaping (AsyncThrowingStream<Element, Failure>.Continuation) async -> Void
+        _ build: @Sendable @escaping (AsyncThrowingStream<Element, Failure>.Continuation) async -> Void
     ) where Failure == Error {
         self = AsyncThrowingStream(elementType, bufferingPolicy: limit) { continuation in
             Task {

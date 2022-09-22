@@ -17,7 +17,7 @@
 /// // 1
 /// // 4
 /// ```
-public actor CurrentElementAsyncSequence<Element>: AsyncSequence {
+public actor CurrentElementAsyncSequence<Element>: AsyncSequence where Element: Sendable {
     /// The element wrapped by this async sequence, emitted as a new element whenever it changes.
     public private(set) var element: Element
     
@@ -74,8 +74,6 @@ public actor CurrentElementAsyncSequence<Element>: AsyncSequence {
 // MARK: Stream
 
 fileprivate struct _Stream<Element>: AsyncSequence {
-    
-    // Private
     private var stream: AsyncStream<Element>!
     private var continuation: AsyncStream<Element>.Continuation!
     
@@ -104,3 +102,5 @@ fileprivate struct _Stream<Element>: AsyncSequence {
         self.continuation.finish(with: element)
     }
 }
+
+extension _Stream: Sendable where Element: Sendable {}

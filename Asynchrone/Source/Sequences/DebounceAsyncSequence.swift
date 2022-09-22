@@ -32,7 +32,10 @@ import Foundation
 /// // 1
 /// // 5
 /// ```
-public struct DebounceAsyncSequence<T: AsyncSequence>: AsyncSequence {
+public struct DebounceAsyncSequence<T: AsyncSequence>: AsyncSequence
+where
+T.AsyncIterator: Sendable,
+T.Element: Sendable {
     /// The kind of elements streamed.
     public typealias Element = T.Element
 
@@ -62,6 +65,10 @@ public struct DebounceAsyncSequence<T: AsyncSequence>: AsyncSequence {
         Iterator(base: self.base.makeAsyncIterator(), dueTime: self.dueTime)
     }
 }
+
+extension DebounceAsyncSequence: Sendable
+where
+T: Sendable {}
 
 // MARK: Iterator
 
@@ -156,6 +163,11 @@ extension DebounceAsyncSequence {
     }
 }
 
+extension DebounceAsyncSequence.Iterator: Sendable
+where
+T.AsyncIterator: Sendable,
+T.Element: Sendable {}
+
 // MARK: Race result
 
 extension DebounceAsyncSequence.Iterator {
@@ -167,7 +179,7 @@ extension DebounceAsyncSequence.Iterator {
 
 // MARK: Task race coordinator
 
-fileprivate actor TaskRaceCoodinator<Success, Failure: Error>  {
+fileprivate actor TaskRaceCoodinator<Success, Failure: Error> where Success: Sendable  {
     private var winner: Task<Success, Failure>?
     
     func isFirstToCrossLine(_ task: Task<Success, Failure>) -> Bool {
@@ -179,7 +191,7 @@ fileprivate actor TaskRaceCoodinator<Success, Failure: Error>  {
 
 // MARK: Debounce
 
-extension AsyncSequence {
+extension AsyncSequence where AsyncIterator: Sendable, Element: Sendable {
     /// Emits elements only after a specified time interval elapses between emissions.
     ///
     /// Use the `debounce` operator to control the number of values and time between

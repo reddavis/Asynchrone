@@ -60,3 +60,5 @@ public struct PassthroughAsyncSequence<Element>: AsyncSequence {
         self.continuation.finish(with: element)
     }
 }
+
+extension PassthroughAsyncSequence: Sendable where Element: Sendable {}

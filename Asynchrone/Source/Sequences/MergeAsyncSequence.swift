@@ -35,15 +35,12 @@
 /// // 8
 /// // 9
 /// ```
-public struct MergeAsyncSequence<T: AsyncSequence>: AsyncSequence {
-    /// The kind of elements streamed.
+public struct MergeAsyncSequence<T>: AsyncSequence, Sendable where T: AsyncSequence, T: Sendable {
     public typealias Element = T.Element
     
     // Private
-    // swiftlint:disable implicitly_unwrapped_optional
-    private var stream: AsyncStream<Element>!
-    private var iterator: AsyncStream<Element>.Iterator!
-    // swiftlint:enable implicitly_unwrapped_optional
+    private let p: T
+    private let q: T
     
     // MARK: Initialization
     
@@ -55,64 +52,86 @@ public struct MergeAsyncSequence<T: AsyncSequence>: AsyncSequence {
         _ p: T,
         _ q: T
     ) {
-        self.stream = self.buildStream(p, q)
-        self.iterator = self.stream.makeAsyncIterator()
-    }
-    
-    private func buildStream(
-        _ p: T,
-        _ q: T
-    ) -> AsyncStream<Element> {
-        .init { continuation in
-            let handler: (
-                _ sequence: T,
-                _ continuation: AsyncStream<Element>.Continuation
-            ) async throws -> Void = { sequence, continuation in
-                for try await event in sequence {
-                    continuation.yield(event)
-                }
-            }
-            
-            async let resultA: () = handler(p, continuation)
-            async let resultB: () = handler(q, continuation)
-            
-            _ = try? await [resultA, resultB]
-            continuation.finish()
-        }
+        self.p = p
+        self.q = q
     }
     
     // MARK: AsyncSequence
     
     /// Creates an async iterator that emits elements of this async sequence.
     /// - Returns: An instance that conforms to `AsyncIteratorProtocol`.
-    public func makeAsyncIterator() -> AsyncStream<Element>.Iterator {
-        self.iterator
+    public func makeAsyncIterator() -> Iterator {
+        Iterator(self.p, self.q)
     }
 }
 
-// MARK: AsyncIteratorProtocol
+// MARK: Iterator
 
-extension MergeAsyncSequence: AsyncIteratorProtocol {
-    
-    /// Produces the next element in the sequence.
-    ///
-    /// Continues to call `next()` on it's base iterator and iterator of
-    /// it's combined sequence.
-    ///
-    /// If both iterator's return `nil`, indicating the end of the sequence, this
-    /// iterator returns `nil`.
-    /// - Returns: The next element or `nil` if the end of the sequence is reached.
-    public mutating func next() async rethrows -> Element? {
-        await self.iterator.next()
+extension MergeAsyncSequence {
+    public struct Iterator: AsyncIteratorProtocol {
+        private var _iterator: AsyncThrowingStream<Element, Error>.Iterator!
+        
+        // MARK: Initialization
+        
+        init(
+            _ p: T,
+            _ q: T
+        ) {
+            let stream = self.merge(p, q)
+            self._iterator = stream.makeAsyncIterator()
+        }
+        
+        // MARK: Merge
+        
+        private func merge(
+            _ p: T,
+            _ q: T
+        ) -> AsyncThrowingStream<Element, Error> {
+            .init { continuation in
+                let handler: @Sendable (
+                    _ sequence: T,
+                    _ continuation: AsyncThrowingStream<Element, Error>.Continuation
+                ) async throws -> Void = { sequence, continuation in
+                    for try await event in sequence {
+                        continuation.yield(event)
+                    }
+                }
+                
+                async let resultA: () = handler(p, continuation)
+                async let resultB: () = handler(q, continuation)
+                
+                do {
+                    _ = try await [resultA, resultB]
+                    continuation.finish()
+                } catch {
+                    continuation.finish(throwing: error)
+                }
+            }
+        }
+        
+        // MARK: AsyncIteratorProtocol
+        
+        public mutating func next() async rethrows -> Element? {
+            var result: Result<Element?, Error>
+            do {
+                result = .success(try await self._iterator.next())
+            } catch {
+                result = .failure(error)
+            }
+            
+            switch result {
+            case .success(let element):
+                return element
+            case .failure:
+                try result._rethrowError()
+            }
+        }
     }
 }
-
-
 
 // MARK: Merge
 
 extension AsyncSequence {
-
     /// An asynchronous sequence that merges two async sequence.
     ///
     /// The sequences are iterated through in parallel.
@@ -155,7 +174,7 @@ extension AsyncSequence {
     /// - Returns: A async sequence merges elements from this and another async sequence.
     public func merge(
         with other: Self
-    ) -> MergeAsyncSequence<Self> {
+    ) -> MergeAsyncSequence<Self> where Self: Sendable {
         .init(self, other)
     }
 }

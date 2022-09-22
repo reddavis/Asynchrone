@@ -66,6 +66,13 @@ public struct ZipAsyncSequence<P: AsyncSequence, Q: AsyncSequence>: AsyncSequenc
     }
 }
 
+extension ZipAsyncSequence: Sendable
+where
+P: Sendable,
+P.AsyncIterator: Sendable,
+Q: Sendable,
+Q.AsyncIterator: Sendable {}
+
 // MARK: AsyncIteratorProtocol
 
 extension ZipAsyncSequence: AsyncIteratorProtocol {
