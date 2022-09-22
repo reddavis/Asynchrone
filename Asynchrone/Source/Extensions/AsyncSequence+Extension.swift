@@ -125,6 +125,7 @@ extension AsyncSequence {
         Task(priority: priority) {
             for try await element in self {
                 await receiveValue(element)
+                try Task.checkCancellation()
             }
         }
     }
