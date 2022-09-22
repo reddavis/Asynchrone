@@ -9,22 +9,14 @@ public struct AnyThrowingAsyncSequenceable<Element>: AsyncSequence, Sendable {
     /// Creates a type erasing async sequence.
     /// - Parameters:
     ///   - sequence: The async sequence to type erase.
-    public init<T>(_ sequence: T)
-    where
-    T: AsyncSequence,
-    T: Sendable,
-    T.Element == Element {
+    public init<T>(_ sequence: T) where T: AsyncSequence, T: Sendable, T.Element == Element {
         self._makeAsyncIterator = { Iterator(sequence.makeAsyncIterator()) }
     }
 
     /// Creates an optional type erasing async sequence.
     /// - Parameters:
     ///   - sequence: An optional async sequence to type erase.
-    public init?<T>(_ asyncSequence: T?)
-    where
-    T: AsyncSequence,
-    T: Sendable,
-    T.Element == Element {
+    public init?<T>(_ asyncSequence: T?) where T: AsyncSequence, T: Sendable, T.Element == Element {
         guard let asyncSequence = asyncSequence else { return nil }
         self = .init(asyncSequence)
     }
@@ -44,7 +36,7 @@ extension AnyThrowingAsyncSequenceable {
         
         // MARK: Initialization
         
-        public init<T>(_ iterator: T) where T: AsyncIteratorProtocol, T.Element == Element {
+        init<T>(_ iterator: T) where T: AsyncIteratorProtocol, T.Element == Element {
             self.iterator = iterator
         }
         

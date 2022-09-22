@@ -69,7 +69,8 @@ extension SharedAsyncSequence {
     /// Yielding a new element will update this async sequence's `element` property
     /// along with emitting it through the sequence.
     /// - Parameter element: The element to yield.
-    public func yield<Element>(_ element: Element) async where Base == CurrentElementAsyncSequence<Element>, Element: Sendable  {
+    public func yield<Element>(_ element: Element) async
+    where Base == CurrentElementAsyncSequence<Element>, Element: Sendable  {
         await self.base.yield(element)
     }
     
@@ -84,12 +85,14 @@ extension SharedAsyncSequence {
     ///
     /// Once finished, any calls to yield will result in no change.
     /// - Parameter element: The element to emit.
-    public func finish<Element>(with element: Element) async where Base == CurrentElementAsyncSequence<Element>, Element: Sendable {
+    public func finish<Element>(with element: Element) async
+    where Base == CurrentElementAsyncSequence<Element>, Element: Sendable {
         await self.base.finish(with: element)
     }
     
     /// The element wrapped by this async sequence, emitted as a new element whenever it changes.
-    public func element<Element>() async -> Element where Base == CurrentElementAsyncSequence<Element>, Element: Sendable {
+    public func element<Element>() async -> Element
+    where Base == CurrentElementAsyncSequence<Element>, Element: Sendable {
         await self.base.element
     }
 }
@@ -97,7 +100,6 @@ extension SharedAsyncSequence {
 // MARK: PassthroughAsyncSequence extension
 
 extension SharedAsyncSequence {
-    
     /// Yield a new element to the sequence.
     ///
     /// Yielding a new element will emit it through the sequence.

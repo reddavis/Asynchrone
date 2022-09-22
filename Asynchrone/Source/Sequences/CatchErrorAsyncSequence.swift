@@ -55,7 +55,11 @@ Base.Element == NewAsyncSequence.Element {
 }
 
 extension CatchErrorAsyncSequence: Sendable
-where Base: Sendable, NewAsyncSequence: Sendable, Base.AsyncIterator: Sendable, NewAsyncSequence.AsyncIterator: Sendable {}
+where
+Base: Sendable,
+NewAsyncSequence: Sendable,
+Base.AsyncIterator: Sendable,
+NewAsyncSequence.AsyncIterator: Sendable {}
 
 // MARK: AsyncIteratorProtocol
 

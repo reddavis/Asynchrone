@@ -54,35 +54,6 @@ public struct Merge3AsyncSequence<T: AsyncSequence>: AsyncSequence, Sendable whe
         self.r = r
     }
     
-    private func buildStream(
-        _ p: T,
-        _ q: T,
-        _ r: T
-    ) -> AsyncThrowingStream<Element, Error> {
-        .init { continuation in
-            let handler: @Sendable (
-                _ sequence: T,
-                _ continuation: AsyncThrowingStream<Element, Error>.Continuation
-            ) async throws -> Void = { sequence, continuation in
-                for try await event in sequence {
-                    continuation.yield(event)
-                }
-            }
-            
-            async let resultP: () = handler(p, continuation)
-            async let resultQ: () = handler(q, continuation)
-            async let resultR: () = handler(r, continuation)
-            
-            do {
-                _ = try await [resultP, resultQ, resultR]
-                continuation.finish()
-            }
-            catch {
-                continuation.finish(throwing: error)
-            }
-        }
-    }
-    
     // MARK: AsyncSequence
     
     /// Creates an async iterator that emits elements of this async sequence.
