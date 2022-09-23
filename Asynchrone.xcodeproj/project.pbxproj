@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57D05BA128DD04A90070FE5C /* AsyncStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D05BA028DD04A90070FE5C /* AsyncStreamTests.swift */; };
 		644E0F09277A27300006CEB8 /* SharedAsyncSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644E0F08277A27300006CEB8 /* SharedAsyncSequenceTests.swift */; };
 		644E0F0B277A27480006CEB8 /* SharedAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644E0F0A277A27480006CEB8 /* SharedAsyncSequence.swift */; };
 		6470FF6B2775F8E5009CD087 /* ThrottleAsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6470FF6A2775F8E5009CD087 /* ThrottleAsyncSequence.swift */; };
@@ -73,6 +74,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		57D05BA028DD04A90070FE5C /* AsyncStreamTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncStreamTests.swift; sourceTree = "<group>"; };
 		644E0F08277A27300006CEB8 /* SharedAsyncSequenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedAsyncSequenceTests.swift; sourceTree = "<group>"; };
 		644E0F0A277A27480006CEB8 /* SharedAsyncSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedAsyncSequence.swift; sourceTree = "<group>"; };
 		6470FF6A2775F8E5009CD087 /* ThrottleAsyncSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleAsyncSequence.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				A4C361DC276D080F00511525 /* AsyncSequenceTests.swift */,
+				57D05BA028DD04A90070FE5C /* AsyncStreamTests.swift */,
 				A40B6E52278CABEA00CA6502 /* TimeIntervalTests.swift */,
 			);
 			path = Extensions;
@@ -534,6 +537,7 @@
 				644E0F09277A27300006CEB8 /* SharedAsyncSequenceTests.swift in Sources */,
 				A4C361DD276D080F00511525 /* AsyncSequenceTests.swift in Sources */,
 				A45E0F762781BDB1006B64E1 /* ReplaceErrorAsyncSequenceTests.swift in Sources */,
+				57D05BA128DD04A90070FE5C /* AsyncStreamTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

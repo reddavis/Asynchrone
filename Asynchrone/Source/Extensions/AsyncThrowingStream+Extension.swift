@@ -23,8 +23,12 @@ extension AsyncThrowingStream {
         _ build: @Sendable @escaping (AsyncThrowingStream<Element, Failure>.Continuation) async -> Void
     ) where Failure == Error {
         self = AsyncThrowingStream(elementType, bufferingPolicy: limit) { continuation in
-            Task {
+            let task = Task {
                 await build(continuation)
+            }
+
+            continuation.onTermination = { _ in
+                task.cancel()
             }
         }
     }
