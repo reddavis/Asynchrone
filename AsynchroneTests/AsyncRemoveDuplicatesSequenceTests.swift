@@ -2,7 +2,7 @@ import XCTest
 @testable import Asynchrone
 
 
-final class RemoveDuplicatesAsyncSequenceTests: XCTestCase {
+final class AsyncRemoveDuplicatesAsyncSequenceTests: XCTestCase {
     private var stream: AsyncStream<Int>!
     
     // MARK: Setup
