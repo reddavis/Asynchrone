@@ -9,17 +9,8 @@ on:
       - '*'
 
 jobs:
-  ios-latest:
-    name: Unit Tests (iOS 15.5, Xcode 14.1)
-    runs-on: macOS-12
-    env: 
-      DEVELOPER_DIR: /Applications/Xcode_14.1.app/Contents/Developer
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run Tests
-        run: swift test
-  macos-latest:
-    name: Unit Tests (macOS, Xcode 14.1)
+  test:
+    name: Unit Tests
     runs-on: macOS-12
     env: 
       DEVELOPER_DIR: /Applications/Xcode_14.1.app/Contents/Developer
