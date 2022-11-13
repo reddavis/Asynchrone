@@ -2,27 +2,20 @@ import XCTest
 @testable import Asynchrone
 
 final class DebounceAsyncSequenceTests: XCTestCase {
-    private var stream: AsyncStream<Int>!
-    
-    // MARK: Setup
-    
-    override func setUpWithError() throws {
-        self.stream = AsyncStream<Int> { continuation in
+
+    func testDebounce() async {
+        let stream = AsyncStream<Int> { continuation in
             continuation.yield(0)
-            try? await Task.sleep(seconds: 0.3)
+            try? await Task.sleep(seconds: 0.4)
             continuation.yield(1)
             continuation.yield(2)
-            try? await Task.sleep(seconds: 0.3)
+            try? await Task.sleep(seconds: 0.4)
             continuation.yield(3)
-            try? await Task.sleep(seconds: 0.3)
+            try? await Task.sleep(seconds: 0.4)
             continuation.finish()
         }
-    }
-
-    // MARK: Tests
-    
-    func testDebounce() async {
-        let values = await self.stream
+        
+        let values = await stream
             .debounce(for: 0.1)
             .collect()
         
@@ -44,7 +37,6 @@ final class DebounceAsyncSequenceTests: XCTestCase {
             .debounce(for: 0.3)
             .collect()
         
-        print(values)
         XCTAssert(values.isEmpty)
     }
 }
