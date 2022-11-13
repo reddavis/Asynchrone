@@ -86,6 +86,9 @@
               <li class="nav-group-task">
                 <a href="Extensions/Task.html">Task</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Extensions.html#/s:10Asynchrone7_Stream33_DB0CC7BBEFE82EBE088D95B4D83942B5LLV">_Stream</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -95,7 +98,13 @@
                 <a href="Structs/AnyAsyncSequenceable.html">AnyAsyncSequenceable</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/AnyAsyncSequenceable/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/AnyThrowingAsyncSequenceable.html">AnyThrowingAsyncSequenceable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AnyThrowingAsyncSequenceable/Iterator.html">– Iterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/CatchErrorAsyncSequence.html">CatchErrorAsyncSequence</a>
@@ -119,6 +128,9 @@
                 <a href="Structs/DelayAsyncSequence.html">DelayAsyncSequence</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/DelayAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Empty.html">Empty</a>
               </li>
               <li class="nav-group-task">
@@ -131,7 +143,13 @@
                 <a href="Structs/Merge3AsyncSequence.html">Merge3AsyncSequence</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/Merge3AsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/MergeAsyncSequence.html">MergeAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MergeAsyncSequence/Iterator.html">– Iterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/NotificationCenterAsyncSequence.html">NotificationCenterAsyncSequence</a>
@@ -146,13 +164,19 @@
                 <a href="Structs/RemoveDuplicatesAsyncSequence.html">RemoveDuplicatesAsyncSequence</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/RemoveDuplicatesAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/ReplaceErrorAsyncSequence.html">ReplaceErrorAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ReplaceErrorAsyncSequence/Iterator.html">– Iterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SequenceAsyncSequence.html">SequenceAsyncSequence</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/SequenceAsyncSequenceIterator.html">SequenceAsyncSequenceIterator</a>
+                <a href="Structs/SequenceAsyncSequence/Iterator.html">– Iterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SharedAsyncSequence.html">SharedAsyncSequence</a>
@@ -209,8 +233,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AnyAsyncSequenceable</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">AnyAsyncSequenceable</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AnyAsyncSequenceable</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -240,8 +263,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AnyThrowingAsyncSequenceable</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">AnyThrowingAsyncSequenceable</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AnyThrowingAsyncSequenceable</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -284,11 +306,18 @@ with the provided async sequence.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CatchErrorAsyncSequence</span><span class="o">&lt;</span><span class="kt">Base</span><span class="p">,</span> <span class="kt">NewAsyncSequence</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CatchErrorAsyncSequence</span><span class="o">&lt;</span><span class="kt">Base</span><span class="p">,</span> <span class="kt">NewAsyncSequence</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">AsyncSequence</span>
+<span class="k">where</span>
 <span class="kt">Base</span><span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span>
 <span class="kt">NewAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span>
 <span class="kt">Base</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">NewAsyncSequence</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CatchErrorAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CatchErrorAsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span>
+<span class="k">where</span>
+<span class="kt">Base</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">NewAsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Base</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">NewAsyncSequence</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -357,6 +386,12 @@ and then emits all values from the second.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ChainAsyncSequence</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">,</span> <span class="kt">Q</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Q</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">P</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">Q</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ChainAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ChainAsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span>
+<span class="k">where</span>
+<span class="kt">P</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">P</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Q</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Q</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -425,6 +460,17 @@ when any of them emit a value.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CombineLatest3AsyncSequence</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">,</span> <span class="kt">Q</span><span class="p">,</span> <span class="kt">R</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Q</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">R</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CombineLatest3AsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CombineLatest3AsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span>
+<span class="k">where</span>
+<span class="kt">P</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">P</span><span class="o">.</span><span class="kt">Element</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">P</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Q</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Q</span><span class="o">.</span><span class="kt">Element</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Q</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">R</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">R</span><span class="o">.</span><span class="kt">Element</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">R</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -487,6 +533,14 @@ when any of them emit a value.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CombineLatestAsyncSequence</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">,</span> <span class="kt">Q</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Q</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CombineLatestAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CombineLatestAsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span>
+<span class="k">where</span>
+<span class="kt">P</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">P</span><span class="o">.</span><span class="kt">Element</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">P</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Q</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Q</span><span class="o">.</span><span class="kt">Element</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Q</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -543,7 +597,13 @@ realise my woes of rethrows.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DebounceAsyncSequence</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DebounceAsyncSequence</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">AsyncSequence</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">AsyncSequence</span>
+<span class="k">where</span>
+<span class="kt">T</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">T</span><span class="o">.</span><span class="kt">Element</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">DebounceAsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span>
+<span class="k">where</span>
+<span class="kt">T</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -589,7 +649,9 @@ realise my woes of rethrows.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DelayAsyncSequence</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">DelayAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">DelayAsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span>
+<span class="k">where</span>
+<span class="kt">T</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -632,7 +694,7 @@ realise my woes of rethrows.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Empty</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Empty</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Sendable</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Empty</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
 
                         </div>
@@ -676,7 +738,7 @@ realise my woes of rethrows.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">Failure</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Fail</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Sendable</span> <span class="k">where</span> <span class="kt">Failure</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Fail</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
 
                         </div>
@@ -716,6 +778,7 @@ realise my woes of rethrows.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Just</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Just</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Just</span><span class="p">:</span> <span class="kt">Sendable</span> <span class="k">where</span> <span class="kt">Element</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -771,8 +834,7 @@ realise my woes of rethrows.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Merge3AsyncSequence</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Merge3AsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Merge3AsyncSequence</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Sendable</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 
                         </div>
                       </div>
@@ -834,8 +896,7 @@ realise my woes of rethrows.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MergeAsyncSequence</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">MergeAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MergeAsyncSequence</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Sendable</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 
                         </div>
                       </div>
@@ -918,6 +979,7 @@ realise my woes of rethrows.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PassthroughAsyncSequence</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">PassthroughAsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span> <span class="k">where</span> <span class="kt">Element</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -964,7 +1026,9 @@ that don’t match the previous element.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RemoveDuplicatesAsyncSequence</span><span class="o">&lt;</span><span class="kt">Base</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">Base</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Base</span><span class="o">.</span><span class="kt">Element</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RemoveDuplicatesAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">RemoveDuplicatesAsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span>
+<span class="k">where</span>
+<span class="kt">Base</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -1005,7 +1069,10 @@ that don’t match the previous element.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ReplaceErrorAsyncSequence</span><span class="o">&lt;</span><span class="kt">Base</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">Base</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ReplaceErrorAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ReplaceErrorAsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span>
+<span class="k">where</span>
+<span class="kt">Base</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Base</span><span class="o">.</span><span class="kt">Element</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -1046,46 +1113,7 @@ it&rsquo;s async counterpart.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SequenceAsyncSequence</span><span class="o">&lt;</span><span class="kt">P</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt">Sequence</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/SequenceAsyncSequenceIterator"></a>
-                <a name="//apple_ref/swift/Section/SequenceAsyncSequenceIterator" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/SequenceAsyncSequenceIterator"></a>
-                  <h3 class="section-name"><span>SequenceAsyncSequenceIterator</span>
-</h3>
-                </div>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10Asynchrone013SequenceAsyncB8IteratorV"></a>
-                    <a name="//apple_ref/swift/Struct/SequenceAsyncSequenceIterator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Asynchrone013SequenceAsyncB8IteratorV">SequenceAsyncSequenceIterator</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Structs/SequenceAsyncSequenceIterator.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SequenceAsyncSequenceIterator</span><span class="o">&lt;</span><span class="kt">P</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span> <span class="k">where</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt">Sequence</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">SequenceAsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span> <span class="k">where</span> <span class="kt">P</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -1141,7 +1169,7 @@ it&rsquo;s async counterpart.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SharedAsyncSequence</span><span class="o">&lt;</span><span class="kt">Base</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">Base</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SharedAsyncSequence</span><span class="o">&lt;</span><span class="kt">Base</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Sendable</span> <span class="k">where</span> <span class="kt">Base</span> <span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span> <span class="kt">Base</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 
                         </div>
                       </div>
@@ -1195,6 +1223,9 @@ interval you specify. Other elements received within the throttling interval are
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ThrottleAsyncSequence</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ThrottleAsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span>
+<span class="k">where</span>
+<span class="kt">T</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -1243,6 +1274,7 @@ interval you specify. Other elements received within the throttling interval are
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ThrowingPassthroughAsyncSequence</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ThrowingPassthroughAsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span> <span class="k">where</span> <span class="kt">Element</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -1306,6 +1338,14 @@ then emits both elements as a tuple.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Zip3AsyncSequence</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">,</span> <span class="kt">Q</span><span class="p">,</span> <span class="kt">R</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Q</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">R</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Zip3AsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Zip3AsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span>
+<span class="k">where</span>
+<span class="kt">P</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">P</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Q</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Q</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">R</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">R</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -1363,6 +1403,12 @@ then emits both elements as a tuple.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ZipAsyncSequence</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">,</span> <span class="kt">Q</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">AsyncSequence</span> <span class="k">where</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt">AsyncSequence</span><span class="p">,</span> <span class="kt">Q</span> <span class="p">:</span> <span class="kt">AsyncSequence</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ZipAsyncSequence</span><span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ZipAsyncSequence</span><span class="p">:</span> <span class="kt">Sendable</span>
+<span class="k">where</span>
+<span class="kt">P</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">P</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Q</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Q</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
 
                         </div>
                       </div>
@@ -1374,8 +1420,8 @@ then emits both elements as a tuple.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-08-06)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-11-13)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -86,6 +86,9 @@
               <li class="nav-group-task">
                 <a href="../Extensions/Task.html">Task</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Extensions.html#/s:10Asynchrone7_Stream33_DB0CC7BBEFE82EBE088D95B4D83942B5LLV">_Stream</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -95,7 +98,13 @@
                 <a href="../Structs/AnyAsyncSequenceable.html">AnyAsyncSequenceable</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/AnyAsyncSequenceable/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/AnyThrowingAsyncSequenceable.html">AnyThrowingAsyncSequenceable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AnyThrowingAsyncSequenceable/Iterator.html">– Iterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CatchErrorAsyncSequence.html">CatchErrorAsyncSequence</a>
@@ -119,6 +128,9 @@
                 <a href="../Structs/DelayAsyncSequence.html">DelayAsyncSequence</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/DelayAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Empty.html">Empty</a>
               </li>
               <li class="nav-group-task">
@@ -131,7 +143,13 @@
                 <a href="../Structs/Merge3AsyncSequence.html">Merge3AsyncSequence</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/Merge3AsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/MergeAsyncSequence.html">MergeAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MergeAsyncSequence/Iterator.html">– Iterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/NotificationCenterAsyncSequence.html">NotificationCenterAsyncSequence</a>
@@ -146,13 +164,19 @@
                 <a href="../Structs/RemoveDuplicatesAsyncSequence.html">RemoveDuplicatesAsyncSequence</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/RemoveDuplicatesAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/ReplaceErrorAsyncSequence.html">ReplaceErrorAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ReplaceErrorAsyncSequence/Iterator.html">– Iterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SequenceAsyncSequence.html">SequenceAsyncSequence</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/SequenceAsyncSequenceIterator.html">SequenceAsyncSequenceIterator</a>
+                <a href="../Structs/SequenceAsyncSequence/Iterator.html">– Iterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SharedAsyncSequence.html">SharedAsyncSequence</a>
@@ -204,9 +228,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Scs10AsynchroneE_15bufferingPolicy_Scsyxs5Error_pGxm_Scs12ContinuationV09BufferingC0OyxsAC_p__GyAFyxsAC_p_GYactcsAC_pRs_rlufc"></a>
+                    <a name="/s:Scs10AsynchroneE_15bufferingPolicy_Scsyxs5Error_pGxm_Scs12ContinuationV09BufferingC0OyxsAC_p__GyAFyxsAC_p_GYaYbctcsAC_pRs_rlufc"></a>
                     <a name="//apple_ref/swift/Method/init(_:bufferingPolicy:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Scs10AsynchroneE_15bufferingPolicy_Scsyxs5Error_pGxm_Scs12ContinuationV09BufferingC0OyxsAC_p__GyAFyxsAC_p_GYactcsAC_pRs_rlufc">init(_:<wbr>bufferingPolicy:<wbr>_:<wbr>)</a>
+                    <a class="token" href="#/s:Scs10AsynchroneE_15bufferingPolicy_Scsyxs5Error_pGxm_Scs12ContinuationV09BufferingC0OyxsAC_p__GyAFyxsAC_p_GYaYbctcsAC_pRs_rlufc">init(_:<wbr>bufferingPolicy:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -233,7 +257,7 @@ concurrent contexts could result in out of order delivery.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
     <span class="n">_</span> <span class="nv">elementType</span><span class="p">:</span> <span class="kt">Element</span><span class="o">.</span><span class="k">Type</span> <span class="o">=</span> <span class="kt">Element</span><span class="o">.</span><span class="k">self</span><span class="p">,</span>
     <span class="n">bufferingPolicy</span> <span class="nv">limit</span><span class="p">:</span> <span class="kt">AsyncThrowingStream</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;.</span><span class="kt">Continuation</span><span class="o">.</span><span class="kt">BufferingPolicy</span> <span class="o">=</span> <span class="o">.</span><span class="n">unbounded</span><span class="p">,</span>
-    <span class="n">_</span> <span class="nv">build</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">AsyncThrowingStream</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;.</span><span class="kt">Continuation</span><span class="p">)</span> <span class="k">async</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+    <span class="n">_</span> <span class="nv">build</span><span class="p">:</span> <span class="kd">@Sendable</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">AsyncThrowingStream</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;.</span><span class="kt">Continuation</span><span class="p">)</span> <span class="k">async</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
 <span class="p">)</span> <span class="k">where</span> <span class="kt">Failure</span> <span class="o">==</span> <span class="kt">Error</span></code></pre>
 
                         </div>
@@ -331,8 +355,8 @@ AsyncThrowingStream.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-08-06)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-11-13)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Iterator Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../../js/jquery.min.js" defer></script>
+    <script src="../../js/jazzy.js" defer></script>
+    
+    <script src="../../js/lunr.min.js" defer></script>
+    <script src="../../js/typeahead.jquery.js" defer></script>
+    <script src="../../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/Iterator" class="dashAnchor"></a>
+    <a title="Iterator Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../../index.html"> Docs</a> (100% documented)</p>
+        <div class="header-right">
+          <form role="search" action="../../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../../index.html"> Reference</a>
+        <img id="carat" src="../../img/carat.png" alt=""/>
+        Iterator Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../../Actors.html">Actors</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Actors/CurrentElementAsyncSequence.html">CurrentElementAsyncSequence</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Classes/TimerAsyncSequence.html">TimerAsyncSequence</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Enums/AsyncSequenceCompletion.html">AsyncSequenceCompletion</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Extensions/AsyncSequence.html">AsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/AsyncStream.html">AsyncStream</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/AsyncStream/Continuation.html">– Continuation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/AsyncThrowingStream.html">AsyncThrowingStream</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/AsyncThrowingStream/Continuation.html">– Continuation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/NotificationCenter.html">NotificationCenter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Sequence.html">Sequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Task.html">Task</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions.html#/s:10Asynchrone7_Stream33_DB0CC7BBEFE82EBE088D95B4D83942B5LLV">_Stream</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Structs/AnyAsyncSequenceable.html">AnyAsyncSequenceable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/AnyAsyncSequenceable/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/AnyThrowingAsyncSequenceable.html">AnyThrowingAsyncSequenceable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/AnyThrowingAsyncSequenceable/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/CatchErrorAsyncSequence.html">CatchErrorAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ChainAsyncSequence.html">ChainAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/CombineLatest3AsyncSequence.html">CombineLatest3AsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/CombineLatestAsyncSequence.html">CombineLatestAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DebounceAsyncSequence.html">DebounceAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DebounceAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DelayAsyncSequence.html">DelayAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DelayAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Empty.html">Empty</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Fail.html">Fail</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Just.html">Just</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Merge3AsyncSequence.html">Merge3AsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Merge3AsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MergeAsyncSequence.html">MergeAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MergeAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/NotificationCenterAsyncSequence.html">NotificationCenterAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/NotificationCenterAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/PassthroughAsyncSequence.html">PassthroughAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RemoveDuplicatesAsyncSequence.html">RemoveDuplicatesAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RemoveDuplicatesAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ReplaceErrorAsyncSequence.html">ReplaceErrorAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ReplaceErrorAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SequenceAsyncSequence.html">SequenceAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SequenceAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SharedAsyncSequence.html">SharedAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ThrottleAsyncSequence.html">ThrottleAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ThrottleAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ThrowingPassthroughAsyncSequence.html">ThrowingPassthroughAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Zip3AsyncSequence.html">Zip3AsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ZipAsyncSequence.html">ZipAsyncSequence</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Iterator</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Iterator</span> <span class="p">:</span> <span class="kt">AsyncIteratorProtocol</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="../../Structs/RemoveDuplicatesAsyncSequence.html">RemoveDuplicatesAsyncSequence</a></span><span class="o">.</span><span class="kt">Iterator</span><span class="p">:</span> <span class="kt">Sendable</span>
+<span class="k">where</span>
+<span class="kt">Base</span><span class="o">.</span><span class="kt">AsyncIterator</span><span class="p">:</span> <span class="kt">Sendable</span><span class="p">,</span>
+<span class="kt">Base</span><span class="o">.</span><span class="kt"><a href="../../Structs/RemoveDuplicatesAsyncSequence.html#/s:10Asynchrone29RemoveDuplicatesAsyncSequenceV7Elementa">Element</a></span><span class="p">:</span> <span class="kt">Sendable</span></code></pre>
+
+                </div>
+              </div>
+            
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/AsyncIteratorProtocol"></a>
+                <a name="//apple_ref/swift/Section/AsyncIteratorProtocol" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/AsyncIteratorProtocol"></a>
+                  <h3 class="section-name"><span>AsyncIteratorProtocol</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ScI4next7ElementQzSgyYaKF"></a>
+                    <a name="//apple_ref/swift/Method/next()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ScI4next7ElementQzSgyYaKF">next()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">next</span><span class="p">()</span> <span class="k">async</span> <span class="k">rethrows</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/RemoveDuplicatesAsyncSequence.html#/s:10Asynchrone29RemoveDuplicatesAsyncSequenceV7Elementa">Element</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-11-13)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

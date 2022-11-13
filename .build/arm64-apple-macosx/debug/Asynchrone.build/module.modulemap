@@ -1,0 +1,4 @@
+module Asynchrone {
+    header "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Asynchrone-Swift.h"
+    requires objc
+}

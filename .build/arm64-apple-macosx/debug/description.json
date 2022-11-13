@@ -1,0 +1,735 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchronePackageTests.xctest/Contents/MacOS/AsynchronePackageTests",
+      "productName" : "AsynchronePackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.Asynchrone-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "importPath" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Common/ErrorMechanism.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Common/RethrowingAccessor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Extensions/AsyncSequence+Extension.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Extensions/AsyncStream+Extension.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Extensions/AsyncThrowingStream+Extension.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Extensions/Task+Extension.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Extensions/TimeInterval+Extension.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/AnyAsyncSequenceable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/AnyThrowingAsyncSequenceable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/AsyncSequenceCompletion.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/CatchErrorAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/ChainAsyncSequenceable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/CombineLatest3AsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/CombineLatestAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/CurrentElementAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/DebounceAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/DelayAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/Empty.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/Fail.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/Just.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/Merge3AsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/MergeAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/NotificationCenterAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/PassthroughAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/RemoveDuplicatesAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/ReplaceErrorAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/SequenceAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/SharedAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/ThrottleAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/ThrowingPassthroughAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/TimerAsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/Zip3AsyncSequence.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/ZipAsyncSequence.swift"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "Asynchrone",
+      "moduleOutputPath" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.swiftmodule",
+      "objects" : [
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Common/ErrorMechanism.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Common/RethrowingAccessor.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Extensions/AsyncSequence+Extension.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Extensions/AsyncStream+Extension.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Extensions/AsyncThrowingStream+Extension.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Extensions/Task+Extension.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Extensions/TimeInterval+Extension.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/AnyAsyncSequenceable.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/AnyThrowingAsyncSequenceable.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/AsyncSequenceCompletion.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/CatchErrorAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/ChainAsyncSequenceable.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/CombineLatest3AsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/CombineLatestAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/CurrentElementAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/DebounceAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/DelayAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/Empty.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/Fail.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/Just.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/Merge3AsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/MergeAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/NotificationCenterAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/PassthroughAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/RemoveDuplicatesAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/ReplaceErrorAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/SequenceAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/SharedAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/ThrottleAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/ThrowingPassthroughAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/TimerAsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/Zip3AsyncSequence.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/ZipAsyncSequence.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx12.0",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-g",
+        "-j20",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Asynchrone-Swift.h",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib"
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Common/ErrorMechanism.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Common/RethrowingAccessor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Extensions/AsyncSequence+Extension.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Extensions/AsyncStream+Extension.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Extensions/AsyncThrowingStream+Extension.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Extensions/Task+Extension.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Extensions/TimeInterval+Extension.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/AnyAsyncSequenceable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/AnyThrowingAsyncSequenceable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/AsyncSequenceCompletion.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/CatchErrorAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/ChainAsyncSequenceable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/CombineLatest3AsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/CombineLatestAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/CurrentElementAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/DebounceAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/DelayAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/Empty.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/Fail.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/Just.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/Merge3AsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/MergeAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/NotificationCenterAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/PassthroughAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/RemoveDuplicatesAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/ReplaceErrorAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/SequenceAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/SharedAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/ThrottleAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/ThrowingPassthroughAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/TimerAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/Zip3AsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build/Sequences/ZipAsyncSequence.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Common/ErrorMechanism.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Common/RethrowingAccessor.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Extensions/AsyncSequence+Extension.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Extensions/AsyncStream+Extension.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Extensions/AsyncThrowingStream+Extension.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Extensions/Task+Extension.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Extensions/TimeInterval+Extension.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/AnyAsyncSequenceable.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/AnyThrowingAsyncSequenceable.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/AsyncSequenceCompletion.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/CatchErrorAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/ChainAsyncSequenceable.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/CombineLatest3AsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/CombineLatestAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/CurrentElementAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/DebounceAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/DelayAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/Empty.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/Fail.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/Just.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/Merge3AsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/MergeAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/NotificationCenterAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/PassthroughAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/RemoveDuplicatesAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/ReplaceErrorAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/SequenceAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/SharedAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/ThrottleAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/ThrowingPassthroughAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/TimerAsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/Zip3AsyncSequence.swift",
+        "/Users/reddavis/Developer/Asynchrone/Sources/Asynchrone/Sequences/ZipAsyncSequence.swift"
+      ],
+      "tempsPath" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.AsynchroneTests-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "importPath" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Assertion.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Extensions/AsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Extensions/TimeIntervalTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/AnyAsyncSequenceableTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/AnyThrowingAsyncSequenceableTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/CatchErrorAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/ChainAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/CombineLatest3AsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/CombineLatestAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/CurrentElementAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/DebounceAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/DelayAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/EmptyTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/FailTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/JustTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/Merge3AsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/MergeAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/NotificationCenterAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/PassthroughAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/RemoveDuplicatesAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/ReplaceErrorAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/SequenceAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/SharedAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/ThrottleAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/ThrowingPassthroughAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/TimerAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/ZipAsyncSequenceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/TestError.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/Asynchrone.swiftmodule"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "AsynchroneTests",
+      "moduleOutputPath" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.swiftmodule",
+      "objects" : [
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Assertion.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Extensions/AsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Extensions/TimeIntervalTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/AnyAsyncSequenceableTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/AnyThrowingAsyncSequenceableTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/CatchErrorAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/ChainAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/CombineLatest3AsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/CombineLatestAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/CurrentElementAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/DebounceAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/DelayAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/EmptyTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/FailTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/JustTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/Merge3AsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/MergeAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/NotificationCenterAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/PassthroughAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/RemoveDuplicatesAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/ReplaceErrorAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/SequenceAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/SharedAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/ThrottleAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/ThrowingPassthroughAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/TimerAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/ZipAsyncSequenceTests.swift.o",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/TestError.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx12.0",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-g",
+        "-j20",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib"
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Assertion.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Extensions/AsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Extensions/TimeIntervalTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/AnyAsyncSequenceableTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/AnyThrowingAsyncSequenceableTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/CatchErrorAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/ChainAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/CombineLatest3AsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/CombineLatestAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/CurrentElementAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/DebounceAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/DelayAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/EmptyTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/FailTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/JustTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/Merge3AsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/MergeAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/NotificationCenterAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/PassthroughAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/RemoveDuplicatesAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/ReplaceErrorAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/SequenceAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/SharedAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/ThrottleAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/ThrowingPassthroughAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/TimerAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/Sequences/ZipAsyncSequenceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build/TestError.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Assertion.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Extensions/AsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Extensions/TimeIntervalTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/AnyAsyncSequenceableTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/AnyThrowingAsyncSequenceableTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/CatchErrorAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/ChainAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/CombineLatest3AsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/CombineLatestAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/CurrentElementAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/DebounceAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/DelayAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/EmptyTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/FailTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/JustTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/Merge3AsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/MergeAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/NotificationCenterAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/PassthroughAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/RemoveDuplicatesAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/ReplaceErrorAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/SequenceAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/SharedAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/ThrottleAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/ThrowingPassthroughAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/TimerAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/Sequences/ZipAsyncSequenceTests.swift",
+        "/Users/reddavis/Developer/Asynchrone/Tests/AsynchroneTests/TestError.swift"
+      ],
+      "tempsPath" : "/Users/reddavis/Developer/Asynchrone/.build/arm64-apple-macosx/debug/AsynchroneTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "testDiscoveryCommands" : {
+
+  }
+}

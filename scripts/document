@@ -6,4 +6,4 @@ if test ! $(which jazzy); then
     exit 1
 fi
 
-jazzy --output .documentation --build-tool-arguments -project,Asynchrone.xcodeproj,-scheme,Asynchrone --min-acl public
+jazzy --output .documentation --swift-build-tool spm --min-acl public
