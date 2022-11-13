@@ -1,0 +1,21 @@
+name: "CI"
+
+on: 
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches: 
+      - '*'
+
+jobs:
+  test:
+    name: Unit Tests
+    runs-on: macOS-12
+    env: 
+      DEVELOPER_DIR: /Applications/Xcode_14.1.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Tests
+        run: swift test
+  

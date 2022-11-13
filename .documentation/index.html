@@ -85,6 +85,9 @@
               <li class="nav-group-task">
                 <a href="Extensions/Task.html">Task</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Extensions.html#/s:10Asynchrone7_Stream33_DB0CC7BBEFE82EBE088D95B4D83942B5LLV">_Stream</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -94,7 +97,13 @@
                 <a href="Structs/AnyAsyncSequenceable.html">AnyAsyncSequenceable</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/AnyAsyncSequenceable/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/AnyThrowingAsyncSequenceable.html">AnyThrowingAsyncSequenceable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AnyThrowingAsyncSequenceable/Iterator.html">– Iterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/CatchErrorAsyncSequence.html">CatchErrorAsyncSequence</a>
@@ -118,6 +127,9 @@
                 <a href="Structs/DelayAsyncSequence.html">DelayAsyncSequence</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/DelayAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Empty.html">Empty</a>
               </li>
               <li class="nav-group-task">
@@ -130,7 +142,13 @@
                 <a href="Structs/Merge3AsyncSequence.html">Merge3AsyncSequence</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/Merge3AsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/MergeAsyncSequence.html">MergeAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MergeAsyncSequence/Iterator.html">– Iterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/NotificationCenterAsyncSequence.html">NotificationCenterAsyncSequence</a>
@@ -145,13 +163,19 @@
                 <a href="Structs/RemoveDuplicatesAsyncSequence.html">RemoveDuplicatesAsyncSequence</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/RemoveDuplicatesAsyncSequence/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/ReplaceErrorAsyncSequence.html">ReplaceErrorAsyncSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ReplaceErrorAsyncSequence/Iterator.html">– Iterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SequenceAsyncSequence.html">SequenceAsyncSequence</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/SequenceAsyncSequenceIterator.html">SequenceAsyncSequenceIterator</a>
+                <a href="Structs/SequenceAsyncSequence/Iterator.html">– Iterator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SharedAsyncSequence.html">SharedAsyncSequence</a>
@@ -198,7 +222,7 @@
 <li>Click <code>Package Dependencies</code>.</li>
 <li>Click <code>+</code>.</li>
 <li>Enter package URL: <code>https://github.com/reddavis/Asynchrone</code>.</li>
-<li>Add <code>Asynchone</code> to your app target.</li>
+<li>Add <code>Asynchrone</code> to your app target.</li>
 </ol>
 <h2 id='documentation' class='heading'>Documentation</h2>
 
@@ -585,6 +609,14 @@
 <span class="c1">// 3</span>
 <span class="c1">// 4</span>
 </code></pre>
+<h3 id='a-href-https-distracted-austin-575f34-netlify-app-structs-notificationcenterasyncsequence-notificationcenterasyncsequence-a' class='heading'><a href="https://distracted-austin-575f34.netlify.app/structs/notificationcenterasyncsequence">NotificationCenterAsyncSequence</a></h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">NotificationCenter</span><span class="o">.</span><span class="k">default</span><span class="o">.</span><span class="nf">sequence</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="n">orientationDidChangeNotification</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="k">await</span> <span class="n">element</span> <span class="k">in</span> <span class="n">sequence</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre>
 <h3 id='a-href-https-distracted-austin-575f34-netlify-app-structs-passthroughasyncsequence-passthroughasyncsequence-a' class='heading'><a href="https://distracted-austin-575f34.netlify.app/structs/passthroughasyncsequence">PassthroughAsyncSequence</a></h3>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="kt">PassthroughAsyncSequence</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">()</span>
 <span class="n">sequence</span><span class="o">.</span><span class="nf">yield</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -804,8 +836,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-08-06)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+          <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-11-13)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
