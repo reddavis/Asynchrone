@@ -21,13 +21,13 @@ In Xcode:
 
 ## Documentation
 
-Documentation can be found [here](https://distracted-austin-575f34.netlify.app).
+Documentation can be found [here](https://asynchrone.vercel.app).
 
 ## Overview
 
 ### AsyncSequence
 
-### [Extensions](https://distracted-austin-575f34.netlify.app/extensions/asyncsequence)
+### [Extensions](https://asynchrone.vercel.app/extensions/asyncsequence)
 
 #### Assign
 
@@ -143,7 +143,7 @@ sequence.sink(
 // Complete: failure(TestError())
 ```
 
-### [AnyAsyncSequenceable](https://distracted-austin-575f34.netlify.app/structs/anyasyncsequenceable)
+### [AnyAsyncSequenceable](https://asynchrone.vercel.app/structs/anyasyncsequenceable)
 
 ```swift
 let sequence = Just(1)
@@ -151,14 +151,14 @@ let sequence = Just(1)
     .eraseToAnyAsyncSequenceable()
 ```
 
-### [AnyThrowingAsyncSequenceable](https://distracted-austin-575f34.netlify.app/structs/anythrowingasyncsequenceable)
+### [AnyThrowingAsyncSequenceable](https://asynchrone.vercel.app/structs/anythrowingasyncsequenceable)
 
 ```swift
 let stream = Fail<Int, TestError>(error: TestError.a)
     .eraseToAnyThrowingAsyncSequenceable()
 ```
 
-### [CatchErrorAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/catcherrorasyncsequenceable)
+### [CatchErrorAsyncSequence](https://asynchrone.vercel.app/structs/catcherrorasyncsequenceable)
 
 ```swift
 let sequence = Fail<Int, TestError>(
@@ -176,7 +176,7 @@ for await value in sequence {
 // -1
 ```
 
-### [ChainAsyncSequenceable](https://distracted-austin-575f34.netlify.app/structs/chainasyncsequenceable)
+### [ChainAsyncSequenceable](https://asynchrone.vercel.app/structs/chainasyncsequenceable)
 
 ```swift
 let sequenceA = AsyncStream<Int> { continuation in
@@ -216,7 +216,7 @@ for await value in sequenceA.chain(with: sequenceB).chain(with: sequenceC) {
 // 9
 ```
 
-### [CombineLatestAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/combinelatestasyncsequence)
+### [CombineLatestAsyncSequence](https://asynchrone.vercel.app/structs/combinelatestasyncsequence)
 
 ```swift
 let streamA = .init { continuation in
@@ -248,7 +248,7 @@ for await value in streamA.combineLatest(streamB) {
 // (4, 9)
 ```
 
-### [CombineLatest3AsyncSequence](https://distracted-austin-575f34.netlify.app/structs/combinelatest3asyncsequence)
+### [CombineLatest3AsyncSequence](https://asynchrone.vercel.app/structs/combinelatest3asyncsequence)
 
 ```swift
 let streamA = .init { continuation in
@@ -286,7 +286,7 @@ for await value in streamA.combineLatest(streamB, streamC) {
 // (4, 9, 11)
 ```
 
-### [CurrentElementAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/currentelementasyncsequence)
+### [CurrentElementAsyncSequence](https://asynchrone.vercel.app/structs/currentelementasyncsequence)
 
 ```swift
 let sequence = CurrentElementAsyncSequence(0)
@@ -306,7 +306,7 @@ print(await sequence.element)
 // 4
 ```
 
-### [DebounceAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/debounceasyncsequence)
+### [DebounceAsyncSequence](https://asynchrone.vercel.app/structs/debounceasyncsequence)
 
 ```swift
 let stream = AsyncStream<Int> { continuation in
@@ -331,7 +331,7 @@ for element in try await self.stream.debounce(for: 0.1) {
 // 5
 ```
 
-### [DelayAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/delayasyncsequence)
+### [DelayAsyncSequence](https://asynchrone.vercel.app/structs/delayasyncsequence)
 
 ```swift
 let stream = AsyncStream<Int> { continuation in
@@ -353,7 +353,7 @@ for element in try await self.stream.delay(for: 0.5) {
 >>>>>>> main
 ```
 
-### [Empty](https://distracted-austin-575f34.netlify.app/structs/empty)
+### [Empty](https://asynchrone.vercel.app/structs/empty)
 
 ```swift
 Empty<Int>().sink(
@@ -372,7 +372,7 @@ Empty<Int>().sink(
 // Finished
 ```
 
-### [Fail](https://distracted-austin-575f34.netlify.app/structs/fail)
+### [Fail](https://asynchrone.vercel.app/structs/fail)
 
 ```swift
 let stream = Fail<Int, TestError>(error: TestError())
@@ -389,7 +389,7 @@ do {
 // Error!
 ```
 
-### [Just](https://distracted-austin-575f34.netlify.app/structs/just)
+### [Just](https://asynchrone.vercel.app/structs/just)
 
 ```swift
 let stream = Just(1)
@@ -402,7 +402,7 @@ for await value in stream {
 // 1
 ```
  
-### [MergeAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/mergeasyncsequence)
+### [MergeAsyncSequence](https://asynchrone.vercel.app/structs/mergeasyncsequence)
 
 ```swift
 let streamA = .init { continuation in
@@ -438,7 +438,7 @@ for await value in streamA.merge(with: streamB) {
 // 9
 ```
 
-### [Merge3AsyncSequence](https://distracted-austin-575f34.netlify.app/structs/merge3asyncsequence)
+### [Merge3AsyncSequence](https://asynchrone.vercel.app/structs/merge3asyncsequence)
 
 ```swift
 let streamA = .init { continuation in
@@ -468,7 +468,7 @@ for await value in self.streamA.merge(with: self.streamB, self.streamC) {
 // 4
 ```
 
-### [NotificationCenterAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/notificationcenterasyncsequence)
+### [NotificationCenterAsyncSequence](https://asynchrone.vercel.app/structs/notificationcenterasyncsequence)
 
 ```swift
 let sequence = NotificationCenter.default.sequence(for: UIDevice.orientationDidChangeNotification)
@@ -479,7 +479,7 @@ for await element in sequence {
 
 ```
 
-### [PassthroughAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/passthroughasyncsequence)
+### [PassthroughAsyncSequence](https://asynchrone.vercel.app/structs/passthroughasyncsequence)
 
 ```swift
 let sequence = PassthroughAsyncSequence<Int>()
@@ -498,7 +498,7 @@ for await value in sequence {
 // 2
 ```
 
-### [RemoveDuplicatesAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/removeduplicatesasyncsequence)
+### [RemoveDuplicatesAsyncSequence](https://asynchrone.vercel.app/structs/removeduplicatesasyncsequence)
 
 ```swift
 let stream = .init { continuation in
@@ -519,7 +519,7 @@ for await value in stream.removeDuplicates() {
 // 3
 ```
 
-### [ReplaceErrorAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/replaceerrorasyncsequence)
+### [ReplaceErrorAsyncSequence](https://asynchrone.vercel.app/structs/replaceerrorasyncsequence)
 
 ```swift
 let sequence = Fail<Int, TestError>(
@@ -535,7 +535,7 @@ for await value in stream {
 // 0
 ```
 
-### [SequenceAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/sequenceasyncsequence)
+### [SequenceAsyncSequence](https://asynchrone.vercel.app/structs/sequenceasyncsequence)
 
 ```swift
 let sequence = [0, 1, 2, 3].async
@@ -550,7 +550,7 @@ for await value in sequence {
 // 3
 ```
 
-### [SharedAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/sharedasyncsequence)
+### [SharedAsyncSequence](https://asynchrone.vercel.app/structs/sharedasyncsequence)
 
 ```swift
 let values = [
@@ -582,7 +582,7 @@ let values = try await self.stream.collect()
 // ...
 ```
 
-### [ThrottleAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/throttleasyncsequence)
+### [ThrottleAsyncSequence](https://asynchrone.vercel.app/structs/throttleasyncsequence)
 
 ```swift
 let stream = AsyncStream<Int> { continuation in
@@ -608,7 +608,7 @@ for element in try await self.stream.throttle(for: 0.05, latest: true) {
 // 5
 ```
 
-### [ThrowingPassthroughAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/throwingpassthroughasyncsequence)
+### [ThrowingPassthroughAsyncSequence](https://asynchrone.vercel.app/structs/throwingpassthroughasyncsequence)
 
 ```swift
 let sequence = ThrowingPassthroughAsyncSequence<Int>()
@@ -632,7 +632,7 @@ do {
 // Error!
 ```
 
-### [TimerAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/timerasyncsequence)
+### [TimerAsyncSequence](https://asynchrone.vercel.app/structs/timerasyncsequence)
 
 ```swift
 let sequence = TimerAsyncSequence(interval: 1)
@@ -648,7 +648,7 @@ for element in await sequence {
 // 2022-03-19 20:49:32 +0000
 ```
 
-### [ZipAsyncSequence](https://distracted-austin-575f34.netlify.app/structs/zipasyncsequence)
+### [ZipAsyncSequence](https://asynchrone.vercel.app/structs/zipasyncsequence)
 
 ```swift
 let streamA = .init { continuation in
@@ -673,7 +673,7 @@ for await value in streamA.zip(streamB) {
 // (2, 6)
 ```
 
-### [Zip3AsyncSequence](https://distracted-austin-575f34.netlify.app/structs/zip3asyncsequence)
+### [Zip3AsyncSequence](https://asynchrone.vercel.app/structs/zip3asyncsequence)
 
 ```swift
 let streamA = .init { continuation in
@@ -706,16 +706,16 @@ for await value in streamA.zip(streamB, streamC) {
 
 ### AsyncStream
 
-- [Extensions](https://distracted-austin-575f34.netlify.app/extensions/asyncstream)
+- [Extensions](https://asynchrone.vercel.app/extensions/asyncstream)
 
 ### AsyncStream.Continuation
 
-- [Extensions](https://distracted-austin-575f34.netlify.app/extensions/asyncstream/continuation)
+- [Extensions](https://asynchrone.vercel.app/extensions/asyncstream/continuation)
 
 ### AsyncThrowingStream
 
-- [Extensions](https://distracted-austin-575f34.netlify.app/extensions/asyncthrowingstream)
+- [Extensions](https://asynchrone.vercel.app/extensions/asyncthrowingstream)
 
 ### AsyncThrowingStream.Continuation
 
-- [Extensions](https://distracted-austin-575f34.netlify.app/extensions/asyncthrowingstream/continuation)
+- [Extensions](https://asynchrone.vercel.app/extensions/asyncthrowingstream/continuation)
