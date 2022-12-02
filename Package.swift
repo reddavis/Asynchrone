@@ -6,8 +6,10 @@ import PackageDescription
 let package = Package(
     name: "Asynchrone",
     platforms: [
-        .iOS("14.0"),
-        .macOS("12.0")
+        .iOS(.v14),
+        .macOS(.v12),
+        .watchOS(.v6),
+        .tvOS(.v14)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
