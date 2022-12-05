@@ -6,6 +6,8 @@ Extensions and additions to `AsyncSequence`, `AsyncStream` and `AsyncThrowingStr
 
 - iOS 14.0+
 - macOS 12.0+
+- watchOS 6.0+
+- tvOS 14.0+
 
 ## Installation
 
