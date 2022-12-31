@@ -1,6 +1,6 @@
-# Asynchone
+# Asynchrone
 
-Extensions and additions to `AsyncSequence`, `AsyncStream` and `AsyncThrowingStream`.
+Extensions and additions for Swift's async sequence.
 
 ## Requirements
 
@@ -23,13 +23,13 @@ In Xcode:
 
 ## Documentation
 
-Documentation can be found [here](https://asynchrone.vercel.app).
+Documentation can be found [here](https://swiftpackageindex.com/reddavis/Asynchrone/main/documentation/asynchrone).
 
 ## Overview
 
 ### AsyncSequence
 
-### [Extensions](https://asynchrone.vercel.app/extensions/asyncsequence)
+### Extensions
 
 #### Assign
 
@@ -145,7 +145,7 @@ sequence.sink(
 // Complete: failure(TestError())
 ```
 
-### [AnyAsyncSequenceable](https://asynchrone.vercel.app/structs/anyasyncsequenceable)
+### [AnyAsyncSequenceable](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/anyasyncsequenceable)
 
 ```swift
 let sequence = Just(1)
@@ -153,14 +153,14 @@ let sequence = Just(1)
     .eraseToAnyAsyncSequenceable()
 ```
 
-### [AnyThrowingAsyncSequenceable](https://asynchrone.vercel.app/structs/anythrowingasyncsequenceable)
+### [AnyThrowingAsyncSequenceable](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/anythrowingasyncsequenceable)
 
 ```swift
 let stream = Fail<Int, TestError>(error: TestError.a)
     .eraseToAnyThrowingAsyncSequenceable()
 ```
 
-### [CatchErrorAsyncSequence](https://asynchrone.vercel.app/structs/catcherrorasyncsequenceable)
+### [CatchErrorAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/catcherrorasyncsequence)
 
 ```swift
 let sequence = Fail<Int, TestError>(
@@ -178,7 +178,7 @@ for await value in sequence {
 // -1
 ```
 
-### [ChainAsyncSequenceable](https://asynchrone.vercel.app/structs/chainasyncsequenceable)
+### [ChainAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/chainasyncsequence)
 
 ```swift
 let sequenceA = AsyncStream<Int> { continuation in
@@ -218,7 +218,7 @@ for await value in sequenceA.chain(with: sequenceB).chain(with: sequenceC) {
 // 9
 ```
 
-### [CombineLatestAsyncSequence](https://asynchrone.vercel.app/structs/combinelatestasyncsequence)
+### [CombineLatestAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/combinelatestasyncsequence)
 
 ```swift
 let streamA = .init { continuation in
@@ -250,7 +250,7 @@ for await value in streamA.combineLatest(streamB) {
 // (4, 9)
 ```
 
-### [CombineLatest3AsyncSequence](https://asynchrone.vercel.app/structs/combinelatest3asyncsequence)
+### [CombineLatest3AsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/combinelatest3asyncsequence)
 
 ```swift
 let streamA = .init { continuation in
@@ -288,7 +288,7 @@ for await value in streamA.combineLatest(streamB, streamC) {
 // (4, 9, 11)
 ```
 
-### [CurrentElementAsyncSequence](https://asynchrone.vercel.app/structs/currentelementasyncsequence)
+### [CurrentElementAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/currentelementasyncsequence)
 
 ```swift
 let sequence = CurrentElementAsyncSequence(0)
@@ -308,7 +308,7 @@ print(await sequence.element)
 // 4
 ```
 
-### [DebounceAsyncSequence](https://asynchrone.vercel.app/structs/debounceasyncsequence)
+### [DebounceAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/debounceasyncsequence)
 
 ```swift
 let stream = AsyncStream<Int> { continuation in
@@ -333,7 +333,7 @@ for element in try await self.stream.debounce(for: 0.1) {
 // 5
 ```
 
-### [DelayAsyncSequence](https://asynchrone.vercel.app/structs/delayasyncsequence)
+### [DelayAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/delayasyncsequence)
 
 ```swift
 let stream = AsyncStream<Int> { continuation in
@@ -355,7 +355,7 @@ for element in try await self.stream.delay(for: 0.5) {
 >>>>>>> main
 ```
 
-### [Empty](https://asynchrone.vercel.app/structs/empty)
+### [Empty](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/empty)
 
 ```swift
 Empty<Int>().sink(
@@ -374,7 +374,7 @@ Empty<Int>().sink(
 // Finished
 ```
 
-### [Fail](https://asynchrone.vercel.app/structs/fail)
+### [Fail](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/fail)
 
 ```swift
 let stream = Fail<Int, TestError>(error: TestError())
@@ -391,7 +391,7 @@ do {
 // Error!
 ```
 
-### [Just](https://asynchrone.vercel.app/structs/just)
+### [Just](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/just)
 
 ```swift
 let stream = Just(1)
@@ -404,7 +404,7 @@ for await value in stream {
 // 1
 ```
  
-### [MergeAsyncSequence](https://asynchrone.vercel.app/structs/mergeasyncsequence)
+### [MergeAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/mergeasyncsequence)
 
 ```swift
 let streamA = .init { continuation in
@@ -440,7 +440,7 @@ for await value in streamA.merge(with: streamB) {
 // 9
 ```
 
-### [Merge3AsyncSequence](https://asynchrone.vercel.app/structs/merge3asyncsequence)
+### [Merge3AsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/merge3asyncsequence)
 
 ```swift
 let streamA = .init { continuation in
@@ -470,7 +470,7 @@ for await value in self.streamA.merge(with: self.streamB, self.streamC) {
 // 4
 ```
 
-### [NotificationCenterAsyncSequence](https://asynchrone.vercel.app/structs/notificationcenterasyncsequence)
+### [NotificationCenterAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/notificationcenterasyncsequence)
 
 ```swift
 let sequence = NotificationCenter.default.sequence(for: UIDevice.orientationDidChangeNotification)
@@ -481,7 +481,7 @@ for await element in sequence {
 
 ```
 
-### [PassthroughAsyncSequence](https://asynchrone.vercel.app/structs/passthroughasyncsequence)
+### [PassthroughAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/passthroughasyncsequence)
 
 ```swift
 let sequence = PassthroughAsyncSequence<Int>()
@@ -500,7 +500,7 @@ for await value in sequence {
 // 2
 ```
 
-### [RemoveDuplicatesAsyncSequence](https://asynchrone.vercel.app/structs/removeduplicatesasyncsequence)
+### [RemoveDuplicatesAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/removeduplicatesasyncsequence)
 
 ```swift
 let stream = .init { continuation in
@@ -521,7 +521,7 @@ for await value in stream.removeDuplicates() {
 // 3
 ```
 
-### [ReplaceErrorAsyncSequence](https://asynchrone.vercel.app/structs/replaceerrorasyncsequence)
+### [ReplaceErrorAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/replaceerrorasyncsequence)
 
 ```swift
 let sequence = Fail<Int, TestError>(
@@ -537,7 +537,7 @@ for await value in stream {
 // 0
 ```
 
-### [SequenceAsyncSequence](https://asynchrone.vercel.app/structs/sequenceasyncsequence)
+### [SequenceAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/sequenceasyncsequence)
 
 ```swift
 let sequence = [0, 1, 2, 3].async
@@ -552,7 +552,7 @@ for await value in sequence {
 // 3
 ```
 
-### [SharedAsyncSequence](https://asynchrone.vercel.app/structs/sharedasyncsequence)
+### [SharedAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/sharedasyncsequence)
 
 ```swift
 let values = [
@@ -584,7 +584,7 @@ let values = try await self.stream.collect()
 // ...
 ```
 
-### [ThrottleAsyncSequence](https://asynchrone.vercel.app/structs/throttleasyncsequence)
+### [ThrottleAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/throttleasyncsequence)
 
 ```swift
 let stream = AsyncStream<Int> { continuation in
@@ -610,7 +610,7 @@ for element in try await self.stream.throttle(for: 0.05, latest: true) {
 // 5
 ```
 
-### [ThrowingPassthroughAsyncSequence](https://asynchrone.vercel.app/structs/throwingpassthroughasyncsequence)
+### [ThrowingPassthroughAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/throwingpassthroughasyncsequence)
 
 ```swift
 let sequence = ThrowingPassthroughAsyncSequence<Int>()
@@ -634,7 +634,7 @@ do {
 // Error!
 ```
 
-### [TimerAsyncSequence](https://asynchrone.vercel.app/structs/timerasyncsequence)
+### [TimerAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/timerasyncsequence)
 
 ```swift
 let sequence = TimerAsyncSequence(interval: 1)
@@ -650,7 +650,7 @@ for element in await sequence {
 // 2022-03-19 20:49:32 +0000
 ```
 
-### [ZipAsyncSequence](https://asynchrone.vercel.app/structs/zipasyncsequence)
+### [ZipAsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/zipasyncsequence)
 
 ```swift
 let streamA = .init { continuation in
@@ -675,7 +675,7 @@ for await value in streamA.zip(streamB) {
 // (2, 6)
 ```
 
-### [Zip3AsyncSequence](https://asynchrone.vercel.app/structs/zip3asyncsequence)
+### [Zip3AsyncSequence](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/zip3asyncsequence)
 
 ```swift
 let streamA = .init { continuation in
@@ -706,18 +706,10 @@ for await value in streamA.zip(streamB, streamC) {
 // (2, 6, 9)
 ```
 
-### AsyncStream
+## Other libraries
 
-- [Extensions](https://asynchrone.vercel.app/extensions/asyncstream)
-
-### AsyncStream.Continuation
-
-- [Extensions](https://asynchrone.vercel.app/extensions/asyncstream/continuation)
-
-### AsyncThrowingStream
-
-- [Extensions](https://asynchrone.vercel.app/extensions/asyncthrowingstream)
-
-### AsyncThrowingStream.Continuation
-
-- [Extensions](https://asynchrone.vercel.app/extensions/asyncthrowingstream/continuation)
+- [Papyrus](https://github.com/reddavis/Papyrus) - Papyrus aims to hit the sweet spot between saving raw API responses to the file system and a fully fledged database like Realm.
+- [Validate](https://github.com/reddavis/Validate) - A property wrapper that can validate the property it wraps.
+- [Kyu](https://github.com/reddavis/Kyu) - A persistent queue system in Swift.
+- [FloatingLabelTextFieldStyle](https://github.com/reddavis/FloatingLabelTextFieldStyle) - A floating label style for SwiftUI's TextField.
+- [Panel](https://github.com/reddavis/Panel) - A panel component similar to the iOS Airpod battery panel.
