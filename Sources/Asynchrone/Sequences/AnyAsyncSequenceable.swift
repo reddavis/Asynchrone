@@ -31,12 +31,12 @@ public struct AnyAsyncSequenceable<Element>: AsyncSequence, Sendable {
 // MARK: Iterator
 
 extension AnyAsyncSequenceable {
-    public struct Iterator: AsyncIteratorProtocol {
-        private var iterator: any AsyncIteratorProtocol
+    public struct Iterator: AsyncIteratorProtocol, Sendable {
+        private var iterator: any AsyncIteratorProtocol & Sendable
         
         // MARK: Initialization
         
-        init<T>(_ iterator: T) where T: AsyncIteratorProtocol, T.Element == Element {
+        init<T>(_ iterator: T) where T: AsyncIteratorProtocol & Sendable, T.Element == Element {
             self.iterator = iterator
         }
         

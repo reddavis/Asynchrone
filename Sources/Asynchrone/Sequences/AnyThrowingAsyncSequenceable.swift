@@ -31,12 +31,12 @@ public struct AnyThrowingAsyncSequenceable<Element>: AsyncSequence, Sendable {
 // MARK: Iterator
 
 extension AnyThrowingAsyncSequenceable {
-    public struct Iterator: AsyncIteratorProtocol {
-        private var iterator: any AsyncIteratorProtocol
+    public struct Iterator: AsyncIteratorProtocol, Sendable {
+        private var iterator: any AsyncIteratorProtocol & Sendable
         
         // MARK: Initialization
         
-        init<T>(_ iterator: T) where T: AsyncIteratorProtocol, T.Element == Element {
+        init<T>(_ iterator: T) where T: AsyncIteratorProtocol & Sendable, T.Element == Element {
             self.iterator = iterator
         }
         
@@ -46,7 +46,8 @@ extension AnyThrowingAsyncSequenceable {
             // NOTE: When `AsyncSequence`, `AsyncIteratorProtocol` get their Element as
             // their primary associated type we won't need the casting.
             // https://github.com/apple/swift-evolution/blob/main/proposals/0358-primary-associated-types-in-stdlib.md#alternatives-considered
-            try await self.iterator.next() as? Element
+            guard let element = try await self.iterator.next() else { return nil }
+            return element as? Element
         }
     }
 }
