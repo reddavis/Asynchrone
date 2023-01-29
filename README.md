@@ -148,7 +148,7 @@ sequence.sink(
 ### [AnyAsyncSequenceable](https://swiftpackageindex.com/reddavis/asynchrone/main/documentation/asynchrone/anyasyncsequenceable)
 
 ```swift
-let sequence = Just(1)
+let sequence: AnyAsyncSequenceable<String> = Just(1)
     .map(String.init)
     .eraseToAnyAsyncSequenceable()
 ```
